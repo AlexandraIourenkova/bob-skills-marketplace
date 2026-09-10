@@ -359,10 +359,20 @@ class Registry:
         }
 
     @staticmethod
-    def _stable(doc: dict) -> dict:
+    def _stable(doc: dict, soft: bool = False) -> dict:
+        """Index without the fields that change on their own.
+
+        ``generated`` and the registry commit always differ between builds. Pack
+        ``versions`` come from release tags, which are created after the commit
+        that carries the index, so ``--check`` ignores them too (soft=False);
+        a plain build still rewrites the file when they change (soft=True).
+        """
         copy = json.loads(json.dumps(doc))
         copy.pop("generated", None)
         copy.get("registry", {}).pop("commit", None)
+        if not soft:
+            for pack in copy.get("packs", []):
+                pack.pop("versions", None)
         return copy
 
     def write_index(self, check: bool = False) -> bool:
@@ -393,11 +403,14 @@ class Registry:
             if catalog_changed or refreshed:
                 index = self.build_index()
                 marketplace = self.build_marketplace_manifest(index)
-        changed = self._stable(current) != self._stable(index) or current_market != marketplace or catalog_changed or refreshed
-        if changed and not check:
+        stable_changed = self._stable(current) != self._stable(index) or current_market != marketplace or catalog_changed or refreshed
+        full_changed = stable_changed or self._stable(current, soft=True) != self._stable(index, soft=True)
+        if check:
+            return stable_changed
+        if full_changed:
             index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             market_path.write_text(json.dumps(marketplace, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        return changed
+        return full_changed
 
 
 # -- resolving a registry spec to a local checkout ---------------------------

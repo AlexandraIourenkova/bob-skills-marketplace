@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T09:06:05Z",
+  "generated": "2026-09-10T09:09:34Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "4a141ef430c71085d35ee073497893247abc39a2"
+    "commit": "31351ffce0b59c7e900b511c25403db5b6254e12"
   },
   "vendors": [
     {
@@ -112,6 +112,7 @@
       "digest": "sha256:1e974b3329c5e1bd41122fe643346268e025b00d62f26c33451f58a291bb2aa4",
       "revokedVersions": [],
       "versions": [
+        "1.1.0",
         "1.0.0"
       ],
       "baselineFindings": 0,
