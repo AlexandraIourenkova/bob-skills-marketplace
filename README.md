@@ -88,7 +88,7 @@ flowchart LR
 | [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import (MPL-2.0) |
 | [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.1.0 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas, azure-diagnostics, azure-compute (MIT) |
 | [`microsoft-foundry`](packs/microsoft/microsoft-foundry) | Microsoft | released 1.0.0 | microsoft-foundry, Microsoft's most installed agent skill (MIT) |
-| `app-modernization`, `building-blocks`, `dev-workflow` | IBM | coming soon | UI modernization, Client Engineering building-block modes, developer workflow skills; five more candidates in `roadmap.json` |
+| `app-modernization`, `building-blocks`, `dev-workflow` | IBM | coming soon | UI modernization, Client Engineering building-block modes, developer workflow skills; three more candidates in `roadmap.json` |
 
 The IBM packs are the marketplace's own product and come first in the catalog; packs from other vendors are curated alternatives for teams that already use those platforms.
 

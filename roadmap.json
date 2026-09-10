@@ -39,18 +39,6 @@
       "votes": 0
     },
     {
-      "name": "google-gemini",
-      "displayName": "Google Gemini and Genkit",
-      "vendor": "google",
-      "status": "candidate",
-      "description": "gemini-api, gemini-live-api, gemini-agents-api and the Genkit skills from Google's official repository.",
-      "source": "https://github.com/google/skills",
-      "blockedBy": "",
-      "vendorDisplayName": "Google",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/4",
-      "votes": 0
-    },
-    {
       "name": "hashicorp-packer",
       "displayName": "HashiCorp Packer",
       "vendor": "hashicorp",
@@ -84,18 +72,6 @@
       "blockedBy": "Red Hat has not published agent skills under a redistributable licence",
       "vendorDisplayName": "Red Hat",
       "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
-      "votes": 0
-    },
-    {
-      "name": "vercel-react",
-      "displayName": "React and web design best practices",
-      "vendor": "vercel",
-      "status": "candidate",
-      "description": "vercel-react-best-practices and web-design-guidelines, among the most installed skills on skills.sh.",
-      "source": "https://github.com/vercel-labs/agent-skills",
-      "blockedBy": "the repository publishes no licence; it cannot be copied into the registry until that changes",
-      "vendorDisplayName": "Vercel",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/8",
       "votes": 0
     }
   ]

@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T13:38:30Z",
+  "generated": "2026-09-10T13:42:52Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "08525f77efbf0e6b2144477e8ec32dc6aeed02b5"
+    "commit": "08d53abe41f998619a2f90de23b659b800db5c7b"
   },
   "vendors": [
     {
@@ -142,7 +142,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:baa7dbb1ae2cef50fd5fd8e64055d7663d3e7ddf9d0f15869632316352977dfe"
+          "digest": "sha256:79b02a1d84e62806745bd0f03a8ce69268a2ae55ad4af54d37e4258ab40bc626"
         },
         {
           "name": "skill-creator",
@@ -161,7 +161,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:6a962f5ecf69236be51a5caf9a4446ed4e5948dc06c2f807a97a7936fe441705",
+      "digest": "sha256:3dbe624e18d8facbb595001769570165f32143bb425de524de5153f729230c70",
       "revokedVersions": [],
       "versions": [
         "1.1.2",
@@ -176,7 +176,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T13:34:09Z",
+        "scannedAt": "2026-09-10T13:42:52Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 36,
         "ciscoMaxSeverity": "INFO",
@@ -611,6 +611,7 @@
       "digest": "sha256:a09d51d9e90153075e0f212367075758a0abbfd027463004ede1275b98389e7c",
       "revokedVersions": [],
       "versions": [
+        "1.1.0",
         "1.0.0"
       ],
       "baselineFindings": 0,
@@ -1028,18 +1029,6 @@
       "votes": 0
     },
     {
-      "name": "google-gemini",
-      "displayName": "Google Gemini and Genkit",
-      "vendor": "google",
-      "vendorDisplayName": "Google",
-      "status": "candidate",
-      "description": "gemini-api, gemini-live-api, gemini-agents-api and the Genkit skills from Google's official repository.",
-      "source": "https://github.com/google/skills",
-      "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/4",
-      "votes": 0
-    },
-    {
       "name": "hashicorp-packer",
       "displayName": "HashiCorp Packer",
       "vendor": "hashicorp",
@@ -1073,18 +1062,6 @@
       "source": "no official Red Hat skills repository yet",
       "blockedBy": "Red Hat has not published agent skills under a redistributable licence",
       "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
-      "votes": 0
-    },
-    {
-      "name": "vercel-react",
-      "displayName": "React and web design best practices",
-      "vendor": "vercel",
-      "vendorDisplayName": "Vercel",
-      "status": "candidate",
-      "description": "vercel-react-best-practices and web-design-guidelines, among the most installed skills on skills.sh.",
-      "source": "https://github.com/vercel-labs/agent-skills",
-      "blockedBy": "the repository publishes no licence; it cannot be copied into the registry until that changes",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/8",
       "votes": 0
     }
   ]

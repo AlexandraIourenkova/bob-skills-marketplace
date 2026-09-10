@@ -169,8 +169,7 @@
     const planned = (state.index.planned || []).filter(plannedMatches);
     const vendorNames = {};
     (state.index.vendors || []).forEach(v => { vendorNames[v.id] = v.displayName; });
-    const plannedCounts = {};
-    (state.index.planned || []).forEach(i => { if (!vendorNames[i.vendor]) vendorNames[i.vendor] = i.vendorDisplayName; vendorCounts[i.vendor] = vendorCounts[i.vendor] || 0; plannedCounts[i.vendor] = (plannedCounts[i.vendor] || 0) + 1; });
+
     const vendors = Object.keys(vendorNames).map(id => ({ id, displayName: vendorNames[id] }));
     app.innerHTML = `
       <div class="hero"><div class="wrap">
@@ -180,7 +179,7 @@
       </div></div>
       <div class="wrap layout">
         <aside>
-          <section><h4>Vendor</h4>${vendors.map(v => `<label><input type="checkbox" data-vendor="${esc(v.id)}" ${state.vendors.has(v.id) ? 'checked' : ''}><span>${esc(v.displayName)}</span><span class="count">${vendorCounts[v.id] || 0}${plannedCounts[v.id] ? ` + ${plannedCounts[v.id]} planned` : ''}</span></label>`).join('')}</section>
+          <section><h4>Vendor</h4>${vendors.map(v => `<label><input type="checkbox" data-vendor="${esc(v.id)}" ${state.vendors.has(v.id) ? 'checked' : ''}><span>${esc(v.displayName)}</span><span class="count">${vendorCounts[v.id] || 0}</span></label>`).join('')}</section>
           <section><h4>Status</h4>${[['released', 'Released'], ['coming-soon', 'Coming soon'], ['candidate', 'Candidate']].map(([k, l]) => `<label><input type="checkbox" data-status="${k}" ${state.status.has(k) ? 'checked' : ''}><span>${l}</span></label>`).join('')}</section>
           <section><h4>Contains</h4>${[['skills', 'Skills'], ['mcp', 'MCP servers'], ['modes', 'Custom modes'], ['commands', 'Slash commands']].map(([k, l]) => `<label><input type="checkbox" data-contains="${k}" ${state.contains.has(k) ? 'checked' : ''}><span>${l}</span></label>`).join('')}</section>
         </aside>
