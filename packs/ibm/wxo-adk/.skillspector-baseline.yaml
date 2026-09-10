@@ -1,6 +1,48 @@
 version: 2
 scanner_version: 2.11.2
 rules:
+- id: E4
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
+- id: MP3
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
+- id: E1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
+- id: P2
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
@@ -29,6 +71,13 @@ rules:
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
     (Cisco data_exfiltration MEDIUM).'
   path: '*scripts/search_traces_agentops_v3.py'
+- id: LP3
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*SKILL.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
@@ -36,6 +85,34 @@ rules:
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
     (Cisco data_exfiltration MEDIUM).'
   path: '*scripts/export_traces_agentops_v3.py'
+- id: E1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*scripts/search_traces_agentops_v3.py'
+- id: EA1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*scripts/extract_tool_info.py'
+- id: SC1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*scripts/requirements.txt'
+- id: SC4
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM).'
+  path: '*scripts/requirements.txt'
 fingerprints:
 - hash: sha256:889c12aa81f35baa15824ef3e60955c58e96dadf4ec8e02bfb47b145b2db061d
   rule_id: E4

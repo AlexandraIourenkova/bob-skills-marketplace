@@ -156,7 +156,7 @@
     {
       "id": "microsoft",
       "displayName": "Microsoft",
-      "status": "planned",
+      "status": "active",
       "homepage": "https://learn.microsoft.com",
       "github": {
         "host": "github.com",
@@ -165,58 +165,23 @@
           "skills"
         ]
       },
-      "maintainers": [],
+      "maintainers": [
+        "Maria-Startseva"
+      ],
       "publicKey": null,
       "networkAllow": [
         "*.microsoft.com",
         "*.azure.com",
+        "*.azure.net",
+        "*.windows.net",
         "*.nuget.org",
         "registry.npmjs.org",
         "pypi.org",
-        "github.com"
+        "files.pythonhosted.org",
+        "github.com",
+        "raw.githubusercontent.com"
       ],
-      "notes": "Candidate: microsoft/skills (MIT) ships Azure SDK skills and MCP servers as Claude Code plugins under .github/plugins/."
-    },
-    {
-      "id": "redhat",
-      "displayName": "Red Hat",
-      "status": "planned",
-      "homepage": "https://www.redhat.com",
-      "github": {
-        "host": "github.com",
-        "org": "RedHatOfficial",
-        "repos": []
-      },
-      "maintainers": [],
-      "publicKey": null,
-      "networkAllow": [
-        "*.redhat.com",
-        "*.openshift.com",
-        "galaxy.ansible.com",
-        "pypi.org"
-      ],
-      "notes": "Candidate: no official agent-skills repository found yet (checked ansible, openshift, redhat-developer organisations)."
-    },
-    {
-      "id": "vercel",
-      "displayName": "Vercel",
-      "status": "planned",
-      "homepage": "https://vercel.com",
-      "github": {
-        "host": "github.com",
-        "org": "vercel-labs",
-        "repos": [
-          "agent-skills"
-        ]
-      },
-      "maintainers": [],
-      "publicKey": null,
-      "networkAllow": [
-        "*.vercel.com",
-        "registry.npmjs.org",
-        "github.com"
-      ],
-      "notes": "Candidate: vercel-labs/agent-skills is popular but publishes no licence, so it cannot be copied into the registry until that changes."
+      "notes": "Curated from microsoft/skills (MIT): Azure operations and SDK skills shipped as Claude Code plugins under .github/plugins/."
     }
   ],
   "signature": null

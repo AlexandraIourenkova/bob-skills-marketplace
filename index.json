@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T10:57:16Z",
+  "generated": "2026-09-10T11:19:41Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "411b8e2953e0e99c0f3a30e2e684da8dc5e2edc0"
+    "commit": "5f208e8af848d7827ba6280730666ceffc5375b7"
   },
   "vendors": [
     {
@@ -107,7 +107,7 @@
     {
       "id": "microsoft",
       "displayName": "Microsoft",
-      "status": "planned",
+      "status": "active",
       "homepage": "https://learn.microsoft.com",
       "github": {
         "host": "github.com",
@@ -117,38 +117,10 @@
         ]
       },
       "extraSources": [],
-      "notes": "Candidate: microsoft/skills (MIT) ships Azure SDK skills and MCP servers as Claude Code plugins under .github/plugins/.",
-      "packs": []
-    },
-    {
-      "id": "redhat",
-      "displayName": "Red Hat",
-      "status": "planned",
-      "homepage": "https://www.redhat.com",
-      "github": {
-        "host": "github.com",
-        "org": "RedHatOfficial",
-        "repos": []
-      },
-      "extraSources": [],
-      "notes": "Candidate: no official agent-skills repository found yet (checked ansible, openshift, redhat-developer organisations).",
-      "packs": []
-    },
-    {
-      "id": "vercel",
-      "displayName": "Vercel",
-      "status": "planned",
-      "homepage": "https://vercel.com",
-      "github": {
-        "host": "github.com",
-        "org": "vercel-labs",
-        "repos": [
-          "agent-skills"
-        ]
-      },
-      "extraSources": [],
-      "notes": "Candidate: vercel-labs/agent-skills is popular but publishes no licence, so it cannot be copied into the registry until that changes.",
-      "packs": []
+      "notes": "Curated from microsoft/skills (MIT): Azure operations and SDK skills shipped as Claude Code plugins under .github/plugins/.",
+      "packs": [
+        "microsoft-azure-ops"
+      ]
     }
   ],
   "packs": [
@@ -183,7 +155,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:9686190700b1f30cc0cc1de2f651b423d8a229fc414aee16920dd9be7b580db1",
+      "digest": "sha256:455dd586eee6ca705d00d411786b813de23a22c2bc70d3f2af935c908e63b0c9",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -195,7 +167,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:06:54Z",
+        "scannedAt": "2026-09-10T11:13:42Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 20,
         "ciscoMaxSeverity": "INFO",
@@ -252,7 +224,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:85b1ba1df6fbf2a587e4be857d327474fad173d86964ac81366fb99159205a86",
+      "digest": "sha256:a3eacb0fdac5960c819d009f1ae393269a9ed28c0e6574ef543445ececc400ff",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -264,7 +236,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:07:20Z",
+        "scannedAt": "2026-09-10T11:14:08Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 2,
         "ciscoMaxSeverity": "INFO",
@@ -326,7 +298,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:e8b283917f0be689cf56d4639deddd0073df8ab246c6ed0ee1c80755366f5ffc",
+      "digest": "sha256:d34a071fe14e8f70490117eeca3f150ca3b424c527a22f15d2781c1606b83a8c",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -338,7 +310,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:08:14Z",
+        "scannedAt": "2026-09-10T11:15:02Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 11,
         "ciscoMaxSeverity": "INFO",
@@ -373,7 +345,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:89cef5bdc9c15ca21b466bda26f2fafaa238b1c560f9775d6bbe2a00188779b0"
+          "digest": "sha256:998d5ac46defd1695355fa0ea6cf10d2ee7c7d48a6093de012b4f56cfaff3040"
         },
         {
           "name": "skill-creator",
@@ -392,7 +364,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:ee7b5ed4fa5522e3e73b8302c5729754cdafddd440bf06f404adf66fd3c60abc",
+      "digest": "sha256:4fbf089727b5d3a1b3aea18ac36f713d586e66d707ec06d494aa64e10d88e4c6",
       "revokedVersions": [],
       "versions": [
         "1.1.1",
@@ -406,9 +378,9 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:08:33Z",
+        "scannedAt": "2026-09-10T11:15:21Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 22,
+        "skillspectorSuppressed": 26,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": null
       },
@@ -477,7 +449,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:29124b953d6d93642a7f9cad4e406f0e1cd1eb84506a9438abd0c77208dbde88",
+      "digest": "sha256:c44b4dd9d055cb7e0cc1558175e22e60551e576e6a7012a3d9a91a0abb3a5736",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -489,7 +461,7 @@
         "riskScore": 0,
         "policyFindings": 23,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:09:32Z",
+        "scannedAt": "2026-09-10T11:16:22Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 27,
         "ciscoMaxSeverity": "INFO",
@@ -542,7 +514,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:0b870aadcdfec07e9299120b763ff2ab2dba5283f5c6c61d73496d380a476514",
+      "digest": "sha256:ebad8ec4c6a7467a9a1ab212344a199480913f56de38ce10feb324777fdb18ff",
       "revokedVersions": [],
       "versions": [
         "1.0.1",
@@ -555,7 +527,7 @@
         "riskScore": 0,
         "policyFindings": 8,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:09:59Z",
+        "scannedAt": "2026-09-10T11:16:50Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 34,
         "ciscoMaxSeverity": "INFO",
@@ -577,6 +549,80 @@
         "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
         "ref": "6bb7f04",
         "path": ".bob/skills"
+      }
+    },
+    {
+      "name": "microsoft-azure-ops",
+      "displayName": "Microsoft Azure operations",
+      "vendor": "microsoft",
+      "vendorDisplayName": "Microsoft",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
+      "path": "packs/microsoft/microsoft-azure-ops",
+      "tag": "microsoft-azure-ops--v1.0.0",
+      "skills": [
+        {
+          "name": "azure-resource-lookup",
+          "description": "List, find, and show Azure resources across subscriptions or resource groups. Handles prompts like \"list the websites in my subscription\", \"list my web apps\", \"show my app services\", \"list virtual machines\", \"list my VMs\", \"show storage accounts\", \"find container apps\", and \"what resources do I have\". USE FOR: list websites, list web apps, list app services, show websites in subscription, resource inventory, find resources by tag, tag analysis, orphaned resource discovery (not for cost analysis), unattached disks, count resources by type, cross-subscription lookup, and Azure Resource Graph queries. DO NOT USE FOR: deploying/changing resources (use azure-deploy), cost optimization (use azure-cost), or non-Azure clouds.",
+          "digest": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d"
+        },
+        {
+          "name": "azure-storage",
+          "description": "Azure Storage Services including Blob Storage, File Shares, Queue Storage, Table Storage, and Data Lake. Answers questions about storage access tiers (hot, cool, cold, archive), when to use each tier, and tier comparison. Provides object storage, SMB file shares, async messaging, NoSQL key-value, and big data analytics. Includes lifecycle management. USE FOR: blob storage, file shares, queue storage, table storage, data lake, upload files, download blobs, storage accounts, access tiers, storage tiers, hot cool cold archive, storage tier comparison, when to use storage tiers, lifecycle management, Azure Storage concepts. DO NOT USE FOR: SQL databases, Cosmos DB (use azure-prepare), messaging with Event Hubs or Service Bus (use azure-messaging).",
+          "digest": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87"
+        },
+        {
+          "name": "azure-cost",
+          "description": "Azure cost management: query costs, forecast spending, optimize to reduce waste. WHEN: \"Azure costs\", \"Azure bill\", \"cost breakdown\", \"how much am I spending\", \"forecast spending\", \"optimize costs\", \"reduce spending\", \"orphaned resources\", \"rightsize VMs\", \"cost spike\", \"reduce storage costs\", \"AKS cost\". DO NOT USE FOR: deploying resources, provisioning, diagnostics, or security audits.",
+          "digest": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b"
+        },
+        {
+          "name": "azure-compliance",
+          "description": "Run Azure compliance and security audits with azqr plus Key Vault expiration checks. Covers best-practice assessment, resource review, policy/compliance validation, and security posture checks. WHEN: compliance scan, security audit, BEFORE running azqr (compliance cli tool), Azure best practices, Key Vault expiration check, expired certificates, expiring secrets, orphaned resources, compliance assessment.",
+          "digest": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b"
+        },
+        {
+          "name": "azure-quotas",
+          "description": "Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: \"check quotas\", \"service limits\", \"current usage\", \"request quota increase\", \"quota exceeded\", \"validate capacity\", \"regional availability\", \"provisioning limits\", \"vCPU limit\", \"how many vCPUs available in my subscription\".",
+          "digest": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:31b78bfa8becc0895ba1cc31ffed2287b3d26c3a700698897416f31c433fd4da",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 5,
+      "readme": "packs/microsoft/microsoft-azure-ops/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T11:18:41Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 7,
+        "ciscoMaxSeverity": null,
+        "ciscoVersion": null
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/microsoft/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "azure",
+        "cloud",
+        "operations",
+        "microsoft"
+      ],
+      "source": {
+        "repo": "https://github.com/microsoft/skills",
+        "ref": "39d230125298",
+        "path": ".github/plugins/azure-skills/skills"
       }
     },
     {
@@ -610,7 +656,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:145f4785f676100388a24c37b7d65c849561ecc2de9cfbe4240eff7d36d9aab2",
+      "digest": "sha256:7b794ad0ca6574389b6dc3fa3e78f28296e97a84d9515779c2239a73620db865",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -622,7 +668,7 @@
         "riskScore": 0,
         "policyFindings": 1,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T10:10:50Z",
+        "scannedAt": "2026-09-10T11:17:42Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 48,
         "ciscoMaxSeverity": "INFO",

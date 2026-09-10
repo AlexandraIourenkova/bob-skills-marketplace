@@ -12,13 +12,13 @@ rules:
     is the skill''s purpose.'
   path: '*references/catalog.md'
 fingerprints:
-- hash: sha256:a98de75dbce81028f4693841fe86ca4d8d0567f455aa2d9e1eb6ccf3f2ba55ed
+- hash: sha256:13a59038585f2645ef1eb55bed34c546356dbfb8685b237608f7ca25007e5b57
   rule_id: RP1
   file: references/catalog.md
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
     is the skill''s purpose.'
-- hash: sha256:9e3066c3a3870a1b0877569b452f88d3216f5f9440a6984f564edb15acad5843
+- hash: sha256:625a64755e6ee00489b5f84e98ec5efbf3e5a3d65ccc775a8c15c38e4ed348a6
   rule_id: RP1
   file: SKILL.md
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules

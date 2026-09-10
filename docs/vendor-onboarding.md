@@ -1,6 +1,6 @@
 # Vendor onboarding
 
-One vendor per product, and that vendor is the product's owner. Users do not publish; they request. The marketplace team curates packs from each vendor's official repositories (recording source, ref and checksums) until the vendor enrols its own maintainers. At the start: IBM (active; ADK, UI modernization, Carbon, Client Engineering building blocks and the team's accelerators), Anthropic, Red Hat and HashiCorp (planned candidates).
+One vendor per product, and that vendor is the product's owner. Users do not publish; they request. The marketplace team curates packs from each vendor's official repositories (recording source, ref and checksums) until the vendor enrols its own maintainers. A vendor is listed only when at least one pack is curated from its official repository under a licence that allows redistribution. At the start: IBM, Anthropic, OpenAI, Google, HashiCorp and Microsoft.
 
 ## Requesting a pack
 

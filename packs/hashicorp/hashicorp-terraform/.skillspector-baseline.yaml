@@ -9,6 +9,10 @@ rules:
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
     to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
   path: '*SKILL.md'
+- id: AS3
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+  path: '*SKILL.md'
 fingerprints:
 - hash: sha256:4e03e8da47b87b91fe248a48a9c204bac5e2fab4a02c357e20e1408dfb7c8f25
   rule_id: AE1

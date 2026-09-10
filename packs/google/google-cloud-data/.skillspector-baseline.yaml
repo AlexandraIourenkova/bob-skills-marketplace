@@ -1,6 +1,16 @@
 version: 2
 scanner_version: 2.11.2
-rules: []
+rules:
+- id: LP3
+  reason: 'Reviewed 2026-09-10: no per-skill licence header (LP3; the repository is
+    Apache-2.0) and a note about exhausting the context window in gcloud guidance
+    (MP2).'
+  path: '*SKILL.md'
+- id: MP2
+  reason: 'Reviewed 2026-09-10: no per-skill licence header (LP3; the repository is
+    Apache-2.0) and a note about exhausting the context window in gcloud guidance
+    (MP2).'
+  path: '*SKILL.md'
 fingerprints:
 - hash: sha256:3f723ba2f6338918adf1ec791a1e43880063996c0b72ee000ab0f5fc66658cc1
   rule_id: LP3

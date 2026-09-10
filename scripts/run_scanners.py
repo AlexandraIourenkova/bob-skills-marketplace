@@ -127,11 +127,12 @@ def accept_skillspector(pack_dir: Path, skills: list[Path], reason: str, tmp: Pa
                 merged["fingerprints"].append(fp)
     path = pack_dir / SS_BASELINE
     path.write_text(yaml.safe_dump(merged, sort_keys=False, allow_unicode=True), encoding="utf-8")
-    # Second pass: findings that fingerprints did not catch get a glob rule (rule id + file).
+    # Glob rules (rule id + file) for every reviewed finding, so a line shift in the file
+    # does not resurrect an accepted finding; fingerprints stay as the exact record.
     rules = []
     seen_rules = set()
     for skill in skills:
-        report = skillspector_scan(skill, path, tmp, raw=True)
+        report = skillspector_scan(skill, None, tmp, raw=True)
         for issue in report.get("issues", []):
             loc = issue.get("location") or {}
             key = (issue.get("id"), loc.get("file"))

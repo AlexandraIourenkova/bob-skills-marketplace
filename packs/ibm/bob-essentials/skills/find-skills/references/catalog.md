@@ -10,9 +10,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 - **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-security.
 - **Google** (`google`, active): sources github.com/google. Packs: google-cloud-data.
 - **HashiCorp** (`hashicorp`, active): sources github.com/hashicorp. Packs: hashicorp-terraform.
-- **Microsoft** (`microsoft`, planned): sources github.com/microsoft. Packs: none yet.
-- **Red Hat** (`redhat`, planned): sources github.com/RedHatOfficial. Packs: none yet.
-- **Vercel** (`vercel`, planned): sources github.com/vercel-labs. Packs: none yet.
+- **Microsoft** (`microsoft`, active): sources github.com/microsoft. Packs: microsoft-azure-ops.
 
 ## Packs
 
@@ -106,6 +104,22 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 - Also installs: MCP servers: wxo-adk, wxo-docs; rules: wxo-data-agent.md.
 - Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 8 reviewed policy findings; 3 checksummed components.
 - Install: `uvx bob-skills add wxo-talk-with-your-data`
+
+### microsoft-azure-ops — Microsoft Azure operations
+
+- Vendor: Microsoft (`microsoft`, active). Version 1.0.0.
+- Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.
+- Source: https://github.com/microsoft/skills @ 39d230125298 (.github/plugins/azure-skills/skills)
+- Homepage: https://github.com/microsoft/skills
+- Tags: azure, cloud, operations, microsoft
+- Skills (5):
+  - `azure-resource-lookup`: List, find, and show Azure resources across subscriptions or resource groups. Handles prompts like "list the websites in my subscription", "list my web apps", "show my app services", "list virtual machines", "list my VMs", "show storage accounts", "find container apps", and "what resources do I have". USE FOR: list websites, list web apps, list app services, show websites in subscription, resource inventory, find resources by tag, tag analysis, orphaned resource discovery (not for cost analysis), unattached disks, count resources by type, cross-subscription lookup, and Azure Resource Graph queries. DO NOT USE FOR: deploying/changing resources (use azure-deploy), cost optimization (use azure-cost), or non-Azure clouds.
+  - `azure-storage`: Azure Storage Services including Blob Storage, File Shares, Queue Storage, Table Storage, and Data Lake. Answers questions about storage access tiers (hot, cool, cold, archive), when to use each tier, and tier comparison. Provides object storage, SMB file shares, async messaging, NoSQL key-value, and big data analytics. Includes lifecycle management. USE FOR: blob storage, file shares, queue storage, table storage, data lake, upload files, download blobs, storage accounts, access tiers, storage tiers, hot cool cold archive, storage tier comparison, when to use storage tiers, lifecycle management, Azure Storage concepts. DO NOT USE FOR: SQL databases, Cosmos DB (use azure-prepare), messaging with Event Hubs or Service Bus (use azure-messaging).
+  - `azure-cost`: Azure cost management: query costs, forecast spending, optimize to reduce waste. WHEN: "Azure costs", "Azure bill", "cost breakdown", "how much am I spending", "forecast spending", "optimize costs", "reduce spending", "orphaned resources", "rightsize VMs", "cost spike", "reduce storage costs", "AKS cost". DO NOT USE FOR: deploying resources, provisioning, diagnostics, or security audits.
+  - `azure-compliance`: Run Azure compliance and security audits with azqr plus Key Vault expiration checks. Covers best-practice assessment, resource review, policy/compliance validation, and security posture checks. WHEN: compliance scan, security audit, BEFORE running azqr (compliance cli tool), Azure best practices, Key Vault expiration check, expired certificates, expiring secrets, orphaned resources, compliance assessment.
+  - `azure-quotas`: Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: "check quotas", "service limits", "current usage", "request quota increase", "quota exceeded", "validate capacity", "regional availability", "provisioning limits", "vCPU limit", "how many vCPUs available in my subscription".
+- Gate: pass, SkillSpector risk 0/100; 0 reviewed policy findings; 5 checksummed components.
+- Install: `uvx bob-skills add microsoft-azure-ops`
 
 ### openai-security — OpenAI application security
 

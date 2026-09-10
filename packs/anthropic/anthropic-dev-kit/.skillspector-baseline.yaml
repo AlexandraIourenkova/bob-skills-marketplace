@@ -10,6 +10,51 @@ rules:
     AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
     model output.'
   path: '*SKILL.md'
+- id: EA5
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*reference/evaluation.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*reference/mcp_best_practices.md'
+- id: LP3
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*SKILL.md'
+- id: RP1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*SKILL.md'
+- id: EA1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*reference/evaluation.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
@@ -19,6 +64,60 @@ rules:
     AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
     model output.'
   path: '*reference/node_mcp_server.md'
+- id: E1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*reference/python_mcp_server.md'
+- id: SC1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*scripts/requirements.txt'
+- id: SC4
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*scripts/requirements.txt'
+- id: TM1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*scripts/with_server.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*scripts/with_server.py'
+- id: AR2
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
+    example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
+    in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
+    (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
+    with_server.py starts the user''s own dev-server command with shell=True (TM1,
+    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
+    model output.'
+  path: '*SKILL.md'
 fingerprints:
 - hash: sha256:30265c66e092e5b4c25a6a175396c321b0f5a81c72be4a0598f414845937cbf6
   rule_id: AE1

@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "microsoft-azure-ops",
+  "displayName": "Microsoft Azure operations",
+  "version": "1.0.0",
+  "vendor": "microsoft",
+  "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
+  "license": "MIT",
+  "homepage": "https://github.com/microsoft/skills",
+  "source": {
+    "repo": "https://github.com/microsoft/skills",
+    "ref": "39d230125298",
+    "path": ".github/plugins/azure-skills/skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "azure",
+    "cloud",
+    "operations",
+    "microsoft"
+  ],
+  "skills": [
+    "azure-resource-lookup",
+    "azure-storage",
+    "azure-cost",
+    "azure-compliance",
+    "azure-quotas"
+  ],
+  "networkAllow": [
+    "*.microsoft.com",
+    "*.azure.com",
+    "*.azure.net",
+    "*.windows.net",
+    "pypi.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/azure-resource-lookup": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d",
+    "skills/azure-storage": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87",
+    "skills/azure-cost": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b",
+    "skills/azure-compliance": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b",
+    "skills/azure-quotas": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+  }
+}

@@ -122,6 +122,24 @@
       "category": "ibm-bob"
     },
     {
+      "name": "microsoft-azure-ops",
+      "source": "./packs/microsoft/microsoft-azure-ops",
+      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Microsoft"
+      },
+      "homepage": "https://github.com/microsoft/skills",
+      "license": "MIT",
+      "keywords": [
+        "azure",
+        "cloud",
+        "operations",
+        "microsoft"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "openai-security",
       "source": "./packs/openai/openai-security",
       "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",

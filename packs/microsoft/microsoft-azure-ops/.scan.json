@@ -1,0 +1,120 @@
+{
+  "scannedAt": "2026-09-10T11:18:41Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": null
+  },
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "azure-resource-lookup": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "azure-storage": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "azure-cost": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "azure-compliance": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "azure-quotas": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": null,
+    "verdict": "pass",
+    "skillspectorSuppressed": 7,
+    "ciscoAccepted": 0
+  }
+}

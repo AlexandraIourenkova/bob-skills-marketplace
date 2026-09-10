@@ -6,7 +6,7 @@ Team entry for the IBM Bob Innovation Challenge, Israel 2026. First pack: **wats
 
 ## The idea in four points
 
-- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM first, then candidates such as Anthropic, Red Hat and HashiCorp. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
+- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM, Anthropic, OpenAI, Google, HashiCorp and Microsoft, and only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
 - **Curated IBM packs.** IBM is a vendor like the others. Its packs are curated from official IBM repositories with recorded provenance (source repository, tag, checksum per component) and include the team's own accelerators.
 - **Every pack goes through a scanner gate.** Schema and checksums, a policy linter, NVIDIA SkillSpector, Cisco skill-scanner and two human approvals, for every version. Results are shown on the pack page, risk scores included, also for official vendor skills. After install, a lock file and a guard hook refuse anything unknown or modified.
 - **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or click "Add to Bob" on the website.
@@ -66,9 +66,11 @@ The registry does not wait for vendors to open PRs. The marketplace team curates
 ```mermaid
 flowchart LR
     ibm["IBM<br/>official repositories<br/>+ team accelerators"] --> cur
-    anth["Anthropic<br/>anthropics/skills"] -. candidate .-> cur
-    rh["Red Hat<br/>OpenShift, Ansible"] -. candidate .-> cur
-    hc["HashiCorp<br/>Terraform, Vault"] -. candidate .-> cur
+    anth["Anthropic<br/>anthropics/skills"] --> cur
+    oai["OpenAI<br/>openai/skills"] --> cur
+    goog["Google<br/>google/skills"] --> cur
+    hc["HashiCorp<br/>hashicorp/agent-skills"] --> cur
+    ms["Microsoft<br/>microsoft/skills"] --> cur
     cur["Marketplace team curates:<br/>picks the useful packs, records source and ref,<br/>runs the gate, keeps the baselines"] --> reg["Registry<br/>one pack per outcome"]
 ```
 
@@ -82,9 +84,9 @@ flowchart LR
 | [`google-cloud-data`](packs/google/google-cloud-data) | Google | released 1.0.0 | bigquery-basics, bigquery-bigframes, bigquery-ai-ml, gcloud from google/skills (Apache-2.0) |
 | [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import from hashicorp/agent-skills (MPL-2.0) |
 | `app-modernization`, `building-blocks` | IBM | planned | IBM/ui-modernization-lab skills; Client Engineering building-block modes |
-| Microsoft, Red Hat, Vercel | candidates | planned | microsoft/skills (Azure SDK plugins); no official Red Hat skills repository found yet; vercel-labs/agent-skills publishes no licence |
+| [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.0.0 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas from microsoft/skills (MIT) |
 
-Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services. Every vendored skill above is Apache-2.0 or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
+Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services; vercel-labs/agent-skills publishes no licence; no official Red Hat skills repository exists yet. A vendor is listed only when at least one pack is curated from it. Every vendored skill above is Apache-2.0, MIT or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
 
 ## Even official skills need checking
 
@@ -181,13 +183,13 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry with five active vendors (IBM, Anthropic, OpenAI, Google, HashiCorp) and three candidates, seven released packs, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
+Done: registry with six vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft), eight released packs, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
 
 Next, in order:
 
 1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
-3. IBM packs `app-modernization` (IBM/ui-modernization-lab) and `building-blocks`; a Microsoft pack from microsoft/skills.
+3. IBM packs `app-modernization` (IBM/ui-modernization-lab) and `building-blocks`.
 4. CI on github.ibm.com: GitHub Actions is disabled for user and team repositories on this instance and no runners exist, so the gate runs locally with `scripts/gate.sh` until an organisation with Actions (or another CI) is available. The workflows are ready.
 5. Day-one check from the plan: the `use_skill` hook payload carries the skill name.
 

@@ -1,0 +1,94 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: OH1
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*SKILL.md'
+- id: E5
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*SKILL.md'
+- id: E5
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*references/sdk-usage.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*cost-forecast/error-handling.md'
+- id: PE1
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*cost-optimization/workflow.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:e82cdc14dde0a072723dab68e1506370243fdf6965ff90c4672eb115f72bd7dc
+  rule_id: OH1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+- hash: sha256:9627c1ea89ae1558efdbb50040058e9281b7903010a5c297dd622498112cdee3
+  rule_id: E5
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+- hash: sha256:733417d7c1a1f72482980d6de491c0e0d7441bc3f090dfea155136da27f00c84
+  rule_id: E5
+  file: references/sdk-usage.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+- hash: sha256:d282d86c8671f3f196fd674731719d14c036f36447cfeca1871a0cfeb83383cb
+  rule_id: PE3
+  file: cost-forecast/error-handling.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+- hash: sha256:d250cac6a591fd9d3bd1d304cb1bd0c04a97e54c99f7a2674156cb5ae5793af8
+  rule_id: PE1
+  file: cost-optimization/workflow.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
+- hash: sha256:d701eba37bc79b0f9f2d2330726c2e3ca223cc8f0b1bc0737a37d3877448c0a8
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
+    that Azure approves automatically (EA2); ''run the generated command'' is the
+    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
+    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
+    is the storage CLI being taught (E5).'
