@@ -1,8 +1,123 @@
 # Bob Skills Marketplace
 
-A curated, vendor-owned registry of skill packs for [IBM Bob](https://bob.ibm.com). One command installs a pack of skills, MCP servers, rules, slash commands and modes into `.bob/`, after the pack has been checked for poisoning, verified against the vendor list and recorded in a lock file. A hook then refuses any skill that is not in the lock or was changed after install.
+One trusted place to get skills for [IBM Bob](https://bob.ibm.com). A few official vendors, IBM packs curated from official repositories, every version through a scanner gate, and three ways to install that all end in the same verified pack and the same lock entry.
 
 Team entry for the IBM Bob Innovation Challenge, Israel 2026. First pack: **watsonx Orchestrate**.
+
+## The idea in four points
+
+- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM first, then candidates such as Anthropic, Red Hat and HashiCorp. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
+- **Curated IBM packs.** IBM is a vendor like the others. Its packs are curated from official IBM repositories with recorded provenance (source repository, tag, checksum per component) and include the team's own accelerators.
+- **Every pack goes through a scanner gate.** Schema and checksums, a policy linter, NVIDIA SkillSpector, Cisco skill-scanner and two human approvals, for every version. Results are shown on the pack page, risk scores included, also for official vendor skills. After install, a lock file and a guard hook refuse anything unknown or modified.
+- **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or click "Add to Bob" on the website.
+
+## Three ways in, one registry
+
+```mermaid
+flowchart LR
+    subgraph ways["Three ways in"]
+        chat["Chat with Bob<br/>find-skills: pack name or git link"]
+        site["Website<br/>Add to Bob, copy command, download"]
+        cli["Terminal<br/>uvx bob-skills add"]
+    end
+    chat --> add
+    site --> add
+    cli --> add
+    add["bob-skills add &lt;pack&gt;"] --> reg[("Registry<br/>vendors.json, packs/, release tags")]
+    reg --> check{"vendor in the list?<br/>checksums match?<br/>version not revoked?"}
+    check -- no --> refuse["Refused, with the reason"]
+    check -- yes --> bob[".bob/<br/>skills, mcp.json, rules,<br/>commands, custom_modes.yaml"]
+    bob --> lock[".bob/skills.lock<br/>version, vendor, digest per skill"]
+    lock --> guard["Guard hook<br/>on every use_skill"]
+```
+
+The website mockup (catalog, pack page, install from chat) lives in [docs/images](docs/images):
+
+| Catalog | Pack page | Install from chat |
+|---|---|---|
+| [![Catalog](docs/images/site-catalog.png)](docs/images/site-catalog.png) | [![Pack page](docs/images/site-pack.png)](docs/images/site-pack.png) | [![Install from chat](docs/images/bob-chat-install.png)](docs/images/bob-chat-install.png) |
+
+In chat, `find-skills` maps a pasted git URL to the pack whose source it is and shows what will be installed before asking for confirmation. A repository that is not in the registry is refused, with three ways forward: the closest pack, a pack request to the vendor, or `bob-skills trust` for the user's own skill.
+
+## From a vendor's repository to a running skill
+
+```mermaid
+flowchart TD
+    src["Vendor's official repository"] -->|"sync with provenance:<br/>repo, ref, checksum per component"| pr["PR to packs/&lt;vendor&gt;/&lt;pack&gt;/<br/>author must be a vendor maintainer"]
+    pr --> gate
+    subgraph gate["Gate, for every version"]
+        direction LR
+        g1["Schema, vendor folder,<br/>checksums"] --> g2["Policy linter<br/>P001 to P010"] --> g3["NVIDIA<br/>SkillSpector"] --> g4["Cisco<br/>skill-scanner"] --> g5["LLM judge<br/>(planned)"] --> g6["Two approvals:<br/>vendor + marketplace admin"]
+    end
+    gate -->|"block"| back["Back to the vendor<br/>with a SARIF report"]
+    gate -->|"pass"| rel["Tag &lt;pack&gt;--v&lt;version&gt;<br/>index.json rebuilt"]
+    rel --> install["bob-skills add"]
+    install --> guard{"At activation:<br/>digest on disk = lock?"}
+    guard -->|"no"| deny["Exit 2, skill not activated"]
+    guard -->|"yes"| run["Skill runs in Bob"]
+```
+
+Accepted false positives live in a reviewed per-pack baseline (`.policy-baseline.json`), keyed by the path inside the pack and the line text, so they survive installation and expire as soon as the line changes. The gate fails only on new findings.
+
+## Vendors and curation
+
+The registry does not wait for vendors to open PRs. The marketplace team curates packs from each vendor's official repositories, records where every file came from, runs the gate, and keeps the baselines. Vendors keep ownership: `vendors.json` names their organisation, maintainers, signing key and network allow-list, and CODEOWNERS gives them the last word on their folder.
+
+```mermaid
+flowchart LR
+    ibm["IBM<br/>official repositories<br/>+ team accelerators"] --> cur
+    anth["Anthropic<br/>anthropics/skills"] -. candidate .-> cur
+    rh["Red Hat<br/>OpenShift, Ansible"] -. candidate .-> cur
+    hc["HashiCorp<br/>Terraform, Vault"] -. candidate .-> cur
+    cur["Marketplace team curates:<br/>picks the useful packs, records source and ref,<br/>runs the gate, keeps the baselines"] --> reg["Registry<br/>one pack per outcome"]
+```
+
+| Pack | Vendor | Status | Contents |
+|---|---|---|---|
+| [`wxo`](packs/ibm-watsonx-orchestrate/wxo) | IBM watsonx Orchestrate | released 1.0.0 | 6 official ADK skills (solution-architect, sop-builder, wxo-builder, wxo-analyzer, telemetry-analyzer, agent-instructions-evaluator), MCP servers `wxo-adk` and `wxo-docs`, ADK rule, `/wxo-deploy`, mode `wxo-builder` |
+| [`bob-essentials`](packs/bob-skills-marketplace/bob-essentials) | marketplace team | released 1.0.0 | find-skills, skill-creator, guard, `/skills-add` |
+| `wxo-talk-with-your-data` | IBM | next | excel-to-wxo-agent, wxo-chat-demo-page, ADK and docs MCP servers, ADK rule. 1.1: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
+| `app-modernization` | IBM | planned | UI modernization skills (IBM/ui-modernization-lab), application code modernization |
+| `building-blocks` | IBM | planned | Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality |
+| `office-docs` | Anthropic | candidate | Word, PowerPoint, Excel and PDF skills from anthropics/skills |
+| `openshift-ansible`, `terraform-vault` | Red Hat, HashiCorp | candidate | source repositories to confirm |
+
+## Even official skills need checking
+
+Public catalogs report roughly a quarter of skills with security findings (NVIDIA SkillSpector data: 26.1 % with vulnerabilities, 5.2 % likely malicious). Official skills are not exempt from review. Syncing the six ADK skills from IBM's own repository produced this on the marketplace policy linter alone:
+
+| Finding class | Count | Verdict after review |
+|---|---|---|
+| Third-party hostnames in documentation examples (Milvus, Elasticsearch, Salesforce, Google APIs) | 13 | accepted: instructions only, no script contacts them |
+| `.env` reads in telemetry scripts | 9 | accepted: dotenv load of ADK credentials, network goes to the ADK client's base URL only |
+| "without asking" in an instruction | 1 | accepted: a flow tool takes a document input directly, not a confirmation bypass |
+
+All 23 entries sit in [the pack's baseline](packs/ibm-watsonx-orchestrate/wxo/.policy-baseline.json) with a reason each. A future ADK version that adds a new finding fails the gate until someone reads it. The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
+
+## Guard at runtime
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant B as Bob
+    participant G as bob-skills guard
+    participant L as .bob/skills.lock
+    U->>B: "build an Orchestrate agent from this SOP"
+    B->>G: PreToolUse use_skill wxo-builder
+    G->>L: entry and digest for wxo-builder
+    G->>G: sha256 of .bob/skills/wxo-builder
+    alt digest matches
+        G-->>B: exit 0
+        B->>B: activates the skill
+    else unmanaged, modified or revoked
+        G-->>B: exit 2 with the reason
+        B-->>U: skill refused, how to fix it
+    end
+```
+
+`bob-skills verify` recomputes digests and re-runs the linter on installed skills; `bob-skills check --brief` prints one status line at session start. An organisation makes the guard mandatory through an EnforcedHooks policy with `--no-local`.
+
+## Quick start
 
 ```bash
 uvx bob-skills search orchestrate   # what is there
@@ -11,27 +126,11 @@ uvx bob-skills verify               # digests and policy linter on what is insta
 uvx bob-skills update               # newer versions with SKILL.md diffs, revocations
 ```
 
-Inside Bob: `/skills-add wxo`.
+Inside Bob: `/skills-add wxo`. Until the package is on an index, run it from the checkout:
 
-## Why
-
-Bob has native skills, hooks, MCP and a CLI, but no install, update or verification layer. Today a skill is installed with `git clone` and `cp -r ~/.bob/skills/` and updated by hand. Public catalogs show roughly a quarter of skills with security findings (NVIDIA SkillSpector data), and nobody checks what lands in `.bob/skills/`. The marketplace closes that gap with four properties:
-
-| Property | How |
-|---|---|
-| **Checked for poisoning** | Every pack version passes static scanners, the marketplace policy linter, an LLM judge and two human approvals before it is released. Accepted false positives live in a reviewed per-pack baseline. |
-| **Official vendors only** | A pack is published by the owner of the product it is about. `vendors.json` is the closed list; CODEOWNERS and CI reject PRs from anyone else; the installer and the guard refuse everything outside the list. |
-| **Versioned** | Semver per pack, git tag `<pack>--v<version>`, `.bob/skills.lock` in the project, pinning, rollback and revocation. |
-| **One command** | `bob-skills add` copies skills, merges MCP servers and custom modes, adds rules and commands, writes the lock. `remove` undoes all of it. |
-
-## How a skill gets from a vendor into Bob
-
-1. **Vendor opens a PR** with the pack folder: `pack.json`, `skills/<name>/SKILL.md`, optional MCP servers, rules, commands, modes. CI checks the author is a maintainer of that vendor.
-2. **Gate runs**: JSON schema, checksums, policy linter (`bob-skills lint`), NVIDIA SkillSpector, Cisco skill-scanner, LLM judge. Findings go to the PR as SARIF; blocking findings fail it.
-3. **Two people approve**: a vendor maintainer and a marketplace administrator read the SKILL.md diff.
-4. **Release**: the merge commit is tagged `<pack>--v<version>`, `index.json` is rebuilt, the release is signed (cosign, planned) or covered by sha256 checksums in `pack.json`.
-5. **Developer installs**: `bob-skills add <pack>` clones the registry, verifies the vendor and every checksum, copies the pack into `.bob/`, writes `.bob/skills.lock`.
-6. **Bob activates a skill**: the `PreToolUse` hook on `use_skill` runs `bob-skills guard`, which compares the skill folder digest against the lock. Mismatch or unknown skill: exit code 2, the skill is not activated.
+```bash
+uv run --project /path/to/bob-skills-marketplace/cli bob-skills add wxo --registry /path/to/bob-skills-marketplace
+```
 
 ## Repository layout
 
@@ -44,19 +143,11 @@ index.json              generated search index (bob-skills registry build-index)
 marketplace.json        generated compatibility manifest for other agents
 cli/                    the bob-skills client (Python, typer); also the linter and registry tools
 scripts/                sync_adk_skills.py, CI helpers
-docs/                   pack format, security gate, vendor onboarding, Bob integration, team plan
+docs/                   pack format, security gate, vendor onboarding, Bob integration, team plan, mockup images
 .github/                gate and release workflows, pack request template
 ```
 
-## Packs
-
-| Pack | Vendor | Contents |
-|---|---|---|
-| [`wxo`](packs/ibm-watsonx-orchestrate/wxo) | IBM watsonx Orchestrate | 6 official ADK skills (solution-architect, sop-builder, wxo-builder, wxo-analyzer, telemetry-analyzer, agent-instructions-evaluator), MCP servers `wxo-adk` and `wxo-docs`, ADK rule, `/wxo-deploy`, mode `wxo-builder` |
-| [`bob-essentials`](packs/bob-skills-marketplace/bob-essentials) | marketplace team | find-skills, skill-creator, guard, `/skills-add` |
-| `carbon`, `building-blocks` | IBM Carbon, IBM Client Engineering | planned |
-
-## Working on the registry
+Working on the registry:
 
 ```bash
 uv run --project cli pytest -q                          # client tests, including the red-team cases
@@ -65,12 +156,17 @@ uv run --project cli bob-skills registry build-index    # index.json + marketpla
 uv run --project cli bob-skills lint packs              # policy linter, honours .policy-baseline.json
 ```
 
-Try the client against this checkout without publishing anything:
+## Status and next steps
 
-```bash
-cd /path/to/some/project
-uv run --project /path/to/bob-skills-marketplace/cli bob-skills add wxo --registry /path/to/bob-skills-marketplace
-```
+Done: registry, two released packs, the client with install, update, verify, guard and linter, CI workflows, docs, website mockup.
+
+Next, in order:
+
+1. Vendor model: rename vendor ids to `ibm` and `bob-skills-marketplace` becomes part of IBM; move `wxo` to `wxo-adk`; add candidate vendors as `planned`.
+2. Pack `wxo-talk-with-your-data` from the team's accelerators, then 1.1 with database sources.
+3. `find-skills` grows into the marketplace skill: git URL to pack mapping, a catalog reference generated from `index.json` so Bob answers offline, "what will be installed" before confirmation.
+4. Website from the mockup: static page on GitHub Pages reading `index.json`; "Add to Bob" deep link once Bob IDE's URL handling is confirmed.
+5. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
 
 ## Docs
 
