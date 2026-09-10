@@ -47,9 +47,9 @@ Implementation: `cli/src/bob_skills/hashing.py`.
 version = 1
 
 [[pack]]
-name = "wxo"
+name = "wxo-adk"
 version = "1.0.0"
-vendor = "ibm-watsonx-orchestrate"
+vendor = "ibm"
 digest = "sha256:..."                     # whole pack folder in the registry
 installed = "2026-09-30T10:12:00Z"
 registry = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git"
@@ -70,8 +70,8 @@ A skill trusted with `bob-skills trust <skill>` gets an entry with `vendor = "lo
 
 ## Versions, tags, rollback, revocation
 
-- `bob-skills add wxo` installs the version on the registry's default branch.
-- `bob-skills add wxo@1.0.0` exports the tag `wxo--v1.0.0` with `git archive` and installs that. Rollback is the same command with an older version.
+- `bob-skills add wxo-adk` installs the version on the registry's default branch.
+- `bob-skills add wxo-adk@1.0.0` exports the tag `wxo-adk--v1.0.0` with `git archive` and installs that. Rollback is the same command with an older version.
 - `bob-skills update` compares the lock with the registry, prints the unified diff of every `SKILL.md`, and installs with `--apply` (`--yes` for a major bump).
 - To revoke, the vendor adds the version to `revokedVersions` in a PR. No tag is deleted; history stays auditable.
 

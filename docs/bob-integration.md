@@ -41,10 +41,10 @@ Test the payload by pointing the hook at a script that dumps stdin to a file, th
 
 ## Slash command inside Bob
 
-The `bob-essentials` pack ships `.bob/commands/skills-add.md`. Users type `/skills-add wxo`; Bob runs the installer through `execute_command` and shows the report. The same command works non-interactively for CI:
+The `bob-essentials` pack ships `.bob/commands/skills-add.md`. Users type `/skills-add wxo-adk`; Bob runs the installer through `execute_command` and shows the report. The same command works non-interactively for CI:
 
 ```bash
-bob run "/skills-add wxo"
+bob run "/skills-add wxo-adk"
 ```
 
 ## What the installer touches
@@ -62,4 +62,4 @@ bob run "/skills-add wxo"
 
 ## The ADK MCP server and unmanaged skills
 
-The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo` pack instead, or `bob-skills trust <skill>` for a genuinely local skill.
+The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo-adk` pack instead, or `bob-skills trust <skill>` for a genuinely local skill.

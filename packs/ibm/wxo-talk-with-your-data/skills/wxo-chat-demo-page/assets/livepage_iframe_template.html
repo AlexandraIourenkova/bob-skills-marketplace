@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- LIVE company page + wxo chat on top: the real site loads in a
+     full-viewport iframe (links and scrolling work), the chat widget floats
+     above it in the parent page — the strongest "it's already on your site"
+     demo without touching the site itself.
+     WORKS ONLY IF the site allows framing: check first with
+       curl -sI https://company.com | grep -i 'x-frame-options\|content-security-policy'
+     X-Frame-Options: DENY/SAMEORIGIN or CSP frame-ancestors -> iframe will be
+     blank; fall back to a screenshot background or console injection (see
+     references/embed-issues.md).
+     Placeholders: {{PAGE_TITLE}} {{LIVE_SITE_URL}} {{DEMO_LABEL}}
+       {{ORCHESTRATION_ID}} {{HOST_URL}} {{CRN}} {{AGENT_ID}} -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{PAGE_TITLE}}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; font-family: -apple-system, "Segoe UI", system-ui, sans-serif; }
+    /* Thin demo ribbon so nobody mistakes the wrapper for the real site */
+    .ribbon {
+      flex-shrink: 0; height: 30px; display: flex; align-items: center; justify-content: center;
+      gap: 8px; background: #161616; color: #c6c6c6; font-size: 12px; letter-spacing: .02em;
+    }
+    .ribbon .dot { width: 7px; height: 7px; border-radius: 50%; background: #08bdba; }
+    iframe#site { flex: 1; border: 0; width: 100%; }
+    /* Fallback message shown behind the iframe: visible only if the site
+       refuses to render (framing blocked) */
+    .frame-wrap { position: relative; flex: 1; display: flex; }
+    .frame-fallback {
+      position: absolute; inset: 0; z-index: -1; display: flex; align-items: center;
+      justify-content: center; background: #101017; color: #8d8d97; font-size: 14px;
+      text-align: center; padding: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ribbon"><span class="dot"></span>{{DEMO_LABEL}} — demo overlay, not the production site</div>
+
+  <div class="frame-wrap">
+    <div class="frame-fallback">
+      If this stays visible, {{LIVE_SITE_URL}} blocks framing (X-Frame-Options /
+      frame-ancestors) — use the screenshot-background or console-injection
+      approach instead.
+    </div>
+    <iframe id="site" src="{{LIVE_SITE_URL}}" title="Live site"></iframe>
+  </div>
+
+  <div id="wxo-chat-root"></div>
+
+  <!-- wxo embed: EXACTLY the generated shape. Do NOT add agentEnvironmentId.
+       The widget lives in THIS page, floating above the iframe. -->
+  <script>
+    window.wxOConfiguration = {
+      orchestrationID: "{{ORCHESTRATION_ID}}",
+      hostURL: "{{HOST_URL}}",
+      rootElementID: "wxo-chat-root",
+      showLauncher: true,
+      crn: "{{CRN}}",
+      deploymentPlatform: "ibmcloud",
+      chatOptions: {
+        agentId: "{{AGENT_ID}}"
+      }
+    };
+    setTimeout(function () {
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(script);
+    }, 0);
+  </script>
+
+</body>
+</html>

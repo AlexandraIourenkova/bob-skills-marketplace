@@ -1,7 +1,7 @@
 {
   "name": "bob-skills-marketplace",
   "owner": {
-    "name": "Bob Skills Marketplace team",
+    "name": "IBM Bob Skills Marketplace team",
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
   },
   "metadata": {
@@ -11,11 +11,11 @@
   "plugins": [
     {
       "name": "bob-essentials",
-      "source": "./packs/bob-skills-marketplace/bob-essentials",
+      "source": "./packs/ibm/bob-essentials",
       "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
       "version": "1.0.0",
       "author": {
-        "name": "Bob Skills Marketplace team"
+        "name": "IBM"
       },
       "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
       "license": "Apache-2.0",
@@ -28,12 +28,12 @@
       "category": "ibm-bob"
     },
     {
-      "name": "wxo",
-      "source": "./packs/ibm-watsonx-orchestrate/wxo",
-      "description": "Official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+      "name": "wxo-adk",
+      "source": "./packs/ibm/wxo-adk",
+      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
       "version": "1.0.0",
       "author": {
-        "name": "IBM watsonx Orchestrate"
+        "name": "IBM"
       },
       "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
       "license": "MIT",
@@ -42,6 +42,27 @@
         "wxo",
         "adk",
         "agents",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "wxo-talk-with-your-data",
+      "source": "./packs/ibm/wxo-talk-with-your-data",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "license": "Apache-2.0",
+      "keywords": [
+        "watsonx-orchestrate",
+        "wxo",
+        "data",
+        "text-to-sql",
+        "excel",
+        "demo",
         "ibm"
       ],
       "category": "ibm-bob"

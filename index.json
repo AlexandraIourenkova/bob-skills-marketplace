@@ -1,21 +1,21 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T08:14:26Z",
+  "generated": "2026-09-10T08:59:25Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "643bfea752cd3fd0a354e83878f09c6eae5ba7e3"
+    "commit": "7e218006c704e7a0eebf66110ec9bf0ea841138b"
   },
   "packs": [
     {
       "name": "bob-essentials",
       "displayName": "Bob essentials",
-      "vendor": "bob-skills-marketplace",
-      "vendorDisplayName": "Bob Skills Marketplace team",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
       "vendorStatus": "active",
       "version": "1.0.0",
       "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
-      "path": "packs/bob-skills-marketplace/bob-essentials",
+      "path": "packs/ibm/bob-essentials",
       "tag": "bob-essentials--v1.0.0",
       "skills": [
         {
@@ -40,7 +40,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:91f4040bc079b685dfb032a7c6f70b4666b4ada21ab9c4309b57d550e3d2f4ea",
+      "digest": "sha256:acc9ec97571d7f101bd5e75f4e8268fd6202855c2cafe3675ad11c6c8c46187a",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -61,15 +61,15 @@
       ]
     },
     {
-      "name": "wxo",
-      "displayName": "watsonx Orchestrate",
-      "vendor": "ibm-watsonx-orchestrate",
-      "vendorDisplayName": "IBM watsonx Orchestrate",
+      "name": "wxo-adk",
+      "displayName": "watsonx Orchestrate ADK",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
       "vendorStatus": "active",
       "version": "1.0.0",
-      "description": "Official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
-      "path": "packs/ibm-watsonx-orchestrate/wxo",
-      "tag": "wxo--v1.0.0",
+      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+      "path": "packs/ibm/wxo-adk",
+      "tag": "wxo-adk--v1.0.0",
       "skills": [
         {
           "name": "solution-architect",
@@ -115,7 +115,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:32955dab95cf7683491a09fb2416553d463f359cd73f3cd1b85739d787cd6eb8",
+      "digest": "sha256:6e2d6ea25b8dd3e691960ecad2a2942bf0ed1e4f09bfa3ccc218a1eef5ea858e",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -133,6 +133,60 @@
         "wxo",
         "adk",
         "agents",
+        "ibm"
+      ]
+    },
+    {
+      "name": "wxo-talk-with-your-data",
+      "displayName": "Talk with your data on watsonx Orchestrate",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+      "path": "packs/ibm/wxo-talk-with-your-data",
+      "tag": "wxo-talk-with-your-data--v1.0.0",
+      "skills": [
+        {
+          "name": "excel-to-wxo-agent",
+          "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"сделай агента по этому экселю\", \"deploy a data agent to wxo\", \"прототип text2sql\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
+          "digest": "sha256:7dd1a5641f3c08897caac1e9d325bc11550445f7e77d4cdb16dafaf589c1cd62"
+        },
+        {
+          "name": "wxo-chat-demo-page",
+          "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"вставить чат на страницу\", \"демо страница для агента\", \"лендинг с чатом\"), wants charts or a dashboard built live from the agent's chat answers (\"рендерить графики из ответов\", \"дашборд с чатом\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
+          "digest": "sha256:25c028bb08b4c71d29b17eed09acd496f7955071ee8f168abc7b6ec44bc36ba7"
+        }
+      ],
+      "mcpServers": [
+        "wxo-adk",
+        "wxo-docs"
+      ],
+      "rules": [
+        "wxo-data-agent.md"
+      ],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:9dcfc08189fc0b7c2d2bb651d2556aba666a708a9e77d8e1a5e81ae18589d74f",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "scan": {
+        "riskScore": null,
+        "policyFindings": 0,
+        "verdict": "pending"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-orchestrate",
+        "wxo",
+        "data",
+        "text-to-sql",
+        "excel",
+        "demo",
         "ibm"
       ]
     }

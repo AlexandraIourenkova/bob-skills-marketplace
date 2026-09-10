@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- Full-page wxo chat: the page IS the chat, optionally on top of the
+     customer's real page as background (a screenshot of their site) — the
+     "it's already on your website" demo. Ask the user before using their real
+     site imagery, and never publish such a page publicly.
+     Placeholders: {{PAGE_TITLE}} {{BRAND}} {{PRODUCT_SUBTITLE}}
+       {{BG_IMAGE}} (delete the body background line for a plain dark page)
+       {{ORCHESTRATION_ID}} {{HOST_URL}} {{CRN}} {{AGENT_ID}} -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{PAGE_TITLE}}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: url('{{BG_IMAGE}}') top center / cover no-repeat fixed;
+      height: 100vh;
+    }
+    /* fullscreen-overlay owns the viewport — give it a fixed container and
+       keep our brand chrome as a slim fixed strip BELOW it (a top header
+       gets covered by the widget's own bar) */
+    #root { position: fixed; inset: 0 0 32px 0; overflow: hidden;
+      background: transparent !important; }
+    footer.brand {
+      position: fixed; left: 0; right: 0; bottom: 0; height: 32px; z-index: 5;
+      background: #161616; color: #fff; padding: 0 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    footer.brand .logo { font-size: 13px; font-weight: 600; color: #f4f4f4; }
+    footer.brand .divider { width: 1px; height: 16px; background: #393939; }
+    footer.brand .title { font-size: 13px; color: #c6c6c6; }
+    /* The widget injects opaque backgrounds; force transparency so the page
+       background shows through. */
+    #root > div, #root > div > div,
+    [class*="wxo-"], [class*="chat-container" i], [class*="chatContainer"] {
+      background: transparent !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <footer class="brand">
+    <span class="logo">{{BRAND}}</span>
+    <span class="divider"></span>
+    <span class="title">{{PRODUCT_SUBTITLE}}</span>
+  </footer>
+
+  <!-- wxo embed: EXACTLY the generated shape. Do NOT add agentEnvironmentId. -->
+  <script>
+    window.wxOConfiguration = {
+      orchestrationID: "{{ORCHESTRATION_ID}}",
+      hostURL: "{{HOST_URL}}",
+      // full mode per ADK docs: fullscreen-overlay mounts the chat into
+      // rootElementID and fills it; without layout.form the widget defaults
+      // to "float" and renders as a small floating window instead
+      layout: { form: "fullscreen-overlay" },
+      rootElementID: "root",
+      showLauncher: false,        // render the chat immediately, no bubble
+      deploymentPlatform: "ibmcloud",
+      crn: "{{CRN}}",
+      chatOptions: {
+        agentId: "{{AGENT_ID}}"
+      }
+    };
+    setTimeout(function () {
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(script);
+    }, 0);
+  </script>
+
+</body>
+</html>

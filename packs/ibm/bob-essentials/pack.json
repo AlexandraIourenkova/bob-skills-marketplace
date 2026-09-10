@@ -3,7 +3,7 @@
   "name": "bob-essentials",
   "displayName": "Bob essentials",
   "version": "1.0.0",
-  "vendor": "bob-skills-marketplace",
+  "vendor": "ibm",
   "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
   "license": "Apache-2.0",
   "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",

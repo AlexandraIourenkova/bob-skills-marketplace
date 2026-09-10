@@ -5,8 +5,8 @@
 # schemas, CI, CLI). Every pack release needs two approvals: one vendor
 # maintainer and one marketplace administrator (branch protection rule).
 #
-# Hackathon scope: the marketplace team acts as interim maintainer for the
-# watsonx Orchestrate pack until the ADK team enrols its own maintainers.
+# Hackathon scope: the marketplace team maintains the IBM vendor folder and
+# curates its packs from official IBM repositories.
 
 *                                   @Maria-Startseva
 
@@ -15,5 +15,4 @@
 /.github/                           @Maria-Startseva
 /cli/                               @Maria-Startseva
 
-/packs/ibm-watsonx-orchestrate/     @Maria-Startseva
-/packs/bob-skills-marketplace/      @Maria-Startseva
+/packs/ibm/                         @Maria-Startseva

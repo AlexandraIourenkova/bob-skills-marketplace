@@ -74,9 +74,9 @@ flowchart LR
 
 | Pack | Vendor | Status | Contents |
 |---|---|---|---|
-| [`wxo`](packs/ibm-watsonx-orchestrate/wxo) | IBM watsonx Orchestrate | released 1.0.0 | 6 official ADK skills (solution-architect, sop-builder, wxo-builder, wxo-analyzer, telemetry-analyzer, agent-instructions-evaluator), MCP servers `wxo-adk` and `wxo-docs`, ADK rule, `/wxo-deploy`, mode `wxo-builder` |
-| [`bob-essentials`](packs/bob-skills-marketplace/bob-essentials) | marketplace team | released 1.0.0 | find-skills, skill-creator, guard, `/skills-add` |
-| `wxo-talk-with-your-data` | IBM | next | excel-to-wxo-agent, wxo-chat-demo-page, ADK and docs MCP servers, ADK rule. 1.1: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
+| [`wxo-adk`](packs/ibm/wxo-adk) | IBM | released 1.0.0 | 6 official ADK skills (solution-architect, sop-builder, wxo-builder, wxo-analyzer, telemetry-analyzer, agent-instructions-evaluator), MCP servers `wxo-adk` and `wxo-docs`, ADK rule, `/wxo-deploy`, mode `wxo-builder` |
+| [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.0.0 | find-skills, skill-creator, guard, `/skills-add` |
+| [`wxo-talk-with-your-data`](packs/ibm/wxo-talk-with-your-data) | IBM | released 1.0.0 | excel-to-wxo-agent, wxo-chat-demo-page, ADK and docs MCP servers, data-agent rule. 1.1: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
 | `app-modernization` | IBM | planned | UI modernization skills (IBM/ui-modernization-lab), application code modernization |
 | `building-blocks` | IBM | planned | Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality |
 | `office-docs` | Anthropic | candidate | Word, PowerPoint, Excel and PDF skills from anthropics/skills |
@@ -92,7 +92,7 @@ Public catalogs report roughly a quarter of skills with security findings (NVIDI
 | `.env` reads in telemetry scripts | 9 | accepted: dotenv load of ADK credentials, network goes to the ADK client's base URL only |
 | "without asking" in an instruction | 1 | accepted: a flow tool takes a document input directly, not a confirmation bypass |
 
-All 23 entries sit in [the pack's baseline](packs/ibm-watsonx-orchestrate/wxo/.policy-baseline.json) with a reason each. A future ADK version that adds a new finding fails the gate until someone reads it. The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
+All 23 entries sit in [the pack's baseline](packs/ibm/wxo-adk/.policy-baseline.json) with a reason each. A future ADK version that adds a new finding fails the gate until someone reads it. The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
 
 ## Guard at runtime
 
@@ -121,15 +121,15 @@ sequenceDiagram
 
 ```bash
 uvx bob-skills search orchestrate   # what is there
-uvx bob-skills add wxo              # install: vendor + checksums verified, lock written
+uvx bob-skills add wxo-adk          # install: vendor + checksums verified, lock written
 uvx bob-skills verify               # digests and policy linter on what is installed
 uvx bob-skills update               # newer versions with SKILL.md diffs, revocations
 ```
 
-Inside Bob: `/skills-add wxo`. Until the package is on an index, run it from the checkout:
+Inside Bob: `/skills-add wxo-adk`. Until the package is on an index, run it from the checkout:
 
 ```bash
-uv run --project /path/to/bob-skills-marketplace/cli bob-skills add wxo --registry /path/to/bob-skills-marketplace
+uv run --project /path/to/bob-skills-marketplace/cli bob-skills add wxo-adk --registry /path/to/bob-skills-marketplace
 ```
 
 ## Repository layout
@@ -158,15 +158,14 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry, two released packs, the client with install, update, verify, guard and linter, CI workflows, docs, website mockup.
+Done: registry with vendor `ibm` and three candidate vendors, three released packs, the client with install, update, verify, guard and linter, CI workflows, docs, website mockup.
 
 Next, in order:
 
-1. Vendor model: rename vendor ids to `ibm` and `bob-skills-marketplace` becomes part of IBM; move `wxo` to `wxo-adk`; add candidate vendors as `planned`.
-2. Pack `wxo-talk-with-your-data` from the team's accelerators, then 1.1 with database sources.
-3. `find-skills` grows into the marketplace skill: git URL to pack mapping, a catalog reference generated from `index.json` so Bob answers offline, "what will be installed" before confirmation.
-4. Website from the mockup: static page on GitHub Pages reading `index.json`; "Add to Bob" deep link once Bob IDE's URL handling is confirmed.
-5. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
+1. `find-skills` grows into the marketplace skill: git URL to pack mapping, a catalog reference generated from `index.json` so Bob answers offline, "what will be installed" before confirmation, first install from a vendor confirmed by the user.
+2. Website from the mockup: static page on GitHub Pages reading `index.json`; "Add to Bob" deep link once Bob IDE's URL handling is confirmed.
+3. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow.
+4. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
 
 ## Docs
 
@@ -176,4 +175,4 @@ Next, in order:
 - [Bob integration: hooks, commands, what to verify on day one](docs/bob-integration.md)
 - [Team plan for the challenge (Russian)](docs/marketplace-plan.md)
 
-The vendored ADK skills are MIT-licensed by IBM (see `packs/ibm-watsonx-orchestrate/wxo/skills/LICENSE`). This repository is a hackathon team project and is not an IBM product.
+The vendored ADK skills are MIT-licensed by IBM (see `packs/ibm/wxo-adk/skills/LICENSE`). This repository is a hackathon team project and is not an IBM product.

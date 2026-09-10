@@ -1,0 +1,6 @@
+# cache-bust: v2 (2026-04-26)
+matplotlib>=3.7.1
+seaborn>=0.12.2
+pandas>=2.0.0
+requests>=2.28.0
+python-bidi>=0.4.2

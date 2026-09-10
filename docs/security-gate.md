@@ -16,7 +16,7 @@ No single scanner is a guarantee, so the gate is layered. Each layer catches its
 
 Legitimate ADK skills run CLI commands, read `.env` for credentials and mention third-party hosts in examples, so scanners will flag them. Each pack keeps a baseline of accepted findings and the gate fails only on *new* ones:
 
-- Policy linter: `.policy-baseline.json` in the pack, fingerprints keyed by in-pack path and line text, one reason per entry. Written with `bob-skills lint <pack> --write-baseline`, then edited and reviewed like code. The wxo pack ships with 23 reviewed entries from ADK 2.16.0.
+- Policy linter: `.policy-baseline.json` in the pack, fingerprints keyed by in-pack path and line text, one reason per entry. Written with `bob-skills lint <pack> --write-baseline`, then edited and reviewed like code. The wxo-adk pack ships with 23 reviewed entries from ADK 2.16.0.
 - SkillSpector: `--baseline .skillspector-baseline.yaml` per pack (native feature).
 - Cisco: `--lenient` for command files; findings triaged in the PR.
 

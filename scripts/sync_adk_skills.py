@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy the official skills from the watsonx Orchestrate ADK repository into the wxo pack.
+"""Copy the official skills from the watsonx Orchestrate ADK repository into the wxo-adk pack.
 
 Usage: sync_adk_skills.py --ref 2.16.0
 Then: bump version in pack.json, run `bob-skills registry validate --fix`, lint, PR.
@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-PACK = Path("packs/ibm-watsonx-orchestrate/wxo")
+PACK = Path("packs/ibm/wxo-adk")
 
 
 def main() -> int:

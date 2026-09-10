@@ -1,6 +1,6 @@
 # Pack `bob-essentials`
 
-Vendor: `bob-skills-marketplace`. The marketplace's own skills, installed with `uvx bob-skills add bob-essentials`.
+Vendor: `ibm`. The marketplace's own skills, installed with `uvx bob-skills add bob-essentials`.
 
 | Component | What it adds |
 |---|---|

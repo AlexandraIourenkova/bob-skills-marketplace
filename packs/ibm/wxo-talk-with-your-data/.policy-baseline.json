@@ -1,0 +1,45 @@
+{
+  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
+  "accepted": [
+    {
+      "fingerprint": "6333db79960a9929",
+      "rule": "P006",
+      "path": "skills/excel-to-wxo-agent/assets/mermaid_chart_rules.md",
+      "line": 11,
+      "message": "forbidden instruction: 'Never tell the user'",
+      "reason": "Instruction to the agent not to send users to an external mermaid renderer; it is about output formatting, not about hiding actions. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b42befdd8cad53f4",
+      "rule": "P008",
+      "path": "skills/excel-to-wxo-agent/references/visualization.md",
+      "line": 42,
+      "message": "host 's3.' in instructions is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder hostnames (company.com, an s3 URL pattern) in documentation and HTML templates; no script contacts them. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "2703956f40b3cd58",
+      "rule": "P009",
+      "path": "skills/excel-to-wxo-agent/references/wxo-notes.md",
+      "line": 66,
+      "message": "reference to protected path '.env'",
+      "reason": "Documentation mentions the project .env for ADK credentials; nothing reads or sends it. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "e51e807b1707a1e3",
+      "rule": "P008",
+      "path": "skills/wxo-chat-demo-page/assets/livepage_iframe_template.html",
+      "line": 7,
+      "message": "host 'company.com' in instructions is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder hostnames (company.com, an s3 URL pattern) in documentation and HTML templates; no script contacts them. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "0a6d487f7c12901f",
+      "rule": "P008",
+      "path": "skills/wxo-chat-demo-page/references/embed-issues.md",
+      "line": 122,
+      "message": "host 'company.com' in instructions is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder hostnames (company.com, an s3 URL pattern) in documentation and HTML templates; no script contacts them. Reviewed 2026-09-10."
+    }
+  ]
+}

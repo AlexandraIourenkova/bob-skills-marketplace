@@ -1,0 +1,2 @@
+# sqlite3 is in the Python standard library — no runtime dependencies needed.
+# The ADK automatically appends ibm-watsonx-orchestrate itself on import.

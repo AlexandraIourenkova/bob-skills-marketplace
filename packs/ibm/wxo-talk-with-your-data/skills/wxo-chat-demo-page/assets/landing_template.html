@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- Landing + floating wxo chat launcher. Field-tested layout.
+     Placeholders: {{PAGE_TITLE}} {{BRAND}} {{PRODUCT_SUBTITLE}} {{EYEBROW}}
+       {{HERO_HEADLINE_HTML}} {{HERO_LEAD}} {{HERO_BG_IMAGE}}
+       {{ORCHESTRATION_ID}} {{HOST_URL}} {{CRN}} {{AGENT_ID}} {{FOOTER_LINE}}
+     Optional blocks are fenced <!~~ BLOCK:name ~~> ... <!~~ /BLOCK:name ~~>
+     (written with ~~ so this comment survives; real fences below use dashes).
+     Delete the blocks the user did not pick. Replace ALL sample stats,
+     questions and chat-mock numbers with REAL values computed from the data. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #161616; --panel: #21212a; --panel-2: #262631; --border: #393947;
+      --text: #f4f4f4; --text-2: #c6c6cd; --text-3: #8d8d97;
+      --blue: #4589ff; --blue-2: #78a9ff; --teal: #08bdba; --max: 1120px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    header { position: sticky; top: 0; z-index: 50;
+      background: rgba(22,22,22,.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border); }
+    .nav { height: 52px; display: flex; align-items: center; gap: 14px; }
+    .logo { font-weight: 600; font-size: 15px; }
+    .logo b { color: var(--blue-2); }
+    .nav .divider { width: 1px; height: 18px; background: var(--border); }
+    .nav .subtitle { font-size: 13.5px; color: var(--text-2); }
+    .nav .spacer { flex: 1; }
+    .badge { font-size: 11.5px; color: var(--text-2); border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+    .badge .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--teal); margin-right: 7px; vertical-align: 1px; }
+
+    .hero { position: relative; background: #101017;
+      border-bottom: 1px solid var(--border); overflow: hidden; }
+    /* Background option A: blurred image texture (a website screenshot works).
+       Option B (neutral): delete ::before entirely — the gradient carries it. */
+    .hero::before { content: ""; position: absolute; inset: -40px;
+      background: url('{{HERO_BG_IMAGE}}') center 35% / cover no-repeat;
+      filter: blur(18px) saturate(1.4) brightness(.9); transform: scale(1.08); }
+    .hero::after { content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(900px 420px at 85% 20%, rgba(69,137,255,.16), transparent 60%),
+        linear-gradient(100deg, rgba(13,13,18,.96) 0%, rgba(13,13,18,.86) 45%, rgba(13,13,18,.62) 100%); }
+    .hero-inner { position: relative; z-index: 1; padding: 96px 0 88px; max-width: 640px; }
+    .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12.5px;
+      color: var(--teal); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
+    h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 300; line-height: 1.12; }
+    h1 b { font-weight: 600; color: var(--blue-2); }
+    .hero p.lead { margin-top: 20px; font-size: 17px; color: var(--text-2); max-width: 520px; }
+    .cta-row { margin-top: 34px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--blue);
+      color: #fff; border: none; cursor: pointer; font: 500 15px/1 "IBM Plex Sans", sans-serif;
+      padding: 15px 22px; border-radius: 2px; transition: background .15s; text-decoration: none; }
+    .btn:hover { background: #2c6fe8; }
+    .btn.ghost { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+    .btn.ghost:hover { border-color: var(--text-3); color: var(--text); }
+    .hint { font-size: 13px; color: var(--text-3); }
+
+    .stats { border-bottom: 1px solid var(--border); background: var(--panel); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 26px 24px; border-left: 1px solid var(--border); }
+    .stat:first-child { border-left: none; padding-left: 0; }
+    .stat .num { font-family: "IBM Plex Mono", monospace; font-size: 26px; font-weight: 500; }
+    .stat .num small { font-size: 15px; color: var(--text-3); }
+    .stat .cap { margin-top: 4px; font-size: 12.5px; color: var(--text-3); }
+
+    section { padding: 72px 0; }
+    .sec-label { font-family: "IBM Plex Mono", monospace; font-size: 12px;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+    h2 { font-size: 28px; font-weight: 400; margin-bottom: 36px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+      padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 12px;
+      transition: border-color .15s, transform .15s; }
+    .card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .card .tag { align-self: flex-start; font-family: "IBM Plex Mono", monospace;
+      font-size: 11px; color: var(--teal); border: 1px solid rgba(8,189,186,.35);
+      border-radius: 999px; padding: 3px 10px; }
+    .card .q { font-size: 15.5px; flex: 1; }
+    .card button.copy { align-self: flex-start; background: none; border: none; cursor: pointer;
+      font: 500 12.5px "IBM Plex Sans", sans-serif; color: var(--blue-2); padding: 0; }
+    .card button.copy:hover { text-decoration: underline; }
+
+    .about { border-top: 1px solid var(--border); background: var(--panel); }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .about ol { margin: 22px 0 0 18px; display: grid; gap: 14px; color: var(--text-2); font-size: 15px; }
+    .about ol li::marker { color: var(--teal); font-family: "IBM Plex Mono", monospace; }
+    .note { margin-top: 22px; font-size: 13px; color: var(--text-3);
+      border-left: 3px solid var(--border); padding-left: 14px; }
+
+    .chatmock { background: linear-gradient(160deg, #1b1b24, #14141b);
+      border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.45); padding: 18px;
+      display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; }
+    .chatmock .bar { display: flex; align-items: center; gap: 8px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border); color: var(--text-3); font-size: 12px; }
+    .chatmock .bar .dot2 { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .msg { max-width: 85%; padding: 10px 14px; border-radius: 10px; line-height: 1.5; }
+    .msg.user { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 2px; }
+    .msg.bot { align-self: flex-start; background: #262633; color: var(--text-2); border-bottom-left-radius: 2px; }
+    .msg.bot table { border-collapse: collapse; margin-top: 8px;
+      font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+    .msg.bot td, .msg.bot th { border: 1px solid #3a3a4a; padding: 4px 10px; text-align: right; }
+    .msg.bot th { color: var(--text-3); font-weight: 500; text-align: left; }
+    .msg.bot td:first-child { text-align: left; color: var(--text-3); }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 0 90px; }
+    footer .wrap { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; }
+    footer span { font-size: 12.5px; color: var(--text-3); }
+
+    .toast { position: fixed; left: 50%; bottom: 28px;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+      font-size: 13.5px; padding: 10px 18px; border-radius: 4px; opacity: 0;
+      transition: all .25s; pointer-events: none; z-index: 90; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    @media (max-width: 860px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat, .stat:first-child { border-left: none; padding-left: 0; }
+      .cards { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .chatmock { order: -1; }
+      .hero-inner { padding: 64px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <span class="logo">{{BRAND}}</span>
+      <span class="divider"></span>
+      <span class="subtitle">{{PRODUCT_SUBTITLE}}</span>
+      <span class="spacer"></span>
+      <span class="badge"><span class="dot"></span>Powered by IBM watsonx Orchestrate</span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">{{EYEBROW}}</div>
+      <h1>{{HERO_HEADLINE_HTML}}</h1>
+      <p class="lead">{{HERO_LEAD}}</p>
+      <div class="cta-row">
+        <button class="btn" id="openChat">Ask the analyst
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 3h12v8H6l-4 3V3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        </button>
+        <a class="btn ghost" href="#examples">See example questions</a>
+        <span class="hint">or use the chat bubble in the corner ↘</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCK:stats — numbers MUST be computed from the real data -->
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="num">123,456</div><div class="cap">rows, monthly granularity</div></div>
+      <div class="stat"><div class="num">2020<small>–</small>2026</div><div class="cap">actuals + forward budget</div></div>
+      <div class="stat"><div class="num">13</div><div class="cap">divisions</div></div>
+      <div class="stat"><div class="num">3 <small>currencies</small></div><div class="cap">ILS · USD · EUR</div></div>
+    </div>
+  </div>
+  <!-- /BLOCK:stats -->
+
+  <!-- BLOCK:questions — use questions the agent demonstrably answers well -->
+  <section id="examples">
+    <div class="wrap">
+      <div class="sec-label">Try it</div>
+      <h2>Questions people actually ask</h2>
+      <div class="cards">
+        <div class="card"><span class="tag">revenue</span>
+          <div class="q">What is the total revenue in USD by year?</div>
+          <button class="copy">Copy question</button></div>
+        <div class="card"><span class="tag">budget vs actual</span>
+          <div class="q">Compare actual vs budget by division for 2025.</div>
+          <button class="copy">Copy question</button></div>
+        <div class="card"><span class="tag">trends</span>
+          <div class="q">Show the monthly cost trend for 2024 and highlight unusual months.</div>
+          <button class="copy">Copy question</button></div>
+      </div>
+    </div>
+  </section>
+  <!-- /BLOCK:questions -->
+
+  <!-- BLOCK:about — includes the CSS chat-mock preview; numbers must be real -->
+  <section class="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="sec-label">Under the hood</div>
+        <h2>How this prototype works</h2>
+        <ol>
+          <li>A snapshot of the source data is embedded with the agent's tool —
+              no external database, nothing else to host.</li>
+          <li>The agent translates your question into a read-only SQL query and
+              answers with tables and short conclusions.</li>
+          <li>The full data dictionary is built into the agent, so it
+              understands the business vocabulary.</li>
+        </ol>
+        <div class="note">Prototype for evaluation. Double-check anything you
+          take into a board deck.</div>
+      </div>
+      <div class="chatmock" aria-hidden="true">
+        <div class="bar"><span class="dot2"></span>{{PRODUCT_SUBTITLE}}</div>
+        <div class="msg user">What is the total revenue in USD by year?</div>
+        <div class="msg bot">Revenue by year, USD:
+          <table>
+            <tr><th>year</th><th>revenue_usd</th></tr>
+            <tr><td>2023</td><td>12,345,678</td></tr>
+            <tr><td>2024</td><td>15,432,100</td></tr>
+          </table>
+          2024 is the strongest year, +25% vs 2023. Want the split by segment?
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /BLOCK:about -->
+
+  <footer>
+    <div class="wrap">
+      <span>{{FOOTER_LINE}}</span>
+      <span>Built with watsonx Orchestrate ADK</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Question copied — paste it into the chat</div>
+  <div id="wxo-chat-root"></div>
+
+  <!-- wxo embed: EXACTLY the generated shape. Do NOT add agentEnvironmentId. -->
+  <script>
+    window.wxOConfiguration = {
+      orchestrationID: "{{ORCHESTRATION_ID}}",
+      hostURL: "{{HOST_URL}}",
+      rootElementID: "wxo-chat-root",
+      showLauncher: true,
+      crn: "{{CRN}}",
+      deploymentPlatform: "ibmcloud",
+      chatOptions: {
+        agentId: "{{AGENT_ID}}"
+      }
+    };
+    setTimeout(function () {
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(script);
+    }, 0);
+  </script>
+
+  <script>
+    // Best-effort launcher click (no documented API); hint text is the fallback.
+    document.getElementById('openChat').addEventListener('click', function () {
+      const l = document.querySelector(
+        '[class*="launcher" i] button, button[class*="launcher" i], [id*="launcher" i]');
+      if (l) l.click(); else showToast('Chat is loading — use the bubble in the corner ↘');
+    });
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg; toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+    document.querySelectorAll('.card .copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = btn.parentElement.querySelector('.q').textContent.trim();
+        navigator.clipboard.writeText(q).then(
+          () => showToast('Question copied — paste it into the chat'),
+          () => showToast(q));
+      });
+    });
+  </script>
+
+</body>
+</html>

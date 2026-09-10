@@ -2,49 +2,106 @@
   "$schema": "./schemas/vendors.schema.json",
   "version": 1,
   "updated": "2026-09-10",
+  "administrators": [
+    "Maria-Startseva"
+  ],
   "vendors": [
     {
-      "id": "ibm-watsonx-orchestrate",
-      "displayName": "IBM watsonx Orchestrate",
+      "id": "ibm",
+      "displayName": "IBM",
       "status": "active",
-      "homepage": "https://developer.watson-orchestrate.ibm.com",
+      "homepage": "https://www.ibm.com",
       "github": {
         "host": "github.com",
         "org": "IBM",
-        "repos": ["ibm-watsonx-orchestrate-adk"]
+        "repos": [
+          "ibm-watsonx-orchestrate-adk",
+          "ui-modernization-lab"
+        ]
       },
-      "maintainers": ["Maria-Startseva"],
+      "extraSources": [
+        "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+        "https://github.com/carbon-design-system",
+        "https://github.com/ibm-self-serve-assets"
+      ],
+      "maintainers": [
+        "Maria-Startseva"
+      ],
       "publicKey": null,
-      "networkAllow": ["*.ibm.com", "ibm.com", "pypi.org", "files.pythonhosted.org", "github.com", "raw.githubusercontent.com"],
-      "notes": "Interim: the marketplace team maintains this pack for the hackathon until the ADK team enrols its own maintainers and signing key. Skills are synced verbatim from the MIT-licensed ADK repository."
+      "networkAllow": [
+        "*.ibm.com",
+        "ibm.com",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "github.com",
+        "raw.githubusercontent.com",
+        "github.ibm.com",
+        "cdn.jsdelivr.net",
+        "cdnjs.cloudflare.com",
+        "registry.npmjs.org",
+        "fonts.googleapis.com",
+        "fonts.gstatic.com"
+      ],
+      "notes": "IBM products (watsonx Orchestrate ADK, UI modernization, Carbon, Client Engineering building blocks) and the marketplace team's own accelerators. Packs are curated by the marketplace team from these official repositories with recorded provenance."
     },
     {
-      "id": "bob-skills-marketplace",
-      "displayName": "Bob Skills Marketplace team",
-      "status": "active",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
-      "github": {
-        "host": "github.ibm.com",
-        "org": "Maria-Startseva",
-        "repos": ["bob-skills-marketplace"]
-      },
-      "maintainers": ["Maria-Startseva"],
-      "publicKey": null,
-      "networkAllow": ["github.ibm.com", "pypi.org", "files.pythonhosted.org"]
-    },
-    {
-      "id": "ibm-carbon",
-      "displayName": "IBM Carbon Design System",
+      "id": "anthropic",
+      "displayName": "Anthropic",
       "status": "planned",
-      "homepage": "https://carbondesignsystem.com",
+      "homepage": "https://www.anthropic.com",
       "github": {
         "host": "github.com",
-        "org": "carbon-design-system"
+        "org": "anthropics",
+        "repos": [
+          "skills"
+        ]
       },
       "maintainers": [],
       "publicKey": null,
-      "networkAllow": ["*.ibm.com", "carbondesignsystem.com", "*.carbondesignsystem.com", "registry.npmjs.org"],
-      "notes": "Planned pack: carbon-builder skill from IBM ui-modernization-lab."
+      "networkAllow": [
+        "pypi.org",
+        "files.pythonhosted.org",
+        "registry.npmjs.org",
+        "github.com"
+      ],
+      "notes": "Candidate pack office-docs: Word, PowerPoint, Excel and PDF skills from the public anthropics/skills repository."
+    },
+    {
+      "id": "redhat",
+      "displayName": "Red Hat",
+      "status": "planned",
+      "homepage": "https://www.redhat.com",
+      "github": {
+        "host": "github.com",
+        "org": "RedHatOfficial"
+      },
+      "maintainers": [],
+      "publicKey": null,
+      "networkAllow": [
+        "*.redhat.com",
+        "*.openshift.com",
+        "galaxy.ansible.com",
+        "pypi.org"
+      ],
+      "notes": "Candidate pack openshift-ansible. Source repository and organisation to confirm before enrolment."
+    },
+    {
+      "id": "hashicorp",
+      "displayName": "HashiCorp",
+      "status": "planned",
+      "homepage": "https://www.hashicorp.com",
+      "github": {
+        "host": "github.com",
+        "org": "hashicorp"
+      },
+      "maintainers": [],
+      "publicKey": null,
+      "networkAllow": [
+        "*.hashicorp.com",
+        "registry.terraform.io",
+        "releases.hashicorp.com"
+      ],
+      "notes": "Candidate pack terraform-vault. Source repository to confirm before enrolment."
     }
   ],
   "signature": null

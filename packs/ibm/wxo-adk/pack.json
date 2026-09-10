@@ -1,10 +1,10 @@
 {
   "$schema": "../../../schemas/pack.schema.json",
-  "name": "wxo",
-  "displayName": "watsonx Orchestrate",
+  "name": "wxo-adk",
+  "displayName": "watsonx Orchestrate ADK",
   "version": "1.0.0",
-  "vendor": "ibm-watsonx-orchestrate",
-  "description": "Official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+  "vendor": "ibm",
+  "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
   "license": "MIT",
   "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
   "source": {

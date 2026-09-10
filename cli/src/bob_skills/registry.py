@@ -274,7 +274,7 @@ class Registry:
         """Compatibility manifest in the marketplace.json shape used by other agents."""
         return {
             "name": "bob-skills-marketplace",
-            "owner": {"name": "Bob Skills Marketplace team", "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"},
+            "owner": {"name": "IBM Bob Skills Marketplace team", "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"},
             "metadata": {
                 "description": "Vendor-signed skill packs for IBM Bob. Install with `uvx bob-skills add <pack>`; other agents may read this manifest to discover packs.",
                 "version": "1.0.0",

@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "wxo-talk-with-your-data",
+  "displayName": "Talk with your data on watsonx Orchestrate",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+  "source": {
+    "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+    "ref": "6bb7f04",
+    "path": ".bob/skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "watsonx-orchestrate",
+    "wxo",
+    "data",
+    "text-to-sql",
+    "excel",
+    "demo",
+    "ibm"
+  ],
+  "skills": [
+    "excel-to-wxo-agent",
+    "wxo-chat-demo-page"
+  ],
+  "mcpServers": {
+    "wxo-adk": {
+      "command": "uvx",
+      "args": [
+        "ibm-watsonx-orchestrate-mcp-server"
+      ]
+    },
+    "wxo-docs": {
+      "type": "streamable-http",
+      "url": "https://developer.watson-orchestrate.ibm.com/mcp"
+    }
+  },
+  "rules": [
+    "rules/wxo-data-agent.md"
+  ],
+  "networkAllow": [
+    "*.ibm.com",
+    "ibm.com",
+    "pypi.org",
+    "github.com",
+    "cdn.jsdelivr.net",
+    "cdnjs.cloudflare.com",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/excel-to-wxo-agent": "sha256:7dd1a5641f3c08897caac1e9d325bc11550445f7e77d4cdb16dafaf589c1cd62",
+    "skills/wxo-chat-demo-page": "sha256:25c028bb08b4c71d29b17eed09acd496f7955071ee8f168abc7b6ec44bc36ba7",
+    "rules/wxo-data-agent.md": "sha256:a59721c0109bb54bcb6f18f37bc933fa58f0d1b65beaa21507870b8656486b82"
+  }
+}

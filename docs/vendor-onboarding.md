@@ -1,6 +1,6 @@
 # Vendor onboarding
 
-One vendor per product, and that vendor is the product's owner. Users do not publish; they request. The marketplace team, IBM watsonx Orchestrate (interim, maintained by the team for the challenge) and IBM Carbon (planned) are the vendors at the start.
+One vendor per product, and that vendor is the product's owner. Users do not publish; they request. The marketplace team curates packs from each vendor's official repositories (recording source, ref and checksums) until the vendor enrols its own maintainers. At the start: IBM (active; ADK, UI modernization, Carbon, Client Engineering building blocks and the team's accelerators), Anthropic, Red Hat and HashiCorp (planned candidates).
 
 ## Requesting a pack
 

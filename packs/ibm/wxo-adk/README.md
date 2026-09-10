@@ -1,6 +1,6 @@
-# Pack `wxo` — watsonx Orchestrate
+# Pack `wxo-adk` — watsonx Orchestrate ADK
 
-Vendor: `ibm-watsonx-orchestrate`. Install with `uvx bob-skills add wxo` or `/skills-add wxo` inside Bob.
+Vendor: `ibm`. Curated by the marketplace team from the official ADK repository. Install with `uvx bob-skills add wxo-adk` or `/skills-add wxo-adk` inside Bob.
 
 | Component | Source | What it adds |
 |---|---|---|
@@ -18,4 +18,4 @@ python scripts/sync_adk_skills.py --ref <adk-tag>
 uv run --project cli bob-skills registry validate --fix
 ```
 
-Then bump `version` in `pack.json`, open a PR, and tag the merge commit `wxo--v<version>`.
+Then bump `version` in `pack.json`, open a PR, and tag the merge commit `wxo-adk--v<version>`.
