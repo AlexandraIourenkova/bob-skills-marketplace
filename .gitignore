@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+cli/.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# Scanner output
+*.sarif
+policy-report.*
+skillspector-*.json
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local install targets never belong in the registry
+.bob/skills.lock

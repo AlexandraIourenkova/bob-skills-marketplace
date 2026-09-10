@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "bob-essentials",
+  "displayName": "Bob essentials",
+  "version": "1.0.0",
+  "vendor": "bob-skills-marketplace",
+  "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "minBob": "2.0.2",
+  "tags": [
+    "marketplace",
+    "skills",
+    "security",
+    "bob"
+  ],
+  "skills": [
+    "find-skills",
+    "skill-creator",
+    "guard"
+  ],
+  "commands": [
+    "commands/skills-add.md"
+  ],
+  "networkAllow": [
+    "github.ibm.com",
+    "pypi.org"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/find-skills": "sha256:da2ee2d49f827cccf4af0330287a1072df5447dbcbe906041e9c1bfa4aa19972",
+    "skills/skill-creator": "sha256:32b7e11e2812a1337bf701fed3ae7c2fa464b4d7c24dcd689fae86c11dd64a35",
+    "skills/guard": "sha256:f5454a534343197dbe43fc78c5353cc879499c2b6b5e380b95ba711b1b969a7a",
+    "commands/skills-add.md": "sha256:1c0bac33ca0873cdb535604ee205d7d43cd244950c07682c9b1609698c9bfe61"
+  }
+}

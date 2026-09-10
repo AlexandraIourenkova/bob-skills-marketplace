@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/schemas/vendors.schema.json",
+  "title": "Bob Skills Marketplace vendor list (vendors.json)",
+  "description": "The closed list of vendors allowed to publish packs. Only the owner of a product publishes packs about it. Changes require a PR with two marketplace-administrator approvals.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "vendors"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "updated": { "type": "string", "format": "date" },
+    "vendors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/vendor" }
+    },
+    "signature": {
+      "description": "Marketplace administrators' signature over the `vendors` array. null until admin keys exist; then the installer refuses an unsigned or tampered list.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["keyId", "algorithm", "value"],
+          "properties": {
+            "keyId": { "type": "string" },
+            "algorithm": { "type": "string", "enum": ["cosign", "ed25519"] },
+            "value": { "type": "string" }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "vendor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "status", "github", "maintainers", "networkAllow"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{1,63}$",
+          "description": "Vendor id. Packs live under packs/<id>/ and reference it in pack.json `vendor`."
+        },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "status": {
+          "type": "string",
+          "enum": ["active", "planned", "suspended"],
+          "description": "Only `active` vendors can release. `suspended` makes the installer and guard refuse every version from this vendor."
+        },
+        "homepage": { "type": "string", "format": "uri" },
+        "securityContact": { "type": "string", "format": "email" },
+        "github": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["host", "org"],
+          "properties": {
+            "host": { "type": "string", "description": "GitHub host of the vendor's organisation, e.g. github.com or github.ibm.com." },
+            "org": { "type": "string" },
+            "repos": { "type": "array", "items": { "type": "string" }, "description": "Upstream repositories packs may be synced from." }
+          }
+        },
+        "maintainers": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Za-z0-9-]+$" },
+          "description": "Logins on the registry's GitHub host allowed to change packs/<id>/. CI rejects PRs touching the folder from anyone else before scanners run. Must match CODEOWNERS."
+        },
+        "publicKey": {
+          "description": "PEM-encoded cosign public key used to verify release signatures. null until the vendor enrols a key; the installer then falls back to sha256 checksums from the signed index.",
+          "oneOf": [{ "type": "null" }, { "type": "string", "pattern": "-----BEGIN PUBLIC KEY-----" }]
+        },
+        "networkAllow": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Hosts (glob) the vendor's packs may reference in scripts. A pack's own networkAllow must be a subset."
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

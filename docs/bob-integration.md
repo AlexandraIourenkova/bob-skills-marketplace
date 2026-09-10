@@ -1,0 +1,65 @@
+# Bob integration
+
+## Hooks
+
+Add to `.bob/settings.json` (project) or the user settings. `bob-skills guard` reads the hook payload from stdin and exits 2 to block; `check --brief` prints one status line at session start and never fails.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^use_skill$",
+        "hooks": [
+          { "type": "command", "command": "uvx bob-skills guard", "timeout": 5 }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "uvx bob-skills check --brief" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Until the package is published on an index, use `uv run --project /path/to/bob-skills-marketplace/cli bob-skills guard` as the command.
+
+For an organisation-wide rule, put the same `PreToolUse` entry in an **EnforcedHooks** policy (Bob 2.1.0+) with `uvx bob-skills guard --no-local`, so users cannot switch the guard off and only marketplace packs are activated.
+
+## Verify on day one
+
+The hook payload shape differs between Bob 2.0.2 (`tool_name`, `tool_input`) and the documentation (`tool`, `input`). The guard reads both, and looks for the skill name under `skill`, `skill_name`, `name`, `id` or a `path` ending in `SKILL.md`. What must be confirmed against a real Bob: that the `use_skill` payload carries the skill name at all.
+
+- If it does: nothing to change.
+- If it does not: the guard allows and prints a warning (use `--strict` to refuse instead). Fallback plan from the team plan: a `SessionStart` hook that quarantines folders in `.bob/skills/` which are not in the lock before Bob reads them, plus a rule in `.bob/rules/` that forbids using skills outside the lock.
+
+Test the payload by pointing the hook at a script that dumps stdin to a file, then activating any skill.
+
+## Slash command inside Bob
+
+The `bob-essentials` pack ships `.bob/commands/skills-add.md`. Users type `/skills-add wxo`; Bob runs the installer through `execute_command` and shows the report. The same command works non-interactively for CI:
+
+```bash
+bob run "/skills-add wxo"
+```
+
+## What the installer touches
+
+| Pack component | Project scope (`bob-skills add`) | User scope (`--global`) |
+|---|---|---|
+| skills | `.bob/skills/<skill>/` | `~/.bob/skills/<skill>/` |
+| MCP servers | `.bob/mcp.json` → `mcpServers` | `~/.bob/mcp_settings.json` → `mcpServers` |
+| rules | `.bob/rules/<file>` | `~/.bob/rules/<file>` |
+| commands | `.bob/commands/<file>` | `~/.bob/commands/<file>` |
+| modes | `.bob/custom_modes.yaml` → `customModes` by slug | `~/.bob/custom_modes.yaml` (path to confirm against Bob docs) |
+| lock | `.bob/skills.lock` | `~/.bob/skills.lock` |
+
+`bob-skills remove <pack>` reverses all of it, including the MCP entries and modes, using the lock as the record of ownership.
+
+## The ADK MCP server and unmanaged skills
+
+The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo` pack instead, or `bob-skills trust <skill>` for a genuinely local skill.

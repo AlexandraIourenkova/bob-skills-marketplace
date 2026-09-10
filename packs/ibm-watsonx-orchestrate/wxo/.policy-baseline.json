@@ -1,0 +1,189 @@
+{
+  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
+  "accepted": [
+    {
+      "fingerprint": "60bdc5c24f9f683e",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/export_traces_adk.py",
+      "line": 45,
+      "message": "reference to protected path '\".env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "73a1edfcd25165c4",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/export_traces_adk.py",
+      "line": 26,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "b09f5192e26ff7dd",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/export_traces_adk.py",
+      "line": 37,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "0e08d99b10a1c69b",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/export_traces_agentops_v3.py",
+      "line": 38,
+      "message": "reference to protected path '\".env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "9bf741bdf2a6785d",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/export_traces_agentops_v3.py",
+      "line": 29,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "184ceeddb2625a09",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/search_traces_adk.py",
+      "line": 37,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "ac5544408b570a34",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/search_traces_adk.py",
+      "line": 61,
+      "message": "reference to protected path '\".env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "fd81483d36cc9944",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/search_traces_adk.py",
+      "line": 53,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "3d09f6a066244b1e",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/search_traces_agentops_v3.py",
+      "line": 37,
+      "message": "reference to protected path '\".env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "605b13d5a8be38e4",
+      "rule": "P009",
+      "path": "skills/telemetry-analyzer/scripts/search_traces_agentops_v3.py",
+      "line": 28,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "eb90441d44ed591e",
+      "rule": "P008",
+      "path": "skills/wxo-analyzer/SKILL.md",
+      "line": 250,
+      "message": "host 'api.salesforce.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "d0cd80a859b6a0bd",
+      "rule": "P006",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 929,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Legitimate ADK instruction: a flow that expects a document input is invoked directly instead of prompting for an upload. Not a confirmation bypass. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "3bb3b6c8821041d4",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1401,
+      "message": "host 'oauth2.googleapis.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "584c5b2ffd376873",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1399,
+      "message": "host 'sheets.googleapis.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "61d89dc1ff850520",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 262,
+      "message": "host 'xxx-us-east-2.apps.astra.datastax.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "6c0f166deb07ab1d",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1404,
+      "message": "host 'www.googleapis.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "ab4c7bd6ff82473c",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1403,
+      "message": "host 'www.googleapis.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "b97fbea7e8d5a192",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 304,
+      "message": "host 'my-milvus-instance.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "c3fb1da085c3283b",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1400,
+      "message": "host 'accounts.google.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "d43cc9793ea19f55",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 1386,
+      "message": "host 'api.apify.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "eb174fb006df9a34",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 343,
+      "message": "host 'my-elasticsearch-cluster.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "fe2cef79fca425c2",
+      "rule": "P008",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 417,
+      "message": "host 'my-custom-db.com' in instructions is not in the allow-list ['*.ibm.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Placeholder or third-party hostnames in ADK documentation examples (Milvus, Elasticsearch, Salesforce, Google Sheets, Apify). Instructions only; no script contacts them. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    },
+    {
+      "fingerprint": "55a64f6cd064ac4b",
+      "rule": "P009",
+      "path": "skills/wxo-builder/SKILL.md",
+      "line": 605,
+      "message": "reference to protected path '.env'",
+      "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
+    }
+  ]
+}

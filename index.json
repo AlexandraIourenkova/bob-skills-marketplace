@@ -1,0 +1,140 @@
+{
+  "$schema": "./schemas/index.schema.json",
+  "schemaVersion": 1,
+  "generated": "2026-09-10T08:14:26Z",
+  "registry": {
+    "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
+    "commit": "643bfea752cd3fd0a354e83878f09c6eae5ba7e3"
+  },
+  "packs": [
+    {
+      "name": "bob-essentials",
+      "displayName": "Bob essentials",
+      "vendor": "bob-skills-marketplace",
+      "vendorDisplayName": "Bob Skills Marketplace team",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+      "path": "packs/bob-skills-marketplace/bob-essentials",
+      "tag": "bob-essentials--v1.0.0",
+      "skills": [
+        {
+          "name": "find-skills",
+          "description": "Find and propose a marketplace skill pack when the user needs a capability Bob does not have installed. Use when the user asks how to do something with an IBM product or tool (watsonx Orchestrate, Carbon, OpenShift, Ansible, Vault) and no installed skill covers it, or asks \"is there a skill for X\", \"find a skill\", \"install skills for ...\", \"какой скилл поставить\", \"есть ли скилл для ...\".",
+          "digest": "sha256:da2ee2d49f827cccf4af0330287a1072df5447dbcbe906041e9c1bfa4aa19972"
+        },
+        {
+          "name": "skill-creator",
+          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\", \"сделай скилл\", \"напиши SKILL.md\".",
+          "digest": "sha256:32b7e11e2812a1337bf701fed3ae7c2fa464b4d7c24dcd689fae86c11dd64a35"
+        },
+        {
+          "name": "guard",
+          "description": "Explain and resolve a refusal from the bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a \"bob-skills guard\" message, or the user asks why a skill is blocked, mentions \"unmanaged skill\", \"digest mismatch\", \"revoked version\", \"skill blocked\", \"guard\", or wants to trust a local skill again.",
+          "digest": "sha256:f5454a534343197dbe43fc78c5353cc879499c2b6b5e380b95ba711b1b969a7a"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [
+        "skills-add.md"
+      ],
+      "modes": [],
+      "digest": "sha256:91f4040bc079b685dfb032a7c6f70b4666b4ada21ab9c4309b57d550e3d2f4ea",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "scan": {
+        "riskScore": null,
+        "policyFindings": 0,
+        "verdict": "pending"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "minBob": "2.0.2",
+      "tags": [
+        "marketplace",
+        "skills",
+        "security",
+        "bob"
+      ]
+    },
+    {
+      "name": "wxo",
+      "displayName": "watsonx Orchestrate",
+      "vendor": "ibm-watsonx-orchestrate",
+      "vendorDisplayName": "IBM watsonx Orchestrate",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+      "path": "packs/ibm-watsonx-orchestrate/wxo",
+      "tag": "wxo--v1.0.0",
+      "skills": [
+        {
+          "name": "solution-architect",
+          "description": "Expert guidance for creating high-level solution architecture documents from business requirements, use cases, or problem statements. Produces three focused documents - business overview, technical architecture, and implementation plan - with sufficient detail for elaboration into detailed SOPs.",
+          "digest": "sha256:685da057cb4773aea4242caa108ffad63596b01bb393dec7f2180d48d835e6d3"
+        },
+        {
+          "name": "sop-builder",
+          "description": "Expert guidance for building a Standard Operating Procedure (SOP) from a workflow diagram, Langflow JSON, n8n JSON, BPMN model or workflow description. Focuses on business problem, data requirements, and business logic in plain language.",
+          "digest": "sha256:42fd89cf838bbcec6295c06c5a54b685c8615ba8ffec12f2f5babb7e57edbbf3"
+        },
+        {
+          "name": "wxo-builder",
+          "description": "Expert guidance for generating watsonx Orchestrate native solutions from SOPs or simple prompts. Implements agents, flows, tools, and knowledge bases based on business requirements.",
+          "digest": "sha256:342f92637b216e8ec856de5d273be76d1ab3d1a86f76843d836c25d53ec6f60f"
+        },
+        {
+          "name": "wxo-analyzer",
+          "description": "Analyzes watsonx Orchestrate (wxO) projects and generates a 3-report documentation set covering the overall solution, agents, and tools/connections/other components with Mermaid diagrams.",
+          "digest": "sha256:9827d600438df05d251fb7472fec0d6b0da1336309eb94ea6f3322f13edd4f51"
+        },
+        {
+          "name": "telemetry-analyzer",
+          "description": "Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.",
+          "digest": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f"
+        },
+        {
+          "name": "agent-instructions-evaluator",
+          "description": "Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.",
+          "digest": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902"
+        }
+      ],
+      "mcpServers": [
+        "wxo-adk",
+        "wxo-docs"
+      ],
+      "rules": [
+        "wxo-adk.md"
+      ],
+      "commands": [
+        "wxo-deploy.md"
+      ],
+      "modes": [
+        "wxo-builder"
+      ],
+      "digest": "sha256:32955dab95cf7683491a09fb2416553d463f359cd73f3cd1b85739d787cd6eb8",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "scan": {
+        "riskScore": null,
+        "policyFindings": 0,
+        "verdict": "pending"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-orchestrate",
+        "wxo",
+        "adk",
+        "agents",
+        "ibm"
+      ]
+    }
+  ]
+}
