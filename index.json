@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T10:12:57Z",
+  "generated": "2026-09-10T10:57:16Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "a356bf16f825850df104f22869eec55bc30fc983"
+    "commit": "411b8e2953e0e99c0f3a30e2e684da8dc5e2edc0"
   },
   "vendors": [
     {
@@ -525,12 +525,12 @@
         {
           "name": "excel-to-wxo-agent",
           "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"deploy a data agent to wxo\", \"text-to-SQL prototype\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
-          "digest": "sha256:3637b0c9db712693af099989b4a8d78d0354b999612839d341d7f81a2038c70f"
+          "digest": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d"
         },
         {
           "name": "wxo-chat-demo-page",
           "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"put the chat on a page\", \"demo page for the agent\", \"landing page with chat\"), wants charts or a dashboard built live from the agent's chat answers (\"render charts from the answers\", \"dashboard with chat\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
-          "digest": "sha256:25c028bb08b4c71d29b17eed09acd496f7955071ee8f168abc7b6ec44bc36ba7"
+          "digest": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66"
         }
       ],
       "mcpServers": [
@@ -542,7 +542,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:528e5af8260a2ae7ac18f1b9ba712bd2e3952f51b772b25e96e681578de19ae5",
+      "digest": "sha256:0b870aadcdfec07e9299120b763ff2ab2dba5283f5c6c61d73496d380a476514",
       "revokedVersions": [],
       "versions": [
         "1.0.1",

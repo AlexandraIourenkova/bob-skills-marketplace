@@ -172,6 +172,7 @@ site/                   static catalog website reading index.json
 Working on the registry:
 
 ```bash
+scripts/gate.sh                                         # the whole gate locally: tests, validation, linter, both scanners
 uv run --project cli pytest -q                          # client tests, including the red-team cases
 uv run --project cli bob-skills registry validate --fix # schemas, vendors, checksums
 uv run --project cli bob-skills registry build-index    # index.json + marketplace.json
@@ -187,7 +188,8 @@ Next, in order:
 1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
 3. IBM packs `app-modernization` (IBM/ui-modernization-lab) and `building-blocks`; a Microsoft pack from microsoft/skills.
-4. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
+4. CI on github.ibm.com: GitHub Actions is disabled for user and team repositories on this instance and no runners exist, so the gate runs locally with `scripts/gate.sh` until an organisation with Actions (or another CI) is available. The workflows are ready.
+5. Day-one check from the plan: the `use_skill` hook payload carries the skill name.
 
 ## Docs
 
