@@ -1,0 +1,69 @@
+# Security gate for the registry. Runs on every PR and on main.
+# On GitHub Enterprise, actions from github.com need GitHub Connect; the steps
+# below only rely on actions/checkout and tools installed with pip.
+name: gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  vendor-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: PR author is a maintainer of every touched vendor folder
+        run: python3 scripts/check_pr_author.py --actor "${{ github.actor }}" --base "origin/${{ github.base_ref }}"
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install uv
+        run: python3 -m pip install --quiet uv
+      - name: Client tests (includes the red-team cases)
+        run: uv run --project cli pytest -q
+      - name: Schemas, vendor list, checksums
+        run: uv run --project cli bob-skills registry validate
+      - name: index.json is up to date
+        run: uv run --project cli bob-skills registry build-index --check
+      - name: Marketplace policy linter
+        run: uv run --project cli bob-skills lint packs --format sarif --output policy.sarif
+      - name: Upload policy report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: policy-sarif
+          path: policy.sarif
+
+  scanners:
+    # NVIDIA SkillSpector and Cisco skill-scanner on every skill. A pack blocks when
+    # its SkillSpector risk score is >= 30 after the reviewed .skillspector-baseline.yaml,
+    # or Cisco reports a CRITICAL/HIGH finding not listed in .cisco-baseline.json.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install scanners
+        run: |
+          python3 -m pip install --quiet uv pyyaml
+          uv tool install git+https://github.com/NVIDIA/skillspector.git
+          uv tool install cisco-ai-skill-scanner
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Scan every pack and apply the thresholds
+        run: python3 scripts/run_scanners.py --check --reports reports
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          name: scanner-reports
+          path: reports/
