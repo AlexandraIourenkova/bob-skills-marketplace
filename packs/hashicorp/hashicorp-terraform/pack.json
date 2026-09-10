@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "hashicorp-terraform",
+  "displayName": "HashiCorp Terraform",
+  "version": "1.0.0",
+  "vendor": "hashicorp",
+  "description": "Terraform the way HashiCorp writes it: style guide, tests, policy as code, module refactoring, and importing existing infrastructure with search. Curated from hashicorp/agent-skills.",
+  "license": "MPL-2.0",
+  "homepage": "https://github.com/hashicorp/agent-skills",
+  "source": {
+    "repo": "https://github.com/hashicorp/agent-skills",
+    "ref": "c2d65dfe492f",
+    "path": "plugins/terraform/skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "terraform",
+    "infrastructure",
+    "iac",
+    "hashicorp"
+  ],
+  "skills": [
+    "terraform-style-guide",
+    "terraform-test",
+    "terraform-policy",
+    "refactor-module",
+    "terraform-search-import"
+  ],
+  "networkAllow": [
+    "*.hashicorp.com",
+    "registry.terraform.io",
+    "releases.hashicorp.com",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/terraform-style-guide": "sha256:6b86246c59c0d19053811727ee5002c845e9d223e29a31cf9c33ed25bef3008b",
+    "skills/terraform-test": "sha256:d049f1811b6b21157403dc613b14d04cd8adeffcc73387ae4fcce7366dabb820",
+    "skills/terraform-policy": "sha256:e1f067e3fca23cf2ca67dafff3bc7651d5de7e2413bfb976989ac9a4ca85ec52",
+    "skills/refactor-module": "sha256:5804cb53dadcf90efcb67f47c590f30685dac6916d79c7979aabf2f7baa5c3bd",
+    "skills/terraform-search-import": "sha256:b617bcc3db18cdc49b5b542043b5d17228030f95e80d374cd99edbfe48c3c4e2"
+  }
+}

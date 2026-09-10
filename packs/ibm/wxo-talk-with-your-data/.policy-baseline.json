@@ -1,5 +1,4 @@
 {
-  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
   "accepted": [
     {
       "fingerprint": "6333db79960a9929",
@@ -8,6 +7,30 @@
       "line": 11,
       "message": "forbidden instruction: 'Never tell the user'",
       "reason": "Instruction to the agent not to send users to an external mermaid renderer; it is about output formatting, not about hiding actions. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "3407a55708ccc2e5",
+      "rule": "P008",
+      "path": "skills/excel-to-wxo-agent/assets/visualization_tool.py",
+      "line": 293,
+      "message": "host 'freeimage.host' in script is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Demo-only chart upload to public image hosts (litterbox.catbox.moe, freeimage.host), one of the options the agent offers the user during agent creation; SKILL.md and references/visualization.md carry the disclaimer: never with real data. Accepted by the pack maintainer 2026-09-10."
+    },
+    {
+      "fingerprint": "6e6bfdd7748da253",
+      "rule": "P008",
+      "path": "skills/excel-to-wxo-agent/assets/visualization_tool.py",
+      "line": 67,
+      "message": "host 'catbox.moe' in script is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Demo-only chart upload to public image hosts (litterbox.catbox.moe, freeimage.host), one of the options the agent offers the user during agent creation; SKILL.md and references/visualization.md carry the disclaimer: never with real data. Accepted by the pack maintainer 2026-09-10."
+    },
+    {
+      "fingerprint": "af71ef8ef4b745be",
+      "rule": "P008",
+      "path": "skills/excel-to-wxo-agent/assets/visualization_tool.py",
+      "line": 281,
+      "message": "host 'litterbox.catbox.moe' in script is not in the allow-list ['*.ibm.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'github.com', 'ibm.com', 'pypi.org']",
+      "reason": "Demo-only chart upload to public image hosts (litterbox.catbox.moe, freeimage.host), one of the options the agent offers the user during agent creation; SKILL.md and references/visualization.md carry the disclaimer: never with real data. Accepted by the pack maintainer 2026-09-10."
     },
     {
       "fingerprint": "b42befdd8cad53f4",

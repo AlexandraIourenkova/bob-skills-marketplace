@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "anthropic-dev-kit",
+  "displayName": "Anthropic developer kit",
+  "version": "1.0.0",
+  "vendor": "anthropic",
+  "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/anthropics/skills",
+  "source": {
+    "repo": "https://github.com/anthropics/skills",
+    "ref": "41bbe19d1a1a",
+    "path": "skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "mcp",
+    "testing",
+    "frontend",
+    "anthropic"
+  ],
+  "skills": [
+    "mcp-builder",
+    "webapp-testing",
+    "frontend-design"
+  ],
+  "networkAllow": [
+    "*.anthropic.com",
+    "*.claude.com",
+    "modelcontextprotocol.io",
+    "*.modelcontextprotocol.io",
+    "pypi.org",
+    "registry.npmjs.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/mcp-builder": "sha256:6a9e0cb25cbd7589086b86e9074b93668b68d828f7e7857a9257d9a19e276b28",
+    "skills/webapp-testing": "sha256:415baa08c101f4855f5bb63576d018c6329b335b0f44bc7f0b56f67bf2eb4d28",
+    "skills/frontend-design": "sha256:1d8e08bac10796cc90c3a0d62a87626db60c0fe74aeb76f3f019b3a78b3b0507"
+  }
+}

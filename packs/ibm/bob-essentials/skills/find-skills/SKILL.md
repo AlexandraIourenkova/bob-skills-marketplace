@@ -1,6 +1,6 @@
 ---
 name: find-skills
-description: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill", "какой скилл поставить", "установи скиллы из этого репозитория", "покажи каталог"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
+description: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
 ---
 
 # find-skills

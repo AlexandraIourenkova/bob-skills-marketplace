@@ -47,7 +47,7 @@
     {
       "id": "anthropic",
       "displayName": "Anthropic",
-      "status": "planned",
+      "status": "active",
       "homepage": "https://www.anthropic.com",
       "github": {
         "host": "github.com",
@@ -56,15 +56,126 @@
           "skills"
         ]
       },
-      "maintainers": [],
+      "maintainers": [
+        "Maria-Startseva"
+      ],
       "publicKey": null,
       "networkAllow": [
+        "*.anthropic.com",
+        "*.claude.com",
+        "modelcontextprotocol.io",
+        "*.modelcontextprotocol.io",
         "pypi.org",
         "files.pythonhosted.org",
         "registry.npmjs.org",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from the public anthropics/skills repository. Only the Apache-2.0 skills are eligible; the document skills (docx, pdf, pptx, xlsx) are source-available with a no-copy licence and stay out of the registry."
+    },
+    {
+      "id": "openai",
+      "displayName": "OpenAI",
+      "status": "active",
+      "homepage": "https://openai.com",
+      "github": {
+        "host": "github.com",
+        "org": "openai",
+        "repos": [
+          "skills"
+        ]
+      },
+      "maintainers": [
+        "Maria-Startseva"
+      ],
+      "publicKey": null,
+      "networkAllow": [
+        "*.openai.com",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "registry.npmjs.org",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from the Codex skills catalog (openai/skills). Each skill carries its own LICENSE.txt; only Apache-2.0 skills are taken."
+    },
+    {
+      "id": "google",
+      "displayName": "Google",
+      "status": "active",
+      "homepage": "https://developers.google.com",
+      "github": {
+        "host": "github.com",
+        "org": "google",
+        "repos": [
+          "skills"
+        ]
+      },
+      "maintainers": [
+        "Maria-Startseva"
+      ],
+      "publicKey": null,
+      "networkAllow": [
+        "*.google.com",
+        "*.googleapis.com",
+        "*.cloud.google.com",
+        "*.google.dev",
+        "*.withgoogle.com",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from google/skills (Apache-2.0): agent skills for Google Cloud, Gemini, Ads and Analytics."
+    },
+    {
+      "id": "hashicorp",
+      "displayName": "HashiCorp",
+      "status": "active",
+      "homepage": "https://www.hashicorp.com",
+      "github": {
+        "host": "github.com",
+        "org": "hashicorp",
+        "repos": [
+          "agent-skills"
+        ]
+      },
+      "maintainers": [
+        "Maria-Startseva"
+      ],
+      "publicKey": null,
+      "networkAllow": [
+        "*.hashicorp.com",
+        "registry.terraform.io",
+        "releases.hashicorp.com",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from hashicorp/agent-skills (MPL-2.0): Terraform and Packer skills."
+    },
+    {
+      "id": "microsoft",
+      "displayName": "Microsoft",
+      "status": "planned",
+      "homepage": "https://learn.microsoft.com",
+      "github": {
+        "host": "github.com",
+        "org": "microsoft",
+        "repos": [
+          "skills"
+        ]
+      },
+      "maintainers": [],
+      "publicKey": null,
+      "networkAllow": [
+        "*.microsoft.com",
+        "*.azure.com",
+        "*.nuget.org",
+        "registry.npmjs.org",
+        "pypi.org",
         "github.com"
       ],
-      "notes": "Candidate pack office-docs: Word, PowerPoint, Excel and PDF skills from the public anthropics/skills repository."
+      "notes": "Candidate: microsoft/skills (MIT) ships Azure SDK skills and MCP servers as Claude Code plugins under .github/plugins/."
     },
     {
       "id": "redhat",
@@ -73,7 +184,8 @@
       "homepage": "https://www.redhat.com",
       "github": {
         "host": "github.com",
-        "org": "RedHatOfficial"
+        "org": "RedHatOfficial",
+        "repos": []
       },
       "maintainers": [],
       "publicKey": null,
@@ -83,25 +195,28 @@
         "galaxy.ansible.com",
         "pypi.org"
       ],
-      "notes": "Candidate pack openshift-ansible. Source repository and organisation to confirm before enrolment."
+      "notes": "Candidate: no official agent-skills repository found yet (checked ansible, openshift, redhat-developer organisations)."
     },
     {
-      "id": "hashicorp",
-      "displayName": "HashiCorp",
+      "id": "vercel",
+      "displayName": "Vercel",
       "status": "planned",
-      "homepage": "https://www.hashicorp.com",
+      "homepage": "https://vercel.com",
       "github": {
         "host": "github.com",
-        "org": "hashicorp"
+        "org": "vercel-labs",
+        "repos": [
+          "agent-skills"
+        ]
       },
       "maintainers": [],
       "publicKey": null,
       "networkAllow": [
-        "*.hashicorp.com",
-        "registry.terraform.io",
-        "releases.hashicorp.com"
+        "*.vercel.com",
+        "registry.npmjs.org",
+        "github.com"
       ],
-      "notes": "Candidate pack terraform-vault. Source repository to confirm before enrolment."
+      "notes": "Candidate: vercel-labs/agent-skills is popular but publishes no licence, so it cannot be copied into the registry until that changes."
     }
   ],
   "signature": null

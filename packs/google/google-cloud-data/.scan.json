@@ -1,0 +1,108 @@
+{
+  "scannedAt": "2026-09-10T10:07:20Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": null
+  },
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "bigquery-basics": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "bigquery-bigframes": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "bigquery-ai-ml": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "gcloud": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 2,
+    "ciscoAccepted": 0
+  }
+}

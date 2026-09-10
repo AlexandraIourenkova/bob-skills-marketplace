@@ -12,7 +12,7 @@ import typer
 from . import __version__
 from . import installer
 from .installer import InstallError, Scope, VendorConfirmationRequired, global_scope, project_scope
-from .policy import BLOCK, format_text, lint_path, to_sarif, write_baseline
+from .policy import BLOCK, INFO, format_text, lint_path, to_sarif, write_baseline
 from .registry import Registry, RegistryError, describe_pack, resolve_reference, resolve_registry
 
 app = typer.Typer(
@@ -142,8 +142,10 @@ def show(pack: str, registry: Optional[str] = RegistryOpt, offline: bool = Offli
         if info[kind]:
             typer.echo(f"  {kind}: {', '.join(info[kind])}")
     g = info["gate"]
-    typer.echo(f"  gate: {g['verdict']}; {g['baselineFindings']} reviewed findings in the baseline; {g['components']} checksummed components"
-               + ("; REVOKED" if g["revoked"] else ""))
+    risk = f"; SkillSpector risk {g['riskScore']}/100" if g.get("riskScore") is not None else ""
+    cisco = f"; Cisco max severity {g['ciscoMaxSeverity']}" if g.get("ciscoMaxSeverity") else ""
+    typer.echo(f"  gate: {g['verdict']}{risk}{cisco}; {g['baselineFindings']} reviewed policy findings; {g['components']} checksummed components"
+               + (f"; scanned {g['scannedAt'][:10]}" if g.get("scannedAt") else "") + ("; REVOKED" if g["revoked"] else ""))
     typer.echo(f"  network allowed in scripts: {', '.join(info['networkAllow']) or '-'}")
     c = info["contextTokens"]
     typer.echo(f"  context cost: ~{c['alwaysOn']} tokens always on (skill descriptions + rules), ~{c['onUse']} tokens when a skill is used")
@@ -325,7 +327,9 @@ def lint(paths: list[Path] = typer.Argument(..., help="Pack folder, packs/ tree 
          allow: list[str] = typer.Option([], "--allow", help="Extra allowed hosts for bare skill folders."),
          no_baseline: bool = typer.Option(False, "--no-baseline", help="Ignore .policy-baseline.json"),
          write_baseline_flag: bool = typer.Option(False, "--write-baseline", help="Accept every current finding into the baseline (reviewers only)."),
-         reason: str = typer.Option("accepted by reviewer", "--reason")) -> None:
+         reason: str = typer.Option("accepted by reviewer", "--reason"),
+         show_info: bool = typer.Option(False, "--show-info", help="Also list informational findings (hosts in documentation)."),
+         include_info: bool = typer.Option(False, "--include-info", help="With --write-baseline: also accept informational findings.")) -> None:
     """Run the marketplace policy linter. Exit 1 when a blocking finding remains."""
     base = Path.cwd()
     active, suppressed = [], []
@@ -337,21 +341,23 @@ def lint(paths: list[Path] = typer.Argument(..., help="Pack folder, packs/ tree 
             home = path if (path / "pack.json").is_file() or (path / "SKILL.md").is_file() else None
             if home is None:
                 _fail("--write-baseline needs a single pack or skill folder")
-            write_baseline(home, found, reason)
-            typer.echo(f"accepted {len(found)} finding(s) into {home / '.policy-baseline.json'}")
-            found = []
+            write_baseline(home, found, reason, include_info=include_info)
+            accepted = [f for f in found if include_info or f.severity != INFO]
+            typer.echo(f"accepted {len(accepted)} finding(s) into {home / '.policy-baseline.json'}")
+            found = [f for f in found if f not in accepted]
         active += found
         suppressed += hidden
     if fmt == "sarif":
         text = json.dumps(to_sarif(active, __version__), indent=2)
     else:
-        text = format_text(active)
+        text = format_text([f for f in active if show_info or f.severity != INFO])
     if output:
         output.write_text(text + ("\n" if text else ""), encoding="utf-8")
     elif text:
         typer.echo(text)
     blocking = [f for f in active if f.severity == BLOCK]
-    typer.echo(f"{len(blocking)} blocking, {len(active) - len(blocking)} warning, {len(suppressed)} suppressed by baseline", err=True)
+    info = [f for f in active if f.severity == INFO]
+    typer.echo(f"{len(blocking)} blocking, {len(active) - len(blocking) - len(info)} warning, {len(info)} info, {len(suppressed)} suppressed by baseline", err=True)
     if blocking:
         raise typer.Exit(code=1)
 

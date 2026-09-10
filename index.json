@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T09:09:34Z",
+  "generated": "2026-09-10T10:12:57Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "31351ffce0b59c7e900b511c25403db5b6254e12"
+    "commit": "a356bf16f825850df104f22869eec55bc30fc983"
   },
   "vendors": [
     {
@@ -35,7 +35,7 @@
     {
       "id": "anthropic",
       "displayName": "Anthropic",
-      "status": "planned",
+      "status": "active",
       "homepage": "https://www.anthropic.com",
       "github": {
         "host": "github.com",
@@ -45,7 +45,79 @@
         ]
       },
       "extraSources": [],
-      "notes": "Candidate pack office-docs: Word, PowerPoint, Excel and PDF skills from the public anthropics/skills repository.",
+      "notes": "Curated from the public anthropics/skills repository. Only the Apache-2.0 skills are eligible; the document skills (docx, pdf, pptx, xlsx) are source-available with a no-copy licence and stay out of the registry.",
+      "packs": [
+        "anthropic-dev-kit"
+      ]
+    },
+    {
+      "id": "openai",
+      "displayName": "OpenAI",
+      "status": "active",
+      "homepage": "https://openai.com",
+      "github": {
+        "host": "github.com",
+        "org": "openai",
+        "repos": [
+          "skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Curated from the Codex skills catalog (openai/skills). Each skill carries its own LICENSE.txt; only Apache-2.0 skills are taken.",
+      "packs": [
+        "openai-security"
+      ]
+    },
+    {
+      "id": "google",
+      "displayName": "Google",
+      "status": "active",
+      "homepage": "https://developers.google.com",
+      "github": {
+        "host": "github.com",
+        "org": "google",
+        "repos": [
+          "skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Curated from google/skills (Apache-2.0): agent skills for Google Cloud, Gemini, Ads and Analytics.",
+      "packs": [
+        "google-cloud-data"
+      ]
+    },
+    {
+      "id": "hashicorp",
+      "displayName": "HashiCorp",
+      "status": "active",
+      "homepage": "https://www.hashicorp.com",
+      "github": {
+        "host": "github.com",
+        "org": "hashicorp",
+        "repos": [
+          "agent-skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Curated from hashicorp/agent-skills (MPL-2.0): Terraform and Packer skills.",
+      "packs": [
+        "hashicorp-terraform"
+      ]
+    },
+    {
+      "id": "microsoft",
+      "displayName": "Microsoft",
+      "status": "planned",
+      "homepage": "https://learn.microsoft.com",
+      "github": {
+        "host": "github.com",
+        "org": "microsoft",
+        "repos": [
+          "skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Candidate: microsoft/skills (MIT) ships Azure SDK skills and MCP servers as Claude Code plugins under .github/plugins/.",
       "packs": []
     },
     {
@@ -55,47 +127,258 @@
       "homepage": "https://www.redhat.com",
       "github": {
         "host": "github.com",
-        "org": "RedHatOfficial"
+        "org": "RedHatOfficial",
+        "repos": []
       },
       "extraSources": [],
-      "notes": "Candidate pack openshift-ansible. Source repository and organisation to confirm before enrolment.",
+      "notes": "Candidate: no official agent-skills repository found yet (checked ansible, openshift, redhat-developer organisations).",
       "packs": []
     },
     {
-      "id": "hashicorp",
-      "displayName": "HashiCorp",
+      "id": "vercel",
+      "displayName": "Vercel",
       "status": "planned",
-      "homepage": "https://www.hashicorp.com",
+      "homepage": "https://vercel.com",
       "github": {
         "host": "github.com",
-        "org": "hashicorp"
+        "org": "vercel-labs",
+        "repos": [
+          "agent-skills"
+        ]
       },
       "extraSources": [],
-      "notes": "Candidate pack terraform-vault. Source repository to confirm before enrolment.",
+      "notes": "Candidate: vercel-labs/agent-skills is popular but publishes no licence, so it cannot be copied into the registry until that changes.",
       "packs": []
     }
   ],
   "packs": [
+    {
+      "name": "anthropic-dev-kit",
+      "displayName": "Anthropic developer kit",
+      "vendor": "anthropic",
+      "vendorDisplayName": "Anthropic",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",
+      "path": "packs/anthropic/anthropic-dev-kit",
+      "tag": "anthropic-dev-kit--v1.0.0",
+      "skills": [
+        {
+          "name": "mcp-builder",
+          "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+          "digest": "sha256:6a9e0cb25cbd7589086b86e9074b93668b68d828f7e7857a9257d9a19e276b28"
+        },
+        {
+          "name": "webapp-testing",
+          "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+          "digest": "sha256:415baa08c101f4855f5bb63576d018c6329b335b0f44bc7f0b56f67bf2eb4d28"
+        },
+        {
+          "name": "frontend-design",
+          "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+          "digest": "sha256:1d8e08bac10796cc90c3a0d62a87626db60c0fe74aeb76f3f019b3a78b3b0507"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:9686190700b1f30cc0cc1de2f651b423d8a229fc414aee16920dd9be7b580db1",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 3,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:06:54Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 20,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/anthropics/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "mcp",
+        "testing",
+        "frontend",
+        "anthropic"
+      ],
+      "source": {
+        "repo": "https://github.com/anthropics/skills",
+        "ref": "41bbe19d1a1a",
+        "path": "skills"
+      }
+    },
+    {
+      "name": "google-cloud-data",
+      "displayName": "Google Cloud data",
+      "vendor": "google",
+      "vendorDisplayName": "Google",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Work with BigQuery from an agent: basics, BigFrames data science, AI and ML in BigQuery, plus gcloud CLI guidance. Curated from Google's official agent skills.",
+      "path": "packs/google/google-cloud-data",
+      "tag": "google-cloud-data--v1.0.0",
+      "skills": [
+        {
+          "name": "bigquery-basics",
+          "description": "Manages datasets, tables, and jobs in BigQuery. Use when you need to interact with BigQuery, run SQL queries, manage BigQuery resources (datasets, tables, views), or perform basic data ingestion and analysis.",
+          "digest": "sha256:5404375ad44560b50ba4f0de58a56ca68b213a3de17179b05a4382def178783b"
+        },
+        {
+          "name": "bigquery-bigframes",
+          "description": "Generates Python code using BigQuery DataFrames (BigFrames), the pandas/scikit-learn-style API over BigQuery. Use when writing BigFrames code or doing pandas-style dataframe/ML work against BigQuery (e.g. in a notebook). Don't use for SQL-first workflows or the google-cloud-bigquery client library — use bigquery-basics.",
+          "digest": "sha256:c482b6f72b9c64e6f580194065d36e764bb9df63a44ed5a4bda434e4df81eb68"
+        },
+        {
+          "name": "bigquery-ai-ml",
+          "description": "Leverages BigQuery's built-in machine learning and GenAI capabilities for advanced data analytics. Use when you need to write SQL queries that perform time-series forecasting, predict values, detect outliers or anomalies, find key drivers, perform semantic search or vector search, classify text, calculate similarity, summarize content, translate language, evaluate models, filter by semantic conditions, or leverage generative AI capabilities in BigQuery. Do not use for general BigQuery dataset, table, or job management requests.",
+          "digest": "sha256:53775e031375d1590ea493ddf92a4135f403339f6899692166db3b77567d5eec"
+        },
+        {
+          "name": "gcloud",
+          "description": "Provides safety-critical validation, guardrails, and data reduction for gcloud CLI operations across Google Cloud Platform (GCP) services and infrastructure. Use when planning, generating, constructing, proposing, describing, or executing any gcloud CLI commands - including when answering questions about gcloud syntax, or formatting flags. Don't use when writing Google Cloud client library code or raw REST/gRPC API requests.",
+          "digest": "sha256:339c1903ce0481fd777ceecba955e83a3ebdb34e8ef1a2d55de7008f7c114173"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:85b1ba1df6fbf2a587e4be857d327474fad173d86964ac81366fb99159205a86",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 4,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:07:20Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 2,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/google/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "google-cloud",
+        "bigquery",
+        "data",
+        "google"
+      ],
+      "source": {
+        "repo": "https://github.com/google/skills",
+        "ref": "6e209c43985f",
+        "path": "skills/cloud"
+      }
+    },
+    {
+      "name": "hashicorp-terraform",
+      "displayName": "HashiCorp Terraform",
+      "vendor": "hashicorp",
+      "vendorDisplayName": "HashiCorp",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Terraform the way HashiCorp writes it: style guide, tests, policy as code, module refactoring, and importing existing infrastructure with search. Curated from hashicorp/agent-skills.",
+      "path": "packs/hashicorp/hashicorp-terraform",
+      "tag": "hashicorp-terraform--v1.0.0",
+      "skills": [
+        {
+          "name": "terraform-style-guide",
+          "description": "Generate Terraform HCL code following HashiCorp's official style conventions and best practices. Use when writing, reviewing, or generating Terraform configurations.",
+          "digest": "sha256:6b86246c59c0d19053811727ee5002c845e9d223e29a31cf9c33ed25bef3008b"
+        },
+        {
+          "name": "terraform-test",
+          "description": "Comprehensive guide for writing and running Terraform tests. Use when creating test files (.tftest.hcl), writing test scenarios with run blocks, validating infrastructure behavior with assertions, mocking providers and data sources, testing module outputs and resource configurations, or troubleshooting Terraform test syntax and execution.",
+          "digest": "sha256:d049f1811b6b21157403dc613b14d04cd8adeffcc73387ae4fcce7366dabb820"
+        },
+        {
+          "name": "terraform-policy",
+          "description": "Write, test, or convert Terraform Policy files (.policy.hcl, .policytest.hcl, Sentinel→tfpolicy). Triggers: policy.hcl, policytest, convert sentinel, tfpolicy, write a policy.",
+          "digest": "sha256:e1f067e3fca23cf2ca67dafff3bc7651d5de7e2413bfb976989ac9a4ca85ec52"
+        },
+        {
+          "name": "refactor-module",
+          "description": "Transform monolithic Terraform configurations into reusable, maintainable modules following HashiCorp's module design principles and community best practices.",
+          "digest": "sha256:5804cb53dadcf90efcb67f47c590f30685dac6916d79c7979aabf2f7baa5c3bd"
+        },
+        {
+          "name": "terraform-search-import",
+          "description": "Discover existing cloud resources using Terraform Search queries and bulk import them into Terraform management. Use when bringing unmanaged infrastructure under Terraform control, auditing cloud resources, or migrating to IaC.",
+          "digest": "sha256:b617bcc3db18cdc49b5b542043b5d17228030f95e80d374cd99edbfe48c3c4e2"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:e8b283917f0be689cf56d4639deddd0073df8ab246c6ed0ee1c80755366f5ffc",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 5,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:08:14Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 11,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
+      },
+      "license": "MPL-2.0",
+      "homepage": "https://github.com/hashicorp/agent-skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "terraform",
+        "infrastructure",
+        "iac",
+        "hashicorp"
+      ],
+      "source": {
+        "repo": "https://github.com/hashicorp/agent-skills",
+        "ref": "c2d65dfe492f",
+        "path": "plugins/terraform/skills"
+      }
+    },
     {
       "name": "bob-essentials",
       "displayName": "Bob essentials",
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
       "path": "packs/ibm/bob-essentials",
-      "tag": "bob-essentials--v1.1.0",
+      "tag": "bob-essentials--v1.1.1",
       "skills": [
         {
           "name": "find-skills",
-          "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\", \"какой скилл поставить\", \"установи скиллы из этого репозитория\", \"покажи каталог\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:98be8d4ed2de5be07e8f702249790179aeecae882655adeb021ff52b3de47f95"
+          "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
+          "digest": "sha256:89cef5bdc9c15ca21b466bda26f2fafaa238b1c560f9775d6bbe2a00188779b0"
         },
         {
           "name": "skill-creator",
-          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\", \"сделай скилл\", \"напиши SKILL.md\".",
-          "digest": "sha256:32b7e11e2812a1337bf701fed3ae7c2fa464b4d7c24dcd689fae86c11dd64a35"
+          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\".",
+          "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
         },
         {
           "name": "guard",
@@ -109,9 +392,10 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:1e974b3329c5e1bd41122fe643346268e025b00d62f26c33451f58a291bb2aa4",
+      "digest": "sha256:ee7b5ed4fa5522e3e73b8302c5729754cdafddd440bf06f404adf66fd3c60abc",
       "revokedVersions": [],
       "versions": [
+        "1.1.1",
         "1.1.0",
         "1.0.0"
       ],
@@ -119,9 +403,14 @@
       "components": 4,
       "readme": "packs/ibm/bob-essentials/README.md",
       "scan": {
-        "riskScore": null,
+        "riskScore": 0,
         "policyFindings": 0,
-        "verdict": "pending"
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:08:33Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 22,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
       },
       "license": "Apache-2.0",
       "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
@@ -188,7 +477,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:6e2d6ea25b8dd3e691960ecad2a2942bf0ed1e4f09bfa3ccc218a1eef5ea858e",
+      "digest": "sha256:29124b953d6d93642a7f9cad4e406f0e1cd1eb84506a9438abd0c77208dbde88",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -197,9 +486,14 @@
       "components": 9,
       "readme": "packs/ibm/wxo-adk/README.md",
       "scan": {
-        "riskScore": null,
-        "policyFindings": 0,
-        "verdict": "pending"
+        "riskScore": 0,
+        "policyFindings": 23,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:09:32Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 27,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
       },
       "license": "MIT",
       "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
@@ -223,19 +517,19 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
       "path": "packs/ibm/wxo-talk-with-your-data",
-      "tag": "wxo-talk-with-your-data--v1.0.0",
+      "tag": "wxo-talk-with-your-data--v1.0.1",
       "skills": [
         {
           "name": "excel-to-wxo-agent",
-          "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"сделай агента по этому экселю\", \"deploy a data agent to wxo\", \"прототип text2sql\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
-          "digest": "sha256:7dd1a5641f3c08897caac1e9d325bc11550445f7e77d4cdb16dafaf589c1cd62"
+          "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"deploy a data agent to wxo\", \"text-to-SQL prototype\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
+          "digest": "sha256:3637b0c9db712693af099989b4a8d78d0354b999612839d341d7f81a2038c70f"
         },
         {
           "name": "wxo-chat-demo-page",
-          "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"вставить чат на страницу\", \"демо страница для агента\", \"лендинг с чатом\"), wants charts or a dashboard built live from the agent's chat answers (\"рендерить графики из ответов\", \"дашборд с чатом\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
+          "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"put the chat on a page\", \"demo page for the agent\", \"landing page with chat\"), wants charts or a dashboard built live from the agent's chat answers (\"render charts from the answers\", \"dashboard with chat\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
           "digest": "sha256:25c028bb08b4c71d29b17eed09acd496f7955071ee8f168abc7b6ec44bc36ba7"
         }
       ],
@@ -248,18 +542,24 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:9dcfc08189fc0b7c2d2bb651d2556aba666a708a9e77d8e1a5e81ae18589d74f",
+      "digest": "sha256:528e5af8260a2ae7ac18f1b9ba712bd2e3952f51b772b25e96e681578de19ae5",
       "revokedVersions": [],
       "versions": [
+        "1.0.1",
         "1.0.0"
       ],
-      "baselineFindings": 5,
+      "baselineFindings": 8,
       "components": 3,
       "readme": "packs/ibm/wxo-talk-with-your-data/README.md",
       "scan": {
-        "riskScore": null,
-        "policyFindings": 0,
-        "verdict": "pending"
+        "riskScore": 0,
+        "policyFindings": 8,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:09:59Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 34,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
       },
       "license": "Apache-2.0",
       "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
@@ -277,6 +577,70 @@
         "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
         "ref": "6bb7f04",
         "path": ".bob/skills"
+      }
+    },
+    {
+      "name": "openai-security",
+      "displayName": "OpenAI application security",
+      "vendor": "openai",
+      "vendorDisplayName": "OpenAI",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+      "path": "packs/openai/openai-security",
+      "tag": "openai-security--v1.0.0",
+      "skills": [
+        {
+          "name": "security-best-practices",
+          "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+          "digest": "sha256:45c703638befa3f2ac6ef8de90764bf2f6e6b25ff554c7db2487c6214b70fdae"
+        },
+        {
+          "name": "security-threat-model",
+          "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.",
+          "digest": "sha256:f271a1047bb6f9510e063e08638a40645f0e187c80a9677c4271cc05863d4fa0"
+        },
+        {
+          "name": "security-ownership-map",
+          "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.",
+          "digest": "sha256:f89d2a962cf7e17487c302fba577addebca9cc0733319f3558a2ef42887cd272"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:145f4785f676100388a24c37b7d65c849561ecc2de9cfbe4240eff7d36d9aab2",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 1,
+      "components": 3,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 1,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T10:10:50Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 48,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": null
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/openai/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "security",
+        "threat-model",
+        "appsec",
+        "openai"
+      ],
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "ref": "49f948faa925",
+        "path": "skills/.curated"
       }
     }
   ]

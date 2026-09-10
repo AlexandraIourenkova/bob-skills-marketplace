@@ -1,0 +1,152 @@
+{
+  "scannedAt": "2026-09-10T10:09:32Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": null
+  },
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "solution-architect": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "sop-builder": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "wxo-builder": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 4,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "wxo-analyzer": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "telemetry-analyzer": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 15,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 5,
+        "accepted": 4,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "agent-instructions-evaluator": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 4,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 1,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 27,
+    "ciscoAccepted": 5
+  }
+}

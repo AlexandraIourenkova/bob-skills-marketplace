@@ -7,8 +7,8 @@ description: >-
   deploy), generates the agent YAML with the schema baked into its instructions,
   and imports both via the orchestrate ADK CLI. Use whenever the user wants a
   quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx
-  Orchestrate — including phrasings like "сделай агента по этому экселю",
-  "deploy a data agent to wxo", "прототип text2sql", or any mention of watsonx
+  Orchestrate — including phrasings like "deploy a data agent to wxo",
+  "text-to-SQL prototype", or any mention of watsonx
   Orchestrate together with Excel/CSV/SQLite data.
 ---
 
@@ -154,8 +154,8 @@ security against convenience:
 
 1. **COS bucket** — chart images uploaded to IBM COS: production-ready, but
    needs bucket credentials;
-2. **Free image hosting** — not available in the marketplace edition (removed
-   by policy: chart images must not leave IBM-controlled storage);
+2. **Free image hosting** — zero setup, but the customer's numbers go to
+   public third-party servers: never for real data;
 3. **Mermaid code in answers** — safe and instant, but ONLY together with a
    renderer page (the `wxo-chat-demo-page` analyst canvas): confirm the user
    plans that page before picking this;

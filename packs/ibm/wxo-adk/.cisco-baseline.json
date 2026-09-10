@@ -1,0 +1,55 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "1b37029e455f75d5",
+      "skill": "agent-instructions-evaluator",
+      "severity": "MEDIUM",
+      "category": "supply_chain_attack",
+      "title": "Unpinned dependency",
+      "file": "scripts/requirements.txt",
+      "line": 2,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    },
+    {
+      "key": "406cd2c1c064e5e0",
+      "skill": "telemetry-analyzer",
+      "severity": "MEDIUM",
+      "category": "social_engineering",
+      "title": "Potential description-behavior mismatch",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    },
+    {
+      "key": "9047160e6fc3b8f5",
+      "skill": "telemetry-analyzer",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    },
+    {
+      "key": "3a32c5fb118e2123",
+      "skill": "telemetry-analyzer",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "scripts/export_traces_agentops_v3.py",
+      "line": 86,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    },
+    {
+      "key": "7a6ad6c5a72c30cb",
+      "skill": "telemetry-analyzer",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "scripts/search_traces_agentops_v3.py",
+      "line": 93,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    }
+  ]
+}

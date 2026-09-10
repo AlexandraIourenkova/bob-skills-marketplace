@@ -21,6 +21,7 @@ from .hashing import DigestError, iter_files
 
 BLOCK = "block"
 WARN = "warn"
+INFO = "info"  # informational: shown in reports, never baselined by default
 
 BASELINE_NAME = ".policy-baseline.json"
 
@@ -189,7 +190,7 @@ def lint_file(path: Path, allow: list[str], base: Path, key_root: Path | None = 
                 break
         for host in {m.group(1) for m in URL_HOST.finditer(line)}:
             if not host_allowed(host, allow):
-                severity = BLOCK if is_code else WARN
+                severity = BLOCK if is_code else INFO
                 where = "script" if is_code else "instructions"
                 findings.append(Finding("P008", severity, rel, number,
                                         f"host '{host}' in {where} is not in the allow-list {sorted(allow)}", line, key))
@@ -271,7 +272,8 @@ def load_baseline(where: Path) -> set[str]:
     return {entry["fingerprint"] for entry in data.get("accepted", []) if "fingerprint" in entry}
 
 
-def write_baseline(where: Path, findings: list[Finding], reason: str) -> Path:
+def write_baseline(where: Path, findings: list[Finding], reason: str, include_info: bool = False) -> Path:
+    findings = [f for f in findings if include_info or f.severity != INFO]
     path = Path(where) / BASELINE_NAME
     existing: dict[str, dict] = {}
     if path.is_file():
@@ -336,7 +338,7 @@ def to_sarif(findings: list[Finding], version: str) -> dict:
             }},
             "results": [{
                 "ruleId": f.rule,
-                "level": "error" if f.severity == BLOCK else "warning",
+                "level": "error" if f.severity == BLOCK else "warning" if f.severity == WARN else "note",
                 "message": {"text": f.message},
                 "locations": [{"physicalLocation": {
                     "artifactLocation": {"uri": f.path},

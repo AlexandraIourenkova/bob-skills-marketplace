@@ -5,16 +5,31 @@
   "description": "Generated from vendors.json and every packs/<vendor>/<name>/pack.json by `bob-skills registry build-index`. Read by `bob-skills search`, the catalog page and the find-skills skill. Never edited by hand.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "generated", "packs"],
+  "required": [
+    "schemaVersion",
+    "generated",
+    "packs"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
-    "schemaVersion": { "const": 1 },
-    "generated": { "type": "string", "format": "date-time" },
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "generated": {
+      "type": "string",
+      "format": "date-time"
+    },
     "registry": {
       "type": "object",
       "properties": {
-        "url": { "type": "string" },
-        "commit": { "type": "string" }
+        "url": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        }
       }
     },
     "packs": {
@@ -22,52 +37,183 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "displayName", "vendor", "vendorDisplayName", "vendorStatus", "version", "description", "path", "skills", "digest"],
+        "required": [
+          "name",
+          "displayName",
+          "vendor",
+          "vendorDisplayName",
+          "vendorStatus",
+          "version",
+          "description",
+          "path",
+          "skills",
+          "digest"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "displayName": { "type": "string" },
-          "vendor": { "type": "string" },
-          "vendorDisplayName": { "type": "string" },
-          "vendorStatus": { "type": "string", "enum": ["active", "planned", "suspended"] },
-          "version": { "type": "string" },
-          "description": { "type": "string" },
-          "license": { "type": "string" },
-          "homepage": { "type": "string" },
-          "minBob": { "type": "string" },
-          "tags": { "type": "array", "items": { "type": "string" } },
-          "path": { "type": "string", "description": "Pack folder relative to the registry root." },
-          "tag": { "type": "string", "description": "Git tag of this version: <name>--v<version>." },
+          "name": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "vendorDisplayName": {
+            "type": "string"
+          },
+          "vendorStatus": {
+            "type": "string",
+            "enum": [
+              "active",
+              "planned",
+              "suspended"
+            ]
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "homepage": {
+            "type": "string"
+          },
+          "minBob": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "path": {
+            "type": "string",
+            "description": "Pack folder relative to the registry root."
+          },
+          "tag": {
+            "type": "string",
+            "description": "Git tag of this version: <name>--v<version>."
+          },
           "skills": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["name", "description"],
+              "required": [
+                "name",
+                "description"
+              ],
               "properties": {
-                "name": { "type": "string" },
-                "description": { "type": "string" },
-                "digest": { "type": "string" }
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "digest": {
+                  "type": "string"
+                }
               }
             }
           },
-          "mcpServers": { "type": "array", "items": { "type": "string" } },
-          "rules": { "type": "array", "items": { "type": "string" } },
-          "commands": { "type": "array", "items": { "type": "string" } },
-          "modes": { "type": "array", "items": { "type": "string" }, "description": "Custom mode slugs shipped by the pack." },
-          "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "Digest of the whole pack folder." },
-          "revokedVersions": { "type": "array", "items": { "type": "string" } },
+          "mcpServers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Custom mode slugs shipped by the pack."
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "description": "Digest of the whole pack folder."
+          },
+          "revokedVersions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "versions": {
             "type": "array",
             "description": "Released versions known from git tags, newest first.",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
           "scan": {
             "type": "object",
-            "description": "Latest gate results for this version, filled in by CI.",
+            "description": "Gate results for this version: SkillSpector risk score (0-100, after the pack's .skillspector-baseline.yaml), Cisco skill-scanner maximum severity, verdict (pass, review, block, pending), policy baseline size. Written by scripts/run_scanners.py into .scan.json and merged by build-index.",
             "properties": {
-              "riskScore": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
-              "policyFindings": { "type": "integer" },
-              "scannedAt": { "type": "string", "format": "date-time" },
-              "verdict": { "type": "string", "enum": ["pass", "review", "block", "pending"] }
+              "riskScore": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "policyFindings": {
+                "type": "integer"
+              },
+              "scannedAt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "verdict": {
+                "type": "string",
+                "enum": [
+                  "pass",
+                  "review",
+                  "block",
+                  "pending"
+                ]
+              },
+              "skillspectorVersion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "skillspectorSuppressed": {
+                "type": "integer"
+              },
+              "ciscoMaxSeverity": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ciscoVersion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             }
           }
         }

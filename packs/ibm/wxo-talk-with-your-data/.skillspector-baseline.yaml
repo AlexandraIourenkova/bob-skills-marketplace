@@ -1,0 +1,342 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: E1
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+  path: '*assets/visualization_tool.py'
+- id: AE1
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:7d844dd426f5fd0a73ecca7bcff65bb3e271e2e54c36cfbc1753bf58af0cc0fc
+  rule_id: P2
+  file: assets/mermaid_chart_rules.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:fbac220eb5b663fb324811704a0672f14b63ddcb636124b21c47a0984ee6d312
+  rule_id: PE3
+  file: references/wxo-notes.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:7b4c3803158c47e56662d0d068c49aa4ac23da03a93cffd7422fae24148cb734
+  rule_id: AE4
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:a46f86996aa6209068f04a23e412f4ca3a2b67c1574f6cc7e6cecc93f5896cb2
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:220e81326eb55a63f0832bd85920c66b7f36dfdda84ab8a43774442c2928a64c
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:ba96bd04ddd4b399a461b59e12546ffa408c168e3448b4c78573eb4a99d283e1
+  rule_id: P4
+  file: assets/mermaid_chart_rules.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:25bfc1a4804c1f99102aef3a168681567bddd62429c8f79fcde7ce5ae7562694
+  rule_id: E1
+  file: assets/visualization_tool.py
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:01413c1824a0a4d8233bf3386947c13aa229b207a09bd5ff51b334427f40ed7b
+  rule_id: TT2
+  file: assets/visualization_tool.py
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:c057a331af6a262f4b6ec98a7f600565bd574198ec11904691bf189716e56aab
+  rule_id: E1
+  file: assets/visualization_tool.py
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:ed4fab576141ec0028c60b665211052a7a675237e7e31e6e2cb7e4b55d672e11
+  rule_id: RA2
+  file: references/wxo-notes.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:0e4198b4c269660529edf21af93b5ad504352217e147988d3b2fa5a6db408334
+  rule_id: SC1
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:55eb4cf8a35db8858ea520947da9b68e1ecf80876efc1b22ea6473e9aa95e4eb
+  rule_id: SC1
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:2b66fdc8074df4705029e133d5185e0c51a163f6932ffb5505e2cce82fbd0c98
+  rule_id: SC1
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:3273de9d5b88e6d0dd604f82d67a24bad11a8d4cb05ff1a75b8c3c47fed8a263
+  rule_id: SC4
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:f83d48f5bc3b5d1abcafeaff7841e15f96b6923c6bb75e3c6d392652cca63b8a
+  rule_id: SC1
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:0dd76c5a7b8d695f6d0acd3df5ad68bee0710a83a4920b1bf44d57a333f0c61c
+  rule_id: SC4
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:cc11eaff8a18060df7a5ebfd6a9dfb6f0a114156d496387bcacdddc17ac1e64f
+  rule_id: SC1
+  file: assets/visualization_requirements.txt
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:7aa56ab6d8a3585aaeaba648388972772e10be9730fb09e460001f282745901f
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:6e21c3b87b9db0157e56a2bb159d1d74ab92f74fd5cb64cad367a6f5097c67f9
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:faec07367e37dcf303c93a78de891b8d20f8e5bec2884b6357ce04163165b65f
+  rule_id: P2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:c6e7488c2a9c1d89850886a2cae5b59e17f40c5a3ada87c3f28e10cc91415a7f
+  rule_id: P2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:70f99785cd96517655b692f3ae9cbcbbd0c118f1b5dc2c3135983c3bac370f55
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:a2ad7307083d1294f975597d40ef6f2e255f3d8b79fb941fb3cc77a72ce8ed7f
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:4b20aa47782e593546fd84c65e30e3300b6357285ca6ff281701eb51699ea0b7
+  rule_id: P2
+  file: assets/chart_canvas_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:60fff43f8b44f41fa64e2da43fcb5f702bd553ec394cd5a0d590c5c108ac9f77
+  rule_id: P2
+  file: assets/chart_canvas_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:87fcd7dd91be90deb28ae85ebe21d15176987f40278821375756f241875b17b0
+  rule_id: P2
+  file: assets/fullpage_chat_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:98ff65d978e0ddf8770afda4735a5025212c61e56bd670df8370d19f44620895
+  rule_id: P2
+  file: assets/landing_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:95c446bbc33288f8d4453c7db8a4c590df4a684d5940c2928e8fca81635893b5
+  rule_id: P2
+  file: assets/landing_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:97e8569ce0555266a68a2d06ea00f0b4534341ed55e0f9e4a26b9b93fcf06dd3
+  rule_id: P2
+  file: assets/livepage_iframe_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:a5e4fa1719e8690503b0c0f7d29fff066e56523d99eb8e166fb4c31c23bd61d7
+  rule_id: P2
+  file: assets/livepage_iframe_template.html
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:d2768ac23efaf77a9e36b5661a14055313d240205b8a47d90f1598cf7a218246
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'
+- hash: sha256:4009046e710bf54c6298c3134d1e7ff15353b85579ac0141121bf7b1a73f781c
+  rule_id: AE4
+  file: references/chart-canvas.md
+  reason: 'Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT
+    statements with identifiers taken from the user''s own spreadsheet (Cisco CRITICAL,
+    SQL f-string): a local conversion of the user''s file, identifiers cannot be parameterised;
+    demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted
+    by the maintainer, see .policy-baseline.json; HTML template comments and template
+    references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements
+    (SC1, SC4).'

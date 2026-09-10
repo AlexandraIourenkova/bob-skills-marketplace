@@ -213,7 +213,10 @@ class Registry:
                 problems.append(f"{label}: {pack.manifest['modes']} has no customModes with a slug")
             if git_optional("rev-parse", "--verify", "--quiet", f"refs/tags/{pack.tag}", cwd=self.root):
                 rel = pack.path.relative_to(self.root).as_posix()
-                diff = subprocess.run(["git", "diff", "--quiet", pack.tag, "--", rel], cwd=self.root, capture_output=True)
+                # Shipped components only: pack.json changes follow content changes, and
+                # generated files (the offline catalog) may drift from the tag.
+                pathspec = [f"{rel}/{c}" for c in pack.components()] + [f":(exclude){rel}/{g}" for g in pack.manifest.get("generated", [])]
+                diff = subprocess.run(["git", "diff", "--quiet", pack.tag, "--", *pathspec], cwd=self.root, capture_output=True)
                 if diff.returncode == 1:
                     problems.append(f"{label}: content differs from released tag {pack.tag}; bump version in pack.json")
             expected = pack.compute_checksums()
@@ -243,6 +246,20 @@ class Registry:
             return 0
         return len(json.loads(path.read_text(encoding="utf-8")).get("accepted", []))
 
+    def scan_summary(self, pack_dir: Path) -> dict:
+        """Gate results for the index: from .scan.json (scripts/run_scanners.py) plus the policy baseline."""
+        summary = {"riskScore": None, "policyFindings": self.baseline_count(pack_dir), "verdict": "pending"}
+        path = Path(pack_dir) / ".scan.json"
+        if path.is_file():
+            data = json.loads(path.read_text(encoding="utf-8"))
+            s = data.get("summary", {})
+            summary.update({
+                "riskScore": s.get("riskScore"), "verdict": s.get("verdict", "pending"), "scannedAt": data.get("scannedAt"),
+                "skillspectorVersion": data.get("tools", {}).get("skillspector"), "skillspectorSuppressed": s.get("skillspectorSuppressed", 0),
+                "ciscoMaxSeverity": s.get("ciscoMaxSeverity"), "ciscoVersion": data.get("tools", {}).get("ciscoSkillScanner"),
+            })
+        return summary
+
     def build_index(self, registry_url: str | None = None) -> dict:
         packs = []
         for pack in self.packs():
@@ -268,7 +285,7 @@ class Registry:
                 "baselineFindings": self.baseline_count(pack.path),
                 "components": len(pack.manifest.get("checksums", {})),
                 "readme": pack.path.relative_to(self.root).as_posix() + "/README.md" if (pack.path / "README.md").is_file() else "",
-                "scan": {"riskScore": None, "policyFindings": 0, "verdict": "pending"},
+                "scan": self.scan_summary(pack.path),
             }
             for key in ("license", "homepage", "minBob", "tags", "source"):
                 if key in pack.manifest:
@@ -331,7 +348,10 @@ class Registry:
                 extras.append("modes: " + ", ".join(pack["modes"]))
             if extras:
                 out.append("- Also installs: " + "; ".join(extras) + ".")
-            out.append(f"- Gate: {pack['scan'].get('verdict', 'pending')}; {pack.get('baselineFindings', 0)} reviewed findings in the baseline; {pack.get('components', 0)} checksummed components.")
+            scan = pack.get("scan", {})
+            risk = f", SkillSpector risk {scan['riskScore']}/100" if scan.get("riskScore") is not None else ""
+            cisco = f", Cisco max severity {scan['ciscoMaxSeverity']}" if scan.get("ciscoMaxSeverity") else ""
+            out.append(f"- Gate: {scan.get('verdict', 'pending')}{risk}{cisco}; {pack.get('baselineFindings', 0)} reviewed policy findings; {pack.get('components', 0)} checksummed components.")
             out.append(f"- Install: `uvx bob-skills add {pack['name']}`")
             out.append("")
         return "\n".join(out).rstrip() + "\n"
@@ -547,6 +567,8 @@ def describe_pack(registry: "Registry", pack: Pack, index_entry: dict) -> dict:
         "modes": pack.mode_slugs(),
         "networkAllow": pack.manifest.get("networkAllow", []),
         "gate": {"verdict": index_entry.get("scan", {}).get("verdict", "pending"), "baselineFindings": index_entry.get("baselineFindings", 0),
+                 "riskScore": index_entry.get("scan", {}).get("riskScore"), "ciscoMaxSeverity": index_entry.get("scan", {}).get("ciscoMaxSeverity"),
+                 "scannedAt": index_entry.get("scan", {}).get("scannedAt"),
                  "components": len(pack.manifest.get("checksums", {})), "revoked": pack.version in pack.manifest.get("revokedVersions", [])},
         "contextTokens": {"alwaysOn": always_on // 4, "onUse": on_use // 4},
     }

@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up", "сделай скилл", "напиши SKILL.md".
+description: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up".
 ---
 
 # skill-creator

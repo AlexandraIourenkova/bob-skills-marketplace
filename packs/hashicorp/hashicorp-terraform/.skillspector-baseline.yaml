@@ -1,0 +1,37 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: AE1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+  path: '*SKILL.md'
+- id: RP1
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:4e03e8da47b87b91fe248a48a9c204bac5e2fab4a02c357e20e1408dfb7c8f25
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+- hash: sha256:baa482f2ce1881ed6615d23311bd4adf4f59da755f6dbc6cadd7d1b1381d9d35
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+- hash: sha256:189f8d4f12bd59d387f4fba176d750feb2ce1fd7b5eec3d2c69c6294a7a43a90
+  rule_id: RP1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+- hash: sha256:bd818ece5f968a9e471599f45ab3b4b9e0bdf396f93f25b344c532664ac2ea96
+  rule_id: AS3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'
+- hash: sha256:be986834579e202825a75edd3ba0930e2e3a9384973eb80516f6b5d5acf6e5e4
+  rule_id: AS3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: references to the skill''s own reference files and
+    to sibling skills (AE1, AS3) and imperative policy-authoring rules (RP1).'

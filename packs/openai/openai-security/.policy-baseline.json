@@ -1,0 +1,12 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "10ae1b554fdfd3e8",
+      "rule": "P006",
+      "path": "skills/security-best-practices/references/golang-general-backend-security.md",
+      "line": 293,
+      "message": "forbidden instruction: 'without confirming'",
+      "reason": "Description of an insecure pattern in a security reference (deriving HTTPS from X-Forwarded-Proto without a trusted proxy); documentation, not an instruction to skip confirmation. Reviewed 2026-09-10."
+    }
+  ]
+}

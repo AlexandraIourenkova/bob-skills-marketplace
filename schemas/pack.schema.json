@@ -5,15 +5,28 @@
   "description": "One pack = one installable unit for IBM Bob: skills plus optional MCP servers, rules, slash commands and custom modes. Lives at packs/<vendor>/<name>/pack.json. The release tag is `<name>--v<version>`.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["name", "displayName", "version", "vendor", "description", "skills"],
+  "required": [
+    "name",
+    "displayName",
+    "version",
+    "vendor",
+    "description",
+    "skills"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "name": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9-]{1,63}$",
       "description": "Pack id, unique across the registry. Used in `bob-skills add <name>` and `/skills-add <name>`."
     },
-    "displayName": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
     "version": {
       "$ref": "#/$defs/semver",
       "description": "Semantic version of the pack. A change to any shipped file requires a new version."
@@ -23,47 +36,86 @@
       "pattern": "^[a-z0-9][a-z0-9-]{1,63}$",
       "description": "Vendor id from vendors.json. Must equal the parent folder under packs/."
     },
-    "description": { "type": "string", "minLength": 20, "maxLength": 500 },
-    "license": { "type": "string", "description": "SPDX identifier of the shipped content, e.g. MIT." },
-    "homepage": { "type": "string", "format": "uri" },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 500
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX identifier of the shipped content, e.g. MIT."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["repo", "ref"],
+      "required": [
+        "repo",
+        "ref"
+      ],
       "description": "Upstream the skills were synced from, when they are not authored in this registry.",
       "properties": {
-        "repo": { "type": "string", "format": "uri" },
-        "ref": { "type": "string", "description": "Tag or commit in the upstream repository." },
-        "path": { "type": "string", "description": "Folder inside the upstream repository." }
+        "repo": {
+          "type": "string",
+          "format": "uri"
+        },
+        "ref": {
+          "type": "string",
+          "description": "Tag or commit in the upstream repository."
+        },
+        "path": {
+          "type": "string",
+          "description": "Folder inside the upstream repository."
+        }
       }
     },
-    "minBob": { "$ref": "#/$defs/semver", "description": "Minimum IBM Bob version the pack was tested with." },
+    "minBob": {
+      "$ref": "#/$defs/semver",
+      "description": "Minimum IBM Bob version the pack was tested with."
+    },
     "tags": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9.-]*$"
+      },
       "uniqueItems": true,
       "maxItems": 20
     },
     "skills": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
       "uniqueItems": true,
       "description": "Skill folders under skills/. Each must contain SKILL.md whose frontmatter `name` equals the folder name and has a non-empty `description` (Bob ignores a skill without one)."
     },
     "mcpServers": {
       "type": "object",
-      "additionalProperties": { "$ref": "#/$defs/mcpServer" },
+      "additionalProperties": {
+        "$ref": "#/$defs/mcpServer"
+      },
       "description": "Servers merged into .bob/mcp.json (project) or ~/.bob/mcp_settings.json (--global). Keys are server names."
     },
     "rules": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^rules/[A-Za-z0-9_.-]+\\.md$" },
+      "items": {
+        "type": "string",
+        "pattern": "^rules/[A-Za-z0-9_.-]+\\.md$"
+      },
       "uniqueItems": true,
       "description": "Markdown rule files copied into .bob/rules/."
     },
     "commands": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^commands/[A-Za-z0-9_.-]+\\.md$" },
+      "items": {
+        "type": "string",
+        "pattern": "^commands/[A-Za-z0-9_.-]+\\.md$"
+      },
       "uniqueItems": true,
       "description": "Bob Shell slash commands copied into .bob/commands/."
     },
@@ -74,21 +126,37 @@
     },
     "networkAllow": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "uniqueItems": true,
       "description": "Hosts (glob) the pack's scripts may contact. Must be a subset of the vendor's allow-list in vendors.json. Anything else in code is a blocking policy finding."
     },
     "revokedVersions": {
       "type": "array",
-      "items": { "$ref": "#/$defs/semver" },
+      "items": {
+        "$ref": "#/$defs/semver"
+      },
       "uniqueItems": true,
       "description": "Versions the vendor has withdrawn. The installer refuses them, `update` offers a rollback, the guard refuses to activate their skills."
     },
     "checksums": {
       "type": "object",
-      "propertyNames": { "pattern": "^(skills/[a-z0-9-]+|rules/[A-Za-z0-9_.-]+\\.md|commands/[A-Za-z0-9_.-]+\\.md|custom_modes\\.yaml)$" },
-      "additionalProperties": { "$ref": "#/$defs/digest" },
+      "propertyNames": {
+        "pattern": "^(skills/[a-z0-9-]+|rules/[A-Za-z0-9_.-]+\\.md|commands/[A-Za-z0-9_.-]+\\.md|custom_modes\\.yaml)$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/digest"
+      },
       "description": "Digest per shipped component. Maintained by `bob-skills registry validate --fix`; CI fails when a checksum does not match the tree. See docs/pack-format.md for the algorithm."
+    },
+    "generated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Files inside the pack that the registry tooling regenerates (for example the offline catalog in find-skills). They are checksummed like everything else, but a difference against the release tag in these files does not require a new version."
     }
   },
   "$defs": {
@@ -96,21 +164,69 @@
       "type": "string",
       "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-[0-9A-Za-z.-]+)?$"
     },
-    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
     "mcpServer": {
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "type": { "type": "string", "enum": ["stdio", "streamable-http", "sse"] },
-        "command": { "type": "string" },
-        "args": { "type": "array", "items": { "type": "string" } },
-        "env": { "type": "object", "additionalProperties": { "type": "string" } },
-        "url": { "type": "string", "format": "uri" },
-        "headers": { "type": "object", "additionalProperties": { "type": "string" } },
-        "alwaysAllow": { "type": "array", "items": { "type": "string" } },
-        "disabled": { "type": "boolean" }
+        "type": {
+          "type": "string",
+          "enum": [
+            "stdio",
+            "streamable-http",
+            "sse"
+          ]
+        },
+        "command": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "alwaysAllow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disabled": {
+          "type": "boolean"
+        }
       },
-      "oneOf": [{ "required": ["command"] }, { "required": ["url"] }]
+      "oneOf": [
+        {
+          "required": [
+            "command"
+          ]
+        },
+        {
+          "required": [
+            "url"
+          ]
+        }
+      ]
     }
   }
 }

@@ -7,9 +7,9 @@ description: >-
   questions, mock chat preview, or full-page chat), serves it locally, and
   verifies the chat end-to-end in the browser. Use whenever the user wants a
   demo/landing page for a wxo agent, mentions embedding the wxo web chat into a
-  site ("embed code", "вставить чат на страницу", "демо страница для агента",
-  "лендинг с чатом"), wants charts or a dashboard built live from the agent's
-  chat answers ("рендерить графики из ответов", "дашборд с чатом", mermaid
+  site ("embed code", "put the chat on a page", "demo page for the agent",
+  "landing page with chat"), wants charts or a dashboard built live from the agent's
+  chat answers ("render charts from the answers", "dashboard with chat", mermaid
   charts from a wxo agent, analyst canvas), or reports the wxo chat widget
   loading forever.
 ---

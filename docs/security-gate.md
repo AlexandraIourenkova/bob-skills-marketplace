@@ -5,8 +5,8 @@ No single scanner is a guarantee, so the gate is layered. Each layer catches its
 | Layer | Tool | Catches | Decision | Status |
 |---|---|---|---|---|
 | Structure | JSON schema, `bob-skills registry validate` | Malformed manifests, wrong vendor folder, missing descriptions, stale checksums, pack `networkAllow` wider than the vendor's | Block | implemented |
-| Static analysis | NVIDIA SkillSpector, `--format json` | 71 patterns in 17 categories: prompt injection, exfiltration, privilege escalation, supply chain, memory and MCP poisoning. Risk score 0–100 | ≥ 30 block, 10–29 manual review | wired in CI, threshold script pending the week-0 spike |
-| Second opinion | Cisco skill-scanner (YARA-X, AST) | Malicious scripts, data flows to the network, hidden commands | Any HIGH blocks | wired in CI, `continue-on-error` until baselines exist |
+| Static analysis | NVIDIA SkillSpector, `--no-llm --format json` | 71 patterns in 17 categories: prompt injection, exfiltration, privilege escalation, supply chain, memory and MCP poisoning. Risk score 0–100 | ≥ 30 block, 10–29 manual review, after the pack's `.skillspector-baseline.yaml` | implemented: `scripts/run_scanners.py`, results in `.scan.json`, enforced in CI |
+| Second opinion | Cisco skill-scanner (static analyzer, `--format json`) | Malicious scripts, data flows to the network, hidden commands | CRITICAL or HIGH blocks unless accepted in `.cisco-baseline.json` | implemented: same script, enforced in CI |
 | Marketplace policy | `bob-skills lint` (Python, deterministic) | Hosts outside the vendor allow-list in scripts; `curl \| sh`; protected paths (`~/.ssh`, `.bob/settings.json`, …); hidden Unicode and bidi characters; base64 blobs; phrases such as "disable the hooks", "without asking", "не спрашивай"; secrets; missing description; symlinks and binaries | Block, no exceptions except a reviewed baseline entry | implemented, rules P001–P010 |
 | Semantics | LLM judge with a fixed prompt | Instructions that change the agent's goal or ask it to hide actions | Verdict in the report; block on "malicious" | planned (week 1) |
 | Behaviour | Sandbox run with decoy files (SkillScan style) | Real network calls and reads of foreign files during execution | Optional; first to cut under time pressure | planned |
@@ -17,8 +17,9 @@ No single scanner is a guarantee, so the gate is layered. Each layer catches its
 Legitimate ADK skills run CLI commands, read `.env` for credentials and mention third-party hosts in examples, so scanners will flag them. Each pack keeps a baseline of accepted findings and the gate fails only on *new* ones:
 
 - Policy linter: `.policy-baseline.json` in the pack, fingerprints keyed by in-pack path and line text, one reason per entry. Written with `bob-skills lint <pack> --write-baseline`, then edited and reviewed like code. The wxo-adk pack ships with 23 reviewed entries from ADK 2.16.0.
-- SkillSpector: `--baseline .skillspector-baseline.yaml` per pack (native feature).
-- Cisco: `--lenient` for command files; findings triaged in the PR.
+- SkillSpector: `.skillspector-baseline.yaml` per pack (native fingerprint suppression), written by `scripts/run_scanners.py <pack> --accept-skillspector "<reason>"` after a reviewer read the findings. The scan then reports only new findings and the score ignores accepted ones.
+- Cisco: `.cisco-baseline.json` per pack lists accepted findings (rule, file, title) with a reason; the verdict ignores them.
+- Results of the latest run are committed in each pack's `.scan.json` and surface in `index.json`, `bob-skills show` and the website. Re-run with `python3 scripts/run_scanners.py --write`.
 
 ## Guard at runtime
 

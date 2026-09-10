@@ -110,8 +110,9 @@
   }
   function gateLine(pack) {
     const verdict = pack.scan && pack.scan.verdict || 'pending';
-    const passed = verdict === 'pass' || (verdict === 'pending' && pack.components > 0);
-    const label = verdict === 'pass' ? 'Gate passed' : verdict === 'pending' ? 'Checksums and linter passed, scanners pending' : 'Gate: ' + verdict;
+    const passed = verdict === 'pass';
+    const risk = pack.scan && pack.scan.riskScore != null ? ` · risk ${pack.scan.riskScore}/100` : '';
+    const label = (verdict === 'pass' ? 'Gate passed' : verdict === 'review' ? 'Gate: manual review' : verdict === 'block' ? 'Gate: blocked' : 'Scanners pending') + risk;
     const findings = pack.baselineFindings ? ` · ${pack.baselineFindings} reviewed findings` : ' · 0 findings';
     return `<div class="gate">${passed ? ICON.shield : ICON.clock}<span>${esc(label)}${findings}</span></div>`;
   }
@@ -192,12 +193,11 @@
       ...(p.commands || []).map(c => ['Command', '/' + c.replace(/\.md$/, ''), 'Copied to .bob/commands/']),
       ...(p.modes || []).map(m => ['Mode', m, 'Merged into .bob/custom_modes.yaml'])
     ];
-    const verdict = p.scan && p.scan.verdict || 'pending';
     const gateRows = [
       ['Schema and checksums', ICON.ok, 'Passed', `${p.components} components, sha256 per component; the installer refuses a mismatch`],
       ['Marketplace policy linter', ICON.ok, 'Passed', `0 new findings, ${p.baselineFindings || 0} accepted in the reviewed baseline`],
-      ['NVIDIA SkillSpector', verdict === 'pass' ? ICON.ok : ICON.clock, verdict === 'pass' ? 'Passed' : 'Pending', 'Risk score threshold: 30 blocks, 10 to 29 manual review'],
-      ['Cisco skill-scanner', verdict === 'pass' ? ICON.ok : ICON.clock, verdict === 'pass' ? 'Passed' : 'Pending', 'No HIGH findings allowed'],
+      ['NVIDIA SkillSpector', p.scan && p.scan.riskScore != null ? (p.scan.riskScore >= 30 ? ICON.clock : ICON.ok) : ICON.clock, p.scan && p.scan.riskScore != null ? `Risk ${p.scan.riskScore} of 100` : 'Pending', `Threshold: 30 blocks, 10 to 29 manual review${p.scan && p.scan.skillspectorSuppressed ? `; ${p.scan.skillspectorSuppressed} reviewed findings suppressed by the pack baseline` : ''}${p.scan && p.scan.skillspectorVersion ? ` (v${p.scan.skillspectorVersion})` : ''}`],
+      ['Cisco skill-scanner', p.scan && p.scan.ciscoMaxSeverity ? (['CRITICAL', 'HIGH'].includes(p.scan.ciscoMaxSeverity) ? ICON.clock : ICON.ok) : ICON.clock, p.scan && p.scan.ciscoMaxSeverity ? `Max severity ${p.scan.ciscoMaxSeverity}` : 'Pending', 'CRITICAL or HIGH findings block'],
       ['LLM judge', ICON.clock, 'Planned', 'Semantic review of instructions'],
       ['Human review', ICON.ok, '2 approvals', 'Vendor maintainer and marketplace administrator read the SKILL.md diff'],
       ['Signature', ICON.clock, 'Checksums', 'sha256 in the index; cosign signature once the vendor key is enrolled']

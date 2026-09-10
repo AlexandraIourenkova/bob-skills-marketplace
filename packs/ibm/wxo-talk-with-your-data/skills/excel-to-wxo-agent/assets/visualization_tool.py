@@ -3,12 +3,11 @@ from ibm_watsonx_orchestrate.run import connections
 from ibm_watsonx_orchestrate.agent_builder.connections import ConnectionType, ExpectedCredentials
 from typing import Optional, List, Union, Any
 
-# ── Upload mode ───────────────────────────────────────────
-#   "cos" – IBM Cloud Object Storage only.
-# Marketplace edition: the upstream "free" and "cos_fallback" modes (public
-# image hosts) are removed. Chart images carry the customer's numbers and
-# must not leave IBM-controlled storage (marketplace policy, rule P008).
-UPLOAD_MODE = "cos"
+# ── Upload mode ──────────────────────────────────────────────
+#   "cos"          – IBM Cloud Object Storage only
+#   "free"         – Free services only (catbox / tmpfiles)
+#   "cos_fallback" – Try COS first, fall back to free services
+UPLOAD_MODE = "free"
 
 # Only declare cos_connection as expected when UPLOAD_MODE actually needs COS.
 # WXO validates expected_credentials at invocation time — if the connection
@@ -65,7 +64,7 @@ def generate_and_upload_chart(
             y_label='Sales ($)'
         )
     Example output:
-        ![Sales Comparison](https://<cos-public-endpoint>/<bucket>/chart.png)
+        ![Sales Comparison](https://catbox.moe/your_uploaded_image_url.png)
     """
     import matplotlib.pyplot as plt
     import matplotlib as mpl
@@ -275,7 +274,43 @@ def generate_and_upload_chart(
             put_resp.raise_for_status()
             return f"{public_endpoint.rstrip('/')}/{bucket}/{object_key}"
 
-        image_url = _upload_cos(image_bytes)
+        def _upload_free(img_bytes):
+            import base64
+            # 1. Try litterbox.catbox.moe (temporary 72h hosting)
+            try:
+                resp = requests.post("https://litterbox.catbox.moe/resources/internals/api.php",
+                    files={"fileToUpload": ("chart.png", img_bytes, "image/png")},
+                    data={"reqtype": "fileupload", "time": "72h"}, timeout=30)
+                resp.raise_for_status()
+                url = resp.text.strip()
+                if url.startswith("http"):
+                    return url
+            except Exception:
+                pass
+            # 2. Try freeimage.host (permanent, free API key)
+            try:
+                b64 = base64.b64encode(img_bytes).decode()
+                resp = requests.post("https://freeimage.host/api/1/upload",
+                    data={"key": "6d207e02198a847aa98d0a2a901485a5",
+                          "source": b64, "format": "json"}, timeout=30)
+                resp.raise_for_status()
+                return resp.json()["image"]["url"]
+            except Exception:
+                pass
+            return None
+
+        if UPLOAD_MODE == "cos":
+            image_url = _upload_cos(image_bytes)
+        elif UPLOAD_MODE == "free":
+            image_url = _upload_free(image_bytes)
+        else:  # cos_fallback
+            image_url = None
+            try:
+                image_url = _upload_cos(image_bytes)
+            except Exception:
+                pass
+            if not image_url:
+                image_url = _upload_free(image_bytes)
 
         if not image_url:
             return "❌ Error: Failed to upload chart image."

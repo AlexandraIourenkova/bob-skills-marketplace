@@ -1,0 +1,35 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "e4f77c6b210d51a1",
+      "skill": "mcp-builder",
+      "severity": "MEDIUM",
+      "category": "supply_chain_attack",
+      "title": "Unpinned dependency",
+      "file": "scripts/requirements.txt",
+      "line": 1,
+      "reason": "Reviewed 2026-09-10: references to the skill's own reference files (AE1), example URLs api.example.com (E1), 'access tokens' and 'call any tools' phrases in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing's with_server.py starts the user's own dev-server command with shell=True (TM1, AST4; Cisco HIGH): the command comes from the user's CLI arguments, not from model output."
+    },
+    {
+      "key": "f89397de1877a099",
+      "skill": "mcp-builder",
+      "severity": "MEDIUM",
+      "category": "supply_chain_attack",
+      "title": "Unpinned dependency",
+      "file": "scripts/requirements.txt",
+      "line": 2,
+      "reason": "Reviewed 2026-09-10: references to the skill's own reference files (AE1), example URLs api.example.com (E1), 'access tokens' and 'call any tools' phrases in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing's with_server.py starts the user's own dev-server command with shell=True (TM1, AST4; Cisco HIGH): the command comes from the user's CLI arguments, not from model output."
+    },
+    {
+      "key": "a10a726eb724ceb1",
+      "skill": "webapp-testing",
+      "severity": "HIGH",
+      "category": "command_injection",
+      "title": "Shell command execution with shell=True enabled",
+      "file": "scripts/with_server.py",
+      "line": 69,
+      "reason": "Reviewed 2026-09-10: references to the skill's own reference files (AE1), example URLs api.example.com (E1), 'access tokens' and 'call any tools' phrases in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing's with_server.py starts the user's own dev-server command with shell=True (TM1, AST4; Cisco HIGH): the command comes from the user's CLI arguments, not from model output."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "google-cloud-data",
+  "displayName": "Google Cloud data",
+  "version": "1.0.0",
+  "vendor": "google",
+  "description": "Work with BigQuery from an agent: basics, BigFrames data science, AI and ML in BigQuery, plus gcloud CLI guidance. Curated from Google's official agent skills.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/google/skills",
+  "source": {
+    "repo": "https://github.com/google/skills",
+    "ref": "6e209c43985f",
+    "path": "skills/cloud"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "google-cloud",
+    "bigquery",
+    "data",
+    "google"
+  ],
+  "skills": [
+    "bigquery-basics",
+    "bigquery-bigframes",
+    "bigquery-ai-ml",
+    "gcloud"
+  ],
+  "networkAllow": [
+    "*.google.com",
+    "*.googleapis.com",
+    "*.cloud.google.com",
+    "*.google.dev",
+    "pypi.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/bigquery-basics": "sha256:5404375ad44560b50ba4f0de58a56ca68b213a3de17179b05a4382def178783b",
+    "skills/bigquery-bigframes": "sha256:c482b6f72b9c64e6f580194065d36e764bb9df63a44ed5a4bda434e4df81eb68",
+    "skills/bigquery-ai-ml": "sha256:53775e031375d1590ea493ddf92a4135f403339f6899692166db3b77567d5eec",
+    "skills/gcloud": "sha256:339c1903ce0481fd777ceecba955e83a3ebdb34e8ef1a2d55de7008f7c114173"
+  }
+}

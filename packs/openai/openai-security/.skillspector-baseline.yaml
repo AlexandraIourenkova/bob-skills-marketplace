@@ -1,0 +1,218 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: PE3
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/javascript-express-web-server-security.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/javascript-typescript-nextjs-web-server-security.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/python-fastapi-web-server-security.md'
+- id: OH1
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/javascript-typescript-nextjs-web-server-security.md'
+- id: TM1
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/python-fastapi-web-server-security.md'
+- id: E1
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/javascript-jquery-web-frontend-security.md'
+- id: TM3
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/javascript-typescript-nextjs-web-server-security.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*references/python-django-web-server-security.md'
+- id: TM3
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*SKILL.md'
+- id: AST4
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+  path: '*scripts/build_ownership_map.py'
+fingerprints:
+- hash: sha256:b235aa0ea5cb7a5c078626f6de8e0a4ff37112e5859e9714cff827af42089937
+  rule_id: AR2
+  file: references/golang-general-backend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:294da69060d5edf60bd3e3373597d0a9a673eb69ce3702650357ce7c11818bda
+  rule_id: OH1
+  file: references/javascript-typescript-react-web-frontend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:f2cf16251cca797602cadaca928b4187d8caaefc6a34e190c343c8e5f69837ab
+  rule_id: YR2
+  file: references/python-django-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:0637df479d4a640f4b9e9ae2865dde05ef1bba4ca8e9d382de444313b82a20e4
+  rule_id: TM1
+  file: references/python-django-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:472efccb554f6ade7fa7ac86cea756dee32ad4881859e074eb02d73fc83c2475
+  rule_id: PE3
+  file: references/python-fastapi-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:fc7045aafe29079a5a166488819a84c1512873ac0ad2a9f57af2185fdda75809
+  rule_id: P1
+  file: references/python-flask-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:80375d6b4b95a42ec183787855302b83801c2f41a411323419714ed2a8bc2ceb
+  rule_id: PE3
+  file: references/python-flask-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:0e370e91133fefc3ab1a0901960db979fb93a94f0f786b080739425fb8f84617
+  rule_id: TM1
+  file: references/python-flask-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:a51158a880f4a77e07e3cf5c26be010cd261581ebe798b3584d93996c405bc26
+  rule_id: EA2
+  file: references/golang-general-backend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:e290a26a8b45d6485e4ed562b52ac85612f45ddc04eec2deed7b4bfaed1b6118
+  rule_id: EA2
+  file: references/golang-general-backend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:a9af247ee43bf6ac644282a7590936d24a96d89626390a83120613647e043351
+  rule_id: OH3
+  file: references/golang-general-backend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:ad929bea0de57f2ef2bf74bd0600175cfc8965fea04f0c9ca1d67a4a91feb784
+  rule_id: EA1
+  file: references/javascript-general-web-frontend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:0584968fb59ce78a070d13f2f073e4115f9949e5eb6f05119fcb28a3aaca96ff
+  rule_id: E1
+  file: references/javascript-jquery-web-frontend-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:5726c6de908c9a6b0d81b09b2181690be2dc711199b0ed8663450feafeabc1c5
+  rule_id: TM3
+  file: references/javascript-typescript-nextjs-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:73e6f3b6d930b4958f6ccbaad186e93413bd9a3a3aead11bd20c36bd741c207a
+  rule_id: TM3
+  file: references/python-flask-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:ee65a7417e6a36040f5581fdbff7b99f3571970be244eb623b68bd036cbde59b
+  rule_id: EA4
+  file: references/python-flask-web-server-security.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:d19a9abfb1353919df92066c12d1a215c851b9c062d3399f9822a17b10881917
+  rule_id: P6
+  file: scripts/build_ownership_map.py
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:09cd03c0d59b7ae86ffa4c18678086ba9556b31eb055f6a2e1105c860aa116d2
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:c1af2d8159c76e07242df17326f8d35b9e6b25bf8e164575dc265ef96f058221
+  rule_id: TM3
+  file: scripts/community_maintainers.py
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:90035d27abad53f95fca90c049ed4772dc88dfa7157b65f6e7e0155228fe0cdb
+  rule_id: AST4
+  file: scripts/community_maintainers.py
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:475e2aaebadcafa9aebc4add3a2858f561079978c9c696588e0ab2a6e1a7f653
+  rule_id: TM3
+  file: scripts/community_maintainers.py
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'
+- hash: sha256:84028c8f966ff7ea4688189175e2885eaa824a76c6440e67c4d5d3bdbcbc518b
+  rule_id: AST4
+  file: scripts/run_ownership_map.py
+  reason: 'Reviewed 2026-09-10: security reference material quotes insecure patterns
+    (shell=True, dangerouslySetInnerHTML, os.system, debug mode, access tokens, ''without
+    checking'') in order to warn against them; security-ownership-map scripts read
+    repository metadata (git history, CODEOWNERS) to map ownership.'

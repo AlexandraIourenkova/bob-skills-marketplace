@@ -10,10 +10,64 @@
   },
   "plugins": [
     {
+      "name": "anthropic-dev-kit",
+      "source": "./packs/anthropic/anthropic-dev-kit",
+      "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anthropic"
+      },
+      "homepage": "https://github.com/anthropics/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "mcp",
+        "testing",
+        "frontend",
+        "anthropic"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "google-cloud-data",
+      "source": "./packs/google/google-cloud-data",
+      "description": "Work with BigQuery from an agent: basics, BigFrames data science, AI and ML in BigQuery, plus gcloud CLI guidance. Curated from Google's official agent skills.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Google"
+      },
+      "homepage": "https://github.com/google/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "google-cloud",
+        "bigquery",
+        "data",
+        "google"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "hashicorp-terraform",
+      "source": "./packs/hashicorp/hashicorp-terraform",
+      "description": "Terraform the way HashiCorp writes it: style guide, tests, policy as code, module refactoring, and importing existing infrastructure with search. Curated from hashicorp/agent-skills.",
+      "version": "1.0.0",
+      "author": {
+        "name": "HashiCorp"
+      },
+      "homepage": "https://github.com/hashicorp/agent-skills",
+      "license": "MPL-2.0",
+      "keywords": [
+        "terraform",
+        "infrastructure",
+        "iac",
+        "hashicorp"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "bob-essentials",
       "source": "./packs/ibm/bob-essentials",
       "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "IBM"
       },
@@ -50,7 +104,7 @@
       "name": "wxo-talk-with-your-data",
       "source": "./packs/ibm/wxo-talk-with-your-data",
       "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "IBM"
       },
@@ -64,6 +118,24 @@
         "excel",
         "demo",
         "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "openai-security",
+      "source": "./packs/openai/openai-security",
+      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+      "version": "1.0.0",
+      "author": {
+        "name": "OpenAI"
+      },
+      "homepage": "https://github.com/openai/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "security",
+        "threat-model",
+        "appsec",
+        "openai"
       ],
       "category": "ibm-bob"
     }

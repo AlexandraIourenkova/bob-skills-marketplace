@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "openai-security",
+  "displayName": "OpenAI application security",
+  "version": "1.0.0",
+  "vendor": "openai",
+  "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/openai/skills",
+  "source": {
+    "repo": "https://github.com/openai/skills",
+    "ref": "49f948faa925",
+    "path": "skills/.curated"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "security",
+    "threat-model",
+    "appsec",
+    "openai"
+  ],
+  "skills": [
+    "security-best-practices",
+    "security-threat-model",
+    "security-ownership-map"
+  ],
+  "networkAllow": [
+    "*.openai.com",
+    "pypi.org",
+    "registry.npmjs.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/security-best-practices": "sha256:45c703638befa3f2ac6ef8de90764bf2f6e6b25ff554c7db2487c6214b70fdae",
+    "skills/security-threat-model": "sha256:f271a1047bb6f9510e063e08638a40645f0e187c80a9677c4271cc05863d4fa0",
+    "skills/security-ownership-map": "sha256:f89d2a962cf7e17487c302fba577addebca9cc0733319f3558a2ef42887cd272"
+  }
+}

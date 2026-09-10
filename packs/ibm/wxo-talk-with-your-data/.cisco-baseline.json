@@ -1,0 +1,95 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "d6e713f7d35fe8c2",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "e5e84d54558da522",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "obfuscation",
+      "title": "File extension does not match actual content type",
+      "file": "assets/visualization_requirements.txt",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "14f3de7b8a600258",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "assets/visualization_tool.py",
+      "line": 293,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "2f52d5a57d03fe31",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "assets/visualization_tool.py",
+      "line": 281,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "aac70265485690c3",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "assets/visualization_tool.py",
+      "line": 253,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "fa95ad6e3d1f1917",
+      "skill": "excel-to-wxo-agent",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "assets/visualization_tool.py",
+      "line": 263,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "1b0227d072e161fa",
+      "skill": "excel-to-wxo-agent",
+      "severity": "CRITICAL",
+      "category": "command_injection",
+      "title": "SQL query with f-string variables (SQL injection risk)",
+      "file": "scripts/excel_to_sqlite.py",
+      "line": 102,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "c3a95628321c88e6",
+      "skill": "excel-to-wxo-agent",
+      "severity": "CRITICAL",
+      "category": "command_injection",
+      "title": "SQL query with f-string variables (SQL injection risk)",
+      "file": "scripts/excel_to_sqlite.py",
+      "line": 91,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    },
+    {
+      "key": "d8cb2af04debaf18",
+      "skill": "wxo-chat-demo-page",
+      "severity": "MEDIUM",
+      "category": "obfuscation",
+      "title": "File extension does not match actual content type",
+      "file": "assets/landing_template.html",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
+    }
+  ]
+}

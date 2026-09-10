@@ -6,24 +6,73 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 ## Vendors
 
 - **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, wxo-adk, wxo-talk-with-your-data.
-- **Anthropic** (`anthropic`, planned): sources github.com/anthropics. Packs: none yet.
+- **Anthropic** (`anthropic`, active): sources github.com/anthropics. Packs: anthropic-dev-kit.
+- **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-security.
+- **Google** (`google`, active): sources github.com/google. Packs: google-cloud-data.
+- **HashiCorp** (`hashicorp`, active): sources github.com/hashicorp. Packs: hashicorp-terraform.
+- **Microsoft** (`microsoft`, planned): sources github.com/microsoft. Packs: none yet.
 - **Red Hat** (`redhat`, planned): sources github.com/RedHatOfficial. Packs: none yet.
-- **HashiCorp** (`hashicorp`, planned): sources github.com/hashicorp. Packs: none yet.
+- **Vercel** (`vercel`, planned): sources github.com/vercel-labs. Packs: none yet.
 
 ## Packs
 
+### anthropic-dev-kit — Anthropic developer kit
+
+- Vendor: Anthropic (`anthropic`, active). Version 1.0.0.
+- Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.
+- Source: https://github.com/anthropics/skills @ 41bbe19d1a1a (skills)
+- Homepage: https://github.com/anthropics/skills
+- Tags: mcp, testing, frontend, anthropic
+- Skills (3):
+  - `mcp-builder`: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
+  - `webapp-testing`: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
+  - `frontend-design`: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 3 checksummed components.
+- Install: `uvx bob-skills add anthropic-dev-kit`
+
+### google-cloud-data — Google Cloud data
+
+- Vendor: Google (`google`, active). Version 1.0.0.
+- Work with BigQuery from an agent: basics, BigFrames data science, AI and ML in BigQuery, plus gcloud CLI guidance. Curated from Google's official agent skills.
+- Source: https://github.com/google/skills @ 6e209c43985f (skills/cloud)
+- Homepage: https://github.com/google/skills
+- Tags: google-cloud, bigquery, data, google
+- Skills (4):
+  - `bigquery-basics`: Manages datasets, tables, and jobs in BigQuery. Use when you need to interact with BigQuery, run SQL queries, manage BigQuery resources (datasets, tables, views), or perform basic data ingestion and analysis.
+  - `bigquery-bigframes`: Generates Python code using BigQuery DataFrames (BigFrames), the pandas/scikit-learn-style API over BigQuery. Use when writing BigFrames code or doing pandas-style dataframe/ML work against BigQuery (e.g. in a notebook). Don't use for SQL-first workflows or the google-cloud-bigquery client library — use bigquery-basics.
+  - `bigquery-ai-ml`: Leverages BigQuery's built-in machine learning and GenAI capabilities for advanced data analytics. Use when you need to write SQL queries that perform time-series forecasting, predict values, detect outliers or anomalies, find key drivers, perform semantic search or vector search, classify text, calculate similarity, summarize content, translate language, evaluate models, filter by semantic conditions, or leverage generative AI capabilities in BigQuery. Do not use for general BigQuery dataset, table, or job management requests.
+  - `gcloud`: Provides safety-critical validation, guardrails, and data reduction for gcloud CLI operations across Google Cloud Platform (GCP) services and infrastructure. Use when planning, generating, constructing, proposing, describing, or executing any gcloud CLI commands - including when answering questions about gcloud syntax, or formatting flags. Don't use when writing Google Cloud client library code or raw REST/gRPC API requests.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
+- Install: `uvx bob-skills add google-cloud-data`
+
+### hashicorp-terraform — HashiCorp Terraform
+
+- Vendor: HashiCorp (`hashicorp`, active). Version 1.0.0.
+- Terraform the way HashiCorp writes it: style guide, tests, policy as code, module refactoring, and importing existing infrastructure with search. Curated from hashicorp/agent-skills.
+- Source: https://github.com/hashicorp/agent-skills @ c2d65dfe492f (plugins/terraform/skills)
+- Homepage: https://github.com/hashicorp/agent-skills
+- Tags: terraform, infrastructure, iac, hashicorp
+- Skills (5):
+  - `terraform-style-guide`: Generate Terraform HCL code following HashiCorp's official style conventions and best practices. Use when writing, reviewing, or generating Terraform configurations.
+  - `terraform-test`: Comprehensive guide for writing and running Terraform tests. Use when creating test files (.tftest.hcl), writing test scenarios with run blocks, validating infrastructure behavior with assertions, mocking providers and data sources, testing module outputs and resource configurations, or troubleshooting Terraform test syntax and execution.
+  - `terraform-policy`: Write, test, or convert Terraform Policy files (.policy.hcl, .policytest.hcl, Sentinel→tfpolicy). Triggers: policy.hcl, policytest, convert sentinel, tfpolicy, write a policy.
+  - `refactor-module`: Transform monolithic Terraform configurations into reusable, maintainable modules following HashiCorp's module design principles and community best practices.
+  - `terraform-search-import`: Discover existing cloud resources using Terraform Search queries and bulk import them into Terraform management. Use when bringing unmanaged infrastructure under Terraform control, auditing cloud resources, or migrating to IaC.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 5 checksummed components.
+- Install: `uvx bob-skills add hashicorp-terraform`
+
 ### bob-essentials — Bob essentials
 
-- Vendor: IBM (`ibm`, active). Version 1.1.0.
+- Vendor: IBM (`ibm`, active). Version 1.1.1.
 - The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.
 - Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
 - Tags: marketplace, skills, security, bob
 - Skills (3):
-  - `find-skills`: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill", "какой скилл поставить", "установи скиллы из этого репозитория", "покажи каталог"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
-  - `skill-creator`: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up", "сделай скилл", "напиши SKILL.md".
+  - `find-skills`: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
+  - `skill-creator`: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up".
   - `guard`: Explain and resolve a refusal from the bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a "bob-skills guard" message, or the user asks why a skill is blocked, mentions "unmanaged skill", "digest mismatch", "revoked version", "skill blocked", "guard", or wants to trust a local skill again.
 - Also installs: commands: /skills-add.
-- Gate: pending; 0 reviewed findings in the baseline; 4 checksummed components.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
 - Install: `uvx bob-skills add bob-essentials`
 
 ### wxo-adk — watsonx Orchestrate ADK
@@ -41,19 +90,33 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
   - `telemetry-analyzer`: Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.
   - `agent-instructions-evaluator`: Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.
 - Also installs: MCP servers: wxo-adk, wxo-docs; rules: wxo-adk.md; commands: /wxo-deploy; modes: wxo-builder.
-- Gate: pending; 23 reviewed findings in the baseline; 9 checksummed components.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 23 reviewed policy findings; 9 checksummed components.
 - Install: `uvx bob-skills add wxo-adk`
 
 ### wxo-talk-with-your-data — Talk with your data on watsonx Orchestrate
 
-- Vendor: IBM (`ibm`, active). Version 1.0.0.
+- Vendor: IBM (`ibm`, active). Version 1.0.1.
 - Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.
 - Source: https://github.ibm.com/tech-garage-spgi/excel-to-wxo @ 6bb7f04 (.bob/skills)
 - Homepage: https://github.ibm.com/tech-garage-spgi/excel-to-wxo
 - Tags: watsonx-orchestrate, wxo, data, text-to-sql, excel, demo, ibm
 - Skills (2):
-  - `excel-to-wxo-agent`: Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like "сделай агента по этому экселю", "deploy a data agent to wxo", "прототип text2sql", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.
-  - `wxo-chat-demo-page`: Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site ("embed code", "вставить чат на страницу", "демо страница для агента", "лендинг с чатом"), wants charts or a dashboard built live from the agent's chat answers ("рендерить графики из ответов", "дашборд с чатом", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.
+  - `excel-to-wxo-agent`: Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like "deploy a data agent to wxo", "text-to-SQL prototype", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.
+  - `wxo-chat-demo-page`: Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site ("embed code", "put the chat on a page", "demo page for the agent", "landing page with chat"), wants charts or a dashboard built live from the agent's chat answers ("render charts from the answers", "dashboard with chat", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.
 - Also installs: MCP servers: wxo-adk, wxo-docs; rules: wxo-data-agent.md.
-- Gate: pending; 5 reviewed findings in the baseline; 3 checksummed components.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 8 reviewed policy findings; 3 checksummed components.
 - Install: `uvx bob-skills add wxo-talk-with-your-data`
+
+### openai-security — OpenAI application security
+
+- Vendor: OpenAI (`openai`, active). Version 1.0.0.
+- Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.
+- Source: https://github.com/openai/skills @ 49f948faa925 (skills/.curated)
+- Homepage: https://github.com/openai/skills
+- Tags: security, threat-model, appsec, openai
+- Skills (3):
+  - `security-best-practices`: Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.
+  - `security-threat-model`: Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.
+  - `security-ownership-map`: Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 1 reviewed policy findings; 3 checksummed components.
+- Install: `uvx bob-skills add openai-security`

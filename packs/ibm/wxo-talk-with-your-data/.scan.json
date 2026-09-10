@@ -1,0 +1,64 @@
+{
+  "scannedAt": "2026-09-10T10:09:59Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": null
+  },
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "excel-to-wxo-agent": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 18,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": false,
+        "maxSeverity": "INFO",
+        "findings": 9,
+        "accepted": 8,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "wxo-chat-demo-page": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 16,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 1,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 34,
+    "ciscoAccepted": 9
+  }
+}

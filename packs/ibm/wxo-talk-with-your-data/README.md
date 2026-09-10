@@ -18,8 +18,6 @@ Installs alongside `wxo-adk`: the MCP servers are identical, so the second insta
 
 ## Differences from the upstream skills
 
-The gate found three things in the upstream copy; the marketplace edition changes them and the changes are worth upstreaming:
-
-- `assets/visualization_tool.py`: upload modes `free` and `cos_fallback` (litterbox.catbox.moe, freeimage.host, with an embedded API key) are removed; `UPLOAD_MODE` is fixed to `cos`. Chart images carry the customer's numbers and must not leave IBM-controlled storage. `SKILL.md` and `references/visualization.md` say so.
-- `scripts/excel_to_sqlite.py`: a literal right-to-left mark in a comment is written as `U+200F`, so the file has no hidden characters.
-- Everything else is byte-identical to the source commit in `pack.json`. Accepted findings (placeholder hostnames, a mention of `.env`, an instruction that tells the agent not to send users to external renderers) are listed in `.policy-baseline.json` with reasons.
+- `scripts/excel_to_sqlite.py`: a literal right-to-left mark inside a comment is written as `U+200F`, so the file carries no hidden characters (policy rule P003). No behaviour change.
+- `SKILL.md` descriptions: the Russian trigger phrases are dropped; the marketplace and its site are English-only. Bodies are unchanged.
+- Everything else is byte-identical to the source commit in `pack.json`. The chart tool's demo-only upload to public image hosts is kept as upstream ships it and is recorded in `.policy-baseline.json` with the maintainer's reason; the skill itself tells the agent to state the risk and never use it with real data.

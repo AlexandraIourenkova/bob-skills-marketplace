@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "wxo-talk-with-your-data",
   "displayName": "Talk with your data on watsonx Orchestrate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "vendor": "ibm",
   "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
   "license": "Apache-2.0",
@@ -53,8 +53,8 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/excel-to-wxo-agent": "sha256:7dd1a5641f3c08897caac1e9d325bc11550445f7e77d4cdb16dafaf589c1cd62",
-    "skills/wxo-chat-demo-page": "sha256:25c028bb08b4c71d29b17eed09acd496f7955071ee8f168abc7b6ec44bc36ba7",
+    "skills/excel-to-wxo-agent": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d",
+    "skills/wxo-chat-demo-page": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66",
     "rules/wxo-data-agent.md": "sha256:a59721c0109bb54bcb6f18f37bc933fa58f0d1b65beaa21507870b8656486b82"
   }
 }

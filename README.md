@@ -74,25 +74,38 @@ flowchart LR
 
 | Pack | Vendor | Status | Contents |
 |---|---|---|---|
+| [`wxo-talk-with-your-data`](packs/ibm/wxo-talk-with-your-data) | IBM | released 1.0.1 | excel-to-wxo-agent, wxo-chat-demo-page, ADK and docs MCP servers, data-agent rule. 1.1: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
 | [`wxo-adk`](packs/ibm/wxo-adk) | IBM | released 1.0.0 | 6 official ADK skills (solution-architect, sop-builder, wxo-builder, wxo-analyzer, telemetry-analyzer, agent-instructions-evaluator), MCP servers `wxo-adk` and `wxo-docs`, ADK rule, `/wxo-deploy`, mode `wxo-builder` |
-| [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.0.0 | find-skills, skill-creator, guard, `/skills-add` |
-| [`wxo-talk-with-your-data`](packs/ibm/wxo-talk-with-your-data) | IBM | released 1.0.0 | excel-to-wxo-agent, wxo-chat-demo-page, ADK and docs MCP servers, data-agent rule. 1.1: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
-| `app-modernization` | IBM | planned | UI modernization skills (IBM/ui-modernization-lab), application code modernization |
-| `building-blocks` | IBM | planned | Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality |
-| `office-docs` | Anthropic | candidate | Word, PowerPoint, Excel and PDF skills from anthropics/skills |
-| `openshift-ansible`, `terraform-vault` | Red Hat, HashiCorp | candidate | source repositories to confirm |
+| [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.1.0 | find-skills (the marketplace inside Bob), skill-creator, guard, `/skills-add` |
+| [`anthropic-dev-kit`](packs/anthropic/anthropic-dev-kit) | Anthropic | released 1.0.0 | mcp-builder, webapp-testing, frontend-design from anthropics/skills (Apache-2.0) |
+| [`openai-security`](packs/openai/openai-security) | OpenAI | released 1.0.0 | security-best-practices, security-threat-model, security-ownership-map from the Codex skills catalog (Apache-2.0) |
+| [`google-cloud-data`](packs/google/google-cloud-data) | Google | released 1.0.0 | bigquery-basics, bigquery-bigframes, bigquery-ai-ml, gcloud from google/skills (Apache-2.0) |
+| [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import from hashicorp/agent-skills (MPL-2.0) |
+| `app-modernization`, `building-blocks` | IBM | planned | IBM/ui-modernization-lab skills; Client Engineering building-block modes |
+| Microsoft, Red Hat, Vercel | candidates | planned | microsoft/skills (Azure SDK plugins); no official Red Hat skills repository found yet; vercel-labs/agent-skills publishes no licence |
+
+Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services. Every vendored skill above is Apache-2.0 or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
 
 ## Even official skills need checking
 
-Public catalogs report roughly a quarter of skills with security findings (NVIDIA SkillSpector data: 26.1 % with vulnerabilities, 5.2 % likely malicious). Official skills are not exempt from review. Syncing the six ADK skills from IBM's own repository produced this on the marketplace policy linter alone:
+Public catalogs report roughly a quarter of skills with security findings (NVIDIA SkillSpector data: 26.1 % with vulnerabilities, 5.2 % likely malicious). Official skills are not exempt. This is what the two scanners said about the packs in this registry before any review, static mode, no LLM:
 
-| Finding class | Count | Verdict after review |
-|---|---|---|
-| Third-party hostnames in documentation examples (Milvus, Elasticsearch, Salesforce, Google APIs) | 13 | accepted: instructions only, no script contacts them |
-| `.env` reads in telemetry scripts | 9 | accepted: dotenv load of ADK credentials, network goes to the ADK client's base URL only |
-| "without asking" in an instruction | 1 | accepted: a flow tool takes a document input directly, not a confirmation bypass |
+| Skill | Vendor | SkillSpector risk (0–100) | Cisco max severity | What it actually is |
+|---|---|---|---|---|
+| mcp-builder | Anthropic | 100, do not install | MEDIUM | references to its own reference files, `api.example.com` examples, unpinned `anthropic` and `mcp` requirements |
+| webapp-testing | Anthropic | 64 | HIGH | `with_server.py` starts the user's own dev-server command with `shell=True` |
+| security-best-practices | OpenAI | 100, do not install | INFO | security guidance quoting the insecure patterns it warns against |
+| security-ownership-map | OpenAI | 66 | INFO | scripts that read git history and CODEOWNERS |
+| terraform-policy | HashiCorp | 54 | INFO | references to its own reference files, imperative policy rules |
+| telemetry-analyzer | IBM (ADK) | 89, do not install | MEDIUM | dotenv loads, requests to the ADK base URL |
+| excel-to-wxo-agent | IBM (team) | 95, do not install | CRITICAL | SQL statements built from the user's own spreadsheet column names; demo-only upload of chart images to public hosts |
+| wxo-chat-demo-page | IBM (team) | 89, do not install | MEDIUM | HTML comments in page templates |
+| find-skills | IBM (marketplace) | 11 | INFO | the marketplace's own imperative rules ("never install without confirmation") |
+| bigquery-basics, terraform-test, security-threat-model | Google, HashiCorp, OpenAI | 0 | INFO | nothing to report |
 
-All 23 entries sit in [the pack's baseline](packs/ibm/wxo-adk/.policy-baseline.json) with a reason each. A future ADK version that adds a new finding fails the gate until someone reads it. The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
+Every finding above was read by a reviewer and recorded with a reason in the pack's `.skillspector-baseline.yaml`, `.cisco-baseline.json` or `.policy-baseline.json`. After that the gate reports only new findings, so a future upstream change that adds a real problem fails the PR. The latest results per pack live in `.scan.json`, in `index.json`, in `bob-skills show <pack>` and on the website. `python3 scripts/run_scanners.py --check` is the CI step; `--write` refreshes the results; `--accept-skillspector` and `--accept-cisco` are the reviewer's acceptance, never automatic.
+
+The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
 
 ## Guard at runtime
 
@@ -167,13 +180,13 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry with vendor `ibm` and three candidate vendors, three released packs, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
+Done: registry with five active vendors (IBM, Anthropic, OpenAI, Google, HashiCorp) and three candidates, seven released packs, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
 
 Next, in order:
 
 1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
-3. Candidate packs: `office-docs` from anthropics/skills, `app-modernization` from IBM/ui-modernization-lab.
+3. IBM packs `app-modernization` (IBM/ui-modernization-lab) and `building-blocks`; a Microsoft pack from microsoft/skills.
 4. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
 
 ## Docs
