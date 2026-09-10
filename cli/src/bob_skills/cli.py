@@ -11,9 +11,9 @@ import typer
 
 from . import __version__
 from . import installer
-from .installer import InstallError, Scope, global_scope, project_scope
+from .installer import InstallError, Scope, VendorConfirmationRequired, global_scope, project_scope
 from .policy import BLOCK, format_text, lint_path, to_sarif, write_baseline
-from .registry import Registry, RegistryError, resolve_registry
+from .registry import Registry, RegistryError, describe_pack, resolve_reference, resolve_registry
 
 app = typer.Typer(
     help="Install, verify and guard skill packs for IBM Bob from the Bob Skills Marketplace.",
@@ -83,6 +83,73 @@ def search(query: list[str] = typer.Argument(None, help="Keywords; empty lists e
                    + (f"  modes: {', '.join(pack['modes'])}" if pack.get("modes") else ""))
 
 
+@app.command()
+def resolve(reference: str = typer.Argument(..., help="A git URL, owner/repo, pack name or skill name."),
+            registry: Optional[str] = RegistryOpt, offline: bool = OfflineOpt, json_out: bool = JsonOpt) -> None:
+    """Map a pasted git link (or a name) to registry packs. Exit 1 when nothing matches."""
+    try:
+        root, _, _ = resolve_registry(registry, offline=offline)
+        index = Registry(root).build_index()
+    except RegistryError as error:
+        _fail(str(error))
+    result = resolve_reference(index, reference)
+    if json_out:
+        typer.echo(json.dumps(result, indent=2, ensure_ascii=False))
+        raise typer.Exit(code=0 if result["packs"] else 1)
+    if result["packs"]:
+        for pack in result["packs"]:
+            typer.echo(f"{pack['name']}@{pack['version']}  vendor={pack['vendor']} ({pack['vendorStatus']})  {pack['displayName']}")
+            typer.echo(f"    this pack is curated from {reference}; install it with `uvx bob-skills add {pack['name']}`")
+        return
+    if result["kind"] == "repo" and result["vendors"]:
+        for vendor in result["vendors"]:
+            typer.echo(f"{reference} belongs to vendor {vendor['displayName']} ({vendor['id']}, {vendor['status']}) but no pack is curated from it yet.")
+            typer.echo(f"    packs from this vendor: {', '.join(vendor['packs']) or 'none'}; request one with the 'Request a pack' issue template")
+        raise typer.Exit(code=1)
+    typer.echo(f"{reference} is not in the marketplace and its owner is not a listed vendor. Do not copy skills from it; request a pack or, for your own skill, `bob-skills trust <skill>`.")
+    raise typer.Exit(code=1)
+
+
+@app.command()
+def show(pack: str, registry: Optional[str] = RegistryOpt, offline: bool = OfflineOpt,
+         is_global: bool = GlobalOpt, json_out: bool = JsonOpt) -> None:
+    """What will be installed: skills, MCP servers, rules, commands, modes, gate status, context cost, vendor trust."""
+    try:
+        root, _, _ = resolve_registry(registry, offline=offline)
+        reg = Registry(root)
+        target = reg.get(pack)
+        entry = next((p for p in reg.build_index()["packs"] if p["name"] == pack), {})
+    except RegistryError as error:
+        _fail(str(error), code=2)
+    info = describe_pack(reg, target, entry)
+    info["vendorTrusted"] = target.vendor in installer.trusted_vendors([project_scope(), global_scope()])
+    if json_out:
+        typer.echo(json.dumps(info, indent=2, ensure_ascii=False))
+        return
+    v = info["vendor"]
+    typer.echo(f"{info['displayName']}  ({info['name']}@{info['version']}, tag {info['tag']})")
+    typer.echo(f"  {info['description']}")
+    typer.echo(f"  vendor: {v['displayName']} ({v['id']}, {v['status']}){'' if info['vendorTrusted'] else '  NOT YET TRUSTED in this project: first install needs --accept-vendor'}")
+    if info.get("source"):
+        typer.echo(f"  source: {info['source'].get('repo')} @ {info['source'].get('ref')}")
+    typer.echo(f"  skills ({len(info['skills'])}):")
+    for skill in info["skills"]:
+        typer.echo(f"    - {skill['name']}: {skill['description'][:160]}{'...' if len(skill['description']) > 160 else ''}")
+    for name, cfg in info["mcpServers"].items():
+        how = cfg.get("url") or " ".join([cfg.get("command", "")] + list(cfg.get("args", [])))
+        typer.echo(f"  mcp server {name}: {how}")
+    for kind in ("rules", "commands", "modes"):
+        if info[kind]:
+            typer.echo(f"  {kind}: {', '.join(info[kind])}")
+    g = info["gate"]
+    typer.echo(f"  gate: {g['verdict']}; {g['baselineFindings']} reviewed findings in the baseline; {g['components']} checksummed components"
+               + ("; REVOKED" if g["revoked"] else ""))
+    typer.echo(f"  network allowed in scripts: {', '.join(info['networkAllow']) or '-'}")
+    c = info["contextTokens"]
+    typer.echo(f"  context cost: ~{c['alwaysOn']} tokens always on (skill descriptions + rules), ~{c['onUse']} tokens when a skill is used")
+    typer.echo(f"  install: uvx bob-skills add {info['name']}" + ("" if info["vendorTrusted"] else " --accept-vendor"))
+
+
 @app.command("list")
 def list_(is_global: bool = GlobalOpt, json_out: bool = JsonOpt) -> None:
     """Show installed packs and their versions."""
@@ -119,10 +186,21 @@ def _print_report(report: dict) -> None:
 def add(pack: str = typer.Argument(..., help="<name> or <name>@<version>"),
         registry: Optional[str] = RegistryOpt, is_global: bool = GlobalOpt,
         force: bool = typer.Option(False, "--force", help="Overwrite files this pack does not own."),
+        accept_vendor: bool = typer.Option(False, "--accept-vendor", help="Accept the vendor on its first install in this scope."),
         offline: bool = OfflineOpt) -> None:
     """Install a pack: verify vendor and checksums, copy skills, merge MCP servers, rules, commands and modes, write the lock."""
+    known = installer.trusted_vendors([project_scope(), global_scope()])
     try:
-        _print_report(installer.add(pack, _scope(is_global), registry, force=force, offline=offline))
+        _print_report(installer.add(pack, _scope(is_global), registry, force=force, offline=offline,
+                                    accept_vendor=accept_vendor, known_vendors=known))
+    except VendorConfirmationRequired as error:
+        v = error.vendor
+        typer.echo(f"first install from vendor {v.get('displayName')} ({v.get('id')}, {v.get('status')}) in this scope.", err=True)
+        typer.echo(f"  homepage: {v.get('homepage', '-')}; organisation: {v.get('github', {}).get('host', '')}/{v.get('github', {}).get('org', '')}; "
+                   f"signing key: {'enrolled' if v.get('publicKey') else 'none yet'}", err=True)
+        typer.echo(f"  {v.get('notes', '')}", err=True)
+        typer.echo(f"  if you trust this vendor: uvx bob-skills add {pack} --accept-vendor", err=True)
+        raise typer.Exit(code=3)
     except (InstallError, RegistryError) as error:
         _fail(str(error), code=2)
 
@@ -172,7 +250,7 @@ def update(registry: Optional[str] = RegistryOpt, is_global: bool = GlobalOpt,
             typer.echo(f"skipping {item['pack']}: major update needs --yes")
             continue
         try:
-            _print_report(installer.add(item["pack"], scope, item.get("registry") or registry, force=True, offline=offline))
+            _print_report(installer.add(item["pack"], scope, item.get("registry") or registry, force=True, offline=offline, accept_vendor=True))
         except (InstallError, RegistryError) as error:
             _fail(str(error), code=2)
 

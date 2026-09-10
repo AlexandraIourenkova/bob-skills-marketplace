@@ -22,3 +22,6 @@ Thumbs.db
 
 # Local install targets never belong in the registry
 .bob/skills.lock
+
+# Local Claude Code config
+.claude/

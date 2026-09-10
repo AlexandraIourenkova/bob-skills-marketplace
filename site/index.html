@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bob Skills Marketplace</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+  :root { --bg:#ffffff; --layer:#f4f4f4; --layer-hover:#e8e8e8; --border:#e0e0e0; --border-strong:#8d8d8d; --text:#161616; --text-2:#525252; --text-3:#6f6f6f; --blue:#0f62fe; --blue-hover:#0043ce; --green:#198038; --header:#161616; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; font-size:14px; line-height:20px; }
+  a { color:var(--blue); text-decoration:none; } a:hover { color:var(--blue-hover); text-decoration:underline; }
+  .mono { font-family:"IBM Plex Mono",Menlo,Consolas,monospace; }
+  header { height:48px; background:var(--header); color:#f4f4f4; display:flex; align-items:center; padding:0 16px; gap:32px; }
+  header .brand { display:flex; gap:8px; align-items:center; color:#f4f4f4; } header .brand b { font-weight:600; }
+  header nav { display:flex; height:48px; } header nav a { display:flex; align-items:center; padding:0 16px; color:#c6c6c6; border-bottom:3px solid transparent; }
+  header nav a.active { color:#f4f4f4; border-bottom-color:#4589ff; } header nav a:hover { text-decoration:none; color:#f4f4f4; }
+  header .right { margin-left:auto; display:flex; gap:24px; } header .right a { color:#c6c6c6; }
+  .wrap { width:min(1248px, calc(100% - 64px)); margin:0 auto; }
+  .hero { background:var(--layer); padding:56px 0 48px; } .hero h1 { font-size:42px; line-height:50px; font-weight:300; margin:0 0 16px; max-width:880px; }
+  .hero p { font-size:16px; line-height:24px; color:var(--text-2); margin:0 0 24px; max-width:680px; }
+  .search { display:flex; max-width:800px; height:48px; } .search input { flex:1; border:0; border-bottom:1px solid var(--border-strong); background:#fff; padding:0 16px; font:inherit; font-size:16px; color:var(--text); }
+  .search input:focus { outline:2px solid var(--blue); outline-offset:-2px; }
+  .btn { display:inline-flex; align-items:center; justify-content:space-between; gap:16px; height:48px; padding:0 15px; background:var(--blue); color:#fff; border:0; font:inherit; cursor:pointer; min-width:96px; }
+  .btn:hover { background:var(--blue-hover); color:#fff; text-decoration:none; } .btn.sm { height:40px; } .btn.ghost { background:transparent; color:var(--blue); border:1px solid var(--blue); }
+  .btn.ghost:hover { background:var(--blue); color:#fff; } .btn.muted { background:transparent; color:var(--text-2); border:1px solid var(--border-strong); cursor:default; }
+  .btn.wide { width:100%; }
+  .layout { display:grid; grid-template-columns:240px minmax(0,1fr); gap:48px; padding:48px 0 64px; }
+  aside h4 { font-size:12px; letter-spacing:.32px; text-transform:uppercase; color:var(--text-2); margin:0 0 12px; font-weight:400; }
+  aside section { margin-bottom:32px; } aside label { display:flex; align-items:center; gap:8px; margin-bottom:10px; cursor:pointer; }
+  aside label span.count { margin-left:auto; color:var(--text-3); } aside input { width:16px; height:16px; margin:0; accent-color:var(--text); }
+  .toolbar { display:flex; justify-content:space-between; align-items:center; height:32px; color:var(--text-2); margin-bottom:16px; }
+  .grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; }
+  .tile { background:var(--layer); padding:16px; display:flex; flex-direction:column; gap:12px; min-height:300px; color:inherit; }
+  a.tile:hover { background:var(--layer-hover); text-decoration:none; color:inherit; }
+  .vendor { display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.32px; }
+  .avatar { width:20px; height:20px; background:var(--text); color:#fff; font-size:9px; font-weight:600; display:flex; align-items:center; justify-content:center; }
+  .tag { display:inline-flex; align-items:center; height:24px; padding:0 8px; border-radius:12px; font-size:12px; background:var(--border); color:var(--text); }
+  .tag.green { background:#a7f0ba; color:#0e6027; } .tag.blue { background:#d0e2ff; color:#0043ce; } .tag.red { background:#ffd7d9; color:#a2191f; }
+  .tile h3 { font-size:20px; line-height:28px; font-weight:400; margin:0; } .tile p { margin:0; color:var(--text-2); }
+  .meta { font-size:12px; color:var(--text-3); } .gate { display:flex; align-items:center; gap:6px; font-size:12px; }
+  .tile .foot { margin-top:auto; display:flex; flex-direction:column; gap:12px; }
+  .info { margin-top:24px; padding:24px; border:1px solid var(--border); display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:32px; }
+  .info b { display:block; margin-bottom:8px; font-weight:600; } .info p { margin:0; color:var(--text-2); }
+  .pack-head { background:var(--layer); padding:24px 0 32px; border-bottom:1px solid var(--border); }
+  .crumbs { display:flex; gap:8px; margin-bottom:20px; } .crumbs span { color:var(--text-3); }
+  .pack-head h1 { font-size:32px; line-height:40px; font-weight:400; margin:0 0 12px; }
+  .row { display:flex; align-items:center; gap:16px; color:var(--text-2); flex-wrap:wrap; } .row .sep { color:#c6c6c6; }
+  .tags { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .detail { display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:56px; padding:40px 0 64px; }
+  .detail h2 { font-size:20px; line-height:28px; font-weight:400; margin:0 0 12px; } .detail section { margin-bottom:48px; }
+  .detail p.lead { font-size:16px; line-height:24px; color:var(--text-2); margin:0 0 12px; }
+  table { width:100%; border-collapse:collapse; border-top:1px solid var(--border); } td { padding:14px 16px 14px 0; border-bottom:1px solid var(--border); vertical-align:top; }
+  td.k { color:var(--text-3); width:120px; } td.n { width:220px; } td.d { color:var(--text-2); }
+  .status { display:inline-flex; align-items:center; gap:6px; }
+  .panel { background:var(--layer); padding:24px; display:flex; flex-direction:column; gap:20px; position:sticky; top:16px; }
+  .panel h5 { margin:0 0 8px; font-size:12px; letter-spacing:.32px; color:var(--text-2); font-weight:400; }
+  .cmd { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#161616; color:#f4f4f4; padding:12px 16px; font-size:12px; line-height:18px; }
+  .cmd button { background:transparent; border:0; color:#f4f4f4; cursor:pointer; padding:0; display:flex; }
+  .quote { border-left:3px solid var(--blue); padding-left:12px; }
+  .facts { border-top:1px solid var(--border); margin-top:24px; } .facts div { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--border); } .facts span:first-child { color:var(--text-3); }
+  .hint { font-size:12px; color:var(--text-3); line-height:16px; }
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#161616; color:#f4f4f4; padding:12px 16px; display:none; }
+  .toast.on { display:block; }
+  footer { border-top:1px solid var(--border); padding:24px 0; font-size:12px; color:var(--text-3); } footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .vendors { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; padding:48px 0 64px; }
+  .vendors .tile { min-height:0; }
+  .error { padding:48px 0; color:var(--text-2); }
+  @media (max-width: 1000px) { .grid { grid-template-columns:repeat(2, minmax(0,1fr)); } .layout, .detail { grid-template-columns:1fr; } .panel { position:static; } .info { grid-template-columns:1fr; } .vendors { grid-template-columns:1fr; } }
+  @media (max-width: 640px) { .grid { grid-template-columns:1fr; } .hero h1 { font-size:28px; line-height:36px; } header nav { display:none; } .wrap { width:calc(100% - 32px); } }
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#/"><b>IBM</b><span>Bob Skills Marketplace</span></a>
+  <nav><a href="#/" data-nav="packs">Packs</a><a href="#/vendors" data-nav="vendors">Vendors</a><a id="docs-link" href="#" target="_blank" rel="noopener">Docs</a></nav>
+  <div class="right"><a id="request-link" href="#" target="_blank" rel="noopener">Request a pack</a></div>
+</header>
+<main id="app"><div class="wrap error">Loading the catalog…</div></main>
+<footer><div class="wrap"><span>Bob Skills Marketplace · team project for the IBM Bob Innovation Challenge, Israel 2026</span><span id="foot-right"></span></div></footer>
+<div class="toast" id="toast"></div>
+<script>
+(function () {
+  const ICON = {
+    check: '<svg width="14" height="14" viewBox="0 0 16 16" fill="#0f62fe"><path d="M8 1l1.8 1.5 2.3-.3.9 2.2 2 1.2-.6 2.3.6 2.3-2 1.2-.9 2.2-2.3-.3L8 15l-1.8-1.5-2.3.3-.9-2.2-2-1.2.6-2.3L1 5.6l2-1.2.9-2.2 2.3.3z"/><path d="M5 8l2 2 4-4" stroke="#fff" stroke-width="1.6" fill="none"/></svg>',
+    shield: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#198038" stroke-width="1.6"><path d="M8 1.5l5 2v4c0 3-2.2 5.3-5 6.5-2.8-1.2-5-3.5-5-6.5v-4z"/><path d="M5.5 8l1.8 1.8L10.8 6"/></svg>',
+    clock: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6f6f6f" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></svg>',
+    ok: '<svg width="16" height="16" viewBox="0 0 16 16" fill="#198038"><circle cx="8" cy="8" r="7"/><path d="M5 8l2 2 4-4" stroke="#fff" stroke-width="1.6" fill="none"/></svg>',
+    arrow: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>',
+    copy: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9"/><path d="M11 5V2H2v9h3"/></svg>',
+    down: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M3 13h10"/></svg>'
+  };
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const state = { index: null, q: '', vendors: new Set(), contains: new Set() };
+  const app = document.getElementById('app');
+
+  function webUrl() {
+    const url = (state.index.registry && state.index.registry.url || '').replace(/\.git$/, '');
+    return url || 'https://github.ibm.com/Maria-Startseva/bob-skills-marketplace';
+  }
+  function fileUrl(path) { return webUrl() + '/blob/main/' + path; }
+  function toast(text) { const t = document.getElementById('toast'); t.textContent = text; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
+  window.copyText = function (text, label) {
+    navigator.clipboard.writeText(text).then(() => toast((label || 'Copied') + ': ' + text), () => toast('Copy failed; select the text by hand'));
+  };
+  function vendorOf(id) { return (state.index.vendors || []).find(v => v.id === id) || { id, displayName: id, status: 'planned' }; }
+  function vendorBadge(pack) {
+    const v = vendorOf(pack.vendor);
+    return `<div class="vendor"><div class="avatar">${esc(v.displayName.slice(0, 3).toUpperCase())}</div><span>${esc(v.displayName)}</span>${v.status === 'active' ? ICON.check : ''}</div>`;
+  }
+  function gateLine(pack) {
+    const verdict = pack.scan && pack.scan.verdict || 'pending';
+    const passed = verdict === 'pass' || (verdict === 'pending' && pack.components > 0);
+    const label = verdict === 'pass' ? 'Gate passed' : verdict === 'pending' ? 'Checksums and linter passed, scanners pending' : 'Gate: ' + verdict;
+    const findings = pack.baselineFindings ? ` · ${pack.baselineFindings} reviewed findings` : ' · 0 findings';
+    return `<div class="gate">${passed ? ICON.shield : ICON.clock}<span>${esc(label)}${findings}</span></div>`;
+  }
+  function counts(pack) {
+    const parts = [`${pack.skills.length} skill${pack.skills.length === 1 ? '' : 's'}`];
+    if (pack.mcpServers && pack.mcpServers.length) parts.push(`${pack.mcpServers.length} MCP server${pack.mcpServers.length === 1 ? '' : 's'}`);
+    if (pack.rules && pack.rules.length) parts.push(`${pack.rules.length} rule${pack.rules.length === 1 ? '' : 's'}`);
+    if (pack.commands && pack.commands.length) parts.push(`${pack.commands.length} command${pack.commands.length === 1 ? '' : 's'}`);
+    if (pack.modes && pack.modes.length) parts.push(`${pack.modes.length} mode${pack.modes.length === 1 ? '' : 's'}`);
+    return parts.join(' · ');
+  }
+  function matches(pack) {
+    if (state.vendors.size && !state.vendors.has(pack.vendor)) return false;
+    for (const c of state.contains) {
+      if (c === 'skills' && !pack.skills.length) return false;
+      if (c === 'mcp' && !(pack.mcpServers || []).length) return false;
+      if (c === 'modes' && !(pack.modes || []).length) return false;
+      if (c === 'commands' && !(pack.commands || []).length) return false;
+    }
+    if (!state.q) return true;
+    const hay = [pack.name, pack.displayName, pack.description, pack.vendor, pack.vendorDisplayName, (pack.tags || []).join(' '),
+      pack.skills.map(s => s.name + ' ' + s.description).join(' ')].join(' ').toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).every(t => hay.includes(t));
+  }
+
+  function renderCatalog() {
+    const packs = state.index.packs;
+    const shown = packs.filter(matches);
+    const vendorCounts = {};
+    packs.forEach(p => { vendorCounts[p.vendor] = (vendorCounts[p.vendor] || 0) + 1; });
+    const vendors = (state.index.vendors || []).filter(v => v.status !== 'suspended');
+    app.innerHTML = `
+      <div class="hero"><div class="wrap">
+        <h1>Skill packs for IBM Bob, checked and signed before they reach your project</h1>
+        <p>Skills, MCP servers, rules and modes from official vendors, grouped by what you want to get done. One command to install, a lock file that keeps every project on the same version, a guard that refuses anything modified after install.</p>
+        <div class="search"><input id="q" type="search" placeholder='Search packs, skills or vendors: try "orchestrate" or "excel"' value="${esc(state.q)}"></div>
+      </div></div>
+      <div class="wrap layout">
+        <aside>
+          <section><h4>Vendor</h4>${vendors.map(v => `<label><input type="checkbox" data-vendor="${esc(v.id)}" ${state.vendors.has(v.id) ? 'checked' : ''}><span>${esc(v.displayName)}</span><span class="count">${vendorCounts[v.id] || 0}</span></label>`).join('')}</section>
+          <section><h4>Contains</h4>${[['skills', 'Skills'], ['mcp', 'MCP servers'], ['modes', 'Custom modes'], ['commands', 'Slash commands']].map(([k, l]) => `<label><input type="checkbox" data-contains="${k}" ${state.contains.has(k) ? 'checked' : ''}><span>${l}</span></label>`).join('')}</section>
+        </aside>
+        <div>
+          <div class="toolbar"><span>${shown.length} of ${packs.length} pack${packs.length === 1 ? '' : 's'} from ${Object.keys(vendorCounts).length} vendor${Object.keys(vendorCounts).length === 1 ? '' : 's'}</span><span>Registry commit <span class="mono">${esc((state.index.registry && state.index.registry.commit || '').slice(0, 7) || '-')}</span></span></div>
+          <div class="grid">${shown.map(p => `
+            <a class="tile" href="#/pack/${esc(p.name)}">
+              <div class="vendor">${vendorBadge(p).replace(/^<div class="vendor">|<\/div>$/g, '')}<span class="tag green" style="margin-left:auto">${esc(p.revokedVersions && p.revokedVersions.includes(p.version) ? 'Revoked' : 'Released')}</span></div>
+              <h3>${esc(p.displayName)}</h3>
+              <p>${esc(p.description)}</p>
+              <div class="meta mono">${esc(p.name)} · v${esc(p.version)}</div>
+              <div class="meta">${esc(counts(p))}</div>
+              <div class="foot">${gateLine(p)}<span class="btn ghost sm"><span>View pack</span>${ICON.arrow}</span></div>
+            </a>`).join('') || '<p>No packs match. Clear the filters, or request a pack.</p>'}</div>
+          <div class="info">
+            <div><b>Only official vendors</b><p>A pack is published by the owner of the product it is about, or curated by the marketplace team from that vendor's official repository with provenance recorded.</p></div>
+            <div><b>Every version through the gate</b><p>Schema and checksums, policy linter, NVIDIA SkillSpector, Cisco skill-scanner, two human approvals. Accepted findings stay visible in a reviewed baseline.</p></div>
+            <div><b>Guarded after install</b><p>The lock file records what was installed. A hook refuses any skill that is missing from it or was modified afterwards.</p></div>
+          </div>
+        </div>
+      </div>`;
+    const q = document.getElementById('q');
+    q.addEventListener('input', () => { state.q = q.value; renderCatalog(); q.focus(); q.setSelectionRange(q.value.length, q.value.length); });
+    app.querySelectorAll('input[data-vendor]').forEach(el => el.addEventListener('change', () => { el.checked ? state.vendors.add(el.dataset.vendor) : state.vendors.delete(el.dataset.vendor); renderCatalog(); }));
+    app.querySelectorAll('input[data-contains]').forEach(el => el.addEventListener('change', () => { el.checked ? state.contains.add(el.dataset.contains) : state.contains.delete(el.dataset.contains); renderCatalog(); }));
+  }
+
+  function renderPack(name) {
+    const p = state.index.packs.find(x => x.name === name);
+    if (!p) { app.innerHTML = `<div class="wrap error">Pack "${esc(name)}" is not in the catalog. <a href="#/">Back to packs</a></div>`; return; }
+    const v = vendorOf(p.vendor);
+    const cmd = `uvx bob-skills add ${p.name}`;
+    const web = webUrl();
+    const tag = p.tag || `${p.name}--v${p.version}`;
+    const rows = [
+      ...p.skills.map(s => ['Skill', s.name, s.description]),
+      ...(p.mcpServers || []).map(m => ['MCP server', m, m === 'wxo-docs' ? 'Remote documentation server' : 'Local server started with uvx']),
+      ...(p.rules || []).map(r => ['Rule', r, 'Copied to .bob/rules/']),
+      ...(p.commands || []).map(c => ['Command', '/' + c.replace(/\.md$/, ''), 'Copied to .bob/commands/']),
+      ...(p.modes || []).map(m => ['Mode', m, 'Merged into .bob/custom_modes.yaml'])
+    ];
+    const verdict = p.scan && p.scan.verdict || 'pending';
+    const gateRows = [
+      ['Schema and checksums', ICON.ok, 'Passed', `${p.components} components, sha256 per component; the installer refuses a mismatch`],
+      ['Marketplace policy linter', ICON.ok, 'Passed', `0 new findings, ${p.baselineFindings || 0} accepted in the reviewed baseline`],
+      ['NVIDIA SkillSpector', verdict === 'pass' ? ICON.ok : ICON.clock, verdict === 'pass' ? 'Passed' : 'Pending', 'Risk score threshold: 30 blocks, 10 to 29 manual review'],
+      ['Cisco skill-scanner', verdict === 'pass' ? ICON.ok : ICON.clock, verdict === 'pass' ? 'Passed' : 'Pending', 'No HIGH findings allowed'],
+      ['LLM judge', ICON.clock, 'Planned', 'Semantic review of instructions'],
+      ['Human review', ICON.ok, '2 approvals', 'Vendor maintainer and marketplace administrator read the SKILL.md diff'],
+      ['Signature', ICON.clock, 'Checksums', 'sha256 in the index; cosign signature once the vendor key is enrolled']
+    ];
+    app.innerHTML = `
+      <div class="pack-head"><div class="wrap">
+        <div class="crumbs"><a href="#/">Packs</a><span>/</span><a href="#/vendors">${esc(v.displayName)}</a><span>/</span><span class="mono" style="color:var(--text)">${esc(p.name)}</span></div>
+        <h1>${esc(p.displayName)}</h1>
+        <div class="row">${vendorBadge(p)}<span>${v.status === 'active' ? 'Verified vendor' : esc(v.status)}</span><span class="sep">|</span><span class="mono" style="color:var(--text)">v${esc(p.version)}</span>${p.minBob ? `<span class="sep">|</span><span>Requires Bob ${esc(p.minBob)} or later</span>` : ''}${p.license ? `<span class="sep">|</span><span>${esc(p.license)}</span>` : ''}</div>
+        <div class="tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      </div></div>
+      <div class="wrap detail">
+        <div>
+          <section><h2>Overview</h2><p class="lead">${esc(p.description)}</p>${p.readme ? `<a href="${fileUrl(p.readme)}" target="_blank" rel="noopener">Pack README in the registry</a>` : ''}</section>
+          <section><h2>What you get</h2><table>${rows.map(([k, n, d]) => `<tr><td class="k">${esc(k)}</td><td class="n mono">${esc(n)}</td><td class="d">${esc(d)}</td></tr>`).join('')}</table></section>
+          <section><h2>Security gate for v${esc(p.version)}</h2><table>${gateRows.map(([k, icon, s, d]) => `<tr><td class="k" style="width:240px">${esc(k)}</td><td class="n" style="width:160px"><span class="status">${icon}<span>${esc(s)}</span></span></td><td class="d">${esc(d)}</td></tr>`).join('')}</table>
+            <p style="margin:12px 0 0"><a href="${fileUrl(p.path + '/.policy-baseline.json')}" target="_blank" rel="noopener">Reviewed baseline</a> · <a href="${web}/actions" target="_blank" rel="noopener">Gate runs</a></p></section>
+          <section><h2>Versions</h2><table>${(p.versions || [p.version]).map(ver => `<tr><td class="k mono">${esc(ver)}</td><td class="n">${p.revokedVersions && p.revokedVersions.includes(ver) ? '<span class="tag red">Revoked</span>' : ver === p.version ? '<span class="tag green">Current</span>' : ''}</td><td class="d mono">${esc(p.name)}--v${esc(ver)}</td></tr>`).join('')}</table>
+            <p style="margin:12px 0 0;color:var(--text-2)">Pin or roll back: <span class="mono" style="background:var(--layer);padding:4px 8px">uvx bob-skills add ${esc(p.name)}@${esc(p.version)}</span></p></section>
+        </div>
+        <div>
+          <div class="panel">
+            <div><button class="btn wide" onclick="copyText('/skills-add ${esc(p.name)}', 'Paste into Bob')"><span>Add to Bob</span>${ICON.arrow}</button><div class="hint" style="margin-top:8px">Copies <span class="mono">/skills-add ${esc(p.name)}</span>. Paste it into Bob; it shows what will be installed and asks before writing anything.</div></div>
+            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div></div>
+            <div><h5>Or ask Bob</h5><div class="quote">Install the ${esc(p.displayName)} pack from the marketplace</div></div>
+            <div><h5>Download</h5><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.tar.gz">${ICON.down} <span class="mono">${esc(tag)}.tar.gz</span></a><div class="hint mono" style="margin-top:6px">sha256 in ${esc(tag)}.sha256 next to it</div></div>
+          </div>
+          <div class="facts">
+            <div><span>Installs into</span><span class="mono">.bob/</span></div>
+            <div><span>Lock file</span><span class="mono">.bob/skills.lock</span></div>
+            <div><span>Digest</span><span class="mono" title="${esc(p.digest)}">${esc((p.digest || '').slice(0, 19))}…</span></div>
+            ${p.source ? `<div><span>Source</span><a href="${esc(p.source.repo)}" target="_blank" rel="noopener">${esc(p.source.repo.replace(/^https?:\/\//, ''))} @ ${esc(p.source.ref)}</a></div>` : ''}
+            <div><span>Registry</span><a href="${fileUrl(p.path)}" target="_blank" rel="noopener">${esc(p.path)}</a></div>
+            <div><span>Report a problem</span><a href="${web}/issues/new" target="_blank" rel="noopener">open an issue</a></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderVendors() {
+    const vendors = state.index.vendors || [];
+    app.innerHTML = `<div class="wrap"><div class="hero" style="background:transparent;padding:48px 0 0"><h1 style="font-size:32px;line-height:40px">Vendors</h1><p>Only the owner of a product publishes packs about it. The marketplace team curates packs from each vendor's official repositories, with provenance recorded, until the vendor enrols its own maintainers.</p></div>
+      <div class="vendors">${vendors.map(v => `<div class="tile">
+        <div class="vendor"><div class="avatar">${esc(v.displayName.slice(0, 3).toUpperCase())}</div><span>${esc(v.displayName)}</span>${v.status === 'active' ? ICON.check : ''}<span class="tag ${v.status === 'active' ? 'green' : 'blue'}" style="margin-left:auto">${esc(v.status === 'active' ? 'Active' : v.status === 'planned' ? 'Candidate' : v.status)}</span></div>
+        <div class="meta">${esc((v.github && v.github.host) || 'github.com')}/${esc((v.github && v.github.org) || '')}${(v.extraSources || []).map(s => ' · ' + esc(s.replace(/^https?:\/\//, ''))).join('')}</div>
+        <p>${esc(v.notes || '')}</p>
+        <div class="meta">Packs: ${v.packs && v.packs.length ? v.packs.map(n => `<a href="#/pack/${esc(n)}">${esc(n)}</a>`).join(', ') : 'none yet'}</div>
+        ${v.homepage ? `<a href="${esc(v.homepage)}" target="_blank" rel="noopener">${esc(v.homepage.replace(/^https?:\/\//, ''))}</a>` : ''}
+      </div>`).join('')}</div></div>`;
+  }
+
+  function route() {
+    const hash = location.hash || '#/';
+    document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', (hash.startsWith('#/vendors') ? 'vendors' : 'packs') === a.dataset.nav));
+    if (!state.index) return;
+    const m = hash.match(/^#\/pack\/([A-Za-z0-9-]+)/);
+    if (m) renderPack(m[1]); else if (hash.startsWith('#/vendors')) renderVendors(); else renderCatalog();
+    window.scrollTo(0, 0);
+  }
+
+  fetch('../index.json', { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(index => {
+    state.index = index;
+    const web = webUrl();
+    document.getElementById('docs-link').href = web + '#readme';
+    document.getElementById('request-link').href = web + '/issues/new?template=request-pack.md';
+    document.getElementById('foot-right').innerHTML = `<a href="${web}" target="_blank" rel="noopener">Registry on GitHub Enterprise</a> · <a href="../index.json">index.json</a> · <a href="../marketplace.json">marketplace.json</a>`;
+    route();
+  }).catch(err => {
+    app.innerHTML = `<div class="wrap error">Could not load <span class="mono">../index.json</span> (${esc(err.message)}). Serve the repository root over HTTP, for example <span class="mono">python3 -m http.server</span> in the registry checkout, then open <span class="mono">/site/</span>.</div>`;
+  });
+  window.addEventListener('hashchange', route);
+})();
+</script>
+</body>
+</html>

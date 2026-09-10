@@ -1,11 +1,80 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T08:59:25Z",
+  "generated": "2026-09-10T09:06:05Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "7e218006c704e7a0eebf66110ec9bf0ea841138b"
+    "commit": "4a141ef430c71085d35ee073497893247abc39a2"
   },
+  "vendors": [
+    {
+      "id": "ibm",
+      "displayName": "IBM",
+      "status": "active",
+      "homepage": "https://www.ibm.com",
+      "github": {
+        "host": "github.com",
+        "org": "IBM",
+        "repos": [
+          "ibm-watsonx-orchestrate-adk",
+          "ui-modernization-lab"
+        ]
+      },
+      "extraSources": [
+        "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+        "https://github.com/carbon-design-system",
+        "https://github.com/ibm-self-serve-assets"
+      ],
+      "notes": "IBM products (watsonx Orchestrate ADK, UI modernization, Carbon, Client Engineering building blocks) and the marketplace team's own accelerators. Packs are curated by the marketplace team from these official repositories with recorded provenance.",
+      "packs": [
+        "bob-essentials",
+        "wxo-adk",
+        "wxo-talk-with-your-data"
+      ]
+    },
+    {
+      "id": "anthropic",
+      "displayName": "Anthropic",
+      "status": "planned",
+      "homepage": "https://www.anthropic.com",
+      "github": {
+        "host": "github.com",
+        "org": "anthropics",
+        "repos": [
+          "skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Candidate pack office-docs: Word, PowerPoint, Excel and PDF skills from the public anthropics/skills repository.",
+      "packs": []
+    },
+    {
+      "id": "redhat",
+      "displayName": "Red Hat",
+      "status": "planned",
+      "homepage": "https://www.redhat.com",
+      "github": {
+        "host": "github.com",
+        "org": "RedHatOfficial"
+      },
+      "extraSources": [],
+      "notes": "Candidate pack openshift-ansible. Source repository and organisation to confirm before enrolment.",
+      "packs": []
+    },
+    {
+      "id": "hashicorp",
+      "displayName": "HashiCorp",
+      "status": "planned",
+      "homepage": "https://www.hashicorp.com",
+      "github": {
+        "host": "github.com",
+        "org": "hashicorp"
+      },
+      "extraSources": [],
+      "notes": "Candidate pack terraform-vault. Source repository to confirm before enrolment.",
+      "packs": []
+    }
+  ],
   "packs": [
     {
       "name": "bob-essentials",
@@ -13,15 +82,15 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.0",
-      "description": "Skills of the marketplace itself: find-skills proposes a pack when Bob lacks a capability, skill-creator writes SKILL.md files that pass Bob and the policy linter, guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+      "version": "1.1.0",
+      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
       "path": "packs/ibm/bob-essentials",
-      "tag": "bob-essentials--v1.0.0",
+      "tag": "bob-essentials--v1.1.0",
       "skills": [
         {
           "name": "find-skills",
-          "description": "Find and propose a marketplace skill pack when the user needs a capability Bob does not have installed. Use when the user asks how to do something with an IBM product or tool (watsonx Orchestrate, Carbon, OpenShift, Ansible, Vault) and no installed skill covers it, or asks \"is there a skill for X\", \"find a skill\", \"install skills for ...\", \"какой скилл поставить\", \"есть ли скилл для ...\".",
-          "digest": "sha256:da2ee2d49f827cccf4af0330287a1072df5447dbcbe906041e9c1bfa4aa19972"
+          "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\", \"какой скилл поставить\", \"установи скиллы из этого репозитория\", \"покажи каталог\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
+          "digest": "sha256:98be8d4ed2de5be07e8f702249790179aeecae882655adeb021ff52b3de47f95"
         },
         {
           "name": "skill-creator",
@@ -40,11 +109,14 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:acc9ec97571d7f101bd5e75f4e8268fd6202855c2cafe3675ad11c6c8c46187a",
+      "digest": "sha256:1e974b3329c5e1bd41122fe643346268e025b00d62f26c33451f58a291bb2aa4",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
+      "baselineFindings": 0,
+      "components": 4,
+      "readme": "packs/ibm/bob-essentials/README.md",
       "scan": {
         "riskScore": null,
         "policyFindings": 0,
@@ -120,6 +192,9 @@
       "versions": [
         "1.0.0"
       ],
+      "baselineFindings": 23,
+      "components": 9,
+      "readme": "packs/ibm/wxo-adk/README.md",
       "scan": {
         "riskScore": null,
         "policyFindings": 0,
@@ -134,7 +209,12 @@
         "adk",
         "agents",
         "ibm"
-      ]
+      ],
+      "source": {
+        "repo": "https://github.com/IBM/ibm-watsonx-orchestrate-adk",
+        "ref": "2.16.0",
+        "path": "skills"
+      }
     },
     {
       "name": "wxo-talk-with-your-data",
@@ -172,6 +252,9 @@
       "versions": [
         "1.0.0"
       ],
+      "baselineFindings": 5,
+      "components": 3,
+      "readme": "packs/ibm/wxo-talk-with-your-data/README.md",
       "scan": {
         "riskScore": null,
         "policyFindings": 0,
@@ -188,7 +271,12 @@
         "excel",
         "demo",
         "ibm"
-      ]
+      ],
+      "source": {
+        "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+        "ref": "6bb7f04",
+        "path": ".bob/skills"
+      }
     }
   ]
 }

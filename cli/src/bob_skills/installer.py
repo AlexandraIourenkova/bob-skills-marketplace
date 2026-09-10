@@ -29,6 +29,16 @@ class InstallError(Exception):
     """Raised when a pack cannot be installed, removed or verified."""
 
 
+class VendorConfirmationRequired(InstallError):
+    """First install from a vendor in this scope: the user must accept the vendor first."""
+
+    def __init__(self, vendor: dict, pack: str):
+        self.vendor = vendor
+        self.pack = pack
+        super().__init__(f"first install from vendor '{vendor.get('id')}' ({vendor.get('displayName', '')}); "
+                         f"confirm with `bob-skills add {pack} --accept-vendor`")
+
+
 @dataclass
 class Scope:
     bob_dir: Path
@@ -146,7 +156,18 @@ def check_trust(registry: Registry, pack: Pack) -> list[str]:
 
 # -- add / remove --------------------------------------------------------------
 
-def add(spec: str, scope: Scope, registry_spec: str | None = None, force: bool = False, offline: bool = False) -> dict:
+def trusted_vendors(scopes: list[Scope]) -> set[str]:
+    """Vendors with at least one installed pack in any of the scopes."""
+    out: set[str] = set()
+    for scope in scopes:
+        for entry in read_lock(scope.bob_dir).get("pack", []):
+            if entry.get("vendor") and entry["vendor"] != LOCAL_VENDOR:
+                out.add(entry["vendor"])
+    return out
+
+
+def add(spec: str, scope: Scope, registry_spec: str | None = None, force: bool = False, offline: bool = False,
+        accept_vendor: bool = False, known_vendors: set[str] | None = None) -> dict:
     name, version = parse_spec(spec)
     ref = pack_tag(name, version) if version else None
     root, used_spec, commit = resolve_registry(registry_spec, ref=ref, offline=offline)
@@ -155,6 +176,9 @@ def add(spec: str, scope: Scope, registry_spec: str | None = None, force: bool =
     if version and pack.version != version:
         raise InstallError(f"tag {ref} contains {name}@{pack.version}, not {version}: refusing")
     notes = check_trust(registry, pack)
+    known = set(known_vendors) if known_vendors is not None else trusted_vendors([scope])
+    if pack.vendor not in known and not accept_vendor:
+        raise VendorConfirmationRequired(registry.vendors[pack.vendor], name)
 
     lock = read_lock(scope.bob_dir)
     existing = get_entry(lock, name) or {}

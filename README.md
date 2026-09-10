@@ -117,6 +117,14 @@ sequenceDiagram
 
 `bob-skills verify` recomputes digests and re-runs the linter on installed skills; `bob-skills check --brief` prints one status line at session start. An organisation makes the guard mandatory through an EnforcedHooks policy with `--no-local`.
 
+## Website
+
+[`site/index.html`](site/index.html) is the catalog as a static page: it reads `index.json`, renders the packs with filters and search, a page per pack with contents, gate status, versions and the install panel, and a vendors page. No build step and no server code.
+
+- Locally: run `python3 -m http.server` in the registry checkout and open `http://localhost:8000/site/`.
+- GitHub Pages: Settings → Pages → deploy from branch `main`, folder `/` (root); the site is then at `https://pages.github.ibm.com/<owner>/<repo>/site/`. `.nojekyll` at the root keeps Pages from processing the files.
+- "Add to Bob" copies `/skills-add <pack>` to the clipboard. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
+
 ## Quick start
 
 ```bash
@@ -144,6 +152,7 @@ marketplace.json        generated compatibility manifest for other agents
 cli/                    the bob-skills client (Python, typer); also the linter and registry tools
 scripts/                sync_adk_skills.py, CI helpers
 docs/                   pack format, security gate, vendor onboarding, Bob integration, team plan, mockup images
+site/                   static catalog website reading index.json
 .github/                gate and release workflows, pack request template
 ```
 
@@ -158,13 +167,13 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry with vendor `ibm` and three candidate vendors, three released packs, the client with install, update, verify, guard and linter, CI workflows, docs, website mockup.
+Done: registry with vendor `ibm` and three candidate vendors, three released packs, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
 
 Next, in order:
 
-1. `find-skills` grows into the marketplace skill: git URL to pack mapping, a catalog reference generated from `index.json` so Bob answers offline, "what will be installed" before confirmation, first install from a vendor confirmed by the user.
-2. Website from the mockup: static page on GitHub Pages reading `index.json`; "Add to Bob" deep link once Bob IDE's URL handling is confirmed.
-3. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow.
+1. Enable GitHub Pages for the site; confirm Bob IDE URL handling for an "Add to Bob" deep link.
+2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
+3. Candidate packs: `office-docs` from anthropics/skills, `app-modernization` from IBM/ui-modernization-lab.
 4. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
 
 ## Docs
