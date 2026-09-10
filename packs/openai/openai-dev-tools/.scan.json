@@ -10,29 +10,6 @@
     "review": 10
   },
   "skills": {
-    "pdf": {
-      "skillspector": {
-        "riskScore": 0,
-        "recommendation": "CAUTION",
-        "severity": "LOW",
-        "issues": 0,
-        "byRule": {},
-        "suppressed": 1,
-        "version": "2.11.2",
-        "complete": false
-      },
-      "cisco": {
-        "isSafe": true,
-        "maxSeverity": "INFO",
-        "findings": 1,
-        "accepted": 0,
-        "bySeverity": {
-          "INFO": 1
-        },
-        "version": null
-      },
-      "digest": "sha256:4df65b76b8a5c3ec84267e3b396e7886fb87a85da335a090ee84eb24540b3bb8"
-    },
     "jupyter-notebook": {
       "skillspector": {
         "riskScore": 0,
@@ -107,7 +84,7 @@
     "riskScore": 0,
     "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 11,
+    "skillspectorSuppressed": 10,
     "ciscoAccepted": 0
   }
 }

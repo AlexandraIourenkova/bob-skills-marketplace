@@ -110,17 +110,16 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### openai-dev-tools — OpenAI developer tools
 
-- Vendor: OpenAI (`openai`, active). Version 1.0.0.
-- Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.
+- Vendor: OpenAI (`openai`, active). Version 1.1.0.
+- Everyday developer skills from the Codex skills catalog: work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools. PDF work lives in the IBM office-docs pack.
 - Source: https://github.com/openai/skills @ 49f948faa925 (skills/.curated)
 - Homepage: https://github.com/openai/skills
-- Tags: pdf, jupyter, ci, cli, openai
-- Skills (4):
-  - `pdf`: Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.
+- Tags: jupyter, ci, cli, openai
+- Skills (3):
   - `jupyter-notebook`: Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.
   - `gh-fix-ci`: Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.
   - `cli-creator`: Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose composable read/write commands, return stable JSON, manage auth, and pair with a companion skill.
-- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 3 checksummed components.
 - Install: `uvx bob-skills add openai-dev-tools`
 
 ### openai-security — OpenAI application security

@@ -83,7 +83,7 @@ flowchart LR
 | [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.1.1 | find-skills (the marketplace inside Bob), skill-creator, guard, `/skills-add` |
 | [`anthropic-dev-kit`](packs/anthropic/anthropic-dev-kit) | Anthropic | released 1.0.0 | mcp-builder, webapp-testing, frontend-design from anthropics/skills (Apache-2.0) |
 | [`openai-security`](packs/openai/openai-security) | OpenAI | released 1.0.0 | security-best-practices, security-threat-model, security-ownership-map (Apache-2.0) |
-| [`openai-dev-tools`](packs/openai/openai-dev-tools) | OpenAI | released 1.0.0 | pdf, jupyter-notebook, gh-fix-ci, cli-creator (Apache-2.0) |
+| [`openai-dev-tools`](packs/openai/openai-dev-tools) | OpenAI | released 1.1.0 | jupyter-notebook, gh-fix-ci, cli-creator (Apache-2.0) |
 | [`google-cloud-data`](packs/google/google-cloud-data) | Google | released 1.0.0 | bigquery-basics, bigquery-bigframes, bigquery-ai-ml, gcloud (Apache-2.0) |
 | [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import (MPL-2.0) |
 | [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.1.0 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas, azure-diagnostics, azure-compute (MIT) |

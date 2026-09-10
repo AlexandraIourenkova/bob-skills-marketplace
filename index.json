@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T13:36:02Z",
+  "generated": "2026-09-10T13:38:30Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "75459017457c0c52f0a9c065349cd6b5ccf45cfd"
+    "commit": "08525f77efbf0e6b2144477e8ec32dc6aeed02b5"
   },
   "vendors": [
     {
@@ -142,7 +142,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:5d59890a3c8a4ef4a097b6877e96e7dfe8c2bb98902293f5c80455f7f1c40838"
+          "digest": "sha256:baa7dbb1ae2cef50fd5fd8e64055d7663d3e7ddf9d0f15869632316352977dfe"
         },
         {
           "name": "skill-creator",
@@ -161,7 +161,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:d126c4c542797bce2b8e2d9e80244dc6f2142adc3d17e8de9e8f53dc2ce6c8a6",
+      "digest": "sha256:6a962f5ecf69236be51a5caf9a4446ed4e5948dc06c2f807a97a7936fe441705",
       "revokedVersions": [],
       "versions": [
         "1.1.2",
@@ -583,16 +583,11 @@
       "vendor": "openai",
       "vendorDisplayName": "OpenAI",
       "vendorStatus": "active",
-      "version": "1.0.0",
-      "description": "Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.",
+      "version": "1.1.0",
+      "description": "Everyday developer skills from the Codex skills catalog: work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools. PDF work lives in the IBM office-docs pack.",
       "path": "packs/openai/openai-dev-tools",
-      "tag": "openai-dev-tools--v1.0.0",
+      "tag": "openai-dev-tools--v1.1.0",
       "skills": [
-        {
-          "name": "pdf",
-          "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
-          "digest": "sha256:4df65b76b8a5c3ec84267e3b396e7886fb87a85da335a090ee84eb24540b3bb8"
-        },
         {
           "name": "jupyter-notebook",
           "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
@@ -613,13 +608,13 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:4a4b143fe0b4719a5ced11051f62244ec895c3738bbeb4861aae6688b87f53a3",
+      "digest": "sha256:a09d51d9e90153075e0f212367075758a0abbfd027463004ede1275b98389e7c",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
       "baselineFindings": 0,
-      "components": 4,
+      "components": 3,
       "readme": "",
       "scan": {
         "riskScore": 0,
@@ -627,7 +622,7 @@
         "verdict": "pass",
         "scannedAt": "2026-09-10T12:44:34Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 11,
+        "skillspectorSuppressed": 10,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
@@ -635,7 +630,6 @@
       "homepage": "https://github.com/openai/skills",
       "minBob": "2.0.2",
       "tags": [
-        "pdf",
         "jupyter",
         "ci",
         "cli",
@@ -908,6 +902,7 @@
       "digest": "sha256:4b9d57fdc927b87ce6ec29ec6dd8fcddc012b1122d4e35a890b7f0a837f809d3",
       "revokedVersions": [],
       "versions": [
+        "1.1.1",
         "1.1.0",
         "1.0.0"
       ],
@@ -963,6 +958,7 @@
       "digest": "sha256:ad29e8c4777062e985df9da1b8601cb36b0f3aa48c0fca81e71de1062bd38a8d",
       "revokedVersions": [],
       "versions": [
+        "1.0.1",
         "1.0.0"
       ],
       "baselineFindings": 21,

@@ -2,9 +2,9 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "openai-dev-tools",
   "displayName": "OpenAI developer tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "vendor": "openai",
-  "description": "Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.",
+  "description": "Everyday developer skills from the Codex skills catalog: work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools. PDF work lives in the IBM office-docs pack.",
   "license": "Apache-2.0",
   "homepage": "https://github.com/openai/skills",
   "source": {
@@ -14,14 +14,12 @@
   },
   "minBob": "2.0.2",
   "tags": [
-    "pdf",
     "jupyter",
     "ci",
     "cli",
     "openai"
   ],
   "skills": [
-    "pdf",
     "jupyter-notebook",
     "gh-fix-ci",
     "cli-creator"
@@ -35,7 +33,6 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/pdf": "sha256:4df65b76b8a5c3ec84267e3b396e7886fb87a85da335a090ee84eb24540b3bb8",
     "skills/jupyter-notebook": "sha256:3f4f97a5a39f0ff080ff629bced3e366e378113f0cd845f4575f39e09e498dab",
     "skills/gh-fix-ci": "sha256:5cc0661fa2cee826ffb8c3e3ed354779116d112760e01f6ca650ca20a3fc9a6f",
     "skills/cli-creator": "sha256:38f1bbde75ce49d521353756be14ef6e975b524eff867f592eb5b57c56f0b677"

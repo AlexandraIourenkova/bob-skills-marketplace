@@ -127,15 +127,14 @@
     {
       "name": "openai-dev-tools",
       "source": "./packs/openai/openai-dev-tools",
-      "description": "Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.",
-      "version": "1.0.0",
+      "description": "Everyday developer skills from the Codex skills catalog: work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools. PDF work lives in the IBM office-docs pack.",
+      "version": "1.1.0",
       "author": {
         "name": "OpenAI"
       },
       "homepage": "https://github.com/openai/skills",
       "license": "Apache-2.0",
       "keywords": [
-        "pdf",
         "jupyter",
         "ci",
         "cli",
