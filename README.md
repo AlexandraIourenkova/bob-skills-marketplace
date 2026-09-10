@@ -122,7 +122,7 @@ sequenceDiagram
 [`site/index.html`](site/index.html) is the catalog as a static page: it reads `index.json`, renders the packs with filters and search, a page per pack with contents, gate status, versions and the install panel, and a vendors page. No build step and no server code.
 
 - Locally: run `python3 -m http.server` in the registry checkout and open `http://localhost:8000/site/`.
-- GitHub Pages: Settings → Pages → deploy from branch `main`, folder `/` (root); the site is then at `https://pages.github.ibm.com/<owner>/<repo>/site/`. `.nojekyll` at the root keeps Pages from processing the files.
+- GitHub Pages: enabled from branch `main`, folder `/` (root). The site is at https://pages.github.ibm.com/Maria-Startseva/bob-skills-marketplace/ (the root redirects to `site/`; viewers sign in with w3id). `.nojekyll` at the root keeps Pages from processing the files.
 - "Add to Bob" copies `/skills-add <pack>` to the clipboard. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
 
 ## Quick start
@@ -171,7 +171,7 @@ Done: registry with vendor `ibm` and three candidate vendors, three released pac
 
 Next, in order:
 
-1. Enable GitHub Pages for the site; confirm Bob IDE URL handling for an "Add to Bob" deep link.
+1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
 3. Candidate packs: `office-docs` from anthropics/skills, `app-modernization` from IBM/ui-modernization-lab.
 4. Day-one checks from the plan: the `use_skill` hook payload carries the skill name; SkillSpector JSON shape for the threshold script.
