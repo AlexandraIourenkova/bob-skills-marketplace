@@ -36,10 +36,10 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/azure-resource-lookup": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d",
+    "skills/azure-resource-lookup": "sha256:097820e77febe667cf9a445e50fe85d48c4bb74df8770516dd323b1818c94601",
     "skills/azure-storage": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87",
     "skills/azure-cost": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b",
-    "skills/azure-compliance": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b",
+    "skills/azure-compliance": "sha256:a6100b2d498f579c40b5a67c3fedca04506a4568ce88170f0ca5a24ac638363c",
     "skills/azure-quotas": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
   }
 }

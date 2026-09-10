@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T11:19:41Z",
+  "generated": "2026-09-10T11:20:23Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "5f208e8af848d7827ba6280730666ceffc5375b7"
+    "commit": "ddfa25ed66e41dab726be9ca64e65d34e082fcb4"
   },
   "vendors": [
     {
@@ -565,7 +565,7 @@
         {
           "name": "azure-resource-lookup",
           "description": "List, find, and show Azure resources across subscriptions or resource groups. Handles prompts like \"list the websites in my subscription\", \"list my web apps\", \"show my app services\", \"list virtual machines\", \"list my VMs\", \"show storage accounts\", \"find container apps\", and \"what resources do I have\". USE FOR: list websites, list web apps, list app services, show websites in subscription, resource inventory, find resources by tag, tag analysis, orphaned resource discovery (not for cost analysis), unattached disks, count resources by type, cross-subscription lookup, and Azure Resource Graph queries. DO NOT USE FOR: deploying/changing resources (use azure-deploy), cost optimization (use azure-cost), or non-Azure clouds.",
-          "digest": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d"
+          "digest": "sha256:097820e77febe667cf9a445e50fe85d48c4bb74df8770516dd323b1818c94601"
         },
         {
           "name": "azure-storage",
@@ -580,7 +580,7 @@
         {
           "name": "azure-compliance",
           "description": "Run Azure compliance and security audits with azqr plus Key Vault expiration checks. Covers best-practice assessment, resource review, policy/compliance validation, and security posture checks. WHEN: compliance scan, security audit, BEFORE running azqr (compliance cli tool), Azure best practices, Key Vault expiration check, expired certificates, expiring secrets, orphaned resources, compliance assessment.",
-          "digest": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b"
+          "digest": "sha256:a6100b2d498f579c40b5a67c3fedca04506a4568ce88170f0ca5a24ac638363c"
         },
         {
           "name": "azure-quotas",
@@ -592,7 +592,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:31b78bfa8becc0895ba1cc31ffed2287b3d26c3a700698897416f31c433fd4da",
+      "digest": "sha256:378c6d8b08023ff895dc32c2255f68b9eb3c1aa656b51ab05a4c193bbab57083",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
