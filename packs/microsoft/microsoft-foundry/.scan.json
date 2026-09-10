@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-09-10T12:44:08Z",
+  "scannedAt": "2026-09-10T13:36:01Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
@@ -11,6 +11,7 @@
   },
   "skills": {
     "microsoft-foundry": {
+      "digest": "sha256:013623b208e31f3c54baa676e8dbab93521fb4272a6d377e8ac4a6c0c144eabd",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -28,8 +29,7 @@
         "accepted": 14,
         "bySeverity": {},
         "version": null
-      },
-      "digest": "sha256:b1a1ef83dde683313c21acb5f51eac5b223105bd1b96ce63028f916c767b7644"
+      }
     }
   },
   "summary": {

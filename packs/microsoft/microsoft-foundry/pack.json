@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "microsoft-foundry",
   "displayName": "Microsoft Foundry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "vendor": "microsoft",
   "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
   "license": "MIT",
@@ -33,6 +33,6 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/microsoft-foundry": "sha256:b1a1ef83dde683313c21acb5f51eac5b223105bd1b96ce63028f916c767b7644"
+    "skills/microsoft-foundry": "sha256:013623b208e31f3c54baa676e8dbab93521fb4272a6d377e8ac4a6c0c144eabd"
   }
 }

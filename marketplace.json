@@ -201,7 +201,7 @@
       "name": "microsoft-azure-ops",
       "source": "./packs/microsoft/microsoft-azure-ops",
       "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "Microsoft"
       },
@@ -219,7 +219,7 @@
       "name": "microsoft-foundry",
       "source": "./packs/microsoft/microsoft-foundry",
       "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Microsoft"
       },

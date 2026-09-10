@@ -19,6 +19,9 @@ import tempfile
 from pathlib import Path
 
 
+TEXT_SUFFIXES = {".md", ".txt", ".py", ".sh", ".ps1", ".yaml", ".yml", ".json", ".toml", ".js", ".ts", ".html", ".css", ".csv", ".cfg", ".ini", ".bicep", ".tf", ".hcl", ".xml"}
+
+
 def run(*args: str, cwd: Path | None = None) -> str:
     return subprocess.run(args, cwd=cwd, check=True, capture_output=True, text=True).stdout.strip()
 
@@ -65,6 +68,9 @@ def main() -> int:
                 if dst.exists():
                     shutil.rmtree(dst)
                 shutil.copytree(src_dir, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "node_modules"))
+                for f in dst.rglob("*"):
+                    if f.is_file() and f.suffix.lower() in TEXT_SUFFIXES and b"\r\n" in f.read_bytes():
+                        f.write_bytes(f.read_bytes().replace(b"\r\n", b"\n"))  # git normalises on commit; checksums must see the same bytes
                 print(f"synced {skill} from {repo}@{commit[:12]} ({sum(1 for _ in dst.rglob('*') if _.is_file())} files)")
             licences = sorted(l for l in clone.glob("LICENSE*") if l.is_file())
             if licences:

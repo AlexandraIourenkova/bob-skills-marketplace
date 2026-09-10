@@ -170,7 +170,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### microsoft-azure-ops — Microsoft Azure operations
 
-- Vendor: Microsoft (`microsoft`, active). Version 1.1.0.
+- Vendor: Microsoft (`microsoft`, active). Version 1.1.1.
 - Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.
 - Source: https://github.com/microsoft/skills @ 39d230125298b39f2e432ff6e23831124d05b2b5 (.github/plugins/azure-skills/skills)
 - Homepage: https://github.com/microsoft/skills
@@ -188,7 +188,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### microsoft-foundry — Microsoft Foundry
 
-- Vendor: Microsoft (`microsoft`, active). Version 1.0.0.
+- Vendor: Microsoft (`microsoft`, active). Version 1.0.1.
 - Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.
 - Source: https://github.com/microsoft/skills @ 39d230125298 (.github/plugins/azure-skills/skills)
 - Homepage: https://github.com/microsoft/skills

@@ -176,6 +176,10 @@ class Registry:
         problems += self._schema_problems("vendors.schema.json", self.vendors_doc, "vendors.json")
         problems += self._schema_problems("index.schema.json", self.build_index(), "index.json (as built)")
         codeowners = (self.root / "CODEOWNERS").read_text(encoding="utf-8") if (self.root / "CODEOWNERS").is_file() else ""
+        eol = git_optional("ls-files", "--eol", "packs", cwd=self.root) or ""
+        crlf = [line.split()[-1] for line in eol.splitlines() if "w/crlf" in line and "i/lf" in line]
+        if crlf:
+            problems.append(f"line endings: {len(crlf)} file(s) are CRLF in the working copy but LF in git, so checksums would not match a fresh clone: normalise them (first: {crlf[0]})")
         seen: dict[str, str] = {}
         for pack in self.packs():
             label = pack.path.relative_to(self.root).as_posix()
