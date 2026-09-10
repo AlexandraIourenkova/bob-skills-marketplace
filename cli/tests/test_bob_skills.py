@@ -84,8 +84,14 @@ def test_registry_validates_and_builds_index() -> None:
     index = registry.build_index()
     names = {p["name"] for p in index["packs"]}
     assert {"wxo-adk", "bob-essentials", "wxo-talk-with-your-data"} <= names
+    import jsonschema
+    jsonschema.validate(index, json.loads((REPO / "schemas" / "index.schema.json").read_text()))
+    roadmap = json.loads((REPO / "roadmap.json").read_text())["planned"]
+    assert [p["name"] for p in index["planned"]] == [e["name"] for e in roadmap]
+    assert all(p["issue"].startswith("https://") and isinstance(p["votes"], int) for p in index["planned"])
+    assert "## Planned packs" in registry.build_catalog(index)
     wxo = next(p for p in index["packs"] if p["name"] == "wxo-adk")
-    assert len(wxo["skills"]) == 6 and all(s["description"] for s in wxo["skills"])
+    assert len(wxo["skills"]) == 7 and all(s["description"] for s in wxo["skills"])
     assert wxo["modes"] == ["wxo-builder"]
 
 
@@ -188,14 +194,14 @@ def guard_for(scope: installer.Scope, skill: str, **kwargs) -> tuple[int, str]:
 
 def test_install_guard_tamper_remove(registry_copy: Path, scope: installer.Scope) -> None:
     report = installer.add("wxo-adk", scope, str(registry_copy), accept_vendor=True)
-    assert set(report["skills"]) == {"solution-architect", "sop-builder", "wxo-builder", "wxo-analyzer", "telemetry-analyzer", "agent-instructions-evaluator"}
-    assert report["mcpServers"] == ["wxo-adk", "wxo-docs"] and report["modes"] == ["wxo-builder"]
+    assert set(report["skills"]) == {"solution-architect", "sop-builder", "wxo-builder", "wxo-analyzer", "telemetry-analyzer", "agent-instructions-evaluator", "wxo-agent-architect"}
+    assert report["mcpServers"] == ["watsonx-orchestrate-adk", "watsonx-orchestrate-adk-docs"] and report["modes"] == ["wxo-builder"]
     assert (scope.skills_dir / "wxo-builder" / "SKILL.md").is_file()
     assert (scope.rules_dir / "wxo-adk.md").is_file() and (scope.commands_dir / "wxo-deploy.md").is_file()
     mcp = json.loads(scope.mcp_path.read_text())
-    assert mcp["mcpServers"]["wxo-docs"]["url"].startswith("https://developer.watson-orchestrate.ibm.com")
+    assert mcp["mcpServers"]["watsonx-orchestrate-adk-docs"]["url"].startswith("https://developer.watson-orchestrate.ibm.com")
     lock = read_lock(scope.bob_dir)
-    assert lock["pack"][0]["version"] == "1.0.0" and len(lock["pack"][0]["skillDigests"]) == 6
+    assert lock["pack"][0]["version"] == "1.1.0" and len(lock["pack"][0]["skillDigests"]) == 7
 
     # guard: managed and untouched -> allowed, in both payload shapes
     assert guard_for(scope, "wxo-builder")[0] == 0
@@ -230,8 +236,8 @@ def test_install_guard_tamper_remove(registry_copy: Path, scope: installer.Scope
     # remove cleans everything the pack brought
     report = installer.remove("wxo-adk", scope)
     assert not (scope.skills_dir / "wxo-builder").exists()
-    assert "mcp:wxo-adk" in report["removed"] and "mode:wxo-builder" in report["removed"]
-    assert "wxo-adk" not in json.loads(scope.mcp_path.read_text())["mcpServers"]
+    assert "mcp:watsonx-orchestrate-adk" in report["removed"] and "mode:wxo-builder" in report["removed"]
+    assert "watsonx-orchestrate-adk" not in json.loads(scope.mcp_path.read_text())["mcpServers"]
     assert installer.brief([scope]).startswith("bob-skills:")
 
 
@@ -285,9 +291,9 @@ def test_show_describes_what_will_be_installed() -> None:
     index = registry.build_index()
     pack = registry.get("wxo-adk")
     info = describe_pack(registry, pack, next(p for p in index["packs"] if p["name"] == "wxo-adk"))
-    assert len(info["skills"]) == 6 and set(info["mcpServers"]) == {"wxo-adk", "wxo-docs"}
+    assert len(info["skills"]) == 7 and set(info["mcpServers"]) == {"watsonx-orchestrate-adk", "watsonx-orchestrate-adk-docs"}
     assert info["commands"] == ["/wxo-deploy"] and info["modes"] == ["wxo-builder"]
-    assert info["gate"]["baselineFindings"] == 23 and info["gate"]["components"] == 9
+    assert info["gate"]["baselineFindings"] == 30 and info["gate"]["components"] == 10
     assert info["contextTokens"]["alwaysOn"] > 0 and info["vendor"]["id"] == "ibm"
 
 
@@ -307,5 +313,5 @@ def test_catalog_is_generated_and_deterministic(registry_copy: Path) -> None:
     assert registry.write_index() is True
     catalog = registry_copy / "packs" / "ibm" / "bob-essentials" / "skills" / "find-skills" / "references" / "catalog.md"
     text = catalog.read_text()
-    assert "### wxo-adk" in text and "uvx bob-skills add wxo-talk-with-your-data" in text and "github.com/IBM" in text
+    assert "### wxo-adk" in text and "bob-skills add wxo-talk-with-your-data" in text and "github.com/IBM" in text
     assert registry.write_index() is False

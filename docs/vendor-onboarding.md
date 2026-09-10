@@ -4,7 +4,7 @@ One vendor per product, and that vendor is the product's owner. Users do not pub
 
 ## Requesting a pack
 
-Open an issue with the **Request a pack** template. It names the product, the vendor organisation and what the pack should contain; the marketplace team forwards it to the vendor.
+Open an issue with the **Request a pack** template. It names the product, the vendor organisation and what the pack should contain; the marketplace team forwards it to the vendor. Packs the team already plans are listed in `roadmap.json` and in the catalog as *coming soon* or *candidate*, each with its own request issue: a thumbs-up reaction on the issue is a vote, refreshed into the catalog with `python3 scripts/refresh_roadmap.py`.
 
 ## Enrolling a vendor
 
@@ -29,7 +29,7 @@ Open an issue with the **Request a pack** template. It names the product, the ve
 
 ## Releasing a new version
 
-Bump `version` in `pack.json`, refresh checksums with `validate --fix`, PR, two approvals, tag. `bob-skills update` shows users the SKILL.md diff between the versions.
+Bump `version` in `pack.json`, refresh checksums with `validate --fix`, PR, two approvals, tag. `uvx bob-skills update` shows users the SKILL.md diff between the versions.
 
 ## Revoking a version
 

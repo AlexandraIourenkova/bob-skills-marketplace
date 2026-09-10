@@ -2,8 +2,9 @@
   "scannedAt": "2026-09-10T11:13:42Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:9915da8261c9e693c4a27c2fecb0c112a89640f68f6f835f9a09fb4f111968ff|sha256:94a7f9923a04a2a546d9a5fcbd9db1bc09718353e2592ec47911e62570584b76",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -27,7 +28,8 @@
         "accepted": 2,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:6a9e0cb25cbd7589086b86e9074b93668b68d828f7e7857a9257d9a19e276b28"
     },
     "webapp-testing": {
       "skillspector": {
@@ -47,7 +49,8 @@
         "accepted": 1,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:415baa08c101f4855f5bb63576d018c6329b335b0f44bc7f0b56f67bf2eb4d28"
     },
     "frontend-design": {
       "skillspector": {
@@ -67,7 +70,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:1d8e08bac10796cc90c3a0d62a87626db60c0fe74aeb76f3f019b3a78b3b0507"
     }
   },
   "summary": {

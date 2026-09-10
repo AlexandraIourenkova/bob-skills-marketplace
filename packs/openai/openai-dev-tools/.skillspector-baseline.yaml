@@ -1,0 +1,123 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: PE2
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*SKILL.md'
+- id: RA1
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*scripts/new_notebook.py'
+- id: LP3
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*SKILL.md'
+- id: RA2
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*SKILL.md'
+- id: AS3
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*SKILL.md'
+- id: AST4
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*scripts/inspect_pr_checks.py'
+- id: AS1
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:69dfaad4f0512f62b2482042be8255025e09904f439a89fee0ebb8cb52692352
+  rule_id: PE2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:56b187aa4cf9cc2b9f81efbbb3409cd9e195de80b1b22d7316943679f608ce5c
+  rule_id: RA1
+  file: scripts/new_notebook.py
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:c65c5eb4c587e0160123a795ef263727aaac453171fd2ffae2ef91afe42b17bb
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:b9bcecf9459b541813ed2cb1509e25eb804861c4014c8074be745c9eb86c0932
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:8365903d205d3a0d493f63e3d8e0940766f7ea1b0d1255032a0ea2a164d1cc8a
+  rule_id: AS3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:d70624af628eb9c259619b30cd2954c04c0ff9f687870b250701f367c07b257c
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:a859307f8cceb0aba499f229600a1fb6d073325040fe829ebcf86734d6053f7f
+  rule_id: AST4
+  file: scripts/inspect_pr_checks.py
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:f55f353b840c11316c1861dfc73c3a5803aad73644af5f6dca5d5739c971deea
+  rule_id: AST4
+  file: scripts/inspect_pr_checks.py
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:a2841b92893b715e38316197147bd9f56278a9a07be75473d7322e86c92deb20
+  rule_id: AST4
+  file: scripts/inspect_pr_checks.py
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:56ed6ec9cda47f5b9d87da86a1686927819b82c0e538165f024c07a2cec77eb4
+  rule_id: AS1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'
+- hash: sha256:96a1d70d1671885cf3ed3ed256e9807068c931d0db92e589eded18bf47636e78
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: Codex install paths (.codex/skills, CODEX_HOME) in
+    official OpenAI skills (AS1, AS3); gh-fix-ci runs the gh and git CLIs by design
+    (AST4); new_notebook.py has an explicit overwrite option (RA1); ''sudo'' in pdf
+    tooling install notes (PE2); no per-skill licence header (LP3).'

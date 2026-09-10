@@ -26,3 +26,7 @@ Thumbs.db
 # Local Claude Code config
 .claude/
 reports/
+cli/dist/
+
+# Team plan stays local
+docs/marketplace-plan.md

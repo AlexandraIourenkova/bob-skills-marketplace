@@ -2,8 +2,9 @@
   "scannedAt": "2026-09-10T11:17:42Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:05dd6e76ed435fbc10533e99dcd90b32c14a5a01f10d7593c4a91e53ad3ac18b|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -29,7 +30,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:45c703638befa3f2ac6ef8de90764bf2f6e6b25ff554c7db2487c6214b70fdae"
     },
     "security-threat-model": {
       "skillspector": {
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:f271a1047bb6f9510e063e08638a40645f0e187c80a9677c4271cc05863d4fa0"
     },
     "security-ownership-map": {
       "skillspector": {
@@ -73,7 +76,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:f89d2a962cf7e17487c302fba577addebca9cc0733319f3558a2ef42887cd272"
     }
   },
   "summary": {

@@ -1,0 +1,173 @@
+{
+  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
+  "accepted": [
+    {
+      "fingerprint": "d2c67d428db7d6ac",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/finetuning/scripts/calibrate_grader.py",
+      "line": 19,
+      "message": "host '...' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b909880f6b6e7e1e",
+      "rule": "P009",
+      "path": "skills/microsoft-foundry/foundry-agent/azd-guidance/references/azd-ai-cli.md",
+      "line": 69,
+      "message": "reference to protected path '/.env'",
+      "reason": ".env mentions in azd environment guidance. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "010ceb5ed87d1d72",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/create-hosted.md",
+      "line": 113,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6740c79e217b91a1",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/create-hosted.md",
+      "line": 61,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "7be0223c1a390d12",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
+      "line": 24,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "867bcadd0b1de64f",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
+      "line": 301,
+      "message": "forbidden instruction: 'do not ask the user'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b2cc8f545760b1a2",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
+      "line": 69,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "04f36ed49d18e0eb",
+      "rule": "P009",
+      "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
+      "line": 215,
+      "message": "reference to protected path '/.env'",
+      "reason": ".env mentions in azd environment guidance. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "ef515667adfccb57",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/create/references/skills/skill-attach.md",
+      "line": 120,
+      "message": "forbidden instruction: 'skip approval'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "13040e098b01b6f2",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/create/scripts/verify-environment.ps1",
+      "line": 97,
+      "message": "host 'aka.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "2b7a671f14252bb6",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/create/scripts/verify-environment.ps1",
+      "line": 109,
+      "message": "host 'aka.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "1e6ff40d1811eb81",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/create/scripts/verify-environment.sh",
+      "line": 36,
+      "message": "host 'aka.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "f7f1089fe7ee57a3",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/create/scripts/verify-environment.sh",
+      "line": 41,
+      "message": "host 'aka.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "36340c2678b60b1a",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/deploy/deploy.md",
+      "line": 217,
+      "message": "forbidden instruction: 'skip confirmation'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "88790e5632b9b678",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/foundry-agent/deploy/references/container-deploy.md",
+      "line": 8,
+      "message": "forbidden instruction: 'without asking'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "204f9cefb6930a60",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/toolbox/scripts/get-catalog-inputs.ps1",
+      "line": 41,
+      "message": "host 'api.githubcopilot.com' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "85dc9459fdc9e285",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/toolbox/scripts/get-catalog-inputs.ps1",
+      "line": 62,
+      "message": "host 'eastus.api.azureml.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "774992e4b88e8062",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/toolbox/scripts/get-catalog-inputs.sh",
+      "line": 62,
+      "message": "host 'eastus.api.azureml.ms' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "8fbc8bbce820e97d",
+      "rule": "P008",
+      "path": "skills/microsoft-foundry/foundry-agent/toolbox/scripts/get-catalog-inputs.sh",
+      "line": 47,
+      "message": "host 'api.githubcopilot.com' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
+      "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "54680478587507ce",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/references/standard-agent-setup.md",
+      "line": 37,
+      "message": "forbidden instruction: 'Do not ask the user'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "864a05e9290e07f1",
+      "rule": "P006",
+      "path": "skills/microsoft-foundry/resource/private-network/references/deploy.md",
+      "line": 26,
+      "message": "forbidden instruction: 'auto-approve'",
+      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+    }
+  ]
+}

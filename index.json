@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T11:20:23Z",
+  "generated": "2026-09-10T13:31:38Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "ddfa25ed66e41dab726be9ca64e65d34e082fcb4"
+    "commit": "e32dc6eb3a8d5c2ca34f723ab81c639240e8a022"
   },
   "vendors": [
     {
@@ -28,6 +28,8 @@
       "notes": "IBM products (watsonx Orchestrate ADK, UI modernization, Carbon, Client Engineering building blocks) and the marketplace team's own accelerators. Packs are curated by the marketplace team from these official repositories with recorded provenance.",
       "packs": [
         "bob-essentials",
+        "ibm-watsonx-data-integration",
+        "office-docs",
         "wxo-adk",
         "wxo-talk-with-your-data"
       ]
@@ -65,6 +67,7 @@
       "extraSources": [],
       "notes": "Curated from the Codex skills catalog (openai/skills). Each skill carries its own LICENSE.txt; only Apache-2.0 skills are taken.",
       "packs": [
+        "openai-dev-tools",
         "openai-security"
       ]
     },
@@ -119,11 +122,394 @@
       "extraSources": [],
       "notes": "Curated from microsoft/skills (MIT): Azure operations and SDK skills shipped as Claude Code plugins under .github/plugins/.",
       "packs": [
-        "microsoft-azure-ops"
+        "microsoft-azure-ops",
+        "microsoft-foundry"
       ]
     }
   ],
   "packs": [
+    {
+      "name": "bob-essentials",
+      "displayName": "Bob essentials",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.1.2",
+      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+      "path": "packs/ibm/bob-essentials",
+      "tag": "bob-essentials--v1.1.2",
+      "skills": [
+        {
+          "name": "find-skills",
+          "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
+          "digest": "sha256:537c6059e46f31ceea1548a298fd86b32e1674c9e761a1d05a1bb74dbc5f3319"
+        },
+        {
+          "name": "skill-creator",
+          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\".",
+          "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
+        },
+        {
+          "name": "guard",
+          "description": "Explain and resolve a refusal from the uvx bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a \"uvx bob-skills guard\" message, or the user asks why a skill is blocked, mentions \"unmanaged skill\", \"digest mismatch\", \"revoked version\", \"skill blocked\", \"guard\", or wants to trust a local skill again.",
+          "digest": "sha256:42938ecd6a6659749cd745c1de6ce98658d39ed5aa6ce91f0bf0ae297c60a373"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [
+        "skills-add.md"
+      ],
+      "modes": [],
+      "digest": "sha256:5bfcf89f3c4e965e0a3a7cc04ae5a057c0a1dbb7b62d7a032e729859b176c291",
+      "revokedVersions": [],
+      "versions": [
+        "1.1.1",
+        "1.1.0",
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 4,
+      "readme": "packs/ibm/bob-essentials/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T13:31:38Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 36,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "minBob": "2.0.2",
+      "tags": [
+        "marketplace",
+        "skills",
+        "security",
+        "bob"
+      ]
+    },
+    {
+      "name": "ibm-watsonx-data-integration",
+      "displayName": "IBM watsonx.data integration",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
+      "path": "packs/ibm/ibm-watsonx-data-integration",
+      "tag": "ibm-watsonx-data-integration--v1.0.0",
+      "skills": [
+        {
+          "name": "di-agent-flow-lifecycle",
+          "description": "Entry point for ALL flow work in watsonx.data integration — creating, editing, running, diagnosing a failed run, or backing up/restoring a flow. Load this FIRST whenever a request touches a data flow. It gathers intent — including which engine the flow runs on — routes to exactly one lifecycle state, and applies a fixed precedence order so routing is consistent run to run.",
+          "digest": "sha256:d4982cfc89cab647806e99427f7b67a4fd1ce93aa639a913da89c4d83be24910"
+        },
+        {
+          "name": "di-agent-flow-datastage",
+          "description": "Reference for the verbose watsonx.data integration SDK for DataStage (batch) flows, with exhaustive stage and property access — the full engine stage catalog. Load this only after the di-agent-flow-lifecycle router has selected the datastage-sdk authoring backend — this is a syntax and stage reference, not a decision about whether to use it. If you have not routed yet, load di-agent-flow-lifecycle instead.",
+          "digest": "sha256:32f42c7645e62a54ea682dab256e41f152046df1a0a7e438649d1d5d7890ce0c"
+        },
+        {
+          "name": "di-agent-flow-pyflow",
+          "description": "API spec for pyflow, IBM's LLM-optimized Python DSL for authoring DataStage and StreamSets flows. Its compact surface and compile-time validation offer context efficiency, fast feedback, and correctness guarantees. Load this only after the di-agent-flow-lifecycle router has selected the pyflow authoring backend — this is a language reference, not a decision about whether to use it. If you have not routed yet, load di-agent-flow-lifecycle instead.",
+          "digest": "sha256:02d5900825caaa4dad3063110a151d03a86b2e61665b44a8ea22b998b3e39a52"
+        },
+        {
+          "name": "di-agent-datastage-investigation",
+          "description": "Deep investigation of a failed run of a DataStage job already in operation — a scheduled or production job, or any job whose failure the user asks you to investigate. Works end-to-end from MCP tools: logs, job config, flow structure, connection health. Produces a root-cause diagnosis, not a fix. NOT for a run that failed while a flow was being built or edited — those are handled by the di-agent-flow-lifecycle skill, which runs its own investigation and loads this one only when a production-depth analysis is needed.",
+          "digest": "sha256:b1c342ec28eb4dea81b05f5a031be403479017b850f0b0e695c7b21b1a25d910"
+        },
+        {
+          "name": "di-agent-knowledge-engine-datastage",
+          "description": "Q&A reference for the DataStage parallel engine — parallelism, partitioning theory, APT configuration files, concurrent job execution, restart/recovery, disk/resource tuning, dataset performance, flow optimization (partitioning/sorting/memory), and per-stage semantics. Use for conceptual engine questions and stage property lookups regardless of authoring tool.",
+          "digest": "sha256:983db27a29331a7129491cb5d57515dfbae5baea7034b198da72ea7f065afbcb"
+        },
+        {
+          "name": "di-agent-bug-report",
+          "description": "Generates a Markdown bug report for an IBM watsonx.data integration session. User can invoke directly. The agent MUST propose it (and must wait for explicit acceptance) after 3 or more consecutive calls to the same tool or the same sequence of tools result in a failure or the same error. Skip for non-watsonx.data integration sessions.",
+          "digest": "sha256:59c9232e436b66d59bf844c80fb210ee76a34b624ddda240fc98a690d2fa6a1f"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [
+        "watsonx-data-integration.md"
+      ],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:c8a0254f9a883b8981d9ba0256378c8ba5389dbc68032c6d6cbd27b5df966526",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 1,
+      "components": 7,
+      "readme": "packs/ibm/ibm-watsonx-data-integration/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 1,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T12:40:23Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 13,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://www.ibm.com/docs/en/watsonx/wdi/saas?topic=integration-agentic-data",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-data",
+        "data-integration",
+        "datastage",
+        "etl",
+        "ibm"
+      ],
+      "source": {
+        "repo": "https://github.com/IBM/ibm-watsonx-data-integration-skills",
+        "ref": "6249929d21ee",
+        "path": "agent/skills"
+      }
+    },
+    {
+      "name": "office-docs",
+      "displayName": "Office documents",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
+      "path": "packs/ibm/office-docs",
+      "tag": "office-docs--v1.0.0",
+      "skills": [
+        {
+          "name": "docx",
+          "description": "Create, edit, fill and extract Microsoft Word (.docx) files with python-docx through four ready-made scripts. Build a document from a JSON spec of headings, paragraphs, bullet and numbered lists, tables, images and page breaks (optionally on top of a template that keeps its styles, headers and footers), replace {{placeholders}} in a template even when Word split them across runs, dump the headings, text and tables of a .docx to Markdown or JSON, and convert to PDF with LibreOffice. Use it whenever a user asks to \"create a Word document\", \"write a .docx report\", \"fill this Word template\", \"extract the text from this docx\", \"add a table to the document\", \"convert the docx to PDF\" or \"edit the Word file\", or names a .docx file as input or output. Do not use for PDF, spreadsheet or presentation files unless a .docx is the input or the output.",
+          "digest": "sha256:471f090cb2ce0cf75be955d2d4202324946397d1aead514df8c65eb087c526ec"
+        },
+        {
+          "name": "pptx",
+          "description": "Create, edit, fill, extract and render PowerPoint (.pptx) decks with python-pptx and tested helper scripts. Builds a 16:9 deck from a Markdown outline (title slide, nested bullets, images, native bar/line/pie charts, speaker notes, optional corporate .pptx or .potx template), finds and replaces text across slides and notes while keeping run formatting, dumps an existing deck to Markdown with slide numbers, and renders it to PDF and PNG with LibreOffice for review. Use it when the user says \"create a PowerPoint\", \"make a slide deck\", \"build slides from this outline\", \"add a chart to the presentation\", \"update the text in this pptx\", asks about \"speaker notes\", wants to \"export the deck to PDF\", or names a .pptx file or a .potx template. Not for PDF, Word or Excel files unless a slide deck is the input or output.",
+          "digest": "sha256:e72e19770ca5474ec8bb5accb4e9eb66688b633c4987b8426297d2fe7b797e54"
+        },
+        {
+          "name": "xlsx",
+          "description": "Create, edit, analyse or analyze Excel workbooks (.xlsx/.xlsm) and convert CSV or TSV files with openpyxl. Builds sheets from a JSON spec with a styled frozen header, number formats (currency, percent, date), live formulas, a totals row, autofilter, native bar/line/pie charts and dropdown validation; converts CSV/TSV exports into typed sheets; reports what an existing workbook contains (sheets, header, formulas, charts, names, merged cells); and checks formulas for errors through a LibreOffice recalculation or a static scan. Use it whenever the input or the deliverable is a spreadsheet file, for requests such as \"create an Excel file\", \"build a spreadsheet\", \"add formulas to the workbook\", \"convert this CSV to xlsx\", \"what is in this Excel file\", \"add a chart to the sheet\" or \"fix the broken formulas\"; not for Word, PowerPoint or PDF files.",
+          "digest": "sha256:ad494c27df152352cc8f0f125bf5baf74099a1f1a4eccb55cefbc49c9de85ff9"
+        },
+        {
+          "name": "pdf",
+          "description": "Read, create, fill and manipulate PDF files with five ready-made scripts built on pypdf, pdfplumber and reportlab. Extract text per page (page ranges, layout mode, scanned-PDF detection), pull tables out as Markdown or CSV, build a report PDF from a JSON spec (headings, paragraphs, lists, tables, images, page numbers, Unicode font so Hebrew, Arabic and Cyrillic render), merge, split, rotate, watermark, compress, encrypt and set metadata, list and fill AcroForm fields, and OCR scanned pages locally with tesseract and poppler. Use it whenever a user says \"extract the text from this PDF\", \"pull the tables out of the PDF\", \"merge these PDFs\", \"split the PDF into pages\", \"create a PDF report\", \"fill in this PDF form\", \"the PDF is scanned, OCR it\" or \"add a watermark to the PDF\", or names a .pdf file as input or output. Not for Word, Excel or PowerPoint files unless a PDF is involved.",
+          "digest": "sha256:f44b98a6a182ca9d20e56fc74d1b017976eb225da8b31536aebc4216dacdfe2b"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [
+        "office-docs.md"
+      ],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:87a49072ecdff455ef624188cf5a2421633ff5e6618dea5e0fe9d52a666d3e2e",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 5,
+      "readme": "packs/ibm/office-docs/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T13:09:02Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 29,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "minBob": "2.0.2",
+      "tags": [
+        "documents",
+        "docx",
+        "pptx",
+        "xlsx",
+        "office",
+        "ibm"
+      ]
+    },
+    {
+      "name": "wxo-adk",
+      "displayName": "watsonx Orchestrate ADK",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.1.0",
+      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+      "path": "packs/ibm/wxo-adk",
+      "tag": "wxo-adk--v1.1.0",
+      "skills": [
+        {
+          "name": "solution-architect",
+          "description": "Expert guidance for creating high-level solution architecture documents from business requirements, use cases, or problem statements. Produces three focused documents - business overview, technical architecture, and implementation plan - with sufficient detail for elaboration into detailed SOPs.",
+          "digest": "sha256:685da057cb4773aea4242caa108ffad63596b01bb393dec7f2180d48d835e6d3"
+        },
+        {
+          "name": "sop-builder",
+          "description": "Expert guidance for building a Standard Operating Procedure (SOP) from a workflow diagram, Langflow JSON, n8n JSON, BPMN model or workflow description. Focuses on business problem, data requirements, and business logic in plain language.",
+          "digest": "sha256:42fd89cf838bbcec6295c06c5a54b685c8615ba8ffec12f2f5babb7e57edbbf3"
+        },
+        {
+          "name": "wxo-builder",
+          "description": "Expert guidance for generating watsonx Orchestrate native solutions from SOPs or simple prompts. Implements agents, flows, tools, and knowledge bases based on business requirements.",
+          "digest": "sha256:342f92637b216e8ec856de5d273be76d1ab3d1a86f76843d836c25d53ec6f60f"
+        },
+        {
+          "name": "wxo-analyzer",
+          "description": "Analyzes watsonx Orchestrate (wxO) projects and generates a 3-report documentation set covering the overall solution, agents, and tools/connections/other components with Mermaid diagrams.",
+          "digest": "sha256:9827d600438df05d251fb7472fec0d6b0da1336309eb94ea6f3322f13edd4f51"
+        },
+        {
+          "name": "telemetry-analyzer",
+          "description": "Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.",
+          "digest": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f"
+        },
+        {
+          "name": "agent-instructions-evaluator",
+          "description": "Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.",
+          "digest": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902"
+        },
+        {
+          "name": "wxo-agent-architect",
+          "description": "Use when building, editing, testing, or deploying anything in IBM watsonx Orchestrate (WXO) — agents, tools, toolkits, knowledge bases, models, or connections. Always invoke when the user mentions watsonx Orchestrate, WXO, the orchestrate ADK, agent.yaml, toolkit-config.yaml, the `orchestrate` CLI, the `@tool` decorator, or WXO credentials. Also trigger when the user asks about publishing an AI assistant to IBM Cloud, wiring up a collaborator agent, or working with WXO Developer Edition.",
+          "digest": "sha256:c716450019dd17ef6dc3dd066e6233a3ff75dfb84ff7220215064cf2a80ea894"
+        }
+      ],
+      "mcpServers": [
+        "watsonx-orchestrate-adk",
+        "watsonx-orchestrate-adk-docs"
+      ],
+      "rules": [
+        "wxo-adk.md"
+      ],
+      "commands": [
+        "wxo-deploy.md"
+      ],
+      "modes": [
+        "wxo-builder"
+      ],
+      "digest": "sha256:dceec91bd92907c54a0b959065dc99491fa3243542d0a2b5b5036b6d97d5ab4c",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 30,
+      "components": 10,
+      "readme": "packs/ibm/wxo-adk/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 30,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T12:41:34Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 52,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-orchestrate",
+        "wxo",
+        "adk",
+        "agents",
+        "ibm"
+      ],
+      "source": {
+        "repo": "https://github.com/IBM/ibm-watsonx-orchestrate-adk",
+        "ref": "128062277c49",
+        "path": "skills"
+      },
+      "sources": {
+        "wxo-agent-architect": {
+          "repo": "https://github.com/IBM/agentic-ai-labs-skills",
+          "ref": "7a96fcd752f8",
+          "path": "plugins/wxo-agent-architect/skills"
+        }
+      }
+    },
+    {
+      "name": "wxo-talk-with-your-data",
+      "displayName": "Talk with your data on watsonx Orchestrate",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.0.2",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+      "path": "packs/ibm/wxo-talk-with-your-data",
+      "tag": "wxo-talk-with-your-data--v1.0.2",
+      "skills": [
+        {
+          "name": "excel-to-wxo-agent",
+          "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"deploy a data agent to wxo\", \"text-to-SQL prototype\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
+          "digest": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d"
+        },
+        {
+          "name": "wxo-chat-demo-page",
+          "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"put the chat on a page\", \"demo page for the agent\", \"landing page with chat\"), wants charts or a dashboard built live from the agent's chat answers (\"render charts from the answers\", \"dashboard with chat\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
+          "digest": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66"
+        }
+      ],
+      "mcpServers": [
+        "watsonx-orchestrate-adk",
+        "watsonx-orchestrate-adk-docs"
+      ],
+      "rules": [
+        "wxo-data-agent.md"
+      ],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:e4a09404c5a9eac3b60a52ee7a30bebc8164e47a573e8018b64ae635aea11a92",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.1",
+        "1.0.0"
+      ],
+      "baselineFindings": 8,
+      "components": 3,
+      "readme": "packs/ibm/wxo-talk-with-your-data/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 8,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T11:16:50Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 34,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-orchestrate",
+        "wxo",
+        "data",
+        "text-to-sql",
+        "excel",
+        "demo",
+        "ibm"
+      ],
+      "source": {
+        "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+        "ref": "6bb7f04",
+        "path": ".bob/skills"
+      }
+    },
     {
       "name": "anthropic-dev-kit",
       "displayName": "Anthropic developer kit",
@@ -155,7 +541,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:455dd586eee6ca705d00d411786b813de23a22c2bc70d3f2af935c908e63b0c9",
+      "digest": "sha256:2b2cf0896136350f5563b5cdbcfda16856bc0e81cf130490c455abe6c7e28c2f",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -171,7 +557,7 @@
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 20,
         "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
+        "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
       "homepage": "https://github.com/anthropics/skills",
@@ -186,6 +572,140 @@
         "repo": "https://github.com/anthropics/skills",
         "ref": "41bbe19d1a1a",
         "path": "skills"
+      }
+    },
+    {
+      "name": "openai-dev-tools",
+      "displayName": "OpenAI developer tools",
+      "vendor": "openai",
+      "vendorDisplayName": "OpenAI",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.",
+      "path": "packs/openai/openai-dev-tools",
+      "tag": "openai-dev-tools--v1.0.0",
+      "skills": [
+        {
+          "name": "pdf",
+          "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+          "digest": "sha256:4df65b76b8a5c3ec84267e3b396e7886fb87a85da335a090ee84eb24540b3bb8"
+        },
+        {
+          "name": "jupyter-notebook",
+          "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+          "digest": "sha256:3f4f97a5a39f0ff080ff629bced3e366e378113f0cd845f4575f39e09e498dab"
+        },
+        {
+          "name": "gh-fix-ci",
+          "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
+          "digest": "sha256:5cc0661fa2cee826ffb8c3e3ed354779116d112760e01f6ca650ca20a3fc9a6f"
+        },
+        {
+          "name": "cli-creator",
+          "description": "Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose composable read/write commands, return stable JSON, manage auth, and pair with a companion skill.",
+          "digest": "sha256:38f1bbde75ce49d521353756be14ef6e975b524eff867f592eb5b57c56f0b677"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:4a4b143fe0b4719a5ced11051f62244ec895c3738bbeb4861aae6688b87f53a3",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 4,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T12:44:34Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 11,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/openai/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "pdf",
+        "jupyter",
+        "ci",
+        "cli",
+        "openai"
+      ],
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "ref": "49f948faa925",
+        "path": "skills/.curated"
+      }
+    },
+    {
+      "name": "openai-security",
+      "displayName": "OpenAI application security",
+      "vendor": "openai",
+      "vendorDisplayName": "OpenAI",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+      "path": "packs/openai/openai-security",
+      "tag": "openai-security--v1.0.0",
+      "skills": [
+        {
+          "name": "security-best-practices",
+          "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+          "digest": "sha256:45c703638befa3f2ac6ef8de90764bf2f6e6b25ff554c7db2487c6214b70fdae"
+        },
+        {
+          "name": "security-threat-model",
+          "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.",
+          "digest": "sha256:f271a1047bb6f9510e063e08638a40645f0e187c80a9677c4271cc05863d4fa0"
+        },
+        {
+          "name": "security-ownership-map",
+          "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.",
+          "digest": "sha256:f89d2a962cf7e17487c302fba577addebca9cc0733319f3558a2ef42887cd272"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:9299dd1eb3dfb09cdef8741d39844be9974095b2a1c75646ef4392cd17598a50",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 1,
+      "components": 3,
+      "readme": "",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 1,
+        "verdict": "pass",
+        "scannedAt": "2026-09-10T11:17:42Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 48,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/openai/skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "security",
+        "threat-model",
+        "appsec",
+        "openai"
+      ],
+      "source": {
+        "repo": "https://github.com/openai/skills",
+        "ref": "49f948faa925",
+        "path": "skills/.curated"
       }
     },
     {
@@ -224,7 +744,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:a3eacb0fdac5960c819d009f1ae393269a9ed28c0e6574ef543445ececc400ff",
+      "digest": "sha256:7ec0cd2ac1e8c6e3c73b37eb54652f4dc56a948d283b3a9a9018de2acf3ae1bd",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -240,7 +760,7 @@
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 2,
         "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
+        "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
       "homepage": "https://github.com/google/skills",
@@ -298,7 +818,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:d34a071fe14e8f70490117eeca3f150ca3b424c527a22f15d2781c1606b83a8c",
+      "digest": "sha256:c424875eb10fadff113f30b32cc93c8956fd207f0c7ed47d81fcb9e7fbf5d1b8",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -314,7 +834,7 @@
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 11,
         "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
+        "ciscoVersion": "2.1.0"
       },
       "license": "MPL-2.0",
       "homepage": "https://github.com/hashicorp/agent-skills",
@@ -332,240 +852,20 @@
       }
     },
     {
-      "name": "bob-essentials",
-      "displayName": "Bob essentials",
-      "vendor": "ibm",
-      "vendorDisplayName": "IBM",
-      "vendorStatus": "active",
-      "version": "1.1.1",
-      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
-      "path": "packs/ibm/bob-essentials",
-      "tag": "bob-essentials--v1.1.1",
-      "skills": [
-        {
-          "name": "find-skills",
-          "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:998d5ac46defd1695355fa0ea6cf10d2ee7c7d48a6093de012b4f56cfaff3040"
-        },
-        {
-          "name": "skill-creator",
-          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\".",
-          "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
-        },
-        {
-          "name": "guard",
-          "description": "Explain and resolve a refusal from the bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a \"bob-skills guard\" message, or the user asks why a skill is blocked, mentions \"unmanaged skill\", \"digest mismatch\", \"revoked version\", \"skill blocked\", \"guard\", or wants to trust a local skill again.",
-          "digest": "sha256:f5454a534343197dbe43fc78c5353cc879499c2b6b5e380b95ba711b1b969a7a"
-        }
-      ],
-      "mcpServers": [],
-      "rules": [],
-      "commands": [
-        "skills-add.md"
-      ],
-      "modes": [],
-      "digest": "sha256:4fbf089727b5d3a1b3aea18ac36f713d586e66d707ec06d494aa64e10d88e4c6",
-      "revokedVersions": [],
-      "versions": [
-        "1.1.1",
-        "1.1.0",
-        "1.0.0"
-      ],
-      "baselineFindings": 0,
-      "components": 4,
-      "readme": "packs/ibm/bob-essentials/README.md",
-      "scan": {
-        "riskScore": 0,
-        "policyFindings": 0,
-        "verdict": "pass",
-        "scannedAt": "2026-09-10T11:15:21Z",
-        "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 26,
-        "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
-      },
-      "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
-      "minBob": "2.0.2",
-      "tags": [
-        "marketplace",
-        "skills",
-        "security",
-        "bob"
-      ]
-    },
-    {
-      "name": "wxo-adk",
-      "displayName": "watsonx Orchestrate ADK",
-      "vendor": "ibm",
-      "vendorDisplayName": "IBM",
-      "vendorStatus": "active",
-      "version": "1.0.0",
-      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
-      "path": "packs/ibm/wxo-adk",
-      "tag": "wxo-adk--v1.0.0",
-      "skills": [
-        {
-          "name": "solution-architect",
-          "description": "Expert guidance for creating high-level solution architecture documents from business requirements, use cases, or problem statements. Produces three focused documents - business overview, technical architecture, and implementation plan - with sufficient detail for elaboration into detailed SOPs.",
-          "digest": "sha256:685da057cb4773aea4242caa108ffad63596b01bb393dec7f2180d48d835e6d3"
-        },
-        {
-          "name": "sop-builder",
-          "description": "Expert guidance for building a Standard Operating Procedure (SOP) from a workflow diagram, Langflow JSON, n8n JSON, BPMN model or workflow description. Focuses on business problem, data requirements, and business logic in plain language.",
-          "digest": "sha256:42fd89cf838bbcec6295c06c5a54b685c8615ba8ffec12f2f5babb7e57edbbf3"
-        },
-        {
-          "name": "wxo-builder",
-          "description": "Expert guidance for generating watsonx Orchestrate native solutions from SOPs or simple prompts. Implements agents, flows, tools, and knowledge bases based on business requirements.",
-          "digest": "sha256:342f92637b216e8ec856de5d273be76d1ab3d1a86f76843d836c25d53ec6f60f"
-        },
-        {
-          "name": "wxo-analyzer",
-          "description": "Analyzes watsonx Orchestrate (wxO) projects and generates a 3-report documentation set covering the overall solution, agents, and tools/connections/other components with Mermaid diagrams.",
-          "digest": "sha256:9827d600438df05d251fb7472fec0d6b0da1336309eb94ea6f3322f13edd4f51"
-        },
-        {
-          "name": "telemetry-analyzer",
-          "description": "Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.",
-          "digest": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f"
-        },
-        {
-          "name": "agent-instructions-evaluator",
-          "description": "Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.",
-          "digest": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902"
-        }
-      ],
-      "mcpServers": [
-        "wxo-adk",
-        "wxo-docs"
-      ],
-      "rules": [
-        "wxo-adk.md"
-      ],
-      "commands": [
-        "wxo-deploy.md"
-      ],
-      "modes": [
-        "wxo-builder"
-      ],
-      "digest": "sha256:c44b4dd9d055cb7e0cc1558175e22e60551e576e6a7012a3d9a91a0abb3a5736",
-      "revokedVersions": [],
-      "versions": [
-        "1.0.0"
-      ],
-      "baselineFindings": 23,
-      "components": 9,
-      "readme": "packs/ibm/wxo-adk/README.md",
-      "scan": {
-        "riskScore": 0,
-        "policyFindings": 23,
-        "verdict": "pass",
-        "scannedAt": "2026-09-10T11:16:22Z",
-        "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 27,
-        "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
-      },
-      "license": "MIT",
-      "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
-      "minBob": "2.0.2",
-      "tags": [
-        "watsonx-orchestrate",
-        "wxo",
-        "adk",
-        "agents",
-        "ibm"
-      ],
-      "source": {
-        "repo": "https://github.com/IBM/ibm-watsonx-orchestrate-adk",
-        "ref": "2.16.0",
-        "path": "skills"
-      }
-    },
-    {
-      "name": "wxo-talk-with-your-data",
-      "displayName": "Talk with your data on watsonx Orchestrate",
-      "vendor": "ibm",
-      "vendorDisplayName": "IBM",
-      "vendorStatus": "active",
-      "version": "1.0.1",
-      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
-      "path": "packs/ibm/wxo-talk-with-your-data",
-      "tag": "wxo-talk-with-your-data--v1.0.1",
-      "skills": [
-        {
-          "name": "excel-to-wxo-agent",
-          "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"deploy a data agent to wxo\", \"text-to-SQL prototype\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
-          "digest": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d"
-        },
-        {
-          "name": "wxo-chat-demo-page",
-          "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"put the chat on a page\", \"demo page for the agent\", \"landing page with chat\"), wants charts or a dashboard built live from the agent's chat answers (\"render charts from the answers\", \"dashboard with chat\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
-          "digest": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66"
-        }
-      ],
-      "mcpServers": [
-        "wxo-adk",
-        "wxo-docs"
-      ],
-      "rules": [
-        "wxo-data-agent.md"
-      ],
-      "commands": [],
-      "modes": [],
-      "digest": "sha256:ebad8ec4c6a7467a9a1ab212344a199480913f56de38ce10feb324777fdb18ff",
-      "revokedVersions": [],
-      "versions": [
-        "1.0.1",
-        "1.0.0"
-      ],
-      "baselineFindings": 8,
-      "components": 3,
-      "readme": "packs/ibm/wxo-talk-with-your-data/README.md",
-      "scan": {
-        "riskScore": 0,
-        "policyFindings": 8,
-        "verdict": "pass",
-        "scannedAt": "2026-09-10T11:16:50Z",
-        "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 34,
-        "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
-      },
-      "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
-      "minBob": "2.0.2",
-      "tags": [
-        "watsonx-orchestrate",
-        "wxo",
-        "data",
-        "text-to-sql",
-        "excel",
-        "demo",
-        "ibm"
-      ],
-      "source": {
-        "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
-        "ref": "6bb7f04",
-        "path": ".bob/skills"
-      }
-    },
-    {
       "name": "microsoft-azure-ops",
       "displayName": "Microsoft Azure operations",
       "vendor": "microsoft",
       "vendorDisplayName": "Microsoft",
       "vendorStatus": "active",
-      "version": "1.0.0",
-      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
+      "version": "1.1.0",
+      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.",
       "path": "packs/microsoft/microsoft-azure-ops",
-      "tag": "microsoft-azure-ops--v1.0.0",
+      "tag": "microsoft-azure-ops--v1.1.0",
       "skills": [
         {
           "name": "azure-resource-lookup",
           "description": "List, find, and show Azure resources across subscriptions or resource groups. Handles prompts like \"list the websites in my subscription\", \"list my web apps\", \"show my app services\", \"list virtual machines\", \"list my VMs\", \"show storage accounts\", \"find container apps\", and \"what resources do I have\". USE FOR: list websites, list web apps, list app services, show websites in subscription, resource inventory, find resources by tag, tag analysis, orphaned resource discovery (not for cost analysis), unattached disks, count resources by type, cross-subscription lookup, and Azure Resource Graph queries. DO NOT USE FOR: deploying/changing resources (use azure-deploy), cost optimization (use azure-cost), or non-Azure clouds.",
-          "digest": "sha256:097820e77febe667cf9a445e50fe85d48c4bb74df8770516dd323b1818c94601"
+          "digest": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d"
         },
         {
           "name": "azure-storage",
@@ -580,35 +880,45 @@
         {
           "name": "azure-compliance",
           "description": "Run Azure compliance and security audits with azqr plus Key Vault expiration checks. Covers best-practice assessment, resource review, policy/compliance validation, and security posture checks. WHEN: compliance scan, security audit, BEFORE running azqr (compliance cli tool), Azure best practices, Key Vault expiration check, expired certificates, expiring secrets, orphaned resources, compliance assessment.",
-          "digest": "sha256:a6100b2d498f579c40b5a67c3fedca04506a4568ce88170f0ca5a24ac638363c"
+          "digest": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b"
         },
         {
           "name": "azure-quotas",
           "description": "Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: \"check quotas\", \"service limits\", \"current usage\", \"request quota increase\", \"quota exceeded\", \"validate capacity\", \"regional availability\", \"provisioning limits\", \"vCPU limit\", \"how many vCPUs available in my subscription\".",
           "digest": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+        },
+        {
+          "name": "azure-diagnostics",
+          "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, troubleshoot functions, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, service bus dead letter.",
+          "digest": "sha256:aad3f4f4005def69b6a7b44e56de24b1eebcf2999184005dac8af20f58e76f9d"
+        },
+        {
+          "name": "azure-compute",
+          "description": "Azure VM/VMSS router. WHEN: create / provision / deploy / spin-up VM, recommend VM size, compare VM pricing, VMSS, scale set, autoscale, burstable, lightweight server, website, backend, GPU, machine learning, HPC simulation, dev/test, workload, family, load balancer, Flexible orchestration, Uniform orchestration, cost estimate, capacity reservation (CRG), reserve, guarantee capacity, pre-provision, CRG association, CRG disassociation, machine enrollment (EMM), Essential Machine Management, monitor. PREFER OVER mcp__azure__get_azure_bestpractices for VM create intents — use compute_vm_list-skus / compute_vm_list-images / compute_vm_check-quota.",
+          "digest": "sha256:9322f5f57e5acea5d4f8235027a9ca05e7344721749e25dace9760f29d7f4a1a"
         }
       ],
       "mcpServers": [],
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:378c6d8b08023ff895dc32c2255f68b9eb3c1aa656b51ab05a4c193bbab57083",
+      "digest": "sha256:b25c2d0c9aa8782030c35df08f4e4f88829925c796eb05651e188cb04443a7eb",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
-      "baselineFindings": 0,
-      "components": 5,
+      "baselineFindings": 16,
+      "components": 7,
       "readme": "packs/microsoft/microsoft-azure-ops/README.md",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 0,
+        "policyFindings": 16,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T11:18:41Z",
+        "scannedAt": "2026-09-10T12:42:47Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 7,
-        "ciscoMaxSeverity": null,
-        "ciscoVersion": null
+        "skillspectorSuppressed": 52,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
       },
       "license": "MIT",
       "homepage": "https://github.com/microsoft/skills",
@@ -621,73 +931,161 @@
       ],
       "source": {
         "repo": "https://github.com/microsoft/skills",
-        "ref": "39d230125298",
+        "ref": "39d230125298b39f2e432ff6e23831124d05b2b5",
         "path": ".github/plugins/azure-skills/skills"
       }
     },
     {
-      "name": "openai-security",
-      "displayName": "OpenAI application security",
-      "vendor": "openai",
-      "vendorDisplayName": "OpenAI",
+      "name": "microsoft-foundry",
+      "displayName": "Microsoft Foundry",
+      "vendor": "microsoft",
+      "vendorDisplayName": "Microsoft",
       "vendorStatus": "active",
       "version": "1.0.0",
-      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
-      "path": "packs/openai/openai-security",
-      "tag": "openai-security--v1.0.0",
+      "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
+      "path": "packs/microsoft/microsoft-foundry",
+      "tag": "microsoft-foundry--v1.0.0",
       "skills": [
         {
-          "name": "security-best-practices",
-          "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
-          "digest": "sha256:45c703638befa3f2ac6ef8de90764bf2f6e6b25ff554c7db2487c6214b70fdae"
-        },
-        {
-          "name": "security-threat-model",
-          "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.",
-          "digest": "sha256:f271a1047bb6f9510e063e08638a40645f0e187c80a9677c4271cc05863d4fa0"
-        },
-        {
-          "name": "security-ownership-map",
-          "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.",
-          "digest": "sha256:f89d2a962cf7e17487c302fba577addebca9cc0733319f3558a2ef42887cd272"
+          "name": "microsoft-foundry",
+          "description": "Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, create agent, update agent, add tool to agent, invoke agent, agent.yaml, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, prompt optimizer, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).",
+          "digest": "sha256:b1a1ef83dde683313c21acb5f51eac5b223105bd1b96ce63028f916c767b7644"
         }
       ],
       "mcpServers": [],
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:7b794ad0ca6574389b6dc3fa3e78f28296e97a84d9515779c2239a73620db865",
+      "digest": "sha256:2d3b34256eab7bceb8dbd35c935fd0c9c664a3a683bbc3d5939cbccba4a13e7e",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
-      "baselineFindings": 1,
-      "components": 3,
+      "baselineFindings": 21,
+      "components": 1,
       "readme": "",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 1,
+        "policyFindings": 21,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T11:17:42Z",
+        "scannedAt": "2026-09-10T12:44:08Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 48,
+        "skillspectorSuppressed": 86,
         "ciscoMaxSeverity": "INFO",
-        "ciscoVersion": null
+        "ciscoVersion": "2.1.0"
       },
-      "license": "Apache-2.0",
-      "homepage": "https://github.com/openai/skills",
+      "license": "MIT",
+      "homepage": "https://github.com/microsoft/skills",
       "minBob": "2.0.2",
       "tags": [
-        "security",
-        "threat-model",
-        "appsec",
-        "openai"
+        "azure",
+        "foundry",
+        "ai",
+        "microsoft"
       ],
       "source": {
-        "repo": "https://github.com/openai/skills",
-        "ref": "49f948faa925",
-        "path": "skills/.curated"
+        "repo": "https://github.com/microsoft/skills",
+        "ref": "39d230125298",
+        "path": ".github/plugins/azure-skills/skills"
       }
+    }
+  ],
+  "planned": [
+    {
+      "name": "app-modernization",
+      "displayName": "Application modernization",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "status": "coming-soon",
+      "description": "Bring legacy screens to Carbon with IBM's UI modernization skills and modernize application code (Java EE to Quarkus, WebSphere) with watsonx Code Assistant guidance.",
+      "source": "IBM UI modernization lab and IBM/application-modernization-javaee-quarkus",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/1",
+      "votes": 0
+    },
+    {
+      "name": "building-blocks",
+      "displayName": "Building blocks",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "status": "coming-soon",
+      "description": "Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality. Modes and MCP configuration instead of skills.",
+      "source": "https://github.com/ibm-self-serve-assets",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/2",
+      "votes": 0
+    },
+    {
+      "name": "dev-workflow",
+      "displayName": "Developer workflow",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "status": "coming-soon",
+      "description": "Plan before implementing, review code, diagnose bugs, write architecture decision records. Original IBM skills for the everyday loop, the second most installed category on public skill directories.",
+      "source": "written by the marketplace team",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/3",
+      "votes": 0
+    },
+    {
+      "name": "google-gemini",
+      "displayName": "Google Gemini and Genkit",
+      "vendor": "google",
+      "vendorDisplayName": "Google",
+      "status": "candidate",
+      "description": "gemini-api, gemini-live-api, gemini-agents-api and the Genkit skills from Google's official repository.",
+      "source": "https://github.com/google/skills",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/4",
+      "votes": 0
+    },
+    {
+      "name": "hashicorp-packer",
+      "displayName": "HashiCorp Packer",
+      "vendor": "hashicorp",
+      "vendorDisplayName": "HashiCorp",
+      "status": "candidate",
+      "description": "AWS and Azure image builders, Windows builder and push-to-registry skills from hashicorp/agent-skills.",
+      "source": "https://github.com/hashicorp/agent-skills",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/5",
+      "votes": 0
+    },
+    {
+      "name": "microsoft-azure-sdk-python",
+      "displayName": "Azure SDK for Python",
+      "vendor": "microsoft",
+      "vendorDisplayName": "Microsoft",
+      "status": "candidate",
+      "description": "Forty skills for the Azure SDKs in Python: identity, storage, Cosmos DB, AI services, monitoring, messaging.",
+      "source": "https://github.com/microsoft/skills",
+      "blockedBy": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/6",
+      "votes": 0
+    },
+    {
+      "name": "redhat-openshift-ansible",
+      "displayName": "OpenShift and Ansible",
+      "vendor": "redhat",
+      "vendorDisplayName": "Red Hat",
+      "status": "candidate",
+      "description": "Deploy to OpenShift and write Ansible playbooks with skills from Red Hat.",
+      "source": "no official Red Hat skills repository yet",
+      "blockedBy": "Red Hat has not published agent skills under a redistributable licence",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
+      "votes": 0
+    },
+    {
+      "name": "vercel-react",
+      "displayName": "React and web design best practices",
+      "vendor": "vercel",
+      "vendorDisplayName": "Vercel",
+      "status": "candidate",
+      "description": "vercel-react-best-practices and web-design-guidelines, among the most installed skills on skills.sh.",
+      "source": "https://github.com/vercel-labs/agent-skills",
+      "blockedBy": "the repository publishes no licence; it cannot be copied into the registry until that changes",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/8",
+      "votes": 0
     }
   ]
 }

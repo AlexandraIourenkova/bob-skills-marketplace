@@ -1,0 +1,42 @@
+{
+  "scannedAt": "2026-09-10T12:44:08Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:eeaf376a50dfbdb583b2be4e7c9e8f23836e51eefd0b7a8b5b6ad7c2e776ee7a|sha256:9d0029ccdd9414509aa05d5947a9e66b78c2bcc516f2bb4a796717c97fbbeb3d",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "microsoft-foundry": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 86,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": false,
+        "maxSeverity": "INFO",
+        "findings": 14,
+        "accepted": 14,
+        "bySeverity": {},
+        "version": null
+      },
+      "digest": "sha256:b1a1ef83dde683313c21acb5f51eac5b223105bd1b96ce63028f916c767b7644"
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 86,
+    "ciscoAccepted": 14
+  }
+}

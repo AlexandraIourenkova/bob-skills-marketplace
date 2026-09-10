@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "ibm-watsonx-data-integration",
+  "displayName": "IBM watsonx.data integration",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
+  "license": "Apache-2.0",
+  "homepage": "https://www.ibm.com/docs/en/watsonx/wdi/saas?topic=integration-agentic-data",
+  "source": {
+    "repo": "https://github.com/IBM/ibm-watsonx-data-integration-skills",
+    "ref": "6249929d21ee",
+    "path": "agent/skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "watsonx-data",
+    "data-integration",
+    "datastage",
+    "etl",
+    "ibm"
+  ],
+  "skills": [
+    "di-agent-flow-lifecycle",
+    "di-agent-flow-datastage",
+    "di-agent-flow-pyflow",
+    "di-agent-datastage-investigation",
+    "di-agent-knowledge-engine-datastage",
+    "di-agent-bug-report"
+  ],
+  "networkAllow": [
+    "*.ibm.com",
+    "ibm.com",
+    "*.cloud.ibm.com",
+    "pypi.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/di-agent-flow-lifecycle": "sha256:d4982cfc89cab647806e99427f7b67a4fd1ce93aa639a913da89c4d83be24910",
+    "skills/di-agent-flow-datastage": "sha256:32f42c7645e62a54ea682dab256e41f152046df1a0a7e438649d1d5d7890ce0c",
+    "skills/di-agent-flow-pyflow": "sha256:02d5900825caaa4dad3063110a151d03a86b2e61665b44a8ea22b998b3e39a52",
+    "skills/di-agent-datastage-investigation": "sha256:b1c342ec28eb4dea81b05f5a031be403479017b850f0b0e695c7b21b1a25d910",
+    "skills/di-agent-knowledge-engine-datastage": "sha256:983db27a29331a7129491cb5d57515dfbae5baea7034b198da72ea7f065afbcb",
+    "skills/di-agent-bug-report": "sha256:59c9232e436b66d59bf844c80fb210ee76a34b624ddda240fc98a690d2fa6a1f",
+    "rules/watsonx-data-integration.md": "sha256:86a3a31749e58ffacd98f5f2f5d7d80d3f5f8c3e5ee77c0b9b1db7b3828fbb30"
+  },
+  "rules": [
+    "rules/watsonx-data-integration.md"
+  ]
+}

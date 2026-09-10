@@ -1,11 +1,11 @@
 ---
 name: guard
-description: Explain and resolve a refusal from the bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a "bob-skills guard" message, or the user asks why a skill is blocked, mentions "unmanaged skill", "digest mismatch", "revoked version", "skill blocked", "guard", or wants to trust a local skill again.
+description: Explain and resolve a refusal from the uvx bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a "uvx bob-skills guard" message, or the user asks why a skill is blocked, mentions "unmanaged skill", "digest mismatch", "revoked version", "skill blocked", "guard", or wants to trust a local skill again.
 ---
 
 # guard
 
-The `PreToolUse` hook on `use_skill` runs `bob-skills guard`. It refuses the activation (exit code 2) in three cases:
+The `PreToolUse` hook on `use_skill` runs `uvx bob-skills guard`. It refuses the activation (exit code 2) in three cases:
 
 | Case | Meaning |
 |---|---|

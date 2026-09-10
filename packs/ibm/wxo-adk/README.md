@@ -5,8 +5,8 @@ Vendor: `ibm`. Curated by the marketplace team from the official ADK repository.
 | Component | Source | What it adds |
 |---|---|---|
 | `skills/solution-architect`, `sop-builder`, `wxo-builder`, `wxo-analyzer`, `telemetry-analyzer`, `agent-instructions-evaluator` | [IBM/ibm-watsonx-orchestrate-adk](https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills), tag `2.16.0`, copied verbatim (MIT, see `skills/LICENSE`) | Requirements → SOP → implementation → audit → telemetry → instruction quality |
-| MCP server `wxo-adk` | PyPI `ibm-watsonx-orchestrate-mcp-server` via `uvx` | ADK commands as tools: agents, tools, knowledge bases |
-| MCP server `wxo-docs` | `https://developer.watson-orchestrate.ibm.com/mcp` | Current documentation without bloating the context |
+| MCP server `watsonx-orchestrate-adk` | PyPI `ibm-watsonx-orchestrate-mcp-server` via `uvx` | ADK commands as tools: agents, tools, knowledge bases |
+| MCP server `watsonx-orchestrate-adk-docs` | `https://developer.watson-orchestrate.ibm.com/mcp` | Current documentation without bloating the context |
 | `rules/wxo-adk.md` | this pack | Separate venv, UTF-8 encoding before importing non-ASCII YAML, import order |
 | `commands/wxo-deploy.md` | this pack | `/wxo-deploy`: import tools and agents in dependency order |
 | `custom_modes.yaml` | this pack | Mode `wxo-builder` with a restricted tool set |

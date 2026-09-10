@@ -17,4 +17,4 @@ These rules apply when building a text-to-SQL or data agent for watsonx Orchestr
 ## Demo page
 
 - Serve the demo page locally and verify the chat works end to end before showing it. Embed snippets come from the Orchestrate UI; never paste an API key into the page.
-- Search the documentation with the `wxo-docs` MCP server before changing the embed configuration; the widget options change between releases.
+- Search the documentation with the `watsonx-orchestrate-adk-docs` MCP server before changing the embed configuration; the widget options change between releases.

@@ -2,8 +2,9 @@
   "scannedAt": "2026-09-10T11:15:02Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:a096dd989c30a21d0de2e04aa0665d2987247b639c2b3e0a193efeff74143abe|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -29,7 +30,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:6b86246c59c0d19053811727ee5002c845e9d223e29a31cf9c33ed25bef3008b"
     },
     "terraform-test": {
       "skillspector": {
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:d049f1811b6b21157403dc613b14d04cd8adeffcc73387ae4fcce7366dabb820"
     },
     "terraform-policy": {
       "skillspector": {
@@ -71,7 +74,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:e1f067e3fca23cf2ca67dafff3bc7651d5de7e2413bfb976989ac9a4ca85ec52"
     },
     "refactor-module": {
       "skillspector": {
@@ -93,7 +97,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:5804cb53dadcf90efcb67f47c590f30685dac6916d79c7979aabf2f7baa5c3bd"
     },
     "terraform-search-import": {
       "skillspector": {
@@ -115,7 +120,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:b617bcc3db18cdc49b5b542043b5d17228030f95e80d374cd99edbfe48c3c4e2"
     }
   },
   "summary": {

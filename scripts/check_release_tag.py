@@ -8,6 +8,7 @@ Prints the pack folder on success so the workflow can package it.
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -21,7 +22,9 @@ def main(tag: str) -> int:
     if len(matches) != 1:
         print(f"::error::expected exactly one pack named '{name}', found {len(matches)}")
         return 1
-    manifest = json.loads(matches[0].read_text())
+    # Read the manifest as it is at the tag, so older tags stay valid after later releases.
+    shown = subprocess.run(["git", "show", f"{tag}:{matches[0].as_posix()}"], capture_output=True, text=True)
+    manifest = json.loads(shown.stdout) if shown.returncode == 0 else json.loads(matches[0].read_text())
     if manifest.get("version") != version:
         print(f"::error::tag says {version} but {matches[0]} has version {manifest.get('version')}")
         return 1

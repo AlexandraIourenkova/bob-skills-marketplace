@@ -95,7 +95,8 @@
         "files.pythonhosted.org",
         "registry.npmjs.org",
         "github.com",
-        "raw.githubusercontent.com"
+        "raw.githubusercontent.com",
+        "api.github.com"
       ],
       "notes": "Curated from the Codex skills catalog (openai/skills). Each skill carries its own LICENSE.txt; only Apache-2.0 skills are taken."
     },
@@ -179,7 +180,10 @@
         "pypi.org",
         "files.pythonhosted.org",
         "github.com",
-        "raw.githubusercontent.com"
+        "raw.githubusercontent.com",
+        "aka.ms",
+        "*.azureml.ms",
+        "*.ai.azure.com"
       ],
       "notes": "Curated from microsoft/skills (MIT): Azure operations and SDK skills shipped as Claude Code plugins under .github/plugins/."
     }

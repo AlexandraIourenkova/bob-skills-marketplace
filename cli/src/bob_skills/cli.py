@@ -106,7 +106,7 @@ def resolve(reference: str = typer.Argument(..., help="A git URL, owner/repo, pa
             typer.echo(f"{reference} belongs to vendor {vendor['displayName']} ({vendor['id']}, {vendor['status']}) but no pack is curated from it yet.")
             typer.echo(f"    packs from this vendor: {', '.join(vendor['packs']) or 'none'}; request one with the 'Request a pack' issue template")
         raise typer.Exit(code=1)
-    typer.echo(f"{reference} is not in the marketplace and its owner is not a listed vendor. Do not copy skills from it; request a pack or, for your own skill, `bob-skills trust <skill>`.")
+    typer.echo(f"{reference} is not in the marketplace and its owner is not a listed vendor. Do not copy skills from it; request a pack or, for your own skill, `uvx bob-skills trust <skill>`.")
     raise typer.Exit(code=1)
 
 

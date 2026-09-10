@@ -24,18 +24,7 @@ jobs:
         run: |
           uv run --project cli bob-skills registry validate
           uv run --project cli bob-skills lint "${{ steps.pack.outputs.dir }}"
-      - name: Package the pack
-        run: |
-          tar -czf "${{ github.ref_name }}.tar.gz" -C "$(dirname '${{ steps.pack.outputs.dir }}')" "$(basename '${{ steps.pack.outputs.dir }}')"
-          sha256sum "${{ github.ref_name }}.tar.gz" > "${{ github.ref_name }}.sha256"
-      # Planned: cosign sign-blob with the vendor key from vendors.json (docs/security-gate.md).
-      - name: Publish the release
+      - name: Package and publish the release
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_HOST: ${{ github.server_url }}
-          TAG: ${{ github.ref_name }}
-        run: |
-          SPEC="${TAG%%--v*}@${TAG##*--v}"
-          gh release create "${{ github.ref_name }}" "${{ github.ref_name }}.tar.gz" "${{ github.ref_name }}.sha256" \
-            --repo "${{ github.repository }}" --title "${{ github.ref_name }}" \
-            --notes "Pack release. Install: uvx bob-skills add $SPEC" || echo "::warning::gh release failed; upload the archives by hand"
+        run: python3 scripts/release_pack.py "${{ github.ref_name }}"

@@ -2,93 +2,485 @@ version: 2
 scanner_version: 2.11.2
 rules:
 - id: OH1
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*SKILL.md'
 - id: E5
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*SKILL.md'
 - id: E5
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*references/sdk-usage.md'
 - id: PE3
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*cost-forecast/error-handling.md'
 - id: PE1
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*cost-optimization/workflow.md'
 - id: EA2
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
   path: '*SKILL.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/aks/aks-troubleshooting.md'
+- id: TM2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/compute/references/credential-auth-errors.md'
+- id: LP3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*SKILL.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*references/app-service/README.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/aks/networking.md'
+- id: PE2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/compute/references/credential-auth-errors.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/compute/references/rdp-service-config.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*troubleshooting/compute/references/vm-agent-not-responding.md'
+- id: TM1
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/essential-machine-management/references/emm-enable-flow.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/examples/bicep/README.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/examples/terraform/README.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/delivery-options/save-local.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/depth-probe/beginner.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/output-adapters/az-cli.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/output-adapters/bicep.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/output-adapters/terraform.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/plan-card.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/examples/bicep/main.bicep'
+- id: TM1
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/references/delivery-options/index.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/capacity-reservation/capacity-reservation.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/capacity-reservation/references/association-disassociation.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/capacity-reservation/references/capacity-reservation-overview.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*references/vm-quotas.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+  path: '*workflows/vm-creator/examples/terraform/README.md'
 fingerprints:
 - hash: sha256:e82cdc14dde0a072723dab68e1506370243fdf6965ff90c4672eb115f72bd7dc
   rule_id: OH1
   file: SKILL.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
 - hash: sha256:9627c1ea89ae1558efdbb50040058e9281b7903010a5c297dd622498112cdee3
   rule_id: E5
   file: SKILL.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
 - hash: sha256:733417d7c1a1f72482980d6de491c0e0d7441bc3f090dfea155136da27f00c84
   rule_id: E5
   file: references/sdk-usage.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
 - hash: sha256:d282d86c8671f3f196fd674731719d14c036f36447cfeca1871a0cfeb83383cb
   rule_id: PE3
   file: cost-forecast/error-handling.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
 - hash: sha256:d250cac6a591fd9d3bd1d304cb1bd0c04a97e54c99f7a2674156cb5ae5793af8
   rule_id: PE1
   file: cost-optimization/workflow.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
 - hash: sha256:d701eba37bc79b0f9f2d2330726c2e3ca223cc8f0b1bc0737a37d3877448c0a8
   rule_id: EA2
   file: SKILL.md
-  reason: 'Reviewed 2026-09-10: ''auto-approved'' describes Azure quota increase requests
-    that Azure approves automatically (EA2); ''run the generated command'' is the
-    az CLI workflow of the skill (OH1); ''access token'' appears in az login troubleshooting
-    (PE3); ''Permissions:*'' is a documentation heading (PE1); ''az storage blob upload''
-    is the storage CLI being taught (E5).'
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:52540df2a775019b7d792350e4933f9204b580cc70784c0f32b273311f0ff34b
+  rule_id: PE3
+  file: troubleshooting/aks/aks-troubleshooting.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:00d5ca612ad763d7a64b33a20320c3ca6b98110cb7e61bf201046a3c62c98d9b
+  rule_id: TM2
+  file: troubleshooting/compute/references/credential-auth-errors.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:8194a918c6f1c5cf990bbb5d73cd1399d9a45f422cbec419f7ffd874c91049ea
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:b32214d1175765c167a58bfb379f1644dffffb06f4c0b6a778bd0dc9b0f68222
+  rule_id: EA2
+  file: references/app-service/README.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:e552c5b46a9341b1f41da175423b2326c3864e0ca6921bc9be5aff63d9a6a3ff
+  rule_id: P9
+  file: troubleshooting/aks/networking.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:11fcc3413383517d8bc1f134d2c5de80e8a1fa6aac63230944e89743b215e02c
+  rule_id: P9
+  file: troubleshooting/aks/networking.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:1274726038b8c58b4db8aeb5b2fc6aaf4ac1402f9e352dcaecc7993a6de2f5f1
+  rule_id: P9
+  file: troubleshooting/aks/networking.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:907a21d2484fa8df762866a96c47bfa4cb3f14c22f443c80aa94600c23bd10f5
+  rule_id: P9
+  file: troubleshooting/aks/networking.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:f12f7059c80e2abde2ce10d1970851f49948fd3326fdb84092d231b49543dc80
+  rule_id: PE2
+  file: troubleshooting/compute/references/credential-auth-errors.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:d83afc073e338a80e8eabbd50cd0151683d516214193ab6c3d7f36ef2bbabeb1
+  rule_id: P9
+  file: troubleshooting/compute/references/rdp-service-config.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:53cf2726317b07085114ab8e3148c2bb87efc6e4aaa672a78f29aa0b541fbe36
+  rule_id: P9
+  file: troubleshooting/compute/references/vm-agent-not-responding.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:cae25123dc772b73146fef12cfc0a5c3a6bcf32ea13a810483b2755700ec82ad
+  rule_id: TM1
+  file: workflows/essential-machine-management/references/emm-enable-flow.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:6a9946ef00fe0d32d77ebee9b277c700f29af7230e57817169330149062d3d0f
+  rule_id: PE3
+  file: workflows/vm-creator/examples/bicep/README.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:f4ae33a163e6c08bec767f302bc4eb218678441f4be16552b234ffb2053e45f5
+  rule_id: PE3
+  file: workflows/vm-creator/examples/bicep/main.bicep
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:b1dba9470df41d8aac4648a64142d5541570ed09cfead501118382f7f206fe0d
+  rule_id: TM1
+  file: workflows/vm-creator/references/delivery-options/index.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:ed7733ebc6f385834e3eedbc3b8063e107490f623c0ed7695f79f8fb9270d070
+  rule_id: PE3
+  file: workflows/vm-creator/references/output-adapters/az-cli.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:9795e7ef02aac75f2b3d4a277f2789209f5ff2eee9354e3436ff545262c865be
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:48bfb63674e8951d917a30c66973ffa33b2810b8e31f59ad029260823d447897
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:bb2dfed0fe333ecf32738bb2f91a636249df87f1a68b3fa6ebc84195844c4ddb
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:3515b94496a182336bcb6f6e8f30a9376ef5d8228a676bbf67acea140cfaea20
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:e804b43c1f21bcb62dfd05a96807107bd464f0a50063d8dbc8644f1cc49eb459
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:8c359e15ed75fb57a0f7e73b8120b3234f9214a1006b29033dd86d9164ff8837
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:901baaab5d38d4f9edd49dd4904b4232397d71c1bc37bed5a45e5dc7cbc87d63
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:624bd19238c44dad6f82e1f72e29972a7703a961c14a1dac1828cb7446793670
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:ac30416be355444c54683df152d3d08b5c9fdca1b2300332edb8469890634956
+  rule_id: P9
+  file: workflows/capacity-reservation/capacity-reservation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:439588447fe5b1e03ee11a8eab5d62e277fbe33ade7687251feeeafed7a4e39f
+  rule_id: EA2
+  file: workflows/capacity-reservation/references/association-disassociation.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:4d76412fa54bffd14e11cc914dcc5b878ef0e799f50263026e1a4ab9c8a5b886
+  rule_id: P9
+  file: workflows/capacity-reservation/references/capacity-reservation-overview.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'
+- hash: sha256:81aa99bcd2c18a174456e7f790de485be033c7622486057956826fb2c96bc701
+  rule_id: EA2
+  file: workflows/vm-creator/examples/terraform/README.md
+  reason: 'Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub,
+    authorized_keys) and ''git push --force'' as text (PE3, TM1); long runs of spaces
+    are Markdown table padding (P9); kubeconfig, sudo and ''automatically run'' appear
+    in troubleshooting docs; Cisco ''undeclared network usage'' is the az CLI the
+    skill teaches.'

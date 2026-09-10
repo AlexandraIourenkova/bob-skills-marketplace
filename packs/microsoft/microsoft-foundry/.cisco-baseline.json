@@ -1,0 +1,145 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "c78f22c768cecfce",
+      "skill": "microsoft-foundry",
+      "severity": "LOW",
+      "category": "policy_violation",
+      "title": "Skill package contains many files",
+      "file": ".",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "88113803c17ade25",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "9f6e80ce5a58d15e",
+      "skill": "microsoft-foundry",
+      "severity": "CRITICAL",
+      "category": "command_injection",
+      "title": "Dangerous code execution functions that can execute arbitrary code",
+      "file": "finetuning/scripts/calibrate_grader.py",
+      "line": 54,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "35508c13f7b8b21f",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "finetuning/scripts/deploy_model.py",
+      "line": 141,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "80f53a389a847b84",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "finetuning/scripts/deploy_model.py",
+      "line": 120,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "a0344c2a3874153d",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "finetuning/scripts/deploy_model.py",
+      "line": 178,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "f110bd4157b4bf07",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "finetuning/scripts/deploy_model.py",
+      "line": 167,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "48251c744d5c296b",
+      "skill": "microsoft-foundry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "finetuning/scripts/submit_training.py",
+      "line": 84,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "2fca67973fe1fcb2",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "JAILBREAK detected by YARA",
+      "file": "foundry-agent/toolbox/references/tool-azure-ai-search.md",
+      "line": 164,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "7f3647b2633896a9",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "JAILBREAK detected by YARA",
+      "file": "foundry-agent/toolbox/references/tool-azure-ai-search.md",
+      "line": 60,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "8648beef054026e1",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "JAILBREAK detected by YARA",
+      "file": "foundry-agent/toolbox/references/tool-azure-ai-search.md",
+      "line": 11,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "b88dadb93b50cbb8",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "JAILBREAK detected by YARA",
+      "file": "foundry-agent/toolbox/references/tool-azure-ai-search.md",
+      "line": 168,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "c5113c91acb6d239",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "JAILBREAK detected by YARA",
+      "file": "foundry-agent/toolbox/references/tool-azure-ai-search.md",
+      "line": 23,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    },
+    {
+      "key": "b33c603f540b6580",
+      "skill": "microsoft-foundry",
+      "severity": "HIGH",
+      "category": "data_exfiltration",
+      "title": "Sensitive source reaches a network sink",
+      "file": "foundry-agent/toolbox/scripts/get-catalog-inputs.sh",
+      "line": 81,
+      "reason": "Reviewed 2026-09-10: Microsoft's official Foundry toolkit. finetuning/scripts/calibrate_grader.py executes the user's own grader file by design (exec of a local file named on the command line); deploy_model.py, submit_training.py and get-catalog-inputs.sh send the user's Azure token to Azure ML and gallery endpoints in the allow-list (deployment is their purpose); Cisco YARA 'JAILBREAK' hits in tool-azure-ai-search.md are ordinary setup prose ('skip to Section A', 'grab the endpoint and admin key'); the remaining SkillSpector items are references to the skill's own files (AE1), example URLs and curl calls with Bearer tokens in docs (E1, SC2), grader prompt engineering (P6), deploy option flags and 'without asking' defaults (EA2), .azure/ and .env mentions (PE3)."
+    }
+  ]
+}

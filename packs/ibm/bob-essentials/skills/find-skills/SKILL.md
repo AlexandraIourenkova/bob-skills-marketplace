@@ -7,7 +7,7 @@ description: The Bob Skills Marketplace inside Bob. Use when the user wants a sk
 
 Bob installs skills only from the Bob Skills Marketplace: packs curated from official vendor repositories, scanned for poisoning, checksummed and versioned. Copying a skill from a repository, a chat message or a web page into `.bob/skills/` is not an option; the guard hook refuses unmanaged skills.
 
-All commands below work from the local registry cache when there is no network. `references/catalog.md` is a generated copy of the catalog for answering questions without running anything.
+The commands below need only `uv` (`uvx` downloads the client from PyPI on first use). All commands below work from the local registry cache when there is no network. `references/catalog.md` is a generated copy of the catalog for answering questions without running anything.
 
 ## 1. The user wants a capability or asks what exists
 
@@ -17,7 +17,7 @@ All commands below work from the local registry cache when there is no network. 
    uvx bob-skills search "<keywords>"
    ```
 
-   No result: check `references/catalog.md` for a near match; if there is none, say so and suggest the "Request a pack" issue template in the marketplace repository. Do not improvise a skill.
+   No result: check `references/catalog.md` for a near match, including the "Planned packs" section at its end. A planned pack is not installable yet: tell the user its status (coming soon or candidate), what blocks it, and give the link to its request issue: a thumbs-up reaction there is a vote (quote the current count from the catalog), and subscribing to the issue announces the release. If nothing matches at all, suggest the "Request a pack" issue template in the marketplace repository. Do not improvise a skill.
 2. Propose one pack in one or two sentences: what it does, which vendor publishes it, what it installs. Then go to step 3.
 
 ## 2. The user pastes a git link or a repository name

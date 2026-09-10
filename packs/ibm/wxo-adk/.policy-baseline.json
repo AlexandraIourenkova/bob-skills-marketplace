@@ -82,6 +82,62 @@
       "reason": "Standard dotenv load of the project .env for ADK credentials. The scripts' only network call goes to the ADK client's configured base_url. Reviewed 2026-09-10 while syncing ADK 2.16.0."
     },
     {
+      "fingerprint": "4c6bcaf8508d42d9",
+      "rule": "P009",
+      "path": "skills/wxo-agent-architect/SKILL.md",
+      "line": 111,
+      "message": "reference to protected path '.env'",
+      "reason": ".env mentions for watsonx Orchestrate credentials in IBM's wxo-agent-architect skill. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "76d51486092959e5",
+      "rule": "P009",
+      "path": "skills/wxo-agent-architect/SKILL.md",
+      "line": 52,
+      "message": "reference to protected path '.env'",
+      "reason": ".env mentions for watsonx Orchestrate credentials in IBM's wxo-agent-architect skill. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "99a01c833a7deef6",
+      "rule": "P009",
+      "path": "skills/wxo-agent-architect/SKILL.md",
+      "line": 110,
+      "message": "reference to protected path '.env'",
+      "reason": ".env mentions for watsonx Orchestrate credentials in IBM's wxo-agent-architect skill. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b46aeedee6ba3d83",
+      "rule": "P004",
+      "path": "skills/wxo-agent-architect/reference/mcp_setup.md",
+      "line": 110,
+      "message": "download piped into a shell",
+      "reason": "IBM's documented uv installer (curl -LsSf https://astral.sh/uv/install.sh | sh) in the MCP setup reference of wxo-agent-architect; the pack rule tells Bob to install uv with the package manager instead. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b704a6d993d70320",
+      "rule": "P004",
+      "path": "skills/wxo-agent-architect/reference/mcp_setup.md",
+      "line": 130,
+      "message": "download piped into a shell",
+      "reason": "IBM's documented uv installer (curl -LsSf https://astral.sh/uv/install.sh | sh) in the MCP setup reference of wxo-agent-architect; the pack rule tells Bob to install uv with the package manager instead. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "4b7edd6feccfe61c",
+      "rule": "P009",
+      "path": "skills/wxo-agent-architect/reference/mcp_setup.md",
+      "line": 200,
+      "message": "reference to protected path '.env'",
+      "reason": ".env mentions for watsonx Orchestrate credentials in IBM's wxo-agent-architect skill. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "628065458d70a067",
+      "rule": "P009",
+      "path": "skills/wxo-agent-architect/reference/mcp_setup.md",
+      "line": 196,
+      "message": "reference to protected path '.env'",
+      "reason": ".env mentions for watsonx Orchestrate credentials in IBM's wxo-agent-architect skill. Reviewed 2026-09-10."
+    },
+    {
       "fingerprint": "eb90441d44ed591e",
       "rule": "P008",
       "path": "skills/wxo-analyzer/SKILL.md",

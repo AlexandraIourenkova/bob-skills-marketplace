@@ -1,0 +1,159 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: EA2
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*references/author.md'
+- id: AE1
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*SKILL.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*SKILL.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*references/sdk-conventions.md'
+- id: RA2
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*stages/FileSetStage.md'
+- id: P9
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md'
+- id: RA2
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:9bdfba70464746006038a8e7a6a6a174a3fb498240e143e112a39997e5804a76
+  rule_id: EA2
+  file: references/author.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:bc889621c8bb8e5f28a878e0854cb7ad8f11f0b5508e949f98e8f042c5c80c93
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:74934f2f7e10aab405aedf2b9365f124777624a72d5016ebe4a9fdc0e634e775
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:5dcf1a31a40d1e424eaaf7a66a31f3ae0a31a30253242585419b66875b87a919
+  rule_id: RA2
+  file: stages/FileSetStage.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:07840af47b40390357b95715bfa4551cf6249bf014651bcfbb1a2babc5ffaf70
+  rule_id: P9
+  file: stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:6afbed2d94eecff9cc9b0c7c386cad867b654d6a44e9caaa8a324e155d57f964
+  rule_id: P9
+  file: stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:72883a8d7d419ff201cca3e72e25dd04643948eb996027e3529e788b3efa3a05
+  rule_id: P9
+  file: stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:40635d03336fac84214ac6af99cbb02cda7a4440b77cc57eaa57e265ccc2ea57
+  rule_id: P9
+  file: stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:3c49785c8702c9a5273d91538ba999eb58233d9a0a5b716b9b05e117244fc2b6
+  rule_id: P9
+  file: stages/TransformerStageFunctions/TransformerStageFunctionsOverview.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:086dc998cf6c8e61b7bb5d0df732278b51f255bee6137fc45468893e5c7a7902
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'
+- hash: sha256:c8b0f1022936ea828063a36f0743cb8984f319c72106b20daed106c34ce4a213
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: ''no confirmation'' and ''without checking'' are the
+    skill''s own rules about when to ask (EA2); references to its own reference files
+    (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown
+    table padding (P9); Cisco ''conceal actions'' hit is the honesty instruction not
+    to claim a backup was created when it was reused (author.md:55), the opposite
+    of concealment.'

@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "microsoft-foundry",
+  "displayName": "Microsoft Foundry",
+  "version": "1.0.0",
+  "vendor": "microsoft",
+  "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
+  "license": "MIT",
+  "homepage": "https://github.com/microsoft/skills",
+  "source": {
+    "repo": "https://github.com/microsoft/skills",
+    "ref": "39d230125298",
+    "path": ".github/plugins/azure-skills/skills"
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "azure",
+    "foundry",
+    "ai",
+    "microsoft"
+  ],
+  "skills": [
+    "microsoft-foundry"
+  ],
+  "networkAllow": [
+    "*.microsoft.com",
+    "*.azure.com",
+    "*.azure.net",
+    "*.windows.net",
+    "*.ai.azure.com",
+    "pypi.org",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/microsoft-foundry": "sha256:b1a1ef83dde683313c21acb5f51eac5b223105bd1b96ce63028f916c767b7644"
+  }
+}

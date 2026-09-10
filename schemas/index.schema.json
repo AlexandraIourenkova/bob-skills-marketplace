@@ -215,6 +215,152 @@
                 ]
               }
             }
+          },
+          "baselineFindings": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Accepted policy-linter findings in .policy-baseline.json."
+          },
+          "components": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Checksummed components in pack.json."
+          },
+          "readme": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "repo": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            }
+          },
+          "sources": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "repo": {
+                  "type": "string"
+                },
+                "ref": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "planned": {
+      "type": "array",
+      "description": "Planned packs from roadmap.json: not installable, votes are thumbs-up reactions on the request issue.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "displayName",
+          "vendor",
+          "vendorDisplayName",
+          "status",
+          "description",
+          "source",
+          "issue",
+          "votes"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "vendorDisplayName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "coming-soon",
+              "candidate"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "blockedBy": {
+            "type": "string"
+          },
+          "issue": {
+            "type": "string",
+            "format": "uri"
+          },
+          "votes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "vendors": {
+      "type": "array",
+      "description": "Vendors from vendors.json with the packs curated from each.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "displayName",
+          "status",
+          "packs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "homepage": {
+            "type": "string"
+          },
+          "github": {
+            "type": "object"
+          },
+          "extraSources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "packs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

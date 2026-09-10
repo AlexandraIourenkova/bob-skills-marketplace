@@ -10,6 +10,103 @@
   },
   "plugins": [
     {
+      "name": "bob-essentials",
+      "source": "./packs/ibm/bob-essentials",
+      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+      "version": "1.1.2",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "marketplace",
+        "skills",
+        "security",
+        "bob"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "ibm-watsonx-data-integration",
+      "source": "./packs/ibm/ibm-watsonx-data-integration",
+      "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://www.ibm.com/docs/en/watsonx/wdi/saas?topic=integration-agentic-data",
+      "license": "Apache-2.0",
+      "keywords": [
+        "watsonx-data",
+        "data-integration",
+        "datastage",
+        "etl",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "office-docs",
+      "source": "./packs/ibm/office-docs",
+      "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "documents",
+        "docx",
+        "pptx",
+        "xlsx",
+        "office",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "wxo-adk",
+      "source": "./packs/ibm/wxo-adk",
+      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+      "version": "1.1.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
+      "license": "MIT",
+      "keywords": [
+        "watsonx-orchestrate",
+        "wxo",
+        "adk",
+        "agents",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "wxo-talk-with-your-data",
+      "source": "./packs/ibm/wxo-talk-with-your-data",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+      "version": "1.0.2",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "license": "Apache-2.0",
+      "keywords": [
+        "watsonx-orchestrate",
+        "wxo",
+        "data",
+        "text-to-sql",
+        "excel",
+        "demo",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "anthropic-dev-kit",
       "source": "./packs/anthropic/anthropic-dev-kit",
       "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",
@@ -24,6 +121,43 @@
         "testing",
         "frontend",
         "anthropic"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "openai-dev-tools",
+      "source": "./packs/openai/openai-dev-tools",
+      "description": "Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.",
+      "version": "1.0.0",
+      "author": {
+        "name": "OpenAI"
+      },
+      "homepage": "https://github.com/openai/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "pdf",
+        "jupyter",
+        "ci",
+        "cli",
+        "openai"
+      ],
+      "category": "ibm-bob"
+    },
+    {
+      "name": "openai-security",
+      "source": "./packs/openai/openai-security",
+      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+      "version": "1.0.0",
+      "author": {
+        "name": "OpenAI"
+      },
+      "homepage": "https://github.com/openai/skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "security",
+        "threat-model",
+        "appsec",
+        "openai"
       ],
       "category": "ibm-bob"
     },
@@ -64,68 +198,10 @@
       "category": "ibm-bob"
     },
     {
-      "name": "bob-essentials",
-      "source": "./packs/ibm/bob-essentials",
-      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
-      "version": "1.1.1",
-      "author": {
-        "name": "IBM"
-      },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
-      "license": "Apache-2.0",
-      "keywords": [
-        "marketplace",
-        "skills",
-        "security",
-        "bob"
-      ],
-      "category": "ibm-bob"
-    },
-    {
-      "name": "wxo-adk",
-      "source": "./packs/ibm/wxo-adk",
-      "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
-      "version": "1.0.0",
-      "author": {
-        "name": "IBM"
-      },
-      "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
-      "license": "MIT",
-      "keywords": [
-        "watsonx-orchestrate",
-        "wxo",
-        "adk",
-        "agents",
-        "ibm"
-      ],
-      "category": "ibm-bob"
-    },
-    {
-      "name": "wxo-talk-with-your-data",
-      "source": "./packs/ibm/wxo-talk-with-your-data",
-      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
-      "version": "1.0.1",
-      "author": {
-        "name": "IBM"
-      },
-      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
-      "license": "Apache-2.0",
-      "keywords": [
-        "watsonx-orchestrate",
-        "wxo",
-        "data",
-        "text-to-sql",
-        "excel",
-        "demo",
-        "ibm"
-      ],
-      "category": "ibm-bob"
-    },
-    {
       "name": "microsoft-azure-ops",
       "source": "./packs/microsoft/microsoft-azure-ops",
-      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
-      "version": "1.0.0",
+      "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.",
+      "version": "1.1.0",
       "author": {
         "name": "Microsoft"
       },
@@ -140,20 +216,20 @@
       "category": "ibm-bob"
     },
     {
-      "name": "openai-security",
-      "source": "./packs/openai/openai-security",
-      "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+      "name": "microsoft-foundry",
+      "source": "./packs/microsoft/microsoft-foundry",
+      "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
       "version": "1.0.0",
       "author": {
-        "name": "OpenAI"
+        "name": "Microsoft"
       },
-      "homepage": "https://github.com/openai/skills",
-      "license": "Apache-2.0",
+      "homepage": "https://github.com/microsoft/skills",
+      "license": "MIT",
       "keywords": [
-        "security",
-        "threat-model",
-        "appsec",
-        "openai"
+        "azure",
+        "foundry",
+        "ai",
+        "microsoft"
       ],
       "category": "ibm-bob"
     }

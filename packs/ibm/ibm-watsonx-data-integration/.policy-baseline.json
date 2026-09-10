@@ -1,0 +1,13 @@
+{
+  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
+  "accepted": [
+    {
+      "fingerprint": "82f648f9a5b99c65",
+      "rule": "P006",
+      "path": "skills/di-agent-flow-lifecycle/references/author.md",
+      "line": 55,
+      "message": "forbidden instruction: 'Do not tell the user'",
+      "reason": "Honesty instruction: do not claim a backup was created when the tool reports it was reused; the opposite of hiding actions. Reviewed 2026-09-10."
+    }
+  ]
+}

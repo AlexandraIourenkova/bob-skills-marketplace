@@ -1,0 +1,157 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: LP3
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*SKILL.md'
+- id: AST4
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*scripts/docx_to_pdf.py'
+- id: AE1
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*SKILL.md'
+- id: AST4
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*scripts/pptx_render.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*scripts/xlsx_recalc_check.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*scripts/pdf_ocr.py'
+- id: AST7
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+  path: '*scripts/pdf_tools.py'
+fingerprints:
+- hash: sha256:89230fb1ee1cd4f4bdba2c7aaaa553cc306a7a773aaabd264d0f2ff3abac1b94
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:888a3ca163f968afb6820ff83d41a96f226d915cf43191e8862240faf0f26366
+  rule_id: AST4
+  file: scripts/docx_to_pdf.py
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:0077b9519e4f2adf7d0f6f8835361b0b9b1976be6c7060bbf226ef2719c185ef
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:303c95610e7b1012c1f6ae565f7e0470594905c03b1ac2ac700d05fe20bd9eb6
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:c46d9bfc4cd32f7ef080c2f9405a080294ab5da3de3009f2ef94a774a2b901cc
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:ff93e311f8688a9fac772625fd1c73fc6a8f2850f0d1d5c85f8b354484394072
+  rule_id: AST4
+  file: scripts/pptx_render.py
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:eaceedcfc156cfadf97edf63180d3fa7c3ae2bc7b8caca6a9065391b18fad672
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:bd3ce3aa8833f2ec086e25493a43642094c6f5047f38ed4508b34c80712eff5c
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:c263c770486792d1007738d43e0bfe08881b593369caeaa73092a9d72cc54ca4
+  rule_id: AST4
+  file: scripts/xlsx_recalc_check.py
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:c5ed74f7939e4199d2a1bae6b318bb589bcc7a4a570105b1484b9aa9654eb0f6
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:248de628f24c76f1aac1a14c1201b963b2273585683f5618c363146f9eab0f77
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:2b5ed0244a240f6cfde3add42d16e0c6ee809949168da645f63331f8d4236c83
+  rule_id: AST4
+  file: scripts/pdf_ocr.py
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'
+- hash: sha256:1f433f532ed7cafab887d2669d7723380f98c621855929bd557f6b6678cdd4b3
+  rule_id: AST7
+  file: scripts/pdf_tools.py
+  reason: 'Reviewed 2026-09-10 by the pack authors: SKILL.md refers to the skill''s
+    own scripts (AE1); the licence is at pack level (LP3); scripts call LibreOffice
+    and tesseract through subprocess only after shutil.which finds them (AST4); install
+    hints name apt and brew packages (PE2); argparse attribute lookup in pdf_tools.py
+    (AST7).'

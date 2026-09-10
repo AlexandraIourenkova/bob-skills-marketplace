@@ -2,14 +2,14 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "wxo-adk",
   "displayName": "watsonx Orchestrate ADK",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "vendor": "ibm",
-  "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+  "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
   "license": "MIT",
   "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
   "source": {
     "repo": "https://github.com/IBM/ibm-watsonx-orchestrate-adk",
-    "ref": "2.16.0",
+    "ref": "128062277c49",
     "path": "skills"
   },
   "minBob": "2.0.2",
@@ -26,16 +26,17 @@
     "wxo-builder",
     "wxo-analyzer",
     "telemetry-analyzer",
-    "agent-instructions-evaluator"
+    "agent-instructions-evaluator",
+    "wxo-agent-architect"
   ],
   "mcpServers": {
-    "wxo-adk": {
+    "watsonx-orchestrate-adk": {
       "command": "uvx",
       "args": [
         "ibm-watsonx-orchestrate-mcp-server"
       ]
     },
-    "wxo-docs": {
+    "watsonx-orchestrate-adk-docs": {
       "type": "streamable-http",
       "url": "https://developer.watson-orchestrate.ibm.com/mcp"
     }
@@ -61,8 +62,16 @@
     "skills/wxo-analyzer": "sha256:9827d600438df05d251fb7472fec0d6b0da1336309eb94ea6f3322f13edd4f51",
     "skills/telemetry-analyzer": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f",
     "skills/agent-instructions-evaluator": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902",
-    "rules/wxo-adk.md": "sha256:a2723e53a81f545cb75882bc22d820a7608dd31045c5a2435e2ef4040f382bb7",
+    "skills/wxo-agent-architect": "sha256:c716450019dd17ef6dc3dd066e6233a3ff75dfb84ff7220215064cf2a80ea894",
+    "rules/wxo-adk.md": "sha256:54a09683667629b52ffd3e3e687aafa9a62989aa6eac7bbb4769c9660454e3d2",
     "commands/wxo-deploy.md": "sha256:14d3ad8b8d350d810817783eea3a15c464bb177ddfee03445a4172a6339f0daf",
-    "custom_modes.yaml": "sha256:5bac28cc468f49e3c0f5c5d0728bf881de9bd5054c956a513640d9aa7893ea0d"
+    "custom_modes.yaml": "sha256:b6c152af5ea852830e4b24dbfa5851eb03a051c47e72f19b4acd5c5b9976b342"
+  },
+  "sources": {
+    "wxo-agent-architect": {
+      "repo": "https://github.com/IBM/agentic-ai-labs-skills",
+      "ref": "7a96fcd752f8",
+      "path": "plugins/wxo-agent-architect/skills"
+    }
   }
 }

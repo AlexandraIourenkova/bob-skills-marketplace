@@ -36,7 +36,7 @@ class VendorConfirmationRequired(InstallError):
         self.vendor = vendor
         self.pack = pack
         super().__init__(f"first install from vendor '{vendor.get('id')}' ({vendor.get('displayName', '')}); "
-                         f"confirm with `bob-skills add {pack} --accept-vendor`")
+                         f"confirm with `uvx bob-skills add {pack} --accept-vendor`")
 
 
 @dataclass
@@ -304,7 +304,7 @@ def trust(skill: str, scope: Scope) -> dict:
     lock = read_lock(scope.bob_dir)
     owner = entry_for_skill(lock, skill)
     if owner and owner.get("vendor") != LOCAL_VENDOR:
-        raise InstallError(f"skill '{skill}' belongs to pack '{owner['name']}'; reinstall it with `bob-skills add {owner['name']} --force` instead")
+        raise InstallError(f"skill '{skill}' belongs to pack '{owner['name']}'; reinstall it with `uvx bob-skills add {owner['name']} --force` instead")
     entry = {
         "name": skill, "version": "0.0.0", "vendor": LOCAL_VENDOR, "digest": digest, "installed": _now(),
         "networkAllow": [], "skills": [skill], "mcpServers": [], "rules": [], "commands": [], "modes": [],
@@ -350,7 +350,7 @@ def verify(scope: Scope, lint: bool = True) -> tuple[list[str], list[str]]:
                     if finding.severity == BLOCK and finding.fingerprint not in accepted:
                         problems.append(f"{entry['name']}/{skill}: {finding.rule} {finding.path}:{finding.line} {finding.message}")
     for skill in unmanaged_skills(scope):
-        warnings.append(f"unmanaged skill '{skill}' in {scope.label}/skills; the guard will refuse it (install its pack or `bob-skills trust {skill}`)")
+        warnings.append(f"unmanaged skill '{skill}' in {scope.label}/skills; the guard will refuse it (install its pack or `uvx bob-skills trust {skill}`)")
     return problems, warnings
 
 
@@ -402,8 +402,8 @@ def guard(payload: dict, scopes: list[Scope], allow_local: bool = True, strict: 
     skill = extract_skill_name(payload)
     if not skill:
         if strict:
-            return 2, "bob-skills guard: cannot determine the skill name from the hook payload; refusing (strict mode)"
-        return 0, "bob-skills guard: no skill name in payload; allowed (use --strict to refuse)"
+            return 2, "uvx bob-skills guard: cannot determine the skill name from the hook payload; refusing (strict mode)"
+        return 0, "uvx bob-skills guard: no skill name in payload; allowed (use --strict to refuse)"
     for scope in scopes:
         path = scope.skills_dir / skill
         lock = read_lock(scope.bob_dir)
@@ -411,22 +411,22 @@ def guard(payload: dict, scopes: list[Scope], allow_local: bool = True, strict: 
         if not path.is_dir() and entry is None:
             continue
         if entry is None:
-            return 2, (f"bob-skills guard: skill '{skill}' in {scope.label}/skills is unmanaged (not in {scope.label}/skills.lock). "
+            return 2, (f"uvx bob-skills guard: skill '{skill}' in {scope.label}/skills is unmanaged (not in {scope.label}/skills.lock). "
                        f"Install it from the marketplace (`uvx bob-skills add <pack>`) or, for your own skill, `uvx bob-skills trust {skill}`.")
         if entry.get("vendor") == LOCAL_VENDOR and not allow_local:
-            return 2, f"bob-skills guard: skill '{skill}' is a local skill and the organisation policy allows marketplace packs only."
+            return 2, f"uvx bob-skills guard: skill '{skill}' is a local skill and the organisation policy allows marketplace packs only."
         if not path.is_dir():
-            return 2, f"bob-skills guard: skill '{skill}' is in the lock but missing from {scope.label}/skills; reinstall `{entry['name']}`."
+            return 2, f"uvx bob-skills guard: skill '{skill}' is in the lock but missing from {scope.label}/skills; reinstall `{entry['name']}`."
         expected = entry.get("skillDigests", {}).get(skill)
         try:
             actual = tree_digest(path)
         except DigestError as error:
-            return 2, f"bob-skills guard: {error}"
+            return 2, f"uvx bob-skills guard: {error}"
         if expected != actual:
-            return 2, (f"bob-skills guard: skill '{skill}' was modified after install (pack {entry['name']}@{entry.get('version')}). "
+            return 2, (f"uvx bob-skills guard: skill '{skill}' was modified after install (pack {entry['name']}@{entry.get('version')}). "
                        f"Run `uvx bob-skills verify` to see what changed, or `uvx bob-skills add {entry['name']} --force` to restore it.")
         return 0, ""
-    return 2, f"bob-skills guard: skill '{skill}' is not installed in any managed scope."
+    return 2, f"uvx bob-skills guard: skill '{skill}' is not installed in any managed scope."
 
 
 def brief(scopes: list[Scope]) -> str:

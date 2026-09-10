@@ -2,8 +2,9 @@
   "scannedAt": "2026-09-10T11:16:50Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:88b53ce7dcfd4bdaafef8c6613716c8a2f8bfafbc5887fcdae7ea26176bb0604|sha256:a5f49645902868eb12193e3e80d36a0e9e5fe0075bb239655732ddeb78d9ad5a",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -29,7 +30,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d"
     },
     "wxo-chat-demo-page": {
       "skillspector": {
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66"
     }
   },
   "summary": {

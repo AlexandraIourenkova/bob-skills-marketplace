@@ -5,7 +5,7 @@ Usage:
   run_scanners.py [pack ...] [--write] [--check] [--accept-skillspector REASON]
 
 --write   records results in packs/<vendor>/<pack>/.scan.json (committed; shown by
-          the site, `bob-skills show` and index.json via `registry build-index`).
+          the site, `uvx bob-skills show` and index.json via `registry build-index`).
 --check   exits 1 when any pack's verdict is `block`: SkillSpector risk score >= 30
           after the pack's .skillspector-baseline.yaml, or a Cisco CRITICAL/HIGH finding.
 --accept-skillspector REASON
@@ -27,6 +27,8 @@ import tempfile
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+
+from bob_skills.hashing import path_digest, tree_digest
 
 BLOCK, REVIEW = 30, 10
 SEVERITY_RANK = {"CRITICAL": 4, "HIGH": 3, "MEDIUM": 2, "LOW": 1, "INFO": 0}
@@ -157,7 +159,10 @@ def main() -> int:
     parser.add_argument("--accept-skillspector", metavar="REASON")
     parser.add_argument("--accept-cisco", metavar="REASON", help="accept every current Cisco finding above INFO into .cisco-baseline.json")
     parser.add_argument("--reports", metavar="DIR", help="keep raw JSON reports in DIR")
+    parser.add_argument("--full", action="store_true", help="rescan every skill even when nothing changed")
     args = parser.parse_args()
+    tool_versions = {"skillspector": subprocess.run([tool("skillspector"), "--version"], capture_output=True, text=True).stdout.strip().split()[-1].lstrip("v"),
+                     "ciscoSkillScanner": subprocess.run([tool("skill-scanner"), "--version"], capture_output=True, text=True).stdout.strip().split()[-1].lstrip("v")}
     manifests = sorted(Path("packs").glob("*/*/pack.json"))
     if args.packs:
         manifests = [m for m in manifests if m.parent.name in args.packs]
@@ -176,9 +181,25 @@ def main() -> int:
             accepted = {}
             if cisco_path.is_file():
                 accepted = {e["key"]: e for e in json.loads(cisco_path.read_text(encoding="utf-8")).get("accepted", [])}
+            baseline_digest = "|".join(path_digest(f) if f.is_file() else "-" for f in (baseline, cisco_path))
+            previous = {}
+            scan_path = pack_dir / ".scan.json"
+            if scan_path.is_file():
+                previous = json.loads(scan_path.read_text(encoding="utf-8"))
+            reusable = (not args.full and not args.accept_skillspector and not args.accept_cisco
+                        and previous.get("tools") == tool_versions and previous.get("baselineDigest") == baseline_digest)
             results = {}
+            cached = 0
             for skill in skills:
-                results[skill.name] = {"skillspector": skillspector_scan(skill, baseline, tmp), "cisco": cisco_scan(skill, tmp, accepted)}
+                digest = tree_digest(skill)
+                old_entry = previous.get("skills", {}).get(skill.name) if reusable else None
+                if old_entry and old_entry.get("digest") == digest:
+                    results[skill.name] = old_entry
+                    cached += 1
+                    continue
+                results[skill.name] = {"digest": digest, "skillspector": skillspector_scan(skill, baseline, tmp), "cisco": cisco_scan(skill, tmp, accepted)}
+                if not args.accept_cisco:
+                    results[skill.name]["cisco"].pop("_raw", None)
                 if args.accept_cisco:
                     for f in results[skill.name]["cisco"]["_raw"]:
                         if f.get("severity") in ("LOW", "MEDIUM", "HIGH", "CRITICAL"):
@@ -189,6 +210,8 @@ def main() -> int:
                 ss, cs = results[skill.name]["skillspector"], results[skill.name]["cisco"]
                 print(f"  {pack_dir.name}/{skill.name}: SkillSpector {ss['riskScore']}/100 {ss['recommendation']} "
                       f"({ss['issues']} issues {ss['byRule']}, {ss['suppressed']} suppressed) | Cisco {cs['maxSeverity']} ({cs['findings']} findings)")
+            if cached:
+                print(f"  {pack_dir.name}: {cached} of {len(skills)} skill(s) unchanged, results reused")
             if args.accept_cisco:
                 cisco_path.write_text(json.dumps({"_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
                                                   "accepted": sorted(accepted.values(), key=lambda e: (e["skill"], e["file"] or "", e["key"]))}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -196,15 +219,16 @@ def main() -> int:
                 for skill in skills:
                     results[skill.name]["cisco"] = cisco_scan(skill, tmp, accepted)
                     results[skill.name]["cisco"].pop("_raw", None)
+                baseline_digest = "|".join(path_digest(f) if f.is_file() else "-" for f in (baseline, cisco_path))
             summary = verdict(results)
-            versions = {"skillspector": next((r["skillspector"]["version"] for r in results.values()), None),
-                        "ciscoSkillScanner": next((r["cisco"]["version"] for r in results.values()), None)}
+            versions = tool_versions
             print(f"{pack_dir.name}: verdict {summary['verdict']} (risk {summary['riskScore']}, cisco {summary['ciscoMaxSeverity']})")
             if summary["verdict"] == "block":
                 blocked.append(pack_dir.name)
             if args.write:
-                data = {"scannedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-                        "tools": versions, "thresholds": {"block": BLOCK, "review": REVIEW}, "skills": results, "summary": summary}
+                scanned_at = previous.get("scannedAt") if cached == len(skills) and previous else datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+                data = {"scannedAt": scanned_at, "tools": versions, "baselineDigest": baseline_digest,
+                        "thresholds": {"block": BLOCK, "review": REVIEW}, "skills": results, "summary": summary}
                 (pack_dir / ".scan.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if args.check and blocked:
         print(f"::error::gate blocked: {', '.join(blocked)}")

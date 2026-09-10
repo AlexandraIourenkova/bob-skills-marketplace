@@ -1,0 +1,133 @@
+{
+  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
+  "accepted": [
+    {
+      "fingerprint": "63e308bb7cb40ada",
+      "rule": "P006",
+      "path": "skills/azure-compute/references/vm-quotas.md",
+      "line": 67,
+      "message": "forbidden instruction: 'auto-approve'",
+      "reason": "'terraform apply -auto-approve' and Azure quota requests being auto-approved, in documentation; not an instruction to skip user confirmation. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "3425c0a87b1e4c89",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/bicep/README.md",
+      "line": 16,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "834390c8c8f1b352",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/bicep/README.md",
+      "line": 8,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b2a6c7daaa207682",
+      "rule": "P006",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/terraform/README.md",
+      "line": 51,
+      "message": "forbidden instruction: 'auto-approve'",
+      "reason": "'terraform apply -auto-approve' and Azure quota requests being auto-approved, in documentation; not an instruction to skip user confirmation. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6650d49d427c6784",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/terraform/README.md",
+      "line": 51,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6e136a11c45e572c",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/terraform/README.md",
+      "line": 16,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "a309d2eeb7905c03",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/terraform/README.md",
+      "line": 17,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "fb75753306a45d06",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/examples/terraform/README.md",
+      "line": 9,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6e94b8d38d463d81",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/delivery-options/save-local.md",
+      "line": 47,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6e07e1376efc032d",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/depth-probe/beginner.md",
+      "line": 13,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "6ac224b374a1039b",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/output-adapters/az-cli.md",
+      "line": 66,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "acc7d5da7082806e",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/output-adapters/az-cli.md",
+      "line": 54,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "0957a792e186c190",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/output-adapters/bicep.md",
+      "line": 18,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "357694fa4f129012",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/output-adapters/terraform.md",
+      "line": 18,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "b9db159507fb8cba",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/output-adapters/terraform.md",
+      "line": 20,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "9978e6d5a87df6e9",
+      "rule": "P009",
+      "path": "skills/azure-compute/workflows/vm-creator/references/plan-card.md",
+      "line": 32,
+      "message": "reference to protected path '~/.ssh'",
+      "reason": "SSH key paths (~/.ssh/id_rsa.pub) in VM creation guidance for Azure; documentation, nothing reads the files. Reviewed 2026-09-10."
+    }
+  ]
+}

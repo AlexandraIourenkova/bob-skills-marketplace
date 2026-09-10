@@ -2,8 +2,9 @@
   "scannedAt": "2026-09-10T11:14:08Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:f1666c21f8669457d869b010dc0bebeeabd7a7feb9263276900d99f2ca29f3f4|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -29,7 +30,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:5404375ad44560b50ba4f0de58a56ca68b213a3de17179b05a4382def178783b"
     },
     "bigquery-bigframes": {
       "skillspector": {
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:c482b6f72b9c64e6f580194065d36e764bb9df63a44ed5a4bda434e4df81eb68"
     },
     "bigquery-ai-ml": {
       "skillspector": {
@@ -73,7 +76,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:53775e031375d1590ea493ddf92a4135f403339f6899692166db3b77567d5eec"
     },
     "gcloud": {
       "skillspector": {
@@ -95,7 +99,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:339c1903ce0481fd777ceecba955e83a3ebdb34e8ef1a2d55de7008f7c114173"
     }
   },
   "summary": {

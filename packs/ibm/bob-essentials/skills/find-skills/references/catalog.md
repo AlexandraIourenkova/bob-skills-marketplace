@@ -5,14 +5,94 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ## Vendors
 
-- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, wxo-adk, wxo-talk-with-your-data.
+- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, ibm-watsonx-data-integration, office-docs, wxo-adk, wxo-talk-with-your-data.
 - **Anthropic** (`anthropic`, active): sources github.com/anthropics. Packs: anthropic-dev-kit.
-- **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-security.
+- **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-dev-tools, openai-security.
 - **Google** (`google`, active): sources github.com/google. Packs: google-cloud-data.
 - **HashiCorp** (`hashicorp`, active): sources github.com/hashicorp. Packs: hashicorp-terraform.
-- **Microsoft** (`microsoft`, active): sources github.com/microsoft. Packs: microsoft-azure-ops.
+- **Microsoft** (`microsoft`, active): sources github.com/microsoft. Packs: microsoft-azure-ops, microsoft-foundry.
 
 ## Packs
+
+### bob-essentials — Bob essentials
+
+- Vendor: IBM (`ibm`, active). Version 1.1.2.
+- The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.
+- Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
+- Tags: marketplace, skills, security, bob
+- Skills (3):
+  - `find-skills`: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
+  - `skill-creator`: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up".
+  - `guard`: Explain and resolve a refusal from the uvx bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a "uvx bob-skills guard" message, or the user asks why a skill is blocked, mentions "unmanaged skill", "digest mismatch", "revoked version", "skill blocked", "guard", or wants to trust a local skill again.
+- Also installs: commands: /skills-add.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
+- Install: `uvx bob-skills add bob-essentials`
+
+### ibm-watsonx-data-integration — IBM watsonx.data integration
+
+- Vendor: IBM (`ibm`, active). Version 1.0.0.
+- Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.
+- Source: https://github.com/IBM/ibm-watsonx-data-integration-skills @ 6249929d21ee (agent/skills)
+- Homepage: https://www.ibm.com/docs/en/watsonx/wdi/saas?topic=integration-agentic-data
+- Tags: watsonx-data, data-integration, datastage, etl, ibm
+- Skills (6):
+  - `di-agent-flow-lifecycle`: Entry point for ALL flow work in watsonx.data integration — creating, editing, running, diagnosing a failed run, or backing up/restoring a flow. Load this FIRST whenever a request touches a data flow. It gathers intent — including which engine the flow runs on — routes to exactly one lifecycle state, and applies a fixed precedence order so routing is consistent run to run.
+  - `di-agent-flow-datastage`: Reference for the verbose watsonx.data integration SDK for DataStage (batch) flows, with exhaustive stage and property access — the full engine stage catalog. Load this only after the di-agent-flow-lifecycle router has selected the datastage-sdk authoring backend — this is a syntax and stage reference, not a decision about whether to use it. If you have not routed yet, load di-agent-flow-lifecycle instead.
+  - `di-agent-flow-pyflow`: API spec for pyflow, IBM's LLM-optimized Python DSL for authoring DataStage and StreamSets flows. Its compact surface and compile-time validation offer context efficiency, fast feedback, and correctness guarantees. Load this only after the di-agent-flow-lifecycle router has selected the pyflow authoring backend — this is a language reference, not a decision about whether to use it. If you have not routed yet, load di-agent-flow-lifecycle instead.
+  - `di-agent-datastage-investigation`: Deep investigation of a failed run of a DataStage job already in operation — a scheduled or production job, or any job whose failure the user asks you to investigate. Works end-to-end from MCP tools: logs, job config, flow structure, connection health. Produces a root-cause diagnosis, not a fix. NOT for a run that failed while a flow was being built or edited — those are handled by the di-agent-flow-lifecycle skill, which runs its own investigation and loads this one only when a production-depth analysis is needed.
+  - `di-agent-knowledge-engine-datastage`: Q&A reference for the DataStage parallel engine — parallelism, partitioning theory, APT configuration files, concurrent job execution, restart/recovery, disk/resource tuning, dataset performance, flow optimization (partitioning/sorting/memory), and per-stage semantics. Use for conceptual engine questions and stage property lookups regardless of authoring tool.
+  - `di-agent-bug-report`: Generates a Markdown bug report for an IBM watsonx.data integration session. User can invoke directly. The agent MUST propose it (and must wait for explicit acceptance) after 3 or more consecutive calls to the same tool or the same sequence of tools result in a failure or the same error. Skip for non-watsonx.data integration sessions.
+- Also installs: rules: watsonx-data-integration.md.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 1 reviewed policy findings; 7 checksummed components.
+- Install: `uvx bob-skills add ibm-watsonx-data-integration`
+
+### office-docs — Office documents
+
+- Vendor: IBM (`ibm`, active). Version 1.0.0.
+- Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.
+- Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
+- Tags: documents, docx, pptx, xlsx, office, ibm
+- Skills (4):
+  - `docx`: Create, edit, fill and extract Microsoft Word (.docx) files with python-docx through four ready-made scripts. Build a document from a JSON spec of headings, paragraphs, bullet and numbered lists, tables, images and page breaks (optionally on top of a template that keeps its styles, headers and footers), replace {{placeholders}} in a template even when Word split them across runs, dump the headings, text and tables of a .docx to Markdown or JSON, and convert to PDF with LibreOffice. Use it whenever a user asks to "create a Word document", "write a .docx report", "fill this Word template", "extract the text from this docx", "add a table to the document", "convert the docx to PDF" or "edit the Word file", or names a .docx file as input or output. Do not use for PDF, spreadsheet or presentation files unless a .docx is the input or the output.
+  - `pptx`: Create, edit, fill, extract and render PowerPoint (.pptx) decks with python-pptx and tested helper scripts. Builds a 16:9 deck from a Markdown outline (title slide, nested bullets, images, native bar/line/pie charts, speaker notes, optional corporate .pptx or .potx template), finds and replaces text across slides and notes while keeping run formatting, dumps an existing deck to Markdown with slide numbers, and renders it to PDF and PNG with LibreOffice for review. Use it when the user says "create a PowerPoint", "make a slide deck", "build slides from this outline", "add a chart to the presentation", "update the text in this pptx", asks about "speaker notes", wants to "export the deck to PDF", or names a .pptx file or a .potx template. Not for PDF, Word or Excel files unless a slide deck is the input or output.
+  - `xlsx`: Create, edit, analyse or analyze Excel workbooks (.xlsx/.xlsm) and convert CSV or TSV files with openpyxl. Builds sheets from a JSON spec with a styled frozen header, number formats (currency, percent, date), live formulas, a totals row, autofilter, native bar/line/pie charts and dropdown validation; converts CSV/TSV exports into typed sheets; reports what an existing workbook contains (sheets, header, formulas, charts, names, merged cells); and checks formulas for errors through a LibreOffice recalculation or a static scan. Use it whenever the input or the deliverable is a spreadsheet file, for requests such as "create an Excel file", "build a spreadsheet", "add formulas to the workbook", "convert this CSV to xlsx", "what is in this Excel file", "add a chart to the sheet" or "fix the broken formulas"; not for Word, PowerPoint or PDF files.
+  - `pdf`: Read, create, fill and manipulate PDF files with five ready-made scripts built on pypdf, pdfplumber and reportlab. Extract text per page (page ranges, layout mode, scanned-PDF detection), pull tables out as Markdown or CSV, build a report PDF from a JSON spec (headings, paragraphs, lists, tables, images, page numbers, Unicode font so Hebrew, Arabic and Cyrillic render), merge, split, rotate, watermark, compress, encrypt and set metadata, list and fill AcroForm fields, and OCR scanned pages locally with tesseract and poppler. Use it whenever a user says "extract the text from this PDF", "pull the tables out of the PDF", "merge these PDFs", "split the PDF into pages", "create a PDF report", "fill in this PDF form", "the PDF is scanned, OCR it" or "add a watermark to the PDF", or names a .pdf file as input or output. Not for Word, Excel or PowerPoint files unless a PDF is involved.
+- Also installs: rules: office-docs.md.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 5 checksummed components.
+- Install: `uvx bob-skills add office-docs`
+
+### wxo-adk — watsonx Orchestrate ADK
+
+- Vendor: IBM (`ibm`, active). Version 1.1.0.
+- The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.
+- Source: https://github.com/IBM/ibm-watsonx-orchestrate-adk @ 128062277c49 (skills)
+- Homepage: https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills
+- Tags: watsonx-orchestrate, wxo, adk, agents, ibm
+- Skills (7):
+  - `solution-architect`: Expert guidance for creating high-level solution architecture documents from business requirements, use cases, or problem statements. Produces three focused documents - business overview, technical architecture, and implementation plan - with sufficient detail for elaboration into detailed SOPs.
+  - `sop-builder`: Expert guidance for building a Standard Operating Procedure (SOP) from a workflow diagram, Langflow JSON, n8n JSON, BPMN model or workflow description. Focuses on business problem, data requirements, and business logic in plain language.
+  - `wxo-builder`: Expert guidance for generating watsonx Orchestrate native solutions from SOPs or simple prompts. Implements agents, flows, tools, and knowledge bases based on business requirements.
+  - `wxo-analyzer`: Analyzes watsonx Orchestrate (wxO) projects and generates a 3-report documentation set covering the overall solution, agents, and tools/connections/other components with Mermaid diagrams.
+  - `telemetry-analyzer`: Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.
+  - `agent-instructions-evaluator`: Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.
+  - `wxo-agent-architect`: Use when building, editing, testing, or deploying anything in IBM watsonx Orchestrate (WXO) — agents, tools, toolkits, knowledge bases, models, or connections. Always invoke when the user mentions watsonx Orchestrate, WXO, the orchestrate ADK, agent.yaml, toolkit-config.yaml, the `orchestrate` CLI, the `@tool` decorator, or WXO credentials. Also trigger when the user asks about publishing an AI assistant to IBM Cloud, wiring up a collaborator agent, or working with WXO Developer Edition.
+- Also installs: MCP servers: watsonx-orchestrate-adk, watsonx-orchestrate-adk-docs; rules: wxo-adk.md; commands: /wxo-deploy; modes: wxo-builder.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 30 reviewed policy findings; 10 checksummed components.
+- Install: `uvx bob-skills add wxo-adk`
+
+### wxo-talk-with-your-data — Talk with your data on watsonx Orchestrate
+
+- Vendor: IBM (`ibm`, active). Version 1.0.2.
+- Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.
+- Source: https://github.ibm.com/tech-garage-spgi/excel-to-wxo @ 6bb7f04 (.bob/skills)
+- Homepage: https://github.ibm.com/tech-garage-spgi/excel-to-wxo
+- Tags: watsonx-orchestrate, wxo, data, text-to-sql, excel, demo, ibm
+- Skills (2):
+  - `excel-to-wxo-agent`: Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like "deploy a data agent to wxo", "text-to-SQL prototype", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.
+  - `wxo-chat-demo-page`: Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site ("embed code", "put the chat on a page", "demo page for the agent", "landing page with chat"), wants charts or a dashboard built live from the agent's chat answers ("render charts from the answers", "dashboard with chat", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.
+- Also installs: MCP servers: watsonx-orchestrate-adk, watsonx-orchestrate-adk-docs; rules: wxo-data-agent.md.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 8 reviewed policy findings; 3 checksummed components.
+- Install: `uvx bob-skills add wxo-talk-with-your-data`
 
 ### anthropic-dev-kit — Anthropic developer kit
 
@@ -27,6 +107,35 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
   - `frontend-design`: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
 - Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 3 checksummed components.
 - Install: `uvx bob-skills add anthropic-dev-kit`
+
+### openai-dev-tools — OpenAI developer tools
+
+- Vendor: OpenAI (`openai`, active). Version 1.0.0.
+- Everyday developer skills from the Codex skills catalog: read and manipulate PDFs, work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools.
+- Source: https://github.com/openai/skills @ 49f948faa925 (skills/.curated)
+- Homepage: https://github.com/openai/skills
+- Tags: pdf, jupyter, ci, cli, openai
+- Skills (4):
+  - `pdf`: Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.
+  - `jupyter-notebook`: Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.
+  - `gh-fix-ci`: Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.
+  - `cli-creator`: Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose composable read/write commands, return stable JSON, manage auth, and pair with a companion skill.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
+- Install: `uvx bob-skills add openai-dev-tools`
+
+### openai-security — OpenAI application security
+
+- Vendor: OpenAI (`openai`, active). Version 1.0.0.
+- Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.
+- Source: https://github.com/openai/skills @ 49f948faa925 (skills/.curated)
+- Homepage: https://github.com/openai/skills
+- Tags: security, threat-model, appsec, openai
+- Skills (3):
+  - `security-best-practices`: Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.
+  - `security-threat-model`: Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.
+  - `security-ownership-map`: Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 1 reviewed policy findings; 3 checksummed components.
+- Install: `uvx bob-skills add openai-security`
 
 ### google-cloud-data — Google Cloud data
 
@@ -59,78 +168,43 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 - Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 5 checksummed components.
 - Install: `uvx bob-skills add hashicorp-terraform`
 
-### bob-essentials — Bob essentials
-
-- Vendor: IBM (`ibm`, active). Version 1.1.1.
-- The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.
-- Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
-- Tags: marketplace, skills, security, bob
-- Skills (3):
-  - `find-skills`: The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist ("is there a skill for X", "find a skill"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.
-  - `skill-creator`: Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include "create a skill", "write a SKILL.md", "package this as a skill", "the skill is not picked up".
-  - `guard`: Explain and resolve a refusal from the bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a "bob-skills guard" message, or the user asks why a skill is blocked, mentions "unmanaged skill", "digest mismatch", "revoked version", "skill blocked", "guard", or wants to trust a local skill again.
-- Also installs: commands: /skills-add.
-- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 4 checksummed components.
-- Install: `uvx bob-skills add bob-essentials`
-
-### wxo-adk — watsonx Orchestrate ADK
-
-- Vendor: IBM (`ibm`, active). Version 1.0.0.
-- The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality), the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.
-- Source: https://github.com/IBM/ibm-watsonx-orchestrate-adk @ 2.16.0 (skills)
-- Homepage: https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills
-- Tags: watsonx-orchestrate, wxo, adk, agents, ibm
-- Skills (6):
-  - `solution-architect`: Expert guidance for creating high-level solution architecture documents from business requirements, use cases, or problem statements. Produces three focused documents - business overview, technical architecture, and implementation plan - with sufficient detail for elaboration into detailed SOPs.
-  - `sop-builder`: Expert guidance for building a Standard Operating Procedure (SOP) from a workflow diagram, Langflow JSON, n8n JSON, BPMN model or workflow description. Focuses on business problem, data requirements, and business logic in plain language.
-  - `wxo-builder`: Expert guidance for generating watsonx Orchestrate native solutions from SOPs or simple prompts. Implements agents, flows, tools, and knowledge bases based on business requirements.
-  - `wxo-analyzer`: Analyzes watsonx Orchestrate (wxO) projects and generates a 3-report documentation set covering the overall solution, agents, and tools/connections/other components with Mermaid diagrams.
-  - `telemetry-analyzer`: Use when the user wants to analyze agent telemetry traces to find bugs and get fix recommendations — walks through exporting traces from a local or remote watsonx Orchestrate server, parsing raw OTel JSON or Langfuse-format trace JSON directly, and reasoning over them to identify failures and suggest fixes.
-  - `agent-instructions-evaluator`: Evaluate an agent instructions or agent definition for achievability and produce a structured, evidence-backed report artifact with per-dimension scores, findings, deterministic signals, and high-impact recommendations.
-- Also installs: MCP servers: wxo-adk, wxo-docs; rules: wxo-adk.md; commands: /wxo-deploy; modes: wxo-builder.
-- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 23 reviewed policy findings; 9 checksummed components.
-- Install: `uvx bob-skills add wxo-adk`
-
-### wxo-talk-with-your-data — Talk with your data on watsonx Orchestrate
-
-- Vendor: IBM (`ibm`, active). Version 1.0.1.
-- Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.
-- Source: https://github.ibm.com/tech-garage-spgi/excel-to-wxo @ 6bb7f04 (.bob/skills)
-- Homepage: https://github.ibm.com/tech-garage-spgi/excel-to-wxo
-- Tags: watsonx-orchestrate, wxo, data, text-to-sql, excel, demo, ibm
-- Skills (2):
-  - `excel-to-wxo-agent`: Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like "deploy a data agent to wxo", "text-to-SQL prototype", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.
-  - `wxo-chat-demo-page`: Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site ("embed code", "put the chat on a page", "demo page for the agent", "landing page with chat"), wants charts or a dashboard built live from the agent's chat answers ("render charts from the answers", "dashboard with chat", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.
-- Also installs: MCP servers: wxo-adk, wxo-docs; rules: wxo-data-agent.md.
-- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 8 reviewed policy findings; 3 checksummed components.
-- Install: `uvx bob-skills add wxo-talk-with-your-data`
-
 ### microsoft-azure-ops — Microsoft Azure operations
 
-- Vendor: Microsoft (`microsoft`, active). Version 1.0.0.
-- Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.
-- Source: https://github.com/microsoft/skills @ 39d230125298 (.github/plugins/azure-skills/skills)
+- Vendor: Microsoft (`microsoft`, active). Version 1.1.0.
+- Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.
+- Source: https://github.com/microsoft/skills @ 39d230125298b39f2e432ff6e23831124d05b2b5 (.github/plugins/azure-skills/skills)
 - Homepage: https://github.com/microsoft/skills
 - Tags: azure, cloud, operations, microsoft
-- Skills (5):
+- Skills (7):
   - `azure-resource-lookup`: List, find, and show Azure resources across subscriptions or resource groups. Handles prompts like "list the websites in my subscription", "list my web apps", "show my app services", "list virtual machines", "list my VMs", "show storage accounts", "find container apps", and "what resources do I have". USE FOR: list websites, list web apps, list app services, show websites in subscription, resource inventory, find resources by tag, tag analysis, orphaned resource discovery (not for cost analysis), unattached disks, count resources by type, cross-subscription lookup, and Azure Resource Graph queries. DO NOT USE FOR: deploying/changing resources (use azure-deploy), cost optimization (use azure-cost), or non-Azure clouds.
   - `azure-storage`: Azure Storage Services including Blob Storage, File Shares, Queue Storage, Table Storage, and Data Lake. Answers questions about storage access tiers (hot, cool, cold, archive), when to use each tier, and tier comparison. Provides object storage, SMB file shares, async messaging, NoSQL key-value, and big data analytics. Includes lifecycle management. USE FOR: blob storage, file shares, queue storage, table storage, data lake, upload files, download blobs, storage accounts, access tiers, storage tiers, hot cool cold archive, storage tier comparison, when to use storage tiers, lifecycle management, Azure Storage concepts. DO NOT USE FOR: SQL databases, Cosmos DB (use azure-prepare), messaging with Event Hubs or Service Bus (use azure-messaging).
   - `azure-cost`: Azure cost management: query costs, forecast spending, optimize to reduce waste. WHEN: "Azure costs", "Azure bill", "cost breakdown", "how much am I spending", "forecast spending", "optimize costs", "reduce spending", "orphaned resources", "rightsize VMs", "cost spike", "reduce storage costs", "AKS cost". DO NOT USE FOR: deploying resources, provisioning, diagnostics, or security audits.
   - `azure-compliance`: Run Azure compliance and security audits with azqr plus Key Vault expiration checks. Covers best-practice assessment, resource review, policy/compliance validation, and security posture checks. WHEN: compliance scan, security audit, BEFORE running azqr (compliance cli tool), Azure best practices, Key Vault expiration check, expired certificates, expiring secrets, orphaned resources, compliance assessment.
   - `azure-quotas`: Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: "check quotas", "service limits", "current usage", "request quota increase", "quota exceeded", "validate capacity", "regional availability", "provisioning limits", "vCPU limit", "how many vCPUs available in my subscription".
-- Gate: pass, SkillSpector risk 0/100; 0 reviewed policy findings; 5 checksummed components.
+  - `azure-diagnostics`: Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, troubleshoot functions, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, service bus dead letter.
+  - `azure-compute`: Azure VM/VMSS router. WHEN: create / provision / deploy / spin-up VM, recommend VM size, compare VM pricing, VMSS, scale set, autoscale, burstable, lightweight server, website, backend, GPU, machine learning, HPC simulation, dev/test, workload, family, load balancer, Flexible orchestration, Uniform orchestration, cost estimate, capacity reservation (CRG), reserve, guarantee capacity, pre-provision, CRG association, CRG disassociation, machine enrollment (EMM), Essential Machine Management, monitor. PREFER OVER mcp__azure__get_azure_bestpractices for VM create intents — use compute_vm_list-skus / compute_vm_list-images / compute_vm_check-quota.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 16 reviewed policy findings; 7 checksummed components.
 - Install: `uvx bob-skills add microsoft-azure-ops`
 
-### openai-security — OpenAI application security
+### microsoft-foundry — Microsoft Foundry
 
-- Vendor: OpenAI (`openai`, active). Version 1.0.0.
-- Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.
-- Source: https://github.com/openai/skills @ 49f948faa925 (skills/.curated)
-- Homepage: https://github.com/openai/skills
-- Tags: security, threat-model, appsec, openai
-- Skills (3):
-  - `security-best-practices`: Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.
-  - `security-threat-model`: Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.
-  - `security-ownership-map`: Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.
-- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 1 reviewed policy findings; 3 checksummed components.
-- Install: `uvx bob-skills add openai-security`
+- Vendor: Microsoft (`microsoft`, active). Version 1.0.0.
+- Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.
+- Source: https://github.com/microsoft/skills @ 39d230125298 (.github/plugins/azure-skills/skills)
+- Homepage: https://github.com/microsoft/skills
+- Tags: azure, foundry, ai, microsoft
+- Skills (1):
+  - `microsoft-foundry`: Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, create agent, update agent, add tool to agent, invoke agent, agent.yaml, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, prompt optimizer, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 21 reviewed policy findings; 1 checksummed components.
+- Install: `uvx bob-skills add microsoft-foundry`
+
+## Planned packs (not installable yet)
+
+- **Application modernization** (`app-modernization`, IBM, coming soon): Bring legacy screens to Carbon with IBM's UI modernization skills and modernize application code (Java EE to Quarkus, WebSphere) with watsonx Code Assistant guidance. Source: IBM UI modernization lab and IBM/application-modernization-javaee-quarkus. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/1 (0 votes).
+- **Building blocks** (`building-blocks`, IBM, coming soon): Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality. Modes and MCP configuration instead of skills. Source: https://github.com/ibm-self-serve-assets. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/2 (0 votes).
+- **Developer workflow** (`dev-workflow`, IBM, coming soon): Plan before implementing, review code, diagnose bugs, write architecture decision records. Original IBM skills for the everyday loop, the second most installed category on public skill directories. Source: written by the marketplace team. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/3 (0 votes).
+- **Google Gemini and Genkit** (`google-gemini`, Google, candidate): gemini-api, gemini-live-api, gemini-agents-api and the Genkit skills from Google's official repository. Source: https://github.com/google/skills. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/4 (0 votes).
+- **HashiCorp Packer** (`hashicorp-packer`, HashiCorp, candidate): AWS and Azure image builders, Windows builder and push-to-registry skills from hashicorp/agent-skills. Source: https://github.com/hashicorp/agent-skills. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/5 (0 votes).
+- **Azure SDK for Python** (`microsoft-azure-sdk-python`, Microsoft, candidate): Forty skills for the Azure SDKs in Python: identity, storage, Cosmos DB, AI services, monitoring, messaging. Source: https://github.com/microsoft/skills. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/6 (0 votes).
+- **OpenShift and Ansible** (`redhat-openshift-ansible`, Red Hat, candidate): Deploy to OpenShift and write Ansible playbooks with skills from Red Hat. Source: no official Red Hat skills repository yet. Blocked by: Red Hat has not published agent skills under a redistributable licence. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7 (0 votes).
+- **React and web design best practices** (`vercel-react`, Vercel, candidate): vercel-react-best-practices and web-design-guidelines, among the most installed skills on skills.sh. Source: https://github.com/vercel-labs/agent-skills. Blocked by: the repository publishes no licence; it cannot be copied into the registry until that changes. Vote or subscribe: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/8 (0 votes).

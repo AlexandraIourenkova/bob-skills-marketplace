@@ -157,6 +157,33 @@
       },
       "uniqueItems": true,
       "description": "Files inside the pack that the registry tooling regenerates (for example the offline catalog in find-skills). They are checksummed like everything else, but a difference against the release tag in these files does not require a new version."
+    },
+    "sources": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repo",
+          "ref"
+        ],
+        "properties": {
+          "repo": {
+            "type": "string",
+            "format": "uri"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Per-skill upstream overrides for packs curated from more than one repository; keys are skill names, values have the shape of `source`."
     }
   },
   "$defs": {

@@ -1,9 +1,10 @@
 {
-  "scannedAt": "2026-09-10T11:18:41Z",
+  "scannedAt": "2026-09-10T12:42:47Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:517f91cf357e739e246f6ffc04ed92e1be64060eafb2cfdbe45d72502d42471a|sha256:244ccac530817d2b37a642199bb3165da5cddd71beaf313b19070b0973984b85",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -27,7 +28,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d"
     },
     "azure-storage": {
       "skillspector": {
@@ -47,7 +49,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87"
     },
     "azure-cost": {
       "skillspector": {
@@ -67,7 +70,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b"
     },
     "azure-compliance": {
       "skillspector": {
@@ -87,7 +91,8 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b"
     },
     "azure-quotas": {
       "skillspector": {
@@ -107,14 +112,57 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      }
+      },
+      "digest": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+    },
+    "azure-diagnostics": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 11,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 1,
+        "bySeverity": {},
+        "version": null
+      },
+      "digest": "sha256:aad3f4f4005def69b6a7b44e56de24b1eebcf2999184005dac8af20f58e76f9d"
+    },
+    "azure-compute": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 34,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      },
+      "digest": "sha256:9322f5f57e5acea5d4f8235027a9ca05e7344721749e25dace9760f29d7f4a1a"
     }
   },
   "summary": {
     "riskScore": 0,
-    "ciscoMaxSeverity": null,
+    "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 7,
-    "ciscoAccepted": 0
+    "skillspectorSuppressed": 52,
+    "ciscoAccepted": 1
   }
 }

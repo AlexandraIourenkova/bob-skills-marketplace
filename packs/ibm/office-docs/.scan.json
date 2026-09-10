@@ -1,0 +1,113 @@
+{
+  "scannedAt": "2026-09-10T13:09:02Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:b9e72ebbf3a98b4fa9f2adc23b886251c1a37e39dacd08ac01e71d52aaa49c9e|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "docx": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      },
+      "digest": "sha256:471f090cb2ce0cf75be955d2d4202324946397d1aead514df8c65eb087c526ec"
+    },
+    "pptx": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 12,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      },
+      "digest": "sha256:e72e19770ca5474ec8bb5accb4e9eb66688b633c4987b8426297d2fe7b797e54"
+    },
+    "xlsx": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 8,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      },
+      "digest": "sha256:ad494c27df152352cc8f0f125bf5baf74099a1f1a4eccb55cefbc49c9de85ff9"
+    },
+    "pdf": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 7,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      },
+      "digest": "sha256:f44b98a6a182ca9d20e56fc74d1b017976eb225da8b31536aebc4216dacdfe2b"
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 29,
+    "ciscoAccepted": 0
+  }
+}

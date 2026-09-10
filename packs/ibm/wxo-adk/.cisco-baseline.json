@@ -50,6 +50,16 @@
       "file": "scripts/search_traces_agentops_v3.py",
       "line": 93,
       "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM)."
+    },
+    {
+      "key": "5bd24319de369ae7",
+      "skill": "wxo-agent-architect",
+      "severity": "HIGH",
+      "category": "data_exfiltration",
+      "title": "Dangerous data flow in command pipeline",
+      "file": "reference/mcp_setup.md",
+      "line": 1,
+      "reason": "Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential mentions in telemetry scripts and docs (PE3), example requests to placeholder hosts (E1), the 'without asking' flow instruction (EA2), unpinned requirements (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client's base URL (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM's uv installer command (Cisco 'command pipeline' in mcp_setup.md)."
     }
   ]
 }

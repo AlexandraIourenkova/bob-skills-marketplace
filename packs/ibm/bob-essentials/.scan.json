@@ -1,22 +1,24 @@
 {
-  "scannedAt": "2026-09-10T11:15:21Z",
+  "scannedAt": "2026-09-10T13:31:38Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:f3750720edfa9a4ecf7fa6056e3233c51e5402573d868490ddd70cc93f0eb98a|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
   "thresholds": {
     "block": 30,
     "review": 10
   },
   "skills": {
     "find-skills": {
+      "digest": "sha256:537c6059e46f31ceea1548a298fd86b32e1674c9e761a1d05a1bb74dbc5f3319",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
         "severity": "LOW",
         "issues": 0,
         "byRule": {},
-        "suppressed": 20,
+        "suppressed": 27,
         "version": "2.11.2",
         "complete": false
       },
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
     },
     "guard": {
       "skillspector": {
@@ -60,7 +63,7 @@
         "severity": "LOW",
         "issues": 0,
         "byRule": {},
-        "suppressed": 5,
+        "suppressed": 8,
         "version": "2.11.2",
         "complete": false
       },
@@ -73,14 +76,15 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:42938ecd6a6659749cd745c1de6ce98658d39ed5aa6ce91f0bf0ae297c60a373"
     }
   },
   "summary": {
     "riskScore": 0,
     "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 26,
+    "skillspectorSuppressed": 36,
     "ciscoAccepted": 0
   }
 }

@@ -4,14 +4,15 @@ These rules apply whenever you work with the watsonx Orchestrate ADK: the `orche
 
 ## Environment
 
+- Install `uv` with the package manager (`brew install uv`, `pipx install uv`), not with a piped installer script.
 - Install the ADK in a dedicated virtual environment: `uv venv .venv-wxo && uv pip install --python .venv-wxo ibm-watsonx-orchestrate`. Never add `ibm-watsonx-orchestrate` to a tool's `requirements.txt`; the platform provides it.
 - Before importing any YAML that contains non-ASCII text (Hebrew, Cyrillic, accented characters), run `orchestrate settings set-encoding utf-8` once. Without it the ADK corrupts the text on import.
 - Run `orchestrate env list` before any import and confirm the active environment with the user when it is not obvious. Never import into an environment the user did not name.
 
 ## Documentation first
 
-- Before solving an ADK task, search the documentation with the `wxo-docs` MCP server. ADK YAML fields change between releases; prefer the docs over memory.
-- Use the `wxo-adk` MCP server to list existing agents and tools before creating new ones, and to reuse collaborator agents where they exist.
+- Before solving an ADK task, search the documentation with the `watsonx-orchestrate-adk-docs` MCP server. ADK YAML fields change between releases; prefer the docs over memory.
+- Use the `watsonx-orchestrate-adk` MCP server to list existing agents and tools before creating new ones, and to reuse collaborator agents where they exist.
 
 ## Deploy order and safety
 

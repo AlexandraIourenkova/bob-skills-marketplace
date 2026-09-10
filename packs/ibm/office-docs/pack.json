@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "office-docs",
+  "displayName": "Office documents",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "minBob": "2.0.2",
+  "tags": [
+    "documents",
+    "docx",
+    "pptx",
+    "xlsx",
+    "office",
+    "ibm"
+  ],
+  "skills": [
+    "docx",
+    "pptx",
+    "xlsx",
+    "pdf"
+  ],
+  "rules": [
+    "rules/office-docs.md"
+  ],
+  "networkAllow": [
+    "pypi.org",
+    "files.pythonhosted.org"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/docx": "sha256:471f090cb2ce0cf75be955d2d4202324946397d1aead514df8c65eb087c526ec",
+    "skills/pptx": "sha256:e72e19770ca5474ec8bb5accb4e9eb66688b633c4987b8426297d2fe7b797e54",
+    "skills/xlsx": "sha256:ad494c27df152352cc8f0f125bf5baf74099a1f1a4eccb55cefbc49c9de85ff9",
+    "skills/pdf": "sha256:f44b98a6a182ca9d20e56fc74d1b017976eb225da8b31536aebc4216dacdfe2b",
+    "rules/office-docs.md": "sha256:7b239cf02062c532effe2a5f6097cb1a95b59df9e826325f574fb7e1d96b7c60"
+  }
+}

@@ -6,113 +6,217 @@ rules:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: MP3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: EA2
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: P2
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/export_traces_adk.py'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/export_traces_agentops_v3.py'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/search_traces_adk.py'
 - id: PE3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/search_traces_agentops_v3.py'
 - id: LP3
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*SKILL.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/export_traces_agentops_v3.py'
 - id: E1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/search_traces_agentops_v3.py'
 - id: EA1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/extract_tool_info.py'
 - id: SC1
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/requirements.txt'
 - id: SC4
   reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
   path: '*scripts/requirements.txt'
+- id: PE3
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/mcp_setup.md'
+- id: AE1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*SKILL.md'
+- id: AS2
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/mcp_setup.md'
+- id: RP1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/cli_vs_mcp.md'
+- id: RP1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/mcp_setup.md'
+- id: E1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/mcp_setup.md'
+- id: RP1
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/self_hosted_cpd.md'
+- id: SC2
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+  path: '*reference/mcp_setup.md'
 fingerprints:
 - hash: sha256:889c12aa81f35baa15824ef3e60955c58e96dadf4ec8e02bfb47b145b2db061d
   rule_id: E4
@@ -121,7 +225,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:a2b212186b42670d55e085baf59a67c72c83254b11b60948c44ac477aeada2db
   rule_id: MP3
   file: SKILL.md
@@ -129,7 +235,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:f447edeaa766d4ed0c39f544c92b253858480aa370b2a46a8af9a20103a6c495
   rule_id: PE3
   file: SKILL.md
@@ -137,7 +245,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:da9f982d0ec25b01af712dde7ac6b07b7f4a4d10a946ae95488c0631cad934f0
   rule_id: E1
   file: SKILL.md
@@ -145,7 +255,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:12869c8d077cf045706f026874ab8c57705ca3c1445d1a12615acbb5a1e7926a
   rule_id: E1
   file: SKILL.md
@@ -153,7 +265,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:e89b7663712ebea4c936d0cffbaaf5dfb20c49a06e0652dc9e3f962e6f524d53
   rule_id: EA2
   file: SKILL.md
@@ -161,7 +275,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:11ffbee33fbb4642b974cee251558b0644bcac748fb94762918d2aa5d7c128f5
   rule_id: EA2
   file: SKILL.md
@@ -169,7 +285,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:6063ad491fba1cdaeda7fb7caf46aa1e233d2c78438a2fe4b27b9a682e342074
   rule_id: EA2
   file: SKILL.md
@@ -177,7 +295,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:089158d78838e97bffd271e3989023de378dc1bfebc2062ddd59e0e88cc9bf15
   rule_id: P2
   file: SKILL.md
@@ -185,7 +305,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:49fee7ab95b4793f2c2ecdf627f746e56dffd7c805070eac91493f1e79e3e701
   rule_id: E4
   file: SKILL.md
@@ -193,7 +315,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:925783f084f79fac4e5c1d626b9ef8296a3627dfe806bc47ab37bee877ac7887
   rule_id: PE3
   file: scripts/export_traces_adk.py
@@ -201,7 +325,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:448bc700d98ef9ca4d87317a6c51ee80820af0518435e490c23408a5d71fb76f
   rule_id: PE3
   file: scripts/search_traces_agentops_v3.py
@@ -209,7 +335,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:5398ecbc62f360e5af602c2855b6f2da43726f319afd2813a85ff5197cda702e
   rule_id: LP3
   file: SKILL.md
@@ -217,7 +345,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:5ae94f1856ca40a9225a66b3fa832752a059c73d329d02e9031c0f8e0a60e60a
   rule_id: E1
   file: scripts/search_traces_agentops_v3.py
@@ -225,7 +355,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:9130ca7aef97abddb6572378b57cf03c6c4cd8463f2fe315e75fdb0dc23dbc3b
   rule_id: LP3
   file: SKILL.md
@@ -233,7 +365,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:3a505d5d2c7f0239f21b75da6c82968af4141a4e4a2007e75c533dffbb389d59
   rule_id: EA1
   file: scripts/extract_tool_info.py
@@ -241,7 +375,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:0ab88d8b1b1c43768ca994acac504c3da6968d78fc5c33c0c0eff06482955cf3
   rule_id: SC1
   file: scripts/requirements.txt
@@ -249,7 +385,9 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
 - hash: sha256:684d2dd987047e7dd50063e01324a778271b6390f8979d3f1c961c670403775d
   rule_id: SC4
   file: scripts/requirements.txt
@@ -257,4 +395,116 @@ fingerprints:
     mentions in telemetry scripts and docs (PE3), example requests to placeholder
     hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
     (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
-    (Cisco data_exfiltration MEDIUM).'
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:0333ef308fc0740af85ab08351335db2c5995a4e747d560fa98cd1bf4490359f
+  rule_id: PE3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:1b752f9e3dd58dc526dd8df3d5831d1330dbf554fed0b476f0c3946ef848ae06
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:a6d87eb3adf45028ddc0d0b61570b90c7010ef6748bc8c45122d60a59fe92ed7
+  rule_id: AS2
+  file: reference/mcp_setup.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:8ca85bece1b4531309c5294bb360bae9fe70d145c41bf8d77fe1736f85cfa26a
+  rule_id: AS2
+  file: reference/mcp_setup.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:0fb1971786c8ad980efee033eaadeecd6409c2238fe510a5c22df529c7c06756
+  rule_id: RP1
+  file: reference/cli_vs_mcp.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:980adf4f3fdde8fab02382c415db36d5bf719e617dc95d35d40f070c11519523
+  rule_id: RP1
+  file: reference/cli_vs_mcp.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:d2a324a525a8688e30048b46a404d9f4c697377cf90cb1695aac1e5cd39e02bb
+  rule_id: E1
+  file: reference/mcp_setup.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:da6b11a4f093344acf0d4cc01b59446460718d0d3dbab638237dafef97356c18
+  rule_id: RP1
+  file: reference/mcp_setup.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:ce2fbdd565d81bc0edc58e3baef8fec1949f03a1e625fd0167012e50ab9272e9
+  rule_id: RP1
+  file: reference/self_hosted_cpd.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:b32c43b21d0d1ad47ef6ca6e5463d71cc3648f6eb8ce41e5b164efd85ddd6ae6
+  rule_id: RP1
+  file: reference/self_hosted_cpd.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'
+- hash: sha256:e9e53d94a90f3b9ba0c2cacc3403e68efab617c07e5cf5cb3999dd09f96b1b99
+  rule_id: SC2
+  file: reference/mcp_setup.md
+  reason: 'Reviewed 2026-09-10: the same lines as the policy baseline: .env and credential
+    mentions in telemetry scripts and docs (PE3), example requests to placeholder
+    hosts (E1), the ''without asking'' flow instruction (EA2), unpinned requirements
+    (SC1, SC4; Cisco MEDIUM), telemetry scripts calling the ADK client''s base URL
+    (Cisco data_exfiltration MEDIUM); wxo-agent-architect references its own reference
+    files (AE1), documents .mcp.json edits for agent configuration (AS2) and IBM''s
+    uv installer command (Cisco ''command pipeline'' in mcp_setup.md).'

@@ -67,7 +67,7 @@
   .vendors .tile { min-height:0; }
   .error { padding:48px 0; color:var(--text-2); }
   @media (max-width: 1000px) { .grid { grid-template-columns:repeat(2, minmax(0,1fr)); } .layout, .detail { grid-template-columns:1fr; } .panel { position:static; } .info { grid-template-columns:1fr; } .vendors { grid-template-columns:1fr; } }
-  @media (max-width: 640px) { .grid { grid-template-columns:1fr; } .hero h1 { font-size:28px; line-height:36px; } header nav { display:none; } .wrap { width:calc(100% - 32px); } }
+  @media (max-width: 640px) { .grid { grid-template-columns:1fr; } table, tbody, tr, td { display:block; width:auto !important; } td { padding:6px 0; border:0; } tr { border-bottom:1px solid var(--border); padding:8px 0; } .hero h1 { font-size:28px; line-height:36px; } header nav { display:none; } .wrap { width:calc(100% - 32px); } }
 </style>
 </head>
 <body>
@@ -91,7 +91,7 @@
     down: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M3 13h10"/></svg>'
   };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const state = { index: null, q: '', vendors: new Set(), contains: new Set() };
+  const state = { index: null, q: '', vendors: new Set(), contains: new Set(), status: new Set() };
   const app = document.getElementById('app');
 
   function webUrl() {
@@ -113,7 +113,7 @@
     const passed = verdict === 'pass';
     const risk = pack.scan && pack.scan.riskScore != null ? ` · risk ${pack.scan.riskScore}/100` : '';
     const label = (verdict === 'pass' ? 'Gate passed' : verdict === 'review' ? 'Gate: manual review' : verdict === 'block' ? 'Gate: blocked' : 'Scanners pending') + risk;
-    const findings = pack.baselineFindings ? ` · ${pack.baselineFindings} reviewed findings` : ' · 0 findings';
+    const findings = pack.baselineFindings ? ` · ${pack.baselineFindings} reviewed finding${pack.baselineFindings === 1 ? '' : 's'}` : ' · 0 findings';
     return `<div class="gate">${passed ? ICON.shield : ICON.clock}<span>${esc(label)}${findings}</span></div>`;
   }
   function counts(pack) {
@@ -124,7 +124,30 @@
     if (pack.modes && pack.modes.length) parts.push(`${pack.modes.length} mode${pack.modes.length === 1 ? '' : 's'}`);
     return parts.join(' · ');
   }
+  function plannedMatches(item) {
+    if (state.vendors.size && !state.vendors.has(item.vendor)) return false;
+    if (state.contains.size) return false;
+    if (state.status.size && !state.status.has(item.status)) return false;
+    if (!state.q) return true;
+    const hay = [item.name, item.displayName, item.description, item.vendor, item.vendorDisplayName, item.source].join(' ').toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).every(t => hay.includes(t));
+  }
+  function plannedCard(item) {
+    const tag = item.status === 'coming-soon' ? '<span class="tag blue" style="margin-left:auto">Coming soon</span>' : '<span class="tag" style="margin-left:auto">Candidate</span>';
+    const votes = item.votes ? `${item.votes} vote${item.votes === 1 ? '' : 's'}` : 'no votes yet';
+    const action = item.issue ? `<a class="btn ghost sm" href="${esc(item.issue)}" target="_blank" rel="noopener"><span>${item.status === 'coming-soon' ? 'Subscribe' : 'Vote for this pack'}</span>${ICON.arrow}</a>` : `<span class="btn muted sm"><span>Request pending</span></span>`;
+    return `<div class="tile">
+      <div class="vendor"><div class="avatar">${esc(item.vendorDisplayName.slice(0, 3).toUpperCase())}</div><span>${esc(item.vendorDisplayName)}</span>${tag}</div>
+      <h3>${esc(item.displayName)}</h3>
+      <p>${esc(item.description)}</p>
+      <div class="meta mono">${esc(item.name)} · ${item.status === 'coming-soon' ? 'planned' : 'candidate'}</div>
+      <div class="meta">${esc(item.source ? 'Source: ' + item.source.replace(/^https?:\/\//, '') : '')}</div>
+      ${item.blockedBy ? `<div class="meta">Blocked: ${esc(item.blockedBy)}</div>` : ''}
+      <div class="foot"><div class="gate">${ICON.clock}<span>Gate not run yet · ${votes}</span></div>${action}</div>
+    </div>`;
+  }
   function matches(pack) {
+    if (state.status.size && !state.status.has('released')) return false;
     if (state.vendors.size && !state.vendors.has(pack.vendor)) return false;
     for (const c of state.contains) {
       if (c === 'skills' && !pack.skills.length) return false;
@@ -143,7 +166,12 @@
     const shown = packs.filter(matches);
     const vendorCounts = {};
     packs.forEach(p => { vendorCounts[p.vendor] = (vendorCounts[p.vendor] || 0) + 1; });
-    const vendors = (state.index.vendors || []).filter(v => v.status !== 'suspended');
+    const planned = (state.index.planned || []).filter(plannedMatches);
+    const vendorNames = {};
+    (state.index.vendors || []).forEach(v => { vendorNames[v.id] = v.displayName; });
+    const plannedCounts = {};
+    (state.index.planned || []).forEach(i => { if (!vendorNames[i.vendor]) vendorNames[i.vendor] = i.vendorDisplayName; vendorCounts[i.vendor] = vendorCounts[i.vendor] || 0; plannedCounts[i.vendor] = (plannedCounts[i.vendor] || 0) + 1; });
+    const vendors = Object.keys(vendorNames).map(id => ({ id, displayName: vendorNames[id] }));
     app.innerHTML = `
       <div class="hero"><div class="wrap">
         <h1>Skill packs for IBM Bob, checked and signed before they reach your project</h1>
@@ -152,11 +180,12 @@
       </div></div>
       <div class="wrap layout">
         <aside>
-          <section><h4>Vendor</h4>${vendors.map(v => `<label><input type="checkbox" data-vendor="${esc(v.id)}" ${state.vendors.has(v.id) ? 'checked' : ''}><span>${esc(v.displayName)}</span><span class="count">${vendorCounts[v.id] || 0}</span></label>`).join('')}</section>
+          <section><h4>Vendor</h4>${vendors.map(v => `<label><input type="checkbox" data-vendor="${esc(v.id)}" ${state.vendors.has(v.id) ? 'checked' : ''}><span>${esc(v.displayName)}</span><span class="count">${vendorCounts[v.id] || 0}${plannedCounts[v.id] ? ` + ${plannedCounts[v.id]} planned` : ''}</span></label>`).join('')}</section>
+          <section><h4>Status</h4>${[['released', 'Released'], ['coming-soon', 'Coming soon'], ['candidate', 'Candidate']].map(([k, l]) => `<label><input type="checkbox" data-status="${k}" ${state.status.has(k) ? 'checked' : ''}><span>${l}</span></label>`).join('')}</section>
           <section><h4>Contains</h4>${[['skills', 'Skills'], ['mcp', 'MCP servers'], ['modes', 'Custom modes'], ['commands', 'Slash commands']].map(([k, l]) => `<label><input type="checkbox" data-contains="${k}" ${state.contains.has(k) ? 'checked' : ''}><span>${l}</span></label>`).join('')}</section>
         </aside>
         <div>
-          <div class="toolbar"><span>${shown.length} of ${packs.length} pack${packs.length === 1 ? '' : 's'} from ${Object.keys(vendorCounts).length} vendor${Object.keys(vendorCounts).length === 1 ? '' : 's'}</span><span>Registry commit <span class="mono">${esc((state.index.registry && state.index.registry.commit || '').slice(0, 7) || '-')}</span></span></div>
+          <div class="toolbar"><span>${shown.length} of ${packs.length} released pack${packs.length === 1 ? '' : 's'}${planned.length ? `, ${planned.length} planned` : ''}</span><span>Registry commit <span class="mono">${esc((state.index.registry && state.index.registry.commit || '').slice(0, 7) || '-')}</span></span></div>
           <div class="grid">${shown.map(p => `
             <a class="tile" href="#/pack/${esc(p.name)}">
               <div class="vendor">${vendorBadge(p).replace(/^<div class="vendor">|<\/div>$/g, '')}<span class="tag green" style="margin-left:auto">${esc(p.revokedVersions && p.revokedVersions.includes(p.version) ? 'Revoked' : 'Released')}</span></div>
@@ -165,7 +194,7 @@
               <div class="meta mono">${esc(p.name)} · v${esc(p.version)}</div>
               <div class="meta">${esc(counts(p))}</div>
               <div class="foot">${gateLine(p)}<span class="btn ghost sm"><span>View pack</span>${ICON.arrow}</span></div>
-            </a>`).join('') || '<p>No packs match. Clear the filters, or request a pack.</p>'}</div>
+            </a>`).join('') + planned.map(plannedCard).join('') || '<p>No packs match. Clear the filters, or request a pack.</p>'}</div>
           <div class="info">
             <div><b>Only official vendors</b><p>A pack is published by the owner of the product it is about, or curated by the marketplace team from that vendor's official repository with provenance recorded.</p></div>
             <div><b>Every version through the gate</b><p>Schema and checksums, policy linter, NVIDIA SkillSpector, Cisco skill-scanner, two human approvals. Accepted findings stay visible in a reviewed baseline.</p></div>
@@ -177,6 +206,7 @@
     q.addEventListener('input', () => { state.q = q.value; renderCatalog(); q.focus(); q.setSelectionRange(q.value.length, q.value.length); });
     app.querySelectorAll('input[data-vendor]').forEach(el => el.addEventListener('change', () => { el.checked ? state.vendors.add(el.dataset.vendor) : state.vendors.delete(el.dataset.vendor); renderCatalog(); }));
     app.querySelectorAll('input[data-contains]').forEach(el => el.addEventListener('change', () => { el.checked ? state.contains.add(el.dataset.contains) : state.contains.delete(el.dataset.contains); renderCatalog(); }));
+    app.querySelectorAll('input[data-status]').forEach(el => el.addEventListener('change', () => { el.checked ? state.status.add(el.dataset.status) : state.status.delete(el.dataset.status); renderCatalog(); }));
   }
 
   function renderPack(name) {
@@ -184,6 +214,7 @@
     if (!p) { app.innerHTML = `<div class="wrap error">Pack "${esc(name)}" is not in the catalog. <a href="#/">Back to packs</a></div>`; return; }
     const v = vendorOf(p.vendor);
     const cmd = `uvx bob-skills add ${p.name}`;
+    const install = 'uv tool install bob-skills';
     const web = webUrl();
     const tag = p.tag || `${p.name}--v${p.version}`;
     const rows = [
@@ -221,9 +252,9 @@
         <div>
           <div class="panel">
             <div><button class="btn wide" onclick="copyText('/skills-add ${esc(p.name)}', 'Paste into Bob')"><span>Add to Bob</span>${ICON.arrow}</button><div class="hint" style="margin-top:8px">Copies <span class="mono">/skills-add ${esc(p.name)}</span>. Paste it into Bob; it shows what will be installed and asks before writing anything.</div></div>
-            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div></div>
+            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div><div class="hint" style="margin-top:8px">Needs only uv. Permanent command instead of uvx: <span class="mono">${esc(install)}</span> <button title="Copy" onclick="copyText('${esc(install)}')" style="background:transparent;border:0;cursor:pointer;vertical-align:middle">${ICON.copy}</button></div></div>
             <div><h5>Or ask Bob</h5><div class="quote">Install the ${esc(p.displayName)} pack from the marketplace</div></div>
-            <div><h5>Download</h5><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.tar.gz">${ICON.down} <span class="mono">${esc(tag)}.tar.gz</span></a><div class="hint mono" style="margin-top:6px">sha256 in ${esc(tag)}.sha256 next to it</div></div>
+            <div><h5>Download</h5><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.zip">${ICON.down} <span class="mono">${esc(tag)}.zip</span></a><div class="hint" style="margin-top:6px"><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.tar.gz">tar.gz</a> · <a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.sha256">sha256</a> · <a href="${web}/releases/tag/${esc(tag)}">release page</a></div></div>
           </div>
           <div class="facts">
             <div><span>Installs into</span><span class="mono">.bob/</span></div>
@@ -254,7 +285,9 @@
     document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', (hash.startsWith('#/vendors') ? 'vendors' : 'packs') === a.dataset.nav));
     if (!state.index) return;
     const m = hash.match(/^#\/pack\/([A-Za-z0-9-]+)/);
-    if (m) renderPack(m[1]); else if (hash.startsWith('#/vendors')) renderVendors(); else renderCatalog();
+    if (m) { renderPack(m[1]); const pk = state.index.packs.find(x => x.name === m[1]); document.title = (pk ? pk.displayName + ' · ' : '') + 'Bob Skills Marketplace'; }
+    else if (hash.startsWith('#/vendors')) { renderVendors(); document.title = 'Vendors · Bob Skills Marketplace'; }
+    else { renderCatalog(); document.title = 'Bob Skills Marketplace'; }
     window.scrollTo(0, 0);
   }
 

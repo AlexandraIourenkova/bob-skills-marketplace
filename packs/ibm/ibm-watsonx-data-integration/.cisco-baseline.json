@@ -1,0 +1,25 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "04b58607abb53600",
+      "skill": "di-agent-flow-lifecycle",
+      "severity": "HIGH",
+      "category": "prompt_injection",
+      "title": "Attempts to conceal actions from the user",
+      "file": "references/author.md",
+      "line": 55,
+      "reason": "Reviewed 2026-09-10: 'no confirmation' and 'without checking' are the skill's own rules about when to ask (EA2); references to its own reference files (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown table padding (P9); Cisco 'conceal actions' hit is the honesty instruction not to claim a backup was created when it was reused (author.md:55), the opposite of concealment."
+    },
+    {
+      "key": "476d606af0bb2b0d",
+      "skill": "di-agent-knowledge-engine-datastage",
+      "severity": "LOW",
+      "category": "policy_violation",
+      "title": "Skill package contains many files",
+      "file": ".",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: 'no confirmation' and 'without checking' are the skill's own rules about when to ask (EA2); references to its own reference files (AE1); DataStage stage docs mention writing data to files (RA2) and use Markdown table padding (P9); Cisco 'conceal actions' hit is the honesty instruction not to claim a backup was created when it was reused (author.md:55), the opposite of concealment."
+    }
+  ]
+}

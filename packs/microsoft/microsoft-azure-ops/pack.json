@@ -2,14 +2,14 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "microsoft-azure-ops",
   "displayName": "Microsoft Azure operations",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "vendor": "microsoft",
-  "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas. Curated from Microsoft's official skills repository.",
+  "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.",
   "license": "MIT",
   "homepage": "https://github.com/microsoft/skills",
   "source": {
     "repo": "https://github.com/microsoft/skills",
-    "ref": "39d230125298",
+    "ref": "39d230125298b39f2e432ff6e23831124d05b2b5",
     "path": ".github/plugins/azure-skills/skills"
   },
   "minBob": "2.0.2",
@@ -24,7 +24,9 @@
     "azure-storage",
     "azure-cost",
     "azure-compliance",
-    "azure-quotas"
+    "azure-quotas",
+    "azure-diagnostics",
+    "azure-compute"
   ],
   "networkAllow": [
     "*.microsoft.com",
@@ -36,10 +38,12 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/azure-resource-lookup": "sha256:097820e77febe667cf9a445e50fe85d48c4bb74df8770516dd323b1818c94601",
+    "skills/azure-resource-lookup": "sha256:61d1b44921fdcece2f1e50808c769148d8b083b7ffe15153f0a0f022ab92f22d",
     "skills/azure-storage": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87",
     "skills/azure-cost": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b",
-    "skills/azure-compliance": "sha256:a6100b2d498f579c40b5a67c3fedca04506a4568ce88170f0ca5a24ac638363c",
-    "skills/azure-quotas": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+    "skills/azure-compliance": "sha256:0ae8ea96e5f391c20ef93d545eab188e6fdd8a899481a9c34c0cb69f6e6b008b",
+    "skills/azure-quotas": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686",
+    "skills/azure-diagnostics": "sha256:aad3f4f4005def69b6a7b44e56de24b1eebcf2999184005dac8af20f58e76f9d",
+    "skills/azure-compute": "sha256:9322f5f57e5acea5d4f8235027a9ca05e7344721749e25dace9760f29d7f4a1a"
   }
 }

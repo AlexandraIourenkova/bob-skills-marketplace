@@ -125,8 +125,11 @@ class Registry:
     # -- reading ---------------------------------------------------------
 
     def packs(self) -> list[Pack]:
+        """Packs in vendors.json order (the registry's own vendor first), then by name."""
+        order = {v["id"]: i for i, v in enumerate(self.vendors_doc.get("vendors", []))}
         packs = []
-        for manifest_path in sorted((self.root / "packs").glob("*/*/pack.json")):
+        for manifest_path in sorted((self.root / "packs").glob("*/*/pack.json"),
+                                    key=lambda m: (order.get(m.parent.parent.name, 999), m.parent.name)):
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             packs.append(Pack(
                 name=str(manifest.get("name", manifest_path.parent.name)),
@@ -171,6 +174,7 @@ class Registry:
     def validate(self, fix: bool = False) -> list[str]:
         problems: list[str] = []
         problems += self._schema_problems("vendors.schema.json", self.vendors_doc, "vendors.json")
+        problems += self._schema_problems("index.schema.json", self.build_index(), "index.json (as built)")
         codeowners = (self.root / "CODEOWNERS").read_text(encoding="utf-8") if (self.root / "CODEOWNERS").is_file() else ""
         seen: dict[str, str] = {}
         for pack in self.packs():
@@ -287,7 +291,7 @@ class Registry:
                 "readme": pack.path.relative_to(self.root).as_posix() + "/README.md" if (pack.path / "README.md").is_file() else "",
                 "scan": self.scan_summary(pack.path),
             }
-            for key in ("license", "homepage", "minBob", "tags", "source"):
+            for key in ("license", "homepage", "minBob", "tags", "source", "sources"):
                 if key in pack.manifest:
                     entry[key] = pack.manifest[key]
             for skill_entry in entry["skills"]:
@@ -307,7 +311,25 @@ class Registry:
                 "notes": v.get("notes", ""), "packs": [p["name"] for p in packs if p["vendor"] == v["id"]],
             } for v in self.vendors_doc.get("vendors", [])],
             "packs": packs,
+            "planned": self.planned(),
         }
+
+    def planned(self) -> list[dict]:
+        """Planned packs from roadmap.json, with their vendor names."""
+        path = self.root / "roadmap.json"
+        if not path.is_file():
+            return []
+        out = []
+        for entry in json.loads(path.read_text(encoding="utf-8")).get("planned", []):
+            vendor = self.vendors.get(entry.get("vendor"), {})
+            out.append({
+                "name": entry["name"], "displayName": entry.get("displayName", entry["name"]), "vendor": entry.get("vendor", ""),
+                "vendorDisplayName": vendor.get("displayName", entry.get("vendorDisplayName", entry.get("vendor", ""))),
+                "status": entry.get("status", "candidate"), "description": entry.get("description", ""),
+                "source": entry.get("source", ""), "blockedBy": entry.get("blockedBy", ""), "issue": entry.get("issue", ""),
+                "votes": int(entry.get("votes", 0) or 0),
+            })
+        return out
 
     # -- catalog for the find-skills skill -----------------------------------
 
@@ -353,6 +375,19 @@ class Registry:
             cisco = f", Cisco max severity {scan['ciscoMaxSeverity']}" if scan.get("ciscoMaxSeverity") else ""
             out.append(f"- Gate: {scan.get('verdict', 'pending')}{risk}{cisco}; {pack.get('baselineFindings', 0)} reviewed policy findings; {pack.get('components', 0)} checksummed components.")
             out.append(f"- Install: `uvx bob-skills add {pack['name']}`")
+            out.append("")
+        if index.get("planned"):
+            out += ["## Planned packs (not installable yet)", ""]
+            for item in index["planned"]:
+                label = "coming soon" if item["status"] == "coming-soon" else "candidate"
+                line = f"- **{item['displayName']}** (`{item['name']}`, {item['vendorDisplayName']}, {label}): {item['description']}"
+                if item.get("source"):
+                    line += f" Source: {item['source']}."
+                if item.get("blockedBy"):
+                    line += f" Blocked by: {item['blockedBy']}."
+                if item.get("issue"):
+                    line += f" Vote or subscribe: {item['issue']} ({item.get('votes', 0)} votes)."
+                out.append(line)
             out.append("")
         return "\n".join(out).rstrip() + "\n"
 
@@ -525,7 +560,8 @@ def resolve_reference(index: dict, reference: str) -> dict:
         other = normalise_repo(url or "")
         return bool(other) and other[0] == host and other[1] == org and (other[2] == repo or not repo)
 
-    hits = [p for p in packs if same_repo(p.get("source", {}).get("repo", "")) or same_repo(p.get("homepage", ""))]
+    hits = [p for p in packs if same_repo(p.get("source", {}).get("repo", "")) or same_repo(p.get("homepage", ""))
+            or any(same_repo(s.get("repo", "")) for s in p.get("sources", {}).values())]
     vendors = []
     for v in index.get("vendors", []):
         gh = v.get("github", {})
@@ -559,7 +595,7 @@ def describe_pack(registry: "Registry", pack: Pack, index_entry: dict) -> dict:
         "description": pack.manifest.get("description", ""), "tag": pack.tag,
         "vendor": {"id": pack.vendor, "displayName": vendor.get("displayName", pack.vendor), "status": vendor.get("status", "unknown"),
                    "homepage": vendor.get("homepage", ""), "github": vendor.get("github", {}), "signingKey": bool(vendor.get("publicKey"))},
-        "source": pack.manifest.get("source"), "minBob": pack.manifest.get("minBob"),
+        "source": pack.manifest.get("source"), "sources": pack.manifest.get("sources", {}), "minBob": pack.manifest.get("minBob"),
         "skills": index_entry.get("skills", []),
         "mcpServers": {name: cfg for name, cfg in pack.manifest.get("mcpServers", {}).items()},
         "rules": [Path(r).name for r in pack.manifest.get("rules", [])],

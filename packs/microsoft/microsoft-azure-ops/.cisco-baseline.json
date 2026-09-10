@@ -1,0 +1,15 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "dfade7c6745cf38a",
+      "skill": "azure-diagnostics",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-10: VM creation guidance names SSH key paths (~/.ssh/id_rsa.pub, authorized_keys) and 'git push --force' as text (PE3, TM1); long runs of spaces are Markdown table padding (P9); kubeconfig, sudo and 'automatically run' appear in troubleshooting docs; Cisco 'undeclared network usage' is the az CLI the skill teaches."
+    }
+  ]
+}

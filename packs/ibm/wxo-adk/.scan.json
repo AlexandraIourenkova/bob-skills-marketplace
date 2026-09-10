@@ -1,9 +1,10 @@
 {
-  "scannedAt": "2026-09-10T11:16:22Z",
+  "scannedAt": "2026-09-10T12:41:34Z",
   "tools": {
     "skillspector": "2.11.2",
-    "ciscoSkillScanner": null
+    "ciscoSkillScanner": "2.1.0"
   },
+  "baselineDigest": "sha256:a7c5cabe99f3bee3af63dd31fe2b104216582b4e18b29cbfce7f10b3b525620e|sha256:68d93acc0169b17973b506c667103400b927dd909ebb1aa5b90efba798b870ba",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -29,7 +30,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:685da057cb4773aea4242caa108ffad63596b01bb393dec7f2180d48d835e6d3"
     },
     "sop-builder": {
       "skillspector": {
@@ -51,7 +53,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:42fd89cf838bbcec6295c06c5a54b685c8615ba8ffec12f2f5babb7e57edbbf3"
     },
     "wxo-builder": {
       "skillspector": {
@@ -73,7 +76,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:342f92637b216e8ec856de5d273be76d1ab3d1a86f76843d836c25d53ec6f60f"
     },
     "wxo-analyzer": {
       "skillspector": {
@@ -95,7 +99,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:9827d600438df05d251fb7472fec0d6b0da1336309eb94ea6f3322f13edd4f51"
     },
     "telemetry-analyzer": {
       "skillspector": {
@@ -117,7 +122,8 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f"
     },
     "agent-instructions-evaluator": {
       "skillspector": {
@@ -139,14 +145,38 @@
           "INFO": 1
         },
         "version": null
-      }
+      },
+      "digest": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902"
+    },
+    "wxo-agent-architect": {
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 25,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": false,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 1,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      },
+      "digest": "sha256:c716450019dd17ef6dc3dd066e6233a3ff75dfb84ff7220215064cf2a80ea894"
     }
   },
   "summary": {
     "riskScore": 0,
     "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 27,
-    "ciscoAccepted": 5
+    "skillspectorSuppressed": 52,
+    "ciscoAccepted": 6
   }
 }

@@ -2,7 +2,7 @@
 
 ## Hooks
 
-Add to `.bob/settings.json` (project) or the user settings. `bob-skills guard` reads the hook payload from stdin and exits 2 to block; `check --brief` prints one status line at session start and never fails.
+Add to `.bob/settings.json` (project) or the user settings. `uvx bob-skills guard` reads the hook payload from stdin and exits 2 to block; `check --brief` prints one status line at session start and never fails.
 
 ```json
 {
@@ -26,7 +26,7 @@ Add to `.bob/settings.json` (project) or the user settings. `bob-skills guard` r
 }
 ```
 
-Until the package is published on an index, use `uv run --project /path/to/bob-skills-marketplace/cli bob-skills guard` as the command.
+The `bob-skills` command comes from a one-time `uv tool install "git+https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git#subdirectory=cli"`; it puts `bob-skills` on the PATH that Bob's hooks use. From a checkout without installing: `uv run --project /path/to/bob-skills-marketplace/cli bob-skills guard`.
 
 For an organisation-wide rule, put the same `PreToolUse` entry in an **EnforcedHooks** policy (Bob 2.1.0+) with `uvx bob-skills guard --no-local`, so users cannot switch the guard off and only marketplace packs are activated.
 
@@ -49,7 +49,7 @@ bob run "/skills-add wxo-adk"
 
 ## What the installer touches
 
-| Pack component | Project scope (`bob-skills add`) | User scope (`--global`) |
+| Pack component | Project scope (`uvx bob-skills add`) | User scope (`--global`) |
 |---|---|---|
 | skills | `.bob/skills/<skill>/` | `~/.bob/skills/<skill>/` |
 | MCP servers | `.bob/mcp.json` → `mcpServers` | `~/.bob/mcp_settings.json` → `mcpServers` |
@@ -58,8 +58,8 @@ bob run "/skills-add wxo-adk"
 | modes | `.bob/custom_modes.yaml` → `customModes` by slug | `~/.bob/custom_modes.yaml` (path to confirm against Bob docs) |
 | lock | `.bob/skills.lock` | `~/.bob/skills.lock` |
 
-`bob-skills remove <pack>` reverses all of it, including the MCP entries and modes, using the lock as the record of ownership.
+`uvx bob-skills remove <pack>` reverses all of it, including the MCP entries and modes, using the lock as the record of ownership.
 
 ## The ADK MCP server and unmanaged skills
 
-The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo-adk` pack instead, or `bob-skills trust <skill>` for a genuinely local skill.
+The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo-adk` pack instead, or `uvx bob-skills trust <skill>` for a genuinely local skill.

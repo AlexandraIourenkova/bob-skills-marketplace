@@ -6,11 +6,29 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = "Apache-2.0"
 authors = [{ name = "Bob Skills Marketplace team" }]
+keywords = ["ibm-bob", "agent-skills", "marketplace", "mcp", "supply-chain", "security"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Security",
+]
 dependencies = [
   "typer>=0.12",
   "pyyaml>=6.0",
   "jsonschema>=4.20",
 ]
+
+[project.urls]
+Homepage = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
+Repository = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
+Documentation = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace#readme"
 
 [project.scripts]
 bob-skills = "bob_skills.cli:app"
