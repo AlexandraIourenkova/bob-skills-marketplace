@@ -186,6 +186,41 @@
         "*.ai.azure.com"
       ],
       "notes": "Curated from microsoft/skills (MIT): Azure operations and SDK skills shipped as Claude Code plugins under .github/plugins/."
+    },
+    {
+      "id": "confluent",
+      "displayName": "Confluent",
+      "status": "active",
+      "homepage": "https://www.confluent.io",
+      "securityContact": "security@confluent.io",
+      "github": {
+        "host": "github.com",
+        "org": "confluentinc",
+        "repos": [
+          "agent-skills"
+        ]
+      },
+      "maintainers": [
+        "Maria-Startseva"
+      ],
+      "publicKey": null,
+      "networkAllow": [
+        "*.confluent.io",
+        "confluent.io",
+        "*.confluent.cloud",
+        "*.warpstream.com",
+        "kafka.apache.org",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "repo.maven.apache.org",
+        "repo1.maven.org",
+        "plugins.gradle.org",
+        "services.gradle.org",
+        "registry.terraform.io",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from confluentinc/agent-skills (Apache-2.0): Kafka clients, Kafka Streams, Schema Registry, Flink and Confluent Cloud pipelines. Confluent has been an IBM company since March 2026 and keeps its own GitHub organisation, so it is listed as its own vendor, like HashiCorp."
     }
   ],
   "signature": null

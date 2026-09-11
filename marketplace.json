@@ -231,6 +231,26 @@
         "microsoft"
       ],
       "category": "ibm-bob"
+    },
+    {
+      "name": "confluent-kafka",
+      "source": "./packs/confluent/confluent-kafka",
+      "description": "Build Kafka producers, consumers and Kafka Streams apps with Schema Registry, bring unmanaged schemas under Schema Registry with PII tags, write Flink SQL and Java UDFs, set up CDC pipelines into Iceberg or Delta tables with Tableflow, and plan a move from AWS MSK to Confluent Cloud. Confluent's official skills, curated from confluentinc/agent-skills with the evals Confluent scores them against.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Confluent"
+      },
+      "homepage": "https://github.com/confluentinc/agent-skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "kafka",
+        "flink",
+        "streaming",
+        "schema-registry",
+        "cdc",
+        "confluent"
+      ],
+      "category": "ibm-bob"
     }
   ]
 }

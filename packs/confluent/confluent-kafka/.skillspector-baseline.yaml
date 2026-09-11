@@ -1,0 +1,1250 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/common.py'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/test_project.py'
+- id: LP3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/evals.json'
+- id: AR2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/build-templates.md'
+- id: MP3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/debugging.md'
+- id: TM1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/verification.md'
+- id: MP3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/verification.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/evals.json'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/debugging.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*scripts/create-topics.sh'
+- id: TM1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*scripts/teardown.sh'
+- id: EA4
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/config-baseline.md'
+- id: SC4
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/ecommerce-platform/analytics-service/requirements.txt'
+- id: SC4
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/legacy-event-publisher/requirements.txt'
+- id: P2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/code-migration.md'
+- id: SC1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/api-gateway/package.json'
+- id: SC4
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/api-gateway/package.json'
+- id: SC1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/ecommerce-platform/notification-service/package.json'
+- id: SC4
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*evals/mock-repos/order-processor/requirements.txt'
+- id: E1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/local-docker-setup.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: AE1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: E1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/rest-api.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: SC2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/assess.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/assess.md'
+- id: PE3
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/kcp-commands.md'
+- id: EA2
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/assess.md'
+- id: EA1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*SKILL.md'
+- id: EA1
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+  path: '*references/assess.md'
+fingerprints:
+- hash: sha256:a3e0ebed4844c17097a6c10ebaf26a21765fe5e8f2653653c1827e2d9a7b6a7a
+  rule_id: PE3
+  file: references/common.py
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:a82d8ea5066b1e9b81ed468c4c416f19e93e0d9c2a60efdb16fba82ff7b0f945
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:a9c0f00c203ac171811eaedfbebf259424624b46b0c136f28af160101b0ecb49
+  rule_id: EA2
+  file: evals/evals.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:d30bde49a2aa62c19df6ec715acb5a4b347ae00c711a71f6f6d46471656362a8
+  rule_id: AR2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:f6134037bf3a96dca13f17d7ef796e3c319a9abb8124ff48d5dc902613a02d91
+  rule_id: PE3
+  file: references/build-templates.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:30e55f71300b2ac676376abe8fbe9cffddb161c279a549c09d715ca5a4c88f04
+  rule_id: MP3
+  file: references/debugging.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:d34e2631f1b2b5ffb6abb414a96ff8d9b1f2d5c1af255faf111f2d3c9ed991b5
+  rule_id: TM1
+  file: references/verification.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:37837af27234b94b108be3066ff6960ccb00ffe3b27f0abc932a1871b3c670d6
+  rule_id: TM1
+  file: references/verification.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:b36369760a67e534008d8f3c535c1da456322ff45587c80139523d53e714c5ab
+  rule_id: TM1
+  file: references/verification.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:53161be9e171d85aa1a92c2a17a73402b249deb9f02ac1f1e8f99356d5d0a6a8
+  rule_id: MP3
+  file: references/verification.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:ed337a5066d0953564d5f6dc91e555c1f6ba85706a9e76ad4762e40108a31a01
+  rule_id: PE3
+  file: scripts/create-topics.sh
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:fbbf96d89632bd1afb6467ab423da06bdbffa288f4354b7eab23e2d00b2b1dc7
+  rule_id: TM1
+  file: scripts/teardown.sh
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:31ad9d8d1d591402df2025f4e01c34136e94913c3abd65092e9c60f454249b8f
+  rule_id: EA4
+  file: references/config-baseline.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:b64fe2202cdd719c03c0f48ac33bded82a1d8bfda2cfbfe2dbca6f4dfe6c58e0
+  rule_id: SC4
+  file: evals/mock-repos/legacy-event-publisher/requirements.txt
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:8de15328f54794a9853e00dda4c53e6d1e0650da07a20e0f8a3e2bcac918702c
+  rule_id: P2
+  file: references/code-migration.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:85e5a616dec1b6adde8d71f224598318af87df93c9b5f87605b85bb98920250a
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:d91c42f2a8ad60ae56a7a7c5bcec04ce73ff4cc1b163e1962559576d47d83feb
+  rule_id: SC1
+  file: evals/mock-repos/api-gateway/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:df6774160c7695c3b3c160f02ff1975772e33af511850d5694d519a8eff180c9
+  rule_id: SC4
+  file: evals/mock-repos/api-gateway/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:55f48d849636a0de5d2dc5b47145107c82cf43769006bff2ced17e424546cd0b
+  rule_id: SC1
+  file: evals/mock-repos/api-gateway/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:1257d74d3664b3d0a0014bef1a631c8963eb3175267ce7cb2b7b0fafbb60fa4e
+  rule_id: SC4
+  file: evals/mock-repos/api-gateway/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:89b85edb32145ca19ee9e17852cc755356dc38f2fcc53d6dd5b08b3484f55c70
+  rule_id: SC1
+  file: evals/mock-repos/api-gateway/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:b13fe67f70cb7302192c4009a510475e9bce19aa8ab2981df6dab79016f2e839
+  rule_id: SC1
+  file: evals/mock-repos/ecommerce-platform/notification-service/package.json
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:2dcd67bea8ca9acb9dd50b172e270ae9d3dd47185dc8821c3e6aa9786837be8e
+  rule_id: SC4
+  file: evals/mock-repos/order-processor/requirements.txt
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:f30e7fc18d9204b55500da752c2f03ccb9e02935b5c3214238a8b6aa2a5fc734
+  rule_id: E1
+  file: references/local-docker-setup.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:2585ee3701c4589ada85bf8dc10a662e95b089f054505cec633366ccc30ac42e
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:f8d7619b49e536dd633d43cdef2c5c754875673f68e1dc60f60fd7667bc3542a
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:16c5b5d3b17361046acb95de05307303870c12da31b394829462d6d2676da587
+  rule_id: E1
+  file: references/rest-api.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:5ab8edffeacb134b78cdeaf6bb00f92c52f141063cca4b2d76a42c23952571da
+  rule_id: E1
+  file: references/rest-api.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:3a146b113de300946df8f8a58fa0ccc2fb2db9c153e1dd99537e0d1241de515a
+  rule_id: E1
+  file: references/rest-api.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:9f0363faa441b9616ddbd664af139c2bdc470a2a7bcde3a8ff35d03ba9d46b60
+  rule_id: E1
+  file: references/rest-api.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:58e16d7af6d180c55b2d032024a54029b593de79c9046df0b33e212e7708a6f8
+  rule_id: E1
+  file: references/rest-api.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:a477c701ffc464782ed0c1eae145d073100d93149c4f1c33fe093045c31a1b6c
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:d543d7442ba6d6fc1a17ad5ea1f3ea16ca3b5cc4e7d949ede90ea7915912d7e4
+  rule_id: PE3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:f4c421e075caadc248f6e2ca83d1148cdc27cd9580ca5449e3f87de836046b89
+  rule_id: SC2
+  file: references/assess.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:6cc8b16ee1e94fc2f9aa2c7a434fd5bb379ea733f4c286a65cb1894dc6b42540
+  rule_id: PE3
+  file: references/kcp-commands.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:d00cd6dec98810e65b1d21916d4bd725d268ad88fb7645d822b60a0368e82d88
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:f5c6cffb74b9e0b0839016296a5100f3e927510bb5f51b23be75c1eaade743dd
+  rule_id: EA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:1b58a326483b0b568487c42f0e2839fc83594e2b565f0ff96cf287b4dce16de6
+  rule_id: EA1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'
+- hash: sha256:33ac21ebb8f0e838d1bf4557d797e0cb5eb41c5a5554b93b681e13b5b0de41df
+  rule_id: EA1
+  file: references/assess.md
+  reason: 'Reviewed 2026-09-11: .env and cluster-credentials.yaml are the user''s
+    own project credential files, loaded by the client templates and by KCP scans,
+    and msk-migration forbids displaying them (PE3). Kafka Streams state-store resets
+    and rm -rf /tmp/kafka-streams/<application-id> cleanup, the script version behind
+    a y/N prompt (MP3, TM1). retries=2147483647 is standard transactional producer
+    config (EA4). ''Don''t lecture'' means do not push Flink over Kafka Streams (AR2).
+    ''auto-approve'', ''without asking'', ''run any command'', ''no approval'' and
+    ''curl | python3'' sit in rules that forbid them or allow only read-only jq parsing
+    of files the user pointed at; every mutating command needs the user''s approval
+    (EA1, EA2, SC2). Confluent Cloud REST examples call api.confluent.cloud with the
+    user''s own key, and a docker-compose file is fetched from confluentinc/tutorials
+    (E1). XML comments in a pom.xml snippet (P2). Unpinned or vulnerable dependencies
+    live only in eval mock repositories the skill reads as input and never installs
+    (SC1, SC4). Reference files SkillSpector inspected partially (AE1) were read in
+    full by the policy linter. No declared tool permissions (LP3).'

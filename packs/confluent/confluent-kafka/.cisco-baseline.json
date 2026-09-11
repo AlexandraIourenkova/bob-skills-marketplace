@@ -1,0 +1,55 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "e3c71a5060312ce9",
+      "skill": "developing-kafka-python-client",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-11: requests.get to the user's own Schema Registry with a 5-second timeout in the Python client template (DATA_EXFIL_NETWORK_REQUESTS, TOOL_ABUSE_UNDECLARED_NETWORK); axios calls inside an eval mock repository that kafka-schema-registry reads as sample input and never runs (DATA_EXFIL_JS_NETWORK); 'curl | python3' appears in a rule that forbids it (PIPELINE_TAINT_FLOW); no licence field in SKILL.md frontmatter, the pack ships Apache-2.0 in skills/LICENSE (MANIFEST_MISSING_LICENSE)."
+    },
+    {
+      "key": "2048f19ff85e7d80",
+      "skill": "developing-kafka-python-client",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "references/common.py",
+      "line": 66,
+      "reason": "Reviewed 2026-09-11: requests.get to the user's own Schema Registry with a 5-second timeout in the Python client template (DATA_EXFIL_NETWORK_REQUESTS, TOOL_ABUSE_UNDECLARED_NETWORK); axios calls inside an eval mock repository that kafka-schema-registry reads as sample input and never runs (DATA_EXFIL_JS_NETWORK); 'curl | python3' appears in a rule that forbids it (PIPELINE_TAINT_FLOW); no licence field in SKILL.md frontmatter, the pack ships Apache-2.0 in skills/LICENSE (MANIFEST_MISSING_LICENSE)."
+    },
+    {
+      "key": "715e783fe375ff2c",
+      "skill": "kafka-schema-registry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives in JavaScript/TypeScript",
+      "file": "evals/mock-repos/api-gateway/src/server.js",
+      "line": 19,
+      "reason": "Reviewed 2026-09-11: requests.get to the user's own Schema Registry with a 5-second timeout in the Python client template (DATA_EXFIL_NETWORK_REQUESTS, TOOL_ABUSE_UNDECLARED_NETWORK); axios calls inside an eval mock repository that kafka-schema-registry reads as sample input and never runs (DATA_EXFIL_JS_NETWORK); 'curl | python3' appears in a rule that forbids it (PIPELINE_TAINT_FLOW); no licence field in SKILL.md frontmatter, the pack ships Apache-2.0 in skills/LICENSE (MANIFEST_MISSING_LICENSE)."
+    },
+    {
+      "key": "b9e44051cb764cdd",
+      "skill": "kafka-schema-registry",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives in JavaScript/TypeScript",
+      "file": "evals/mock-repos/api-gateway/src/server.js",
+      "line": 14,
+      "reason": "Reviewed 2026-09-11: requests.get to the user's own Schema Registry with a 5-second timeout in the Python client template (DATA_EXFIL_NETWORK_REQUESTS, TOOL_ABUSE_UNDECLARED_NETWORK); axios calls inside an eval mock repository that kafka-schema-registry reads as sample input and never runs (DATA_EXFIL_JS_NETWORK); 'curl | python3' appears in a rule that forbids it (PIPELINE_TAINT_FLOW); no licence field in SKILL.md frontmatter, the pack ships Apache-2.0 in skills/LICENSE (MANIFEST_MISSING_LICENSE)."
+    },
+    {
+      "key": "b7050d0c8cf6ff92",
+      "skill": "msk-migration",
+      "severity": "LOW",
+      "category": "data_exfiltration",
+      "title": "Dangerous data flow in command pipeline",
+      "file": "references/assess.md",
+      "line": 1,
+      "reason": "Reviewed 2026-09-11: requests.get to the user's own Schema Registry with a 5-second timeout in the Python client template (DATA_EXFIL_NETWORK_REQUESTS, TOOL_ABUSE_UNDECLARED_NETWORK); axios calls inside an eval mock repository that kafka-schema-registry reads as sample input and never runs (DATA_EXFIL_JS_NETWORK); 'curl | python3' appears in a rule that forbids it (PIPELINE_TAINT_FLOW); no licence field in SKILL.md frontmatter, the pack ships Apache-2.0 in skills/LICENSE (MANIFEST_MISSING_LICENSE)."
+    }
+  ]
+}

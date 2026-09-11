@@ -10,7 +10,7 @@ export PYTHONWARNINGS=ignore
 step() { printf '\n== %s\n' "$1"; }
 
 step "client tests (includes the red-team cases)"
-uv run -q --project cli pytest -q
+uv run -q --project cli pytest -q cli/tests   # only the client tests; skills may ship test_*.py templates
 
 step "schemas, vendor list, checksums, release tags"
 uv run -q --project cli bob-skills registry validate

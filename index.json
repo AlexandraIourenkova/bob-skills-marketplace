@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-10T13:42:52Z",
+  "generated": "2026-09-11T11:05:05Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "08d53abe41f998619a2f90de23b659b800db5c7b"
+    "commit": "d05cf522a7ca028f3f112fb13b04c0665c55b81d"
   },
   "vendors": [
     {
@@ -125,6 +125,24 @@
         "microsoft-azure-ops",
         "microsoft-foundry"
       ]
+    },
+    {
+      "id": "confluent",
+      "displayName": "Confluent",
+      "status": "active",
+      "homepage": "https://www.confluent.io",
+      "github": {
+        "host": "github.com",
+        "org": "confluentinc",
+        "repos": [
+          "agent-skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Curated from confluentinc/agent-skills (Apache-2.0): Kafka clients, Kafka Streams, Schema Registry, Flink and Confluent Cloud pipelines. Confluent has been an IBM company since March 2026 and keeps its own GitHub organisation, so it is listed as its own vendor, like HashiCorp.",
+      "packs": [
+        "confluent-kafka"
+      ]
     }
   ],
   "packs": [
@@ -142,7 +160,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:79b02a1d84e62806745bd0f03a8ce69268a2ae55ad4af54d37e4258ab40bc626"
+          "digest": "sha256:d4a86847a4dd2d5af46d62e2da7a4eb793590bb403797938a93c97ee4cc931e1"
         },
         {
           "name": "skill-creator",
@@ -161,7 +179,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:3dbe624e18d8facbb595001769570165f32143bb425de524de5153f729230c70",
+      "digest": "sha256:013dc2fdbc848146c7b9071103190433b9cdc3544f245c9fc2f16785cf8dbe36",
       "revokedVersions": [],
       "versions": [
         "1.1.2",
@@ -176,9 +194,9 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T13:42:52Z",
+        "scannedAt": "2026-09-11T11:02:57Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 36,
+        "skillspectorSuppressed": 37,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
@@ -988,6 +1006,97 @@
         "repo": "https://github.com/microsoft/skills",
         "ref": "39d230125298",
         "path": ".github/plugins/azure-skills/skills"
+      }
+    },
+    {
+      "name": "confluent-kafka",
+      "displayName": "Kafka and Flink by Confluent",
+      "vendor": "confluent",
+      "vendorDisplayName": "Confluent",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Build Kafka producers, consumers and Kafka Streams apps with Schema Registry, bring unmanaged schemas under Schema Registry with PII tags, write Flink SQL and Java UDFs, set up CDC pipelines into Iceberg or Delta tables with Tableflow, and plan a move from AWS MSK to Confluent Cloud. Confluent's official skills, curated from confluentinc/agent-skills with the evals Confluent scores them against.",
+      "path": "packs/confluent/confluent-kafka",
+      "tag": "confluent-kafka--v1.0.0",
+      "skills": [
+        {
+          "name": "developing-kafka-java-client",
+          "description": "Use when the user wants to integrate a Kafka client into an existing application or scaffold a Java Kafka client project (Maven or Gradle based) for Confluent Cloud, local Docker, or WarpStream. Covers the Apache Kafka Java clients (KafkaProducer/KafkaConsumer/KafkaShareConsumer) with Avro, JSON Schema, or Protobuf serializers. Also use when the user wants to optimize Java Kafka client configuration for WarpStream. Do NOT trigger for Kafka Streams apps (use kafka-streams-programming), Flink, connectors, or Kafka Python client (use developing-kafka-python-client).",
+          "digest": "sha256:29923d0fd0de4a88130993274b9d8c30a9ddb369d9521b4bf158fa20cfaba034"
+        },
+        {
+          "name": "developing-kafka-python-client",
+          "description": "Use when the user wants to build a Python Kafka producer or consumer, add Schema Registry to existing Python code, migrate from raw JSON to schema-backed serialization, or scaffold a confluent-kafka-python project for Confluent Cloud, local Docker, or WarpStream. Also use when user wants to optimize Python Kafka client configuration for WarpStream.",
+          "digest": "sha256:9ff0c811f415b8185e3b1761f8ccc47724d1bee80fca49ec718d4c8bc5a5831d"
+        },
+        {
+          "name": "kafka-streams-programming",
+          "description": "Architect, build, and debug Kafka Streams apps (JVM-embedded stream processing). Use when user mentions KStream, KTable, topology, TopologyTestDriver, StreamsBuilder, interactive queries, GlobalKTable, joins/windows/aggregations, or debugging issues (rebalancing, state stores, lag, deserialization errors). Also use when user wants to optimize Kafka Streams for WarpStream or tune Kafka Streams client configuration for WarpStream. Do NOT trigger for Flink, connectors, CDC, or plain producer/consumer.",
+          "digest": "sha256:cfd6f26d31a7027c8c15c2bb89fbed2ca1ac481268cdaeaf25c4d074d5f7a65c"
+        },
+        {
+          "name": "kafka-schema-registry",
+          "description": "Scan a project to identify Kafka applications, extract schemas from data models, tag PII fields, generate Terraform for Confluent Schema Registry registration, and produce a migration report with rollout ordering. Use this skill when a user asks to analyze a folder or repo for Kafka usage, extract schemas, audit producer/consumer configurations, or generate Terraform for Schema Registry.",
+          "digest": "sha256:d9cf4dd1e7524c98c7e4f3e5ac9c27d0d7c8fa0ccd972118ae50c53c29c62b7b"
+        },
+        {
+          "name": "flink-udf",
+          "description": "Build and deploy Apache Flink user-defined functions (UDFs) in Java for stream processing over Kafka. Use this skill when users want to create scalar UDFs, user-defined table functions (UDTFs), or process table functions (PTFs) in Java, deploy them to Confluent Cloud or local Docker environments, and invoke them from Flink SQL or the Table API. Trigger on: Flink UDF, custom Flink function, process table function, PTF, UDTF, Flink user defined, extend Flink SQL, stateful stream processing with Flink. Do NOT trigger for: Kafka Streams UDFs (use kafka-streams-programming skill), general Flink job development without custom functions, CDC streaming data piplines that include Flink (prefer the confluent-cloud-cdc-tableflow skill), Flink connector setup, or Kafka producer/consumer code.",
+          "digest": "sha256:d5b0e4cb294a2a07ffd26e69d218e2ff120f375c1b6a5b0331f4b331f58596f7"
+        },
+        {
+          "name": "confluent-cloud-flink-sql",
+          "description": "Write and debug Flink SQL that runs on Confluent Cloud, enforcing the CC-vs-Apache-Flink (OSS) dialect boundary. Use when the working directory is a Confluent Cloud Flink workspace, when a Flink SQL statement needs checking before it runs on a CC compute pool, or when the user mentions CC Flink, Confluent Cloud Flink SQL, the `confluent flink` CLI, a CFU compute pool, `CREATE CONNECTION`, or asks to check or debug Flink SQL whose runtime is Confluent Cloud. Also trigger when a Flink SQL question is posed and nothing establishes an Apache Flink OSS runtime. Do NOT trigger for: building or deploying Flink UDFs in Java (UDF/UDTF/PTF — use flink-udf); a full CDC pipeline from a database through Flink into Tableflow/Iceberg/Delta Lake (use confluent-cloud-cdc-tableflow); Kafka Streams topology work (use kafka-streams-programming); or Flink SQL confirmed to run on Apache Flink OSS, not Confluent Cloud.",
+          "digest": "sha256:969c7e8ecfa42052f40f6c3d223d129026881d7f86376cc3bfd46d8b1ba99bb6"
+        },
+        {
+          "name": "confluent-cloud-cdc-tableflow",
+          "description": "Set up end-to-end Change Data Capture (CDC) pipelines on Confluent Cloud using Debezium source connectors, Flink for transformation, and Tableflow for data lake integration. Supports JSON_SR, Avro, and Protobuf formats. Handles schemaless topics (plain JSON without SR) and multi-event topics. This skill handles the complete workflow from database to Iceberg/Delta tables. Use this skill when users want to capture database changes and materialize them into Iceberg or Delta Lake tables via Confluent Cloud Tableflow. Trigger phrases include \"CDC to Tableflow\", \"database to Iceberg\", \"database to Delta Lake\", \"stream database changes to data lake\", \"set up Tableflow pipeline\", \"schemaless topic to Tableflow\", or \"multi-event topic to Iceberg\". Do NOT trigger for general CDC, Debezium, or database replication requests that do not involve Tableflow or Iceberg/Delta Lake as the destination.",
+          "digest": "sha256:1e267c996c609e3286dbce600f6a8d2881d225ce43446535a54aaa212c9b2644"
+        },
+        {
+          "name": "msk-migration",
+          "description": "Use this skill to assess and plan a migration from AWS MSK (Managed Streaming for Apache Kafka) to Confluent Cloud. Triggers on user intent like \"migrate MSK to Confluent Cloud\", \"move off MSK\", \"MSK to CC cutover\", \"Zero-Cut migration from MSK\", \"kcp scan my MSK\", or any discussion of MSK-to-CC assessment, planning, cluster sizing, Cluster Linking setup, Gateway-based switchover, or post-cutover validation. Do NOT trigger for non-MSK Kafka sources (open-source Kafka, Aiven, Confluent Platform, Redpanda) — this skill is MSK-only. Do NOT trigger for greenfield Confluent Cloud projects with no existing Kafka source. Do NOT trigger for general Kafka programming questions (producer/consumer code, Kafka Streams) unrelated to migration.",
+          "digest": "sha256:8ff873fcf4b0b298c6fe522b0e2a8c4939367964ed60e762c45cc30e86092dfc"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:0ab18771f12d3e0c29755dbd2e081b2922ef85417b3c04e450aa7f0d3cea539d",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 23,
+      "components": 8,
+      "readme": "packs/confluent/confluent-kafka/README.md",
+      "scan": {
+        "riskScore": 5,
+        "policyFindings": 23,
+        "verdict": "pass",
+        "scannedAt": "2026-09-11T10:27:19Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 78,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/confluentinc/agent-skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "kafka",
+        "flink",
+        "streaming",
+        "schema-registry",
+        "cdc",
+        "confluent"
+      ],
+      "source": {
+        "repo": "https://github.com/confluentinc/agent-skills",
+        "ref": "914d95eff7ff50513b34bfb9ac97eda7c7fce899",
+        "path": "skills"
       }
     }
   ],

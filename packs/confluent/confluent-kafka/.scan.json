@@ -1,0 +1,207 @@
+{
+  "scannedAt": "2026-09-11T10:27:19Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:a38412ee190c97b05ed8f3efa06d803b95282452d14089fddeb308031ee33a1a|sha256:9c4fe1a6a9f0f3e466c167bc81fa571542089d15a5cb46964c8f3d44c34685c1",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "developing-kafka-java-client": {
+      "digest": "sha256:29923d0fd0de4a88130993274b9d8c30a9ddb369d9521b4bf158fa20cfaba034",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "developing-kafka-python-client": {
+      "digest": "sha256:9ff0c811f415b8185e3b1761f8ccc47724d1bee80fca49ec718d4c8bc5a5831d",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 4,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 3,
+        "accepted": 2,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "kafka-streams-programming": {
+      "digest": "sha256:cfd6f26d31a7027c8c15c2bb89fbed2ca1ac481268cdaeaf25c4d074d5f7a65c",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 23,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "kafka-schema-registry": {
+      "digest": "sha256:d9cf4dd1e7524c98c7e4f3e5ac9c27d0d7c8fa0ccd972118ae50c53c29c62b7b",
+      "skillspector": {
+        "riskScore": 5,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 1,
+        "byRule": {
+          "SC4": 1
+        },
+        "suppressed": 6,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 3,
+        "accepted": 2,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "flink-udf": {
+      "digest": "sha256:d5b0e4cb294a2a07ffd26e69d218e2ff120f375c1b6a5b0331f4b331f58596f7",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "confluent-cloud-flink-sql": {
+      "digest": "sha256:969c7e8ecfa42052f40f6c3d223d129026881d7f86376cc3bfd46d8b1ba99bb6",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "confluent-cloud-cdc-tableflow": {
+      "digest": "sha256:1e267c996c609e3286dbce600f6a8d2881d225ce43446535a54aaa212c9b2644",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 26,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "msk-migration": {
+      "digest": "sha256:8ff873fcf4b0b298c6fe522b0e2a8c4939367964ed60e762c45cc30e86092dfc",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 17,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 1,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 5,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 78,
+    "ciscoAccepted": 5
+  }
+}

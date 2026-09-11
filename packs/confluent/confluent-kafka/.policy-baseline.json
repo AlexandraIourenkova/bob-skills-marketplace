@@ -1,0 +1,188 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "8b0de913e9ce2491",
+      "rule": "P006",
+      "path": "skills/confluent-cloud-flink-sql/SKILL.md",
+      "line": 86,
+      "message": "forbidden instruction: 'auto-approve'",
+      "reason": "Anti-pattern list: the line warns against `terraform apply -auto-approve` on a first run; it tells the agent not to auto-approve. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "60a281cfe3632c79",
+      "rule": "P009",
+      "path": "skills/developing-kafka-python-client/references/common.py",
+      "line": 8,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "2a328afc247d7659",
+      "rule": "P008",
+      "path": "skills/developing-kafka-python-client/references/test_project.py",
+      "line": 150,
+      "message": "host 'sr' in script is not in the allow-list ['*.confluent.cloud', '*.confluent.io', 'kafka.apache.org']",
+      "reason": "Unit-test template: 'https://sr' is a placeholder Schema Registry URL inside tests where requests.get is mocked; no network call is made. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "a6ad80416bf8c030",
+      "rule": "P008",
+      "path": "skills/developing-kafka-python-client/references/test_project.py",
+      "line": 143,
+      "message": "host 'sr' in script is not in the allow-list ['*.confluent.cloud', '*.confluent.io', 'kafka.apache.org']",
+      "reason": "Unit-test template: 'https://sr' is a placeholder Schema Registry URL inside tests where requests.get is mocked; no network call is made. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "acf4f3f9e925b81e",
+      "rule": "P008",
+      "path": "skills/developing-kafka-python-client/references/test_project.py",
+      "line": 54,
+      "message": "host 'sr' in script is not in the allow-list ['*.confluent.cloud', '*.confluent.io', 'kafka.apache.org']",
+      "reason": "Unit-test template: 'https://sr' is a placeholder Schema Registry URL inside tests where requests.get is mocked; no network call is made. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "f3b82183778c07d1",
+      "rule": "P009",
+      "path": "skills/developing-kafka-python-client/references/test_project.py",
+      "line": 60,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "256051d609ebc84d",
+      "rule": "P008",
+      "path": "skills/kafka-schema-registry/evals/mock-repos/api-gateway/src/server.js",
+      "line": 14,
+      "message": "host 'order-service' in script is not in the allow-list ['*.confluent.cloud', '*.confluent.io', 'kafka.apache.org']",
+      "reason": "Eval fixture: a mock repository the skill reads as sample input for schema extraction; 'order-service' and 'user-service' are docker-compose service names, never contacted by the skill. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "a9c50d6c5c84ea71",
+      "rule": "P008",
+      "path": "skills/kafka-schema-registry/evals/mock-repos/api-gateway/src/server.js",
+      "line": 19,
+      "message": "host 'user-service' in script is not in the allow-list ['*.confluent.cloud', '*.confluent.io', 'kafka.apache.org']",
+      "reason": "Eval fixture: a mock repository the skill reads as sample input for schema extraction; 'order-service' and 'user-service' are docker-compose service names, never contacted by the skill. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "345df610cf6df90c",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/evals/evals.json",
+      "line": 346,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "558421de67e3f794",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/evals/evals.json",
+      "line": 45,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "ad0d113d231287de",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/evals/evals.json",
+      "line": 56,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "d46440f86f892084",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/evals/evals.json",
+      "line": 49,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "1b3fbfdd08188b0c",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/build-templates.md",
+      "line": 103,
+      "message": "reference to protected path ''.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "687fc2711a12bc16",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/build-templates.md",
+      "line": 152,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "c6bdccb5c75f2c1b",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/build-templates.md",
+      "line": 41,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "e12bb9652cda43c5",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/build-templates.md",
+      "line": 100,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "f4217e70f38f2fad",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/build-templates.md",
+      "line": 42,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "2e355e3be6168a5f",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/references/debugging.md",
+      "line": 43,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "71204ea0c3ab1c6f",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/scripts/create-topics.sh",
+      "line": 36,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "9fe735ac236efd54",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/scripts/create-topics.sh",
+      "line": 30,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "b68e5e091c8f8539",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/scripts/create-topics.sh",
+      "line": 32,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "d8630e8f2e5bf217",
+      "rule": "P009",
+      "path": "skills/kafka-streams-programming/scripts/create-topics.sh",
+      "line": 29,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "e50766a17dbc8de8",
+      "rule": "P009",
+      "path": "skills/msk-migration/SKILL.md",
+      "line": 301,
+      "message": "reference to protected path '.env'",
+      "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    }
+  ]
+}

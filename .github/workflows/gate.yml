@@ -31,7 +31,7 @@ jobs:
       - name: Install uv
         run: python3 -m pip install --quiet uv
       - name: Client tests (includes the red-team cases)
-        run: uv run --project cli pytest -q
+        run: uv run --project cli pytest -q cli/tests
       - name: Schemas, vendor list, checksums
         run: uv run --project cli bob-skills registry validate
       - name: index.json is up to date

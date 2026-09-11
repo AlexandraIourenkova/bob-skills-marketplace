@@ -4,7 +4,7 @@ One trusted place to get skills for [IBM Bob](https://bob.ibm.com). A few offici
 
 ## The idea in four points
 
-- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM, Anthropic, OpenAI, Google, HashiCorp and Microsoft, and only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
+- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft and Confluent, and only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
 - **IBM packs first.** The team's own packs (office documents, talk with your data, the marketplace skills) and packs curated from official IBM repositories are the product; provenance (source repository, commit, checksum per component) is recorded for everything that was not written here.
 - **Every pack goes through a scanner gate.** Schema and checksums, a policy linter, NVIDIA SkillSpector, Cisco skill-scanner and two human approvals, for every version. Results are shown on the pack page, risk scores included, also for official vendor skills. After install, a lock file and a guard hook refuse anything unknown or modified.
 - **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or click "Add to Bob" on the website.
@@ -69,6 +69,7 @@ flowchart LR
     goog["Google<br/>google/skills"] --> cur
     hc["HashiCorp<br/>hashicorp/agent-skills"] --> cur
     ms["Microsoft<br/>microsoft/skills"] --> cur
+    conf["Confluent<br/>confluentinc/agent-skills"] --> cur
     cur["Marketplace team curates:<br/>picks the useful packs, records source and ref,<br/>runs the gate, keeps the baselines"] --> reg["Registry<br/>one pack per outcome"]
 ```
 
@@ -86,13 +87,14 @@ flowchart LR
 | [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import (MPL-2.0) |
 | [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.1.0 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas, azure-diagnostics, azure-compute (MIT) |
 | [`microsoft-foundry`](packs/microsoft/microsoft-foundry) | Microsoft | released 1.0.0 | microsoft-foundry, Microsoft's most installed agent skill (MIT) |
+| [`confluent-kafka`](packs/confluent/confluent-kafka) | Confluent (an IBM company) | released 1.0.0 | Kafka Java and Python clients, Kafka Streams, Schema Registry migration with PII tags, Flink SQL and UDFs, CDC to Iceberg or Delta with Tableflow, MSK to Confluent Cloud planning (Apache-2.0) |
 | `app-modernization`, `building-blocks`, `dev-workflow` | IBM | coming soon | UI modernization, Client Engineering building-block modes, developer workflow skills; three more candidates in `roadmap.json` |
 
 The IBM packs are the marketplace's own product and come first in the catalog; packs from other vendors are curated alternatives for teams that already use those platforms.
 
 Planned packs live in [`roadmap.json`](roadmap.json) and show in the catalog as *coming soon* (the team will build it) or *candidate* (waiting on the vendor: a licence, an official repository). Each has a request issue labelled `pack-request`; a thumbs-up reaction on it is a vote, and `python3 scripts/refresh_roadmap.py` writes the counts back so the catalog, the website and the find-skills skill show them.
 
-Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services; vercel-labs/agent-skills publishes no licence; no official Red Hat skills repository exists yet. A vendor is listed only when at least one pack is curated from it. Every vendored skill above is Apache-2.0, MIT or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
+Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services; vercel-labs/agent-skills publishes no licence. Red Hat now publishes OpenShift skills under Apache-2.0 in [openshift/agentic-skills](https://github.com/openshift/agentic-skills) (cluster troubleshooting with scripts, cluster updates, GitOps), so an OpenShift pack is a roadmap candidate; Ansible still has no official skills repository. A vendor is listed only when at least one pack is curated from it. Every vendored skill above is Apache-2.0, MIT or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
 
 ## Even official skills need checking
 
@@ -106,6 +108,7 @@ Public catalogs report roughly a quarter of skills with security findings (NVIDI
 | security-ownership-map | OpenAI | 66 | INFO | scripts that read git history and CODEOWNERS |
 | terraform-policy | HashiCorp | 54 | INFO | references to its own reference files, imperative policy rules |
 | telemetry-analyzer | IBM (ADK) | 89, do not install | MEDIUM | dotenv loads, requests to the ADK base URL |
+| kafka-streams-programming | Confluent | 100, do not install | INFO | "Don't lecture" about offering Flink instead, Kafka Streams state-store resets read as memory poisoning, `.env` loading in build templates |
 | excel-to-wxo-agent | IBM (team) | 95, do not install | CRITICAL | SQL statements built from the user's own spreadsheet column names; demo-only upload of chart images to public hosts |
 | wxo-chat-demo-page | IBM (team) | 89, do not install | MEDIUM | HTML comments in page templates |
 | find-skills | IBM (marketplace) | 11 | INFO | the marketplace's own imperative rules ("never install without confirmation") |
@@ -186,7 +189,7 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry with six vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft), twelve released packs including the team's own office-docs, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
+Done: registry with seven vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft, Confluent), thirteen released packs including the team's own office-docs, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
 
 Next, in order:
 
