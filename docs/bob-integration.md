@@ -35,7 +35,7 @@ For an organisation-wide rule, put the same `PreToolUse` entry in an **EnforcedH
 The hook payload shape differs between Bob 2.0.2 (`tool_name`, `tool_input`) and the documentation (`tool`, `input`). The guard reads both, and looks for the skill name under `skill`, `skill_name`, `name`, `id` or a `path` ending in `SKILL.md`. What must be confirmed against a real Bob: that the `use_skill` payload carries the skill name at all.
 
 - If it does: nothing to change.
-- If it does not: the guard allows and prints a warning (use `--strict` to refuse instead). Fallback plan from the team plan: a `SessionStart` hook that quarantines folders in `.bob/skills/` which are not in the lock before Bob reads them, plus a rule in `.bob/rules/` that forbids using skills outside the lock.
+- If it does not: the guard allows and prints a warning (use `--strict` to refuse instead). Fallback: a `SessionStart` hook that quarantines folders in `.bob/skills/` which are not in the lock before Bob reads them, plus a rule in `.bob/rules/` that forbids using skills outside the lock.
 
 Test the payload by pointing the hook at a script that dumps stdin to a file, then activating any skill.
 

@@ -2,8 +2,6 @@
 
 One trusted place to get skills for [IBM Bob](https://bob.ibm.com). A few official vendors, IBM packs curated from official repositories, every version through a scanner gate, and three ways to install that all end in the same verified pack and the same lock entry.
 
-Team entry for the IBM Bob Innovation Challenge, Israel 2026. First pack: **watsonx Orchestrate**.
-
 ## The idea in four points
 
 - **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM, Anthropic, OpenAI, Google, HashiCorp and Microsoft, and only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
@@ -171,7 +169,7 @@ marketplace.json        generated compatibility manifest for other agents
 roadmap.json            planned packs: status, request issue, votes (scripts/refresh_roadmap.py refreshes them)
 cli/                    the bob-skills client (Python, typer); also the linter and registry tools
 scripts/                sync_upstream.py, run_scanners.py, release_pack.py, refresh_roadmap.py, gate.sh
-docs/                   pack format, security gate, vendor onboarding, Bob integration, team plan, mockup images
+docs/                   pack format, security gate, vendor onboarding, Bob integration, publishing, mockup images
 site/                   static catalog website reading index.json
 .github/                gate and release workflows, pack request template
 ```
@@ -206,4 +204,4 @@ Next, in order:
 - [Bob integration: hooks, commands, what to verify on day one](docs/bob-integration.md)
 - [Publishing the client to PyPI](docs/publishing.md)
 
-The vendored ADK skills are MIT-licensed by IBM (see `packs/ibm/wxo-adk/skills/LICENSE`). This repository is a hackathon team project and is not an IBM product.
+The vendored ADK skills are MIT-licensed by IBM (see `packs/ibm/wxo-adk/skills/LICENSE`). This repository is maintained by the marketplace team and is not an official IBM product.

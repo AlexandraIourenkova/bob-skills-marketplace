@@ -5,8 +5,8 @@
 # schemas, CI, CLI). Every pack release needs two approvals: one vendor
 # maintainer and one marketplace administrator (branch protection rule).
 #
-# Hackathon scope: the marketplace team maintains the IBM vendor folder and
-# curates its packs from official IBM repositories.
+# The marketplace team maintains the IBM vendor folder and curates its packs
+# from official IBM repositories.
 
 *                                   @Maria-Startseva
 
