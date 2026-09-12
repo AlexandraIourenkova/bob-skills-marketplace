@@ -29,6 +29,14 @@ class InstallError(Exception):
     """Raised when a pack cannot be installed, removed or verified."""
 
 
+class TrustRefused(InstallError):
+    """The policy linter found blocking problems in a local skill the user wants to trust."""
+
+    def __init__(self, message: str, findings: list) -> None:
+        super().__init__(message)
+        self.findings = findings
+
+
 class VendorConfirmationRequired(InstallError):
     """First install from a vendor in this scope: the user must accept the vendor first."""
 
@@ -58,11 +66,12 @@ class Scope:
 
     @property
     def mcp_path(self) -> Path:
-        return self.bob_dir / ("mcp_settings.json" if self.is_global else "mcp.json")
+        return self.bob_dir / "mcp.json"  # Bob: ~/.bob/mcp.json (global) and .bob/mcp.json (project)
 
     @property
     def modes_path(self) -> Path:
-        return self.bob_dir / "custom_modes.yaml"
+        # Bob reads global modes from ~/.bob/settings/custom_modes.yaml, project modes from .bob/custom_modes.yaml
+        return self.bob_dir / ("settings/custom_modes.yaml" if self.is_global else "custom_modes.yaml")
 
     @property
     def label(self) -> str:
@@ -183,7 +192,8 @@ def add(spec: str, scope: Scope, registry_spec: str | None = None, force: bool =
     lock = read_lock(scope.bob_dir)
     existing = get_entry(lock, name) or {}
     report = {"pack": name, "version": pack.version, "vendor": pack.vendor, "scope": scope.label,
-              "notes": notes, "skills": [], "mcpServers": [], "rules": [], "commands": [], "modes": []}
+              "notes": notes, "safety": pack.manifest.get("safety", []),
+              "skills": [], "mcpServers": [], "rules": [], "commands": [], "modes": []}
 
     # Skills: refuse to overwrite anything this pack does not own.
     for skill in pack.skills:
@@ -292,11 +302,23 @@ def remove(name: str, scope: Scope) -> dict:
     return report
 
 
-def trust(skill: str, scope: Scope) -> dict:
-    """Record a local, unsigned skill in the lock so the guard accepts it."""
+def trust(skill: str, scope: Scope, force: bool = False, allow: list[str] | None = None) -> dict:
+    """Record a local, unsigned skill in the lock so the guard accepts it.
+
+    The policy linter runs first. A blocking finding refuses the trust unless the
+    user read the findings and passed ``force``; the forced findings are recorded
+    as accepted so ``verify`` does not repeat them.
+    """
     path = scope.skills_dir / skill
     if not (path / "SKILL.md").is_file():
         raise InstallError(f"{path} has no SKILL.md")
+    blocking = [f for f in lint_skill(path, list(allow or []), scope.bob_dir.parent) if f.severity == BLOCK]
+    if blocking and not force:
+        lines = "\n".join(f"  {f.rule} {f.path}:{f.line}: {f.message}" for f in blocking[:12])
+        more = f"\n  ... and {len(blocking) - 12} more" if len(blocking) > 12 else ""
+        raise TrustRefused(f"refusing to trust '{skill}': {len(blocking)} blocking policy finding(s):\n{lines}{more}\n"
+                           f"Audit it (`uvx bob-skills audit {scope.label}/skills/{skill}`), fix the skill, "
+                           "or re-run with --force after reading every finding.", blocking)
     try:
         digest = tree_digest(path)
     except DigestError as error:
@@ -307,12 +329,14 @@ def trust(skill: str, scope: Scope) -> dict:
         raise InstallError(f"skill '{skill}' belongs to pack '{owner['name']}'; reinstall it with `uvx bob-skills add {owner['name']} --force` instead")
     entry = {
         "name": skill, "version": "0.0.0", "vendor": LOCAL_VENDOR, "digest": digest, "installed": _now(),
-        "networkAllow": [], "skills": [skill], "mcpServers": [], "rules": [], "commands": [], "modes": [],
+        "networkAllow": list(allow or []), "skills": [skill], "mcpServers": [], "rules": [], "commands": [], "modes": [],
         "skillDigests": {skill: digest},
     }
+    if blocking:
+        entry["policyAccepted"] = sorted({f.fingerprint for f in blocking})
     set_entry(lock, entry)
     write_lock(scope.bob_dir, lock)
-    return {"skill": skill, "digest": digest, "lock": str(scope.bob_dir / "skills.lock")}
+    return {"skill": skill, "digest": digest, "lock": str(scope.bob_dir / "skills.lock"), "forced": len(blocking)}
 
 
 # -- verify / guard ------------------------------------------------------------

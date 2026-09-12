@@ -1,6 +1,6 @@
 [project]
 name = "bob-skills"
-version = "0.1.0"
+version = "0.2.0"
 description = "Install, verify and guard skill packs for IBM Bob from the Bob Skills Marketplace"
 readme = "README.md"
 requires-python = ">=3.11"

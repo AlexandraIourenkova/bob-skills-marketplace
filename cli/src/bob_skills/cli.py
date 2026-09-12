@@ -11,7 +11,7 @@ import typer
 
 from . import __version__
 from . import installer
-from .installer import InstallError, Scope, VendorConfirmationRequired, global_scope, project_scope
+from .installer import InstallError, Scope, TrustRefused, VendorConfirmationRequired, global_scope, project_scope
 from .policy import BLOCK, INFO, format_text, lint_path, to_sarif, write_baseline
 from .registry import Registry, RegistryError, describe_pack, resolve_reference, resolve_registry
 
@@ -137,7 +137,9 @@ def show(pack: str, registry: Optional[str] = RegistryOpt, offline: bool = Offli
         typer.echo(f"    - {skill['name']}: {skill['description'][:160]}{'...' if len(skill['description']) > 160 else ''}")
     for name, cfg in info["mcpServers"].items():
         how = cfg.get("url") or " ".join([cfg.get("command", "")] + list(cfg.get("args", [])))
-        typer.echo(f"  mcp server {name}: {how}")
+        access = info.get("mcpAccess", {}).get(name, {})
+        label = f"  [{access['access']}: {access['reason']}]" if access else "  [access not declared]"
+        typer.echo(f"  mcp server {name}: {how}{label}")
     for kind in ("rules", "commands", "modes"):
         if info[kind]:
             typer.echo(f"  {kind}: {', '.join(info[kind])}")
@@ -146,6 +148,9 @@ def show(pack: str, registry: Optional[str] = RegistryOpt, offline: bool = Offli
     cisco = f"; Cisco max severity {g['ciscoMaxSeverity']}" if g.get("ciscoMaxSeverity") else ""
     typer.echo(f"  gate: {g['verdict']}{risk}{cisco}; {g['baselineFindings']} reviewed policy findings; {g['components']} checksummed components"
                + (f"; scanned {g['scannedAt'][:10]}" if g.get("scannedAt") else "") + ("; REVOKED" if g["revoked"] else ""))
+    for note in info.get("safety", []):
+        typer.echo(f"  before you install: {note['warning']}")
+        typer.echo(f"    covered by: {note['covered']}")
     typer.echo(f"  network allowed in scripts: {', '.join(info['networkAllow']) or '-'}")
     c = info["contextTokens"]
     typer.echo(f"  context cost: ~{c['alwaysOn']} tokens always on (skill descriptions + rules), ~{c['onUse']} tokens when a skill is used")
@@ -182,6 +187,12 @@ def _print_report(report: dict) -> None:
         if report.get(kind):
             typer.echo(f"  {kind}: {', '.join(report[kind])}")
     typer.echo(f"  lock: {report['lock']}")
+    for note in report.get("safety", []):
+        typer.echo(f"  before you use it: {note['warning']}")
+        typer.echo(f"    covered by: {note['covered']}")
+    if not any((scope.rules_dir / "security-defaults.md").is_file() for scope in (project_scope(), global_scope())):
+        typer.echo("  note: the security-defaults rule is not installed, so skills may write to external systems without asking first; "
+                   "install it with `uvx bob-skills add bob-essentials`")
 
 
 @app.command()
@@ -275,13 +286,73 @@ def verify(is_global: bool = GlobalOpt,
 
 
 @app.command()
-def trust(skill: str, is_global: bool = GlobalOpt) -> None:
-    """Record a local, unsigned skill in the lock so the guard accepts it as it is now."""
+def trust(skill: str, is_global: bool = GlobalOpt,
+          force: bool = typer.Option(False, "--force", help="Trust despite blocking policy findings, after reading every one."),
+          allow: list[str] = typer.Option([], "--allow", help="Hosts the skill's scripts may contact.")) -> None:
+    """Lint a local skill, then record it in the lock so the guard accepts it as it is now."""
     try:
-        report = installer.trust(skill, _scope(is_global))
+        report = installer.trust(skill, _scope(is_global), force=force, allow=list(allow))
+    except TrustRefused as error:
+        _fail(str(error), code=2)
     except InstallError as error:
         _fail(str(error), code=2)
-    typer.echo(f"trusted local skill {report['skill']} ({report['digest'][:19]}...) in {report['lock']}")
+    forced = f"; {report['forced']} blocking finding(s) accepted with --force" if report.get("forced") else ""
+    typer.echo(f"trusted local skill {report['skill']} ({report['digest'][:19]}...) in {report['lock']}{forced}")
+
+
+@app.command()
+def audit(path: Path = typer.Argument(..., help="Skill folder, pack folder or a folder of skills."),
+          allow: list[str] = typer.Option([], "--allow", help="Hosts the scripts may contact."),
+          no_scanners: bool = typer.Option(False, "--no-scanners", help="Policy linter only; skip SkillSpector and Cisco."),
+          json_out: bool = JsonOpt) -> None:
+    """Check a skill before trusting it: policy linter, plus SkillSpector and Cisco when installed. Exit 1 on a block verdict."""
+    from .audit import audit as run_audit
+    if not path.exists():
+        _fail(f"{path} does not exist")
+    result = run_audit(path, allow=list(allow), scanners=not no_scanners)
+    if not result["skills"]:
+        _fail(f"no SKILL.md found in {path}")
+    if json_out:
+        typer.echo(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        for skill in result["skills"]:
+            typer.echo(f"{skill['skill']}: {skill['verdict'].upper()}  ({skill['blocking']} blocking, {skill['warnings']} warning policy findings)")
+            for f in skill["policy"]:
+                if f["severity"] != INFO:
+                    typer.echo(f"  {f['severity'].upper():5} {f['rule']} {f['path']}:{f['line']}: {f['message']}")
+            ss, cisco = skill["skillspector"], skill["cisco"]
+            if ss.get("available") and "riskScore" in ss:
+                typer.echo(f"  SkillSpector risk {ss['riskScore']}/100, {len(ss['issues'])} issue(s)")
+                for issue in ss["issues"][:8]:
+                    typer.echo(f"    {issue['severity']} {issue['id']} {issue['category']} @ {issue['file']}:{issue['line']}: {issue['finding']}")
+            elif not ss.get("skipped"):
+                typer.echo("  SkillSpector: not installed (uv tool install git+https://github.com/NVIDIA/skillspector.git)")
+            if cisco.get("available") and "maxSeverity" in cisco:
+                typer.echo(f"  Cisco skill-scanner max severity {cisco['maxSeverity']}, {len(cisco['findings'])} finding(s)")
+                for finding in [f for f in cisco["findings"] if f["severity"] != "INFO"][:8]:
+                    typer.echo(f"    {finding['severity']} {finding['rule']} @ {finding['file']}:{finding['line']}: {finding['title']}")
+            elif not cisco.get("skipped"):
+                typer.echo("  Cisco skill-scanner: not installed (uv tool install cisco-ai-skill-scanner)")
+        typer.echo(f"verdict: {result['verdict']}")
+    if result["verdict"] == "block":
+        raise typer.Exit(code=1)
+
+
+@app.command()
+def doctor(json_out: bool = JsonOpt) -> None:
+    """Read-only check of the Bob setup: hooks, lock, skills, MCP servers and modes in ./.bob and ~/.bob. Exit 1 on problems."""
+    from .doctor import run as run_doctor
+    report = run_doctor(project_scope(), global_scope())
+    if json_out:
+        typer.echo(json.dumps(report.as_dict(), indent=2, ensure_ascii=False))
+    else:
+        for item in report.items:
+            typer.echo(f"{item.severity.upper():7} {item.scope} {item.area}: {item.message}")
+            if item.fix:
+                typer.echo(f"        fix: {item.fix}")
+        typer.echo(f"{len(report.problems)} problem(s), {len(report.warnings)} warning(s); checked {len(report.checked)} location(s)")
+    if report.problems:
+        raise typer.Exit(code=1)
 
 
 @app.command()

@@ -36,6 +36,9 @@ RULES: dict[str, str] = {
     "P008": "Network host outside the vendor allow-list",
     "P009": "Access to a protected path outside the project",
     "P010": "Symlink or unexpected binary file inside a skill",
+    "P011": "TLS certificate verification disabled",
+    "P012": "Listener on all network interfaces or a debug server",
+    "P013": "Script deletes, overwrites or deploys in an external system",
 }
 
 CODE_SUFFIXES = {".py", ".sh", ".bash", ".zsh", ".js", ".mjs", ".ts", ".ps1"}
@@ -89,6 +92,42 @@ PROTECTED_PATHS_WARN = [
     re.compile(r"(^|[\s\"'(/])\.env\b(?!\.example|\.sample|\.template)"),
 ]
 
+# P011: the three holes we found in real MCP servers (TLS off, a listener on every
+# interface, admin writes by default) must never ship inside a skill. TLS and
+# listener patterns apply to instructions too, because the agent executes them.
+TLS_OFF = [re.compile(p) for p in (
+    r"\bverify\s*=\s*False\b",
+    r"(?i)\b(verify[_-]?ssl|ssl[_-]?verify|tls[_-]?verify|verify[_-]?certs?)\b['\"]?\s*[=:]\s*['\"]?(false|0|no|off)\b",
+    r"(?i)\b(insecure[_-]?skip[_-]?verify|InsecureSkipVerify)\b['\"]?\s*[=:]\s*['\"]?true\b",
+    r"_create_unverified_context\b", r"\bCERT_NONE\b", r"\bcheck_hostname\s*=\s*False\b",
+    r"\bcurl\b[^\n|;]*\s(-k|--insecure)(?=\s|$)", r"--no-check-certificate\b", r"--insecure-skip-tls-verify\b",
+    r"\bNODE_TLS_REJECT_UNAUTHORIZED\b['\"]?\s*[=:]\s*['\"]?0\b", r"\bPYTHONHTTPSVERIFY\b['\"]?\s*[=:]\s*['\"]?0\b",
+    r"\bGIT_SSL_NO_VERIFY\b", r"\brejectUnauthorized\s*:\s*false\b",
+    r"\b(TrustAllCerts|trustAllCerts|NoopHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER)\b",
+    r"\bssl\.endpoint\.identification\.algorithm\s*=\s*(\"\"|'')?\s*$",
+)]
+OPEN_LISTENER = [re.compile(p) for p in (
+    r"\bhost\s*=\s*['\"](0\.0\.0\.0|::)['\"]",
+    r"--(host|bind|listen)(=|\s+)['\"]?(0\.0\.0\.0|::)(?![\w.:])",
+    r"\bbind\(\(\s*['\"](0\.0\.0\.0)?['\"]\s*,",
+    r"\b(HTTPServer|ThreadingHTTPServer|TCPServer)\(\(\s*['\"]['\"]\s*,",
+    r"-m\s+http\.server\b(?![^\n]*(--bind|-b)\s+['\"]?(127\.0\.0\.1|localhost|::1)\b)",
+    r"\.run\([^)\n]*\bdebug\s*=\s*True",
+    r"\.listen\(\s*(\d+|PORT|port)\s*(\)|,\s*(\(|function\b|async\b))",
+)]
+DESTRUCTIVE = [re.compile(p, re.I) for p in (
+    r"\brequests\.(delete|put|patch)\(", r"\baxios\.(delete|put|patch)\(", r"\bmethod\s*[=:]\s*['\"](DELETE|PUT|PATCH)['\"]",
+    r"\bcurl\b[^\n]*\s-X\s*['\"]?(DELETE|PUT|PATCH)\b",
+    r"\b(kubectl|oc)\s+(delete|drain|replace|scale)\b", r"\bhelm\s+(uninstall|delete)\b",
+    r"\bterraform\s+destroy\b", r"\bterraform\s+apply\b[^\n]*-auto-approve",
+    r"\baws\s+[\w-]+\s+(delete|terminate|remove|deregister)-", r"\baz\s+[^\n]*\s(delete|purge)\b", r"\bgcloud\s+[^\n]*\s(delete|remove)\b",
+    r"\bconfluent\s+[^\n]*\sdelete\b", r"\bkafka-(topics|configs|acls)(\.sh)?\b[^\n]*--(delete|alter)\b",
+    r"\bgit\s+push\b[^\n]*(--force|\s-f\b|--mirror|--delete)", r"\bgit\s+reset\s+--hard\b", r"\bgit\s+clean\s+-[a-z]*f",
+    r"\b(DROP\s+(TABLE|DATABASE|SCHEMA)|TRUNCATE\s+TABLE)\b", r"\bDELETE\s+FROM\s+\w+\s*(;|['\"]|$)",
+    r"\brm\s+-[a-z]*r[a-z]*\s+[^\n]*\$\{?\w",
+    r"\borchestrate\s+[\w-]+\s+(remove|delete|import)\b",
+)]
+
 # A forbidden phrase preceded by a negation in the same sentence is protective
 # ("never delete an agent without confirming"), not an attack.
 NEGATED_OK = {1, 2, 6}  # indexes into FORBIDDEN_PHRASES that accept a negation
@@ -98,6 +137,12 @@ NEGATION = re.compile(r"\b(never|do not|don't|must not|not|no|avoid|refuse to)\b
 def _negated(line: str, start: int) -> bool:
     sentence = re.split(r"[.;:!?]\s", line[:start])[-1]
     return bool(NEGATION.search(sentence))
+
+
+def _negated_near(line: str, start: int, words: int = 4) -> bool:
+    """Negation among the few words right before the match: "never set verify=False"."""
+    before = re.split(r"[.;:!?(\u2014]\s*", line[:start])[-1].split()[-words:]
+    return bool(NEGATION.search(" ".join(before)))
 
 
 @dataclass
@@ -194,6 +239,17 @@ def lint_file(path: Path, allow: list[str], base: Path, key_root: Path | None = 
                 where = "script" if is_code else "instructions"
                 findings.append(Finding("P008", severity, rel, number,
                                         f"host '{host}' in {where} is not in the allow-list {sorted(allow)}", line, key))
+        for rule, patterns, message in (("P011", TLS_OFF, "TLS certificate verification disabled"),
+                                        ("P012", OPEN_LISTENER, "listener on all network interfaces or a debug server; bind to 127.0.0.1")):
+            match = next((m for m in (p.search(line) for p in patterns) if m), None)
+            if match and (is_code or not _negated_near(line, match.start())):
+                findings.append(Finding(rule, BLOCK, rel, number, f"{message}: '{match.group(0).strip()}'", line, key))
+        if is_code and not line.lstrip().startswith(("#", "//", "*", "/*")):
+            match = next((m for m in (p.search(line) for p in DESTRUCTIVE) if m), None)
+            if match:
+                findings.append(Finding("P013", BLOCK, rel, number,
+                                        f"deletes, overwrites or deploys in an external system: '{match.group(0).strip()}'; "
+                                        "the skill must get the user's confirmation for this exact action first", line, key))
         for tier, patterns in ((BLOCK, PROTECTED_PATHS_BLOCK), (WARN, PROTECTED_PATHS_WARN)):
             match = next((m for m in (p.search(line) for p in patterns) if m), None)
             if match:

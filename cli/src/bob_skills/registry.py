@@ -21,7 +21,8 @@ from pathlib import Path
 
 import yaml
 
-from .hashing import path_digest, tree_digest
+from .hashing import IGNORED_NAMES, path_digest, tree_digest
+from .mcpcheck import PROBLEM as MCP_PROBLEM, check_server
 from .policy import host_allowed, read_frontmatter
 
 DEFAULT_REGISTRY = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git"
@@ -181,8 +182,29 @@ class Registry:
         if crlf:
             problems.append(f"line endings: {len(crlf)} file(s) are CRLF in the working copy but LF in git, so checksums would not match a fresh clone: normalise them (first: {crlf[0]})")
         seen: dict[str, str] = {}
+        # Files git ignores (IDE and build output next to build files) would be hashed
+        # here but never shipped, so a release would fail its own checksums on install.
+        ignored = [line.rstrip("/") for line in (git_optional("ls-files", "--others", "--ignored", "--exclude-standard", "--directory",
+                                                               "--", "packs", cwd=self.root) or "").splitlines()
+                   if line and not any(part in IGNORED_NAMES for part in Path(line.rstrip("/")).parts) and not line.endswith(".pyc")]
         for pack in self.packs():
             label = pack.path.relative_to(self.root).as_posix()
+            junk = [j for j in ignored if j.startswith(label + "/")]
+            if junk:
+                problems.append(f"{label}: files ignored by git would be hashed but never shipped ({', '.join(junk[:3])}"
+                                f"{', ...' if len(junk) > 3 else ''}); delete them, they are usually IDE or build output")
+            servers = pack.manifest.get("mcpServers", {}) or {}
+            access = pack.manifest.get("mcpAccess", {}) or {}
+            for server, spec in servers.items():
+                for issue in check_server(server, spec, strict=True):
+                    if issue.severity == MCP_PROBLEM:
+                        problems.append(f"{label}: MCP server '{server}': {issue}")
+                if server not in access:
+                    problems.append(f"{label}: MCP server '{server}' has no mcpAccess entry; declare read-only, "
+                                    "or read-write with the reason and the confirmation that guards each write")
+            for server in access:
+                if server not in servers:
+                    problems.append(f"{label}: mcpAccess names '{server}', which is not in mcpServers")
             problems += self._schema_problems("pack.schema.json", pack.manifest, f"{label}/pack.json")
             if pack.name in seen:
                 problems.append(f"{label}: pack name '{pack.name}' already used by {seen[pack.name]}")
@@ -230,7 +252,9 @@ class Registry:
             expected = pack.compute_checksums()
             recorded = pack.manifest.get("checksums", {})
             if expected != recorded:
-                if fix:
+                if fix and junk:
+                    problems.append(f"{label}: checksums not rewritten while ignored files are present")
+                elif fix:
                     pack.manifest["checksums"] = expected
                     (pack.path / "pack.json").write_text(json.dumps(pack.manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
                 else:
@@ -295,7 +319,7 @@ class Registry:
                 "readme": pack.path.relative_to(self.root).as_posix() + "/README.md" if (pack.path / "README.md").is_file() else "",
                 "scan": self.scan_summary(pack.path),
             }
-            for key in ("license", "homepage", "minBob", "tags", "source", "sources"):
+            for key in ("license", "homepage", "minBob", "tags", "source", "sources", "safety"):
                 if key in pack.manifest:
                     entry[key] = pack.manifest[key]
             for skill_entry in entry["skills"]:
@@ -374,6 +398,8 @@ class Registry:
                 extras.append("modes: " + ", ".join(pack["modes"]))
             if extras:
                 out.append("- Also installs: " + "; ".join(extras) + ".")
+            for note in pack.get("safety", []):
+                out.append(f"- Before you install: {note['warning']} Covered by: {note['covered']}")
             scan = pack.get("scan", {})
             risk = f", SkillSpector risk {scan['riskScore']}/100" if scan.get("riskScore") is not None else ""
             cisco = f", Cisco max severity {scan['ciscoMaxSeverity']}" if scan.get("ciscoMaxSeverity") else ""
@@ -602,6 +628,8 @@ def describe_pack(registry: "Registry", pack: Pack, index_entry: dict) -> dict:
         "source": pack.manifest.get("source"), "sources": pack.manifest.get("sources", {}), "minBob": pack.manifest.get("minBob"),
         "skills": index_entry.get("skills", []),
         "mcpServers": {name: cfg for name, cfg in pack.manifest.get("mcpServers", {}).items()},
+        "mcpAccess": pack.manifest.get("mcpAccess", {}),
+        "safety": pack.manifest.get("safety", []),
         "rules": [Path(r).name for r in pack.manifest.get("rules", [])],
         "commands": ["/" + Path(c).stem for c in pack.manifest.get("commands", [])],
         "modes": pack.mode_slugs(),

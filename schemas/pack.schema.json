@@ -41,6 +41,41 @@
       "minLength": 20,
       "maxLength": 500
     },
+    "safety": {
+      "type": "array",
+      "description": "Known risks a user must see before installing: what the pack's skills do that needs care, and what closes it. Shown by `bob-skills show`, by `add`, in the offline catalog and on the website. A pack whose skills write to external systems declares it here.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "warning",
+          "covered"
+        ],
+        "properties": {
+          "class": {
+            "type": "string",
+            "enum": [
+              "writes",
+              "cost",
+              "content",
+              "transport",
+              "data"
+            ],
+            "description": "writes: changes outside the workspace; cost: billable resources; content: outside content can steer actions; transport: TLS or exposure; data: data leaves the machine."
+          },
+          "warning": {
+            "type": "string",
+            "minLength": 20,
+            "description": "What the skills do, in the user's terms."
+          },
+          "covered": {
+            "type": "string",
+            "minLength": 20,
+            "description": "What closes it in practice: the rule, the confirmation step, the setting."
+          }
+        }
+      }
+    },
     "license": {
       "type": "string",
       "description": "SPDX identifier of the shipped content, e.g. MIT."
@@ -99,7 +134,32 @@
       "additionalProperties": {
         "$ref": "#/$defs/mcpServer"
       },
-      "description": "Servers merged into .bob/mcp.json (project) or ~/.bob/mcp_settings.json (--global). Keys are server names."
+      "description": "Servers merged into .bob/mcp.json (project) or ~/.bob/mcp.json (--global). Keys are server names. Checked by the registry: pinned versions, https, no secrets, no pre-approved tools, TLS verification on."
+    },
+    "mcpAccess": {
+      "type": "object",
+      "description": "Reviewed access level of every server in mcpServers. read-only: how writes are kept out (a tool allow-list, a read-only mode, or a server that only reads). read-write: why the pack needs writes and which confirmation guards each one. The registry refuses a pack whose server has no entry.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "access",
+          "reason"
+        ],
+        "properties": {
+          "access": {
+            "type": "string",
+            "enum": [
+              "read-only",
+              "read-write"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
     },
     "rules": {
       "type": "array",

@@ -259,6 +259,41 @@
                 }
               }
             }
+          },
+          "safety": {
+            "type": "array",
+            "description": "Known risks a user must see before installing: what the pack's skills do that needs care, and what closes it. Shown by `bob-skills show`, by `add`, in the offline catalog and on the website. A pack whose skills write to external systems declares it here.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "warning",
+                "covered"
+              ],
+              "properties": {
+                "class": {
+                  "type": "string",
+                  "enum": [
+                    "writes",
+                    "cost",
+                    "content",
+                    "transport",
+                    "data"
+                  ],
+                  "description": "writes: changes outside the workspace; cost: billable resources; content: outside content can steer actions; transport: TLS or exposure; data: data leaves the machine."
+                },
+                "warning": {
+                  "type": "string",
+                  "minLength": 20,
+                  "description": "What the skills do, in the user's terms."
+                },
+                "covered": {
+                  "type": "string",
+                  "minLength": 20,
+                  "description": "What closes it in practice: the rule, the confirmation step, the setting."
+                }
+              }
+            }
           }
         }
       }
