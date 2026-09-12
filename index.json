@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T16:08:15Z",
+  "generated": "2026-09-12T16:12:36Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "87a61cecb640f17be5969b465fa5532edbf4ca87"
+    "commit": "e107fa3f5a62a7d21a12bd59a4e8ce30ea557f60"
   },
   "vendors": [
     {
@@ -161,7 +161,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:5806ee4b5d0ef523035113b25098ed30e641f105659baa3d2d5248a0e8caf146"
+          "digest": "sha256:d37e6ea028d1f79460ed9dfbe27858ef07113428ab618257b49e37e95f1fa2a4"
         },
         {
           "name": "skill-creator",
@@ -192,7 +192,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:21f548d572fc5d173660ba8452247fa32b8484d6cab2d014939ae63b6225b139",
+      "digest": "sha256:d91f0a30d7e221a319d1f1587d859eb38889355a8aad03dad26055b82dc9e283",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -208,7 +208,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-12T16:08:12Z",
+        "scannedAt": "2026-09-12T16:12:33Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 57,
         "ciscoMaxSeverity": "INFO",
@@ -391,7 +391,7 @@
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
       "version": "1.9.0",
-      "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint. Original IBM skills, offline.",
+      "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
       "path": "packs/ibm/presentations",
       "tag": "presentations--v1.9.0",
       "skills": [
@@ -436,7 +436,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:8a104c98bda84a1a984f79dc372061283d76a5815031a7a2b1ba89702954acb3",
+      "digest": "sha256:9c432f74f939e0e83f30c55bba41b6961a4fdbaae5264de4923368aaba1d9a4a",
       "revokedVersions": [],
       "versions": [
         "1.9.0"
