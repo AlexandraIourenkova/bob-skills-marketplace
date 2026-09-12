@@ -52,10 +52,10 @@ bob run "/skills-add wxo-adk"
 | Pack component | Project scope (`uvx bob-skills add`) | User scope (`--global`) |
 |---|---|---|
 | skills | `.bob/skills/<skill>/` | `~/.bob/skills/<skill>/` |
-| MCP servers | `.bob/mcp.json` → `mcpServers` | `~/.bob/mcp_settings.json` → `mcpServers` |
+| MCP servers | `.bob/mcp.json` → `mcpServers` | `~/.bob/mcp.json` → `mcpServers` |
 | rules | `.bob/rules/<file>` | `~/.bob/rules/<file>` |
 | commands | `.bob/commands/<file>` | `~/.bob/commands/<file>` |
-| modes | `.bob/custom_modes.yaml` → `customModes` by slug | `~/.bob/custom_modes.yaml` (path to confirm against Bob docs) |
+| modes | `.bob/custom_modes.yaml` → `customModes` by slug | `~/.bob/settings/custom_modes.yaml` (Settings → Modes → Edit Global Modes) |
 | lock | `.bob/skills.lock` | `~/.bob/skills.lock` |
 
 `uvx bob-skills remove <pack>` reverses all of it, including the MCP entries and modes, using the lock as the record of ownership.
@@ -63,3 +63,7 @@ bob run "/skills-add wxo-adk"
 ## The ADK MCP server and unmanaged skills
 
 The watsonx Orchestrate MCP server can copy skills into `.bob/skills/` on its own. The guard treats those as unmanaged and refuses them; the `guard` skill explains to the user how to install the `wxo-adk` pack instead, or `uvx bob-skills trust <skill>` for a genuinely local skill.
+
+## Checking the setup
+
+`uvx bob-skills doctor` reads `.bob/` and `~/.bob/` and reports, without changing a file: a missing guard or SessionStart hook, skills modified after install or not in the lock, skills Bob ignores, risky MCP server entries (the same M001–M007 checks the registry applies to packs) and custom modes with tool groups Bob does not document. Earlier clients wrote global MCP servers to `~/.bob/mcp_settings.json` and global modes to `~/.bob/custom_modes.yaml`, where Bob does not read them; `doctor` points out leftovers there. The bob-doctor skill in bob-essentials explains the report and applies fixes one at a time after the user agrees.

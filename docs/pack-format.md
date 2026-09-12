@@ -19,10 +19,12 @@ packs/<vendor>/<name>/
 |---|---|---|
 | `name` | yes | Pack id, unique in the registry, equals the folder name. `uvx bob-skills add <name>`. |
 | `displayName`, `description` | yes | Catalog text. |
+| `safety` | when the skills write outside the workspace | One entry per known risk: `warning` says what the skills do, `covered` says what closes it in practice. `bob-skills show`, `add`, the offline catalog and the website print both before anyone installs, and the pack README repeats them. |
 | `version` | yes | Semver. Any change to a shipped file needs a new version. Release tag `<name>--v<version>`. |
 | `vendor` | yes | Vendor id from `vendors.json`; must equal the parent folder. |
 | `skills` | yes | Skill folder names under `skills/`. Each `SKILL.md` needs frontmatter `name` (equal to the folder) and a non-empty `description`; Bob ignores a skill without one. |
-| `mcpServers` | no | Merged into `.bob/mcp.json` (project) or `~/.bob/mcp_settings.json` (`--global`). The installer refuses to overwrite a server it does not own unless `--force`. |
+| `mcpServers` | no | Merged into `.bob/mcp.json` (project) or `~/.bob/mcp.json` (`--global`). The installer refuses to overwrite a server it does not own unless `--force`. The registry refuses unpinned packages, plain HTTP, secrets, TLS-off flags, listeners on every interface and pre-approved tools (docs/security-gate.md). |
+| `mcpAccess` | with `mcpServers` | One entry per server: `{"access": "read-only", "reason": "..."}` says how writes are kept out (a tool allow-list, a read-only mode, a server that only reads); `"read-write"` says why the pack needs writes and which confirmation guards each one. `uvx bob-skills show` prints it next to the server. |
 | `rules`, `commands`, `modes` | no | Relative paths of rule files, command files and the modes file. |
 | `networkAllow` | no | Hosts the pack's scripts may contact. Must be a subset of the vendor's allow-list. Any other host in a script is a blocking linter finding. |
 | `revokedVersions` | no | Versions the vendor withdrew. The installer refuses them, `update` offers a way out, the guard refuses their skills. |

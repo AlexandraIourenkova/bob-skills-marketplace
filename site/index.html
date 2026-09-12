@@ -36,7 +36,9 @@
   .vendor { display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.32px; }
   .avatar { width:20px; height:20px; background:var(--text); color:#fff; font-size:9px; font-weight:600; display:flex; align-items:center; justify-content:center; }
   .tag { display:inline-flex; align-items:center; height:24px; padding:0 8px; border-radius:12px; font-size:12px; background:var(--border); color:var(--text); }
-  .tag.green { background:#a7f0ba; color:#0e6027; } .tag.blue { background:#d0e2ff; color:#0043ce; } .tag.red { background:#ffd7d9; color:#a2191f; }
+  .tag.green { background:#a7f0ba; color:#0e6027; } .tag.blue { background:#d0e2ff; color:#0043ce; } .tag.red { background:#ffd7d9; color:#a2191f; } .tag.amber { background:#fddc69; color:#684e00; }
+  .care { border:1px solid #f1c21b; background:rgba(241,194,27,.12); padding:12px 14px; margin:0 0 10px; }
+  .care b { display:block; margin-bottom:4px; } .care p { margin:0; color:var(--text-2); }
   .tile h3 { font-size:20px; line-height:28px; font-weight:400; margin:0; } .tile p { margin:0; color:var(--text-2); }
   .meta { font-size:12px; color:var(--text-3); } .gate { display:flex; align-items:center; gap:6px; font-size:12px; }
   .tile .foot { margin-top:auto; display:flex; flex-direction:column; gap:12px; }
@@ -192,6 +194,7 @@
               <p>${esc(p.description)}</p>
               <div class="meta mono">${esc(p.name)} · v${esc(p.version)}</div>
               <div class="meta">${esc(counts(p))}</div>
+              ${(p.safety || []).length ? `<div class="meta"><span class="tag amber">Read before installing</span></div>` : ''}
               <div class="foot">${gateLine(p)}<span class="btn ghost sm"><span>View pack</span>${ICON.arrow}</span></div>
             </a>`).join('') + planned.map(plannedCard).join('') || '<p>No packs match. Clear the filters, or request a pack.</p>'}</div>
           <div class="info">
@@ -242,6 +245,7 @@
       <div class="wrap detail">
         <div>
           <section><h2>Overview</h2><p class="lead">${esc(p.description)}</p>${p.readme ? `<a href="${fileUrl(p.readme)}" target="_blank" rel="noopener">Pack README in the registry</a>` : ''}</section>
+          ${(p.safety || []).length ? `<section><h2>Before you install</h2>${p.safety.map(n => `<div class="care"><b>${esc(n.warning)}</b><p>Covered by: ${esc(n.covered)}</p></div>`).join('')}<p style="margin:0;color:var(--text-2)">The rule named above comes with the <a href="#/pack/bob-essentials">bob-essentials</a> pack.</p></section>` : ''}
           <section><h2>What you get</h2><table>${rows.map(([k, n, d]) => `<tr><td class="k">${esc(k)}</td><td class="n mono">${esc(n)}</td><td class="d">${esc(d)}</td></tr>`).join('')}</table></section>
           <section><h2>Security gate for v${esc(p.version)}</h2><table>${gateRows.map(([k, icon, s, d]) => `<tr><td class="k" style="width:240px">${esc(k)}</td><td class="n" style="width:160px"><span class="status">${icon}<span>${esc(s)}</span></span></td><td class="d">${esc(d)}</td></tr>`).join('')}</table>
             <p style="margin:12px 0 0"><a href="${fileUrl(p.path + '/.policy-baseline.json')}" target="_blank" rel="noopener">Reviewed baseline</a> · <a href="${web}/actions" target="_blank" rel="noopener">Gate runs</a></p></section>

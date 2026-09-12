@@ -15,17 +15,18 @@ Open an issue with the **Request a pack** template. It names the product, the ve
 ## Publishing the first pack
 
 1. Create `packs/<vendor-id>/<pack>/` with `pack.json`, `skills/`, and any rules, commands or modes. Follow [pack-format.md](pack-format.md). For a pack curated from an upstream repository, fill `source` (repo, ref, path) and the `skills` list, then run `python3 scripts/sync_upstream.py <pack>`: it copies the skills, the licence, and pins `source.ref` to the exact commit. Only skills under a licence that allows redistribution (Apache-2.0, MIT, MPL-2.0) are eligible.
-2. Run locally:
+2. Declare what needs care. If the skills delete, deploy, send, grant or bill outside the workspace, or act on content their authors do not control, add a `safety` entry with the warning and what covers it: usually the `security-defaults` rule from bob-essentials, a confirmation step in the skill, or a setting. The registry shows these lines before every install; repeat them in the pack README.
+3. Run locally:
 
    ```bash
    uv run --project cli bob-skills registry validate --fix
    uv run --project cli bob-skills lint packs/<vendor-id>/<pack>
    ```
 
-3. Read every linter finding. Fix what is real; for accepted false positives run `lint ... --write-baseline --reason "..."` and edit the reasons. Then run the scanners, `python3 scripts/run_scanners.py <pack> --reports reports`, read the reports, and accept what you reviewed with `--accept-skillspector "<reason>" --accept-cisco "<reason>" --write`.
-4. Open the PR from a maintainer account. CI checks the author, runs the gate, and posts the SARIF report.
-5. A vendor maintainer and a marketplace administrator approve after reading the SKILL.md diff.
-6. After the merge, tag the commit `<pack>--v<version>` and push the tag. The release workflow verifies the tag against `pack.json`, rebuilds the index and publishes the release.
+4. Read every linter finding. Fix what is real; for accepted false positives run `lint ... --write-baseline --reason "..."` and edit the reasons. Then run the scanners, `python3 scripts/run_scanners.py <pack> --reports reports`, read the reports, and accept what you reviewed with `--accept-skillspector "<reason>" --accept-cisco "<reason>" --write`.
+5. Open the PR from a maintainer account. CI checks the author, runs the gate, and posts the SARIF report.
+6. A vendor maintainer and a marketplace administrator approve after reading the SKILL.md diff.
+7. After the merge, tag the commit `<pack>--v<version>` and push the tag. The release workflow verifies the tag against `pack.json`, rebuilds the index and publishes the release.
 
 ## Releasing a new version
 
