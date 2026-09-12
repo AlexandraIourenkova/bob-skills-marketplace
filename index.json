@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T18:21:11Z",
+  "generated": "2026-09-12T18:49:14Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "ee8d8dd6496c95618d8ff81374d24fb320b4497b"
+    "commit": "aa07d14357cb058f62f9a2e2709af54280fc44bc"
   },
   "vendors": [
     {
@@ -161,7 +161,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:827551d1f71710e101836101f62cb466e1092da35cb8d3a5399c128fc8987585"
+          "digest": "sha256:6a474c1299eef57beed3bbf317b07e2be87a62e9499090acc9663a6620b6ae53"
         },
         {
           "name": "skill-creator",
@@ -192,7 +192,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:2d2692505e6f5ecf13c2408f886959e921f74d60ba6c41d2c899e511dd6413e2",
+      "digest": "sha256:a4a425b0d8c5a293ab1aa0dcc9c2d3d770a2e631d459c0793fe9e26863789c26",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -1340,7 +1340,7 @@
       "description": "Ask a question of a CSV, Excel file, SQLite, PostgreSQL or Db2 table and get the query, the profile of the data and a chart, then the report through office-docs and presentations. watsonx.data and the data catalogue come in through IBM's own MCP servers.",
       "source": "IBM/ibm-watsonxdata-mcp-server and IBM/data-intelligence-mcp-server, plus our own skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/9",
       "votes": 0
     },
     {
@@ -1352,7 +1352,7 @@
       "description": "Parsers for JSON, syslog, Java stack traces and OpenShift and Cloud Pak logs, error clustering, a timeline correlated by request id, and a report with root-cause hypotheses. Everything runs on the machine, so logs and the secrets in them stay there.",
       "source": "our own skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/10",
       "votes": 0
     },
     {
@@ -1400,7 +1400,7 @@
       "description": "Oracle's own database skills: administration, application development, migrations, PL/SQL, performance, SQLcl and vector search, plus OKE and Functions for OCI.",
       "source": "https://github.com/oracle/skills",
       "blockedBy": "The skills are UPL-1.0, which is not yet on the registry's licence list (Apache-2.0, MIT, MPL-2.0); the policy decision comes first",
-      "issue": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/11",
       "votes": 0
     },
     {
@@ -1412,7 +1412,7 @@
       "description": "Elastic's own skills for SRE triage, Kubernetes investigation, ES|QL queries, alert triage and detection rules: logs, observability and SIEM from one vendor.",
       "source": "https://github.com/elastic/agent-skills",
       "blockedBy": "A new vendor: Elastic joins the registry with its first curated pack, and the votes here say whether teams want it",
-      "issue": "",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/12",
       "votes": 0
     }
   ]
