@@ -21,7 +21,8 @@ library    the 26 bundled pictures (assets/library: abstract vector, black and
            by keyword, `--for-theme` picks the pack for a theme, `--pick` gives
            the path for treat
 
-Pillow only, no network, writes only the output path.
+Pillow for the raster commands (png backdrop, treat, placeholder); svg backdrops,
+icons, patterns and the library work without it. No network, writes only the output path.
 """
 
 from __future__ import annotations
@@ -33,11 +34,14 @@ import random
 import sys
 from pathlib import Path
 
+PILLOW_HINT = "Pillow is not installed. Run with: uv run --with pillow python visual_assets.py ..."
+
 try:
     from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+    PILLOW = True
 except ImportError:  # pragma: no cover - depends on the environment
-    sys.stderr.write("Pillow is not installed. Run with: uv run --with pillow python visual_assets.py ...\n")
-    sys.exit(1)
+    Image = ImageDraw = ImageFilter = ImageFont = ImageOps = None  # svg, icon, pattern and library work without Pillow
+    PILLOW = False
 
 DEFAULT_COLORS = {"bg": "#FFFFFF", "surface": "#F2F4F8", "text": "#161616", "muted": "#525252", "accent": "#0F62FE", "accent2": "#002D9C", "line": "#C6C6C6"}
 PATTERNS = ("gradient", "mesh", "bands", "dots", "grid", "waves", "contours", "noise", "shapes", "arcs")
@@ -49,6 +53,12 @@ FONT_CANDIDATES = (
 
 class AssetError(Exception):
     pass
+
+
+def require_pillow() -> None:
+    """Raster work needs Pillow; SVG backdrops, icons, patterns and the library do not."""
+    if not PILLOW:
+        raise AssetError(PILLOW_HINT)
 
 
 # --------------------------------------------------------------------------- colours and fonts
@@ -123,6 +133,7 @@ def gradient_image(size: tuple[int, int], start: tuple[int, int, int], end: tupl
 
 
 def backdrop(colors: dict, pattern: str, size: tuple[int, int], seed: int, dark: bool | None) -> Image.Image:
+    require_pillow()
     rng = random.Random(seed)
     bg, accent, accent2, surface = colors["bg"], colors["accent"], colors["accent2"], colors["surface"]
     is_dark = dark if dark is not None else sum(bg) < 3 * 110
@@ -547,6 +558,7 @@ def rounded(image: Image.Image, radius: int) -> Image.Image:
 
 
 def treat(args: argparse.Namespace, colors: dict) -> str:
+    require_pillow()
     source = Path(args.input)
     if not source.is_file():
         raise AssetError(f"input not found: {source}")
@@ -591,6 +603,7 @@ def treat(args: argparse.Namespace, colors: dict) -> str:
 
 # --------------------------------------------------------------------------- placeholder
 def placeholder(args: argparse.Namespace, colors: dict) -> str:
+    require_pillow()
     size = parse_size(args.size)
     image = Image.new("RGB", size, mix(colors["bg"], colors["muted"], 0.12))
     draw = ImageDraw.Draw(image)

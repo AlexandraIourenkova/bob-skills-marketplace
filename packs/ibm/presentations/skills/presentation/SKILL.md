@@ -39,7 +39,7 @@ Paths below are relative to `.bob/skills/` (or `~/.bob/skills/` for a global ins
 1. Generate five concepts with the deck's own words:
 
    ```bash
-   python3 deck-style/scripts/style_preview.py --title "<deck title>" --subtitle "<subtitle>" \
+   uv run --with pillow python deck-style/scripts/style_preview.py --title "<deck title>" --subtitle "<subtitle>" \
      --headline "<a real headline>" --bullets "<bullet>;<bullet>;<bullet>" --takeaway "<takeaway>" \
      --numbers "<value>|<label>|<detail>;<value>|<label>|<detail>" --section "<a chapter name>" \
      -o deck/style-preview.html
@@ -50,7 +50,7 @@ Paths below are relative to `.bob/skills/` (or `~/.bob/skills/` for a global ins
 3. Write the theme, with overrides when the user combined concepts:
 
    ```bash
-   python3 deck-style/scripts/style_preview.py --choose <id> --pictures <pack-x|none|generated> -o deck/theme.json
+   uv run --with pillow python deck-style/scripts/style_preview.py --choose <id> --pictures <pack-x|none|generated> -o deck/theme.json
    ```
 
    Overrides: `--accent`, `--accent2`, `--bg`, `--text`, `--heading-font`, `--body-font`, `--align center`, `--name`. Record both choices in the brief.
@@ -64,7 +64,7 @@ Paths below are relative to `.bob/skills/` (or `~/.bob/skills/` for a global ins
    ```
 
 2. Pictures (`deck-images/references/treatment.md` for placement, `library.md` for the bundled set, `sources.md` for open sets, `prompts.md` for generation):
-   - **Pictures from the set the user chose with the style.** The pack ships 72 pictures in seven sets (abstract vector, black and white photo art, dark technology, people at work, paper craft, desk objects, IBM-style isometric), or a backdrop generated from the theme colours. `theme.json` carries the user's choice; the library command reads it and names the title picture and the section pictures, then treat them straight into the deck:
+   - **Pictures from the set the user chose with the style.** The pack ships 86 pictures in eight sets (abstract vector, black and white photo art, dark technology, people at work, paper craft, desk objects, IBM-style isometric, IBM dark premium), or a backdrop generated from the theme colours. `theme.json` carries the user's choice; the library command reads it and names the title picture and the section pictures, then treat them straight into the deck:
 
      ```bash
      uv run --with pillow python deck-images/scripts/visual_assets.py library --for-theme deck/theme.json

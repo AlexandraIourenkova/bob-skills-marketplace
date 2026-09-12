@@ -10,7 +10,7 @@ Output: `deck/style-preview.html` (five concepts for the user to choose from) an
 ## 1. Generate the preview with the deck's own words
 
 ```bash
-python3 scripts/style_preview.py \
+uv run --with pillow python scripts/style_preview.py \
   --title "Subscriptions now carry the business" --subtitle "FY2026 mid-year review" \
   --author "Maria Startseva" --date "September 2026" \
   --headline "Revenue grew 18 percent, and subscriptions did the work" \
@@ -38,11 +38,11 @@ The table in `references/concepts.md` maps common answers ("more corporate", "wa
 ## 3. Write the theme
 
 ```bash
-python3 scripts/style_preview.py --choose editorial --pictures pack-b -o deck/theme.json
-python3 scripts/style_preview.py --choose editorial --pictures none --accent "#0F62FE" --heading-font "IBM Plex Sans" -o deck/theme.json
+uv run --with pillow python scripts/style_preview.py --choose editorial --pictures pack-b -o deck/theme.json
+uv run --with pillow python scripts/style_preview.py --choose editorial --pictures none --accent "#0F62FE" --heading-font "IBM Plex Sans" -o deck/theme.json
 ```
 
-`--pictures` records the picture set the user chose (`pack-a` to `pack-f`, `none`, or `generated`); `library --for-theme deck/theme.json` then hands out that set's pictures, and refuses to guess when the key is missing.
+`--pictures` records the picture set the user chose (`pack-a` to `pack-h`, `none`, or `generated`); `library --for-theme deck/theme.json` then hands out that set's pictures, and refuses to guess when the key is missing.
 
 Overrides: `--accent`, `--accent2`, `--bg`, `--text`, `--heading-font`, `--body-font`, `--align center`, `--name`. The command prints the contrast ratios and says when one is below the floor (text on background 4.5:1, accent on background 3:1, text on accent panels 4.5:1); fix it by darkening or lightening the accent rather than shipping grey on white.
 

@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T17:44:51Z",
+  "generated": "2026-09-12T17:59:57Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "4ef981274616f5d1d21292609bc314b24b0030cd"
+    "commit": "ec2f8fe290d8a7ba89897d530aef6ffc692f9340"
   },
   "vendors": [
     {
@@ -161,7 +161,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:d37e6ea028d1f79460ed9dfbe27858ef07113428ab618257b49e37e95f1fa2a4"
+          "digest": "sha256:be569ca1e540c773bdb81b059680ef9aa348ce20cc19660fc29d07d0c81c36f0"
         },
         {
           "name": "skill-creator",
@@ -192,7 +192,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:d91f0a30d7e221a319d1f1587d859eb38889355a8aad03dad26055b82dc9e283",
+      "digest": "sha256:e5623d36db033fbaab36c17af7fe11f56f406434e79462bd6d7c70d6b8409f66",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -390,15 +390,15 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.9.0",
+      "version": "1.10.0",
       "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
       "path": "packs/ibm/presentations",
-      "tag": "presentations--v1.9.0",
+      "tag": "presentations--v1.10.0",
       "skills": [
         {
           "name": "presentation",
           "description": "Make a presentation from scratch or from the user's material (data, documents, notes) as one workflow. A brief, a story with one headline per slide, five conceptually different style concepts previewed as an HTML page for the user to choose from, charts and pictures, then the deck itself, by default as an interactive HTML presentation to click through or share as a link, and on request as a PDF or a styled 16:9 PowerPoint file from the same storyboard. Ends with a talk kit (pitch versions, speaker notes, Q&A bank, one-pager, follow-up email). Use when the user asks for a presentation, a deck, slides, a pitch deck, a keynote, a board or investor update, a conference talk, a training deck, or says \"сделай презентацию\", \"подготовь слайды\", \"нужна дека\", \"презентация по этим данным\". The step skills deck-story, deck-style, deck-dataviz, deck-images and deck-pitch cover single steps; this skill runs them in order.",
-          "digest": "sha256:94850c9c0a78a2addf513e6aef3395f4d86e9556f7b9957d3bd13de8f0e73d12"
+          "digest": "sha256:00e6eb5b136a38d4f0bfa1c75520c557a6ae17125e5a665cac873695fae318c7"
         },
         {
           "name": "deck-story",
@@ -408,7 +408,7 @@
         {
           "name": "deck-style",
           "description": "Choose the visual style of a presentation with the user instead of guessing. Generates an HTML preview page with five conceptually different style concepts drawn on the deck's own five slides by the same renderer that builds the deck, so the preview is the deck, and turns the user's answer into a theme.json that the PowerPoint builder, the HTML deck, the chart renderer and the image scripts all read. Fifteen built-in concepts from minimal Swiss and IBM Carbon to a cyber steel HUD, pencil sketch, geometric poster and a dark midnight gold; each with its own ornament, every set of five keeps a dark option, contrast checked, brand colour and Cyrillic, Hebrew or Arabic fonts supported. Use when the user asks how the deck should look, wants to see options or a mockup before slides are built, mentions colours, fonts, corporate branding or a template, or says \"выбери стиль\", \"покажи варианты оформления\", \"не нравится дизайн\".",
-          "digest": "sha256:bbf9dced38c859971e8a2663425fe7cd7b2ef9a6c9164bcadd458a87259cbdac"
+          "digest": "sha256:42f353cc8c6d5201eed07ab551a91c61489d438aac97ad1c14e8a8086d8a1c06"
         },
         {
           "name": "deck-dataviz",
@@ -418,7 +418,7 @@
         {
           "name": "deck-images",
           "description": "Pictures for a presentation. Bundled Carbon icons and pattern tiles, generated backdrops, prompts for images the user makes once and reuses, plus where to get photographs legally and how to place everything so the deck looks designed. Covers open image sets (public domain, Creative Commons, Unsplash and similar, icon and illustration sets) with their licences and the credits record, prompts for image generators that match the deck's theme, and offline scripts that make on-theme abstract backdrops in SVG or PNG for title and section slides, apply one consistent treatment to the user's photos (crop, duotone, tint, scrim) and produce labelled placeholders for pictures that have not arrived yet. Use when a deck needs photos, illustrations, icons or a background, when the user asks where to find images, whether an image may be used, how to generate one, or says \"нужны картинки\", \"найди изображения\", \"сгенерируй фон\".",
-          "digest": "sha256:d5da214d4fe48161adb5a875545ad864b2848a5254fa87fa4781c967c7b4a91e"
+          "digest": "sha256:f33fec7c09c7f58208a6b8cbcfcb0abf59258e4328871a9a0370dcd60fa1dedf"
         },
         {
           "name": "deck-pitch",
@@ -436,10 +436,10 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:1051ab7825eb7e6bca3fd05a12d37629533bc76a8e027bae781a1b09684f9af2",
+      "digest": "sha256:7f0e4bb21e1de1abae0a50d88e06310d0749365b149b68e543b3f33fb2556bfe",
       "revokedVersions": [],
       "versions": [
-        "1.9.0"
+        "1.10.0"
       ],
       "baselineFindings": 2,
       "components": 9,
@@ -448,7 +448,7 @@
         "riskScore": 0,
         "policyFindings": 2,
         "verdict": "pass",
-        "scannedAt": "2026-09-12T17:44:47Z",
+        "scannedAt": "2026-09-12T17:50:54Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 6,
         "ciscoMaxSeverity": "INFO",

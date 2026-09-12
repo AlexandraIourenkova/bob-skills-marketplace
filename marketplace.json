@@ -71,7 +71,7 @@
       "name": "presentations",
       "source": "./packs/ibm/presentations",
       "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
-      "version": "1.9.0",
+      "version": "1.10.0",
       "author": {
         "name": "IBM"
       },

@@ -322,7 +322,7 @@ def generated_backdrops(concept: dict, tmp: Path) -> list[tuple[str, Path]]:
         sys.path.insert(0, str(engine))
     try:
         from visual_assets import load_colors, svg_backdrop  # noqa: PLC0415
-    except ImportError:
+    except (ImportError, SystemExit):  # an older deck-images copy refuses to load without Pillow
         return []
     theme_file = tmp / f"theme-{concept.get('id', 'x')}.json"
     theme_file.write_text(json.dumps({"colors": concept["colors"]}), encoding="utf-8")
@@ -336,6 +336,14 @@ def generated_backdrops(concept: dict, tmp: Path) -> list[tuple[str, Path]]:
             continue
         made.append((pattern, target))
     return made
+
+
+def pillow_available() -> bool:
+    try:
+        import PIL  # noqa: F401
+    except ImportError:
+        return False
+    return True
 
 
 def thumbnail(path: Path, tmp: Path) -> Path:
@@ -519,7 +527,7 @@ def picture_row(concept_id: str, concept: dict, text: dict, rtl: bool, manifest:
     if not packs:
         return ""
     variables = theme_vars(concept)
-    scrims = {"pack-a": "none", "pack-b": "dark", "pack-c": "none", "pack-d": "dark", "pack-e": "none", "pack-f": "none"}  # the title sits on the calm side
+    scrims = {"pack-a": "none", "pack-b": "dark", "pack-c": "none", "pack-d": "dark", "pack-e": "none", "pack-f": "none", "pack-g": "none"}  # the title sits on the calm side
     cells = []
     for number, (pack, info, cover) in enumerate(packs, start=1):
         key = f"{pack}/{cover.stem}"
@@ -725,6 +733,9 @@ def main(argv: list[str] | None = None) -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(page, encoding="utf-8")
     print(f"wrote {output}: {len(chosen)} concepts; open it in a browser and ask the user to choose.")
+    if not args.no_pictures and not pillow_available():
+        print("note: Pillow is missing, so library pictures go into the page at full size and it is slow to open. "
+              "Re-run as `uv run --with pillow python scripts/style_preview.py ...` for a light page.", file=sys.stderr)
     print("Show the user these lines as they are; do not describe the concepts from memory:")
     manifest = library_manifest() if not args.no_pictures else {"packs": {}}
     for number, (concept_id, concept) in enumerate(chosen, start=1):
