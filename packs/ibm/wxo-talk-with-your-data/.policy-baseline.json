@@ -1,6 +1,22 @@
 {
   "accepted": [
     {
+      "fingerprint": "afe39e23d4b9ca93",
+      "rule": "P013",
+      "path": "skills/excel-to-wxo-agent/assets/deploy.sh",
+      "line": 28,
+      "message": "deletes, overwrites or deploys in an external system: 'orchestrate tools import'; the skill must get the user's confirmation for this exact action first",
+      "reason": "Deploy step of excel-to-wxo-agent: SKILL.md Step 4 now shows the active environment, tool and agent names and runs the imports only after the user says yes, and checks name collisions before overwriting. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "fbd3e5081a4f6017",
+      "rule": "P013",
+      "path": "skills/excel-to-wxo-agent/assets/deploy.sh",
+      "line": 34,
+      "message": "deletes, overwrites or deploys in an external system: 'orchestrate agents import'; the skill must get the user's confirmation for this exact action first",
+      "reason": "Deploy step of excel-to-wxo-agent: SKILL.md Step 4 now shows the active environment, tool and agent names and runs the imports only after the user says yes, and checks name collisions before overwriting. Reviewed 2026-09-11."
+    },
+    {
       "fingerprint": "6333db79960a9929",
       "rule": "P006",
       "path": "skills/excel-to-wxo-agent/assets/mermaid_chart_rules.md",
@@ -33,6 +49,14 @@
       "reason": "Demo-only chart upload to public image hosts (litterbox.catbox.moe, freeimage.host), one of the options the agent offers the user during agent creation; SKILL.md and references/visualization.md carry the disclaimer: never with real data. Accepted by the pack maintainer 2026-09-10."
     },
     {
+      "fingerprint": "2ee0a2733536074a",
+      "rule": "P013",
+      "path": "skills/excel-to-wxo-agent/assets/visualization_tool.py",
+      "line": 263,
+      "message": "deletes, overwrites or deploys in an external system: 'requests.put('; the skill must get the user's confirmation for this exact action first",
+      "reason": "Chart upload to the user's own IBM COS bucket, only when the user picked the COS option during agent creation; SKILL.md tells the user the images are public-read. Reviewed 2026-09-11."
+    },
+    {
       "fingerprint": "b42befdd8cad53f4",
       "rule": "P008",
       "path": "skills/excel-to-wxo-agent/references/visualization.md",
@@ -47,6 +71,14 @@
       "line": 66,
       "message": "reference to protected path '.env'",
       "reason": "Documentation mentions the project .env for ADK credentials; nothing reads or sends it. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "a49983e75fe4578f",
+      "rule": "P013",
+      "path": "skills/excel-to-wxo-agent/scripts/excel_to_sqlite.py",
+      "line": 5,
+      "message": "deletes, overwrites or deploys in an external system: 'orchestrate tools import'; the skill must get the user's confirmation for this exact action first",
+      "reason": "Docstring that names the orchestrate import command; the script itself only builds the SQLite file. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "e51e807b1707a1e3",

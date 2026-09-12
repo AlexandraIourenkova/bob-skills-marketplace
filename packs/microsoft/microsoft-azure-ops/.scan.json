@@ -1,10 +1,10 @@
 {
-  "scannedAt": "2026-09-10T13:34:39Z",
+  "scannedAt": "2026-09-11T11:43:17Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
   },
-  "baselineDigest": "sha256:517f91cf357e739e246f6ffc04ed92e1be64060eafb2cfdbe45d72502d42471a|sha256:244ccac530817d2b37a642199bb3165da5cddd71beaf313b19070b0973984b85",
+  "baselineDigest": "sha256:1300d99450167e096b8b670832354853be96ad5b29045c119ba97147621a3a46|sha256:244ccac530817d2b37a642199bb3165da5cddd71beaf313b19070b0973984b85",
   "thresholds": {
     "block": 30,
     "review": 10
@@ -32,6 +32,7 @@
       }
     },
     "azure-storage": {
+      "digest": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -49,10 +50,10 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      },
-      "digest": "sha256:1f33a5809f75f9abbe83714b743ed9c15e45f64ddfc0b447573fed7867479a87"
+      }
     },
     "azure-cost": {
+      "digest": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -70,8 +71,7 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      },
-      "digest": "sha256:69c7f78a4a60c8296e876f1cce057eab483aa29cc49239903c1ec0c3a910493b"
+      }
     },
     "azure-compliance": {
       "digest": "sha256:a6100b2d498f579c40b5a67c3fedca04506a4568ce88170f0ca5a24ac638363c",
@@ -95,6 +95,7 @@
       }
     },
     "azure-quotas": {
+      "digest": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -112,8 +113,7 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      },
-      "digest": "sha256:428c6d63e67076cc666c71321ceaadb144ddbc7dc3af9bed5e587e7cf7ada686"
+      }
     },
     "azure-diagnostics": {
       "digest": "sha256:4fb1ba6be8d8fede49f29ca3fd5172a4ac37651e3db6cf6580e12f963f5b231b",
@@ -137,6 +137,7 @@
       }
     },
     "azure-compute": {
+      "digest": "sha256:9322f5f57e5acea5d4f8235027a9ca05e7344721749e25dace9760f29d7f4a1a",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -154,8 +155,7 @@
         "accepted": 0,
         "bySeverity": {},
         "version": null
-      },
-      "digest": "sha256:9322f5f57e5acea5d4f8235027a9ca05e7344721749e25dace9760f29d7f4a1a"
+      }
     }
   },
   "summary": {

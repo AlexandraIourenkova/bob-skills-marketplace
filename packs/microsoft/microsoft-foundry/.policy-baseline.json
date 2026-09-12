@@ -1,5 +1,4 @@
 {
-  "_comment": "Accepted policy findings for this pack. Every entry was read by a reviewer. Remove an entry to make the gate re-evaluate it; new findings still fail the gate.",
   "accepted": [
     {
       "fingerprint": "d2c67d428db7d6ac",
@@ -8,6 +7,22 @@
       "line": 19,
       "message": "host '...' in script is not in the allow-list ['*.ai.azure.com', '*.azure.com', '*.azure.net', '*.microsoft.com', '*.windows.net', 'github.com', 'pypi.org']",
       "reason": "Placeholder URL 'https://...' in a script docstring and a commented example of the GitHub Copilot MCP endpoint; the scripts' real calls go to Azure hosts in the allow-list. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "672b0ea807dcf9d3",
+      "rule": "P013",
+      "path": "skills/microsoft-foundry/finetuning/scripts/deploy_model.py",
+      "line": 120,
+      "message": "deletes, overwrites or deploys in an external system: 'requests.put('; the skill must get the user's confirmation for this exact action first",
+      "reason": "Vendor script that creates (PUT) or, with --delete, removes a model deployment the user names through ARM. The Foundry workflow does not tell the agent to ask first; the bob-essentials security-defaults rule makes the agent show each deploy or delete and wait for the user's yes. Worth reporting upstream. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "b7df8187796bb6ef",
+      "rule": "P013",
+      "path": "skills/microsoft-foundry/finetuning/scripts/deploy_model.py",
+      "line": 167,
+      "message": "deletes, overwrites or deploys in an external system: 'requests.delete('; the skill must get the user's confirmation for this exact action first",
+      "reason": "Vendor script that creates (PUT) or, with --delete, removes a model deployment the user names through ARM. The Foundry workflow does not tell the agent to ask first; the bob-essentials security-defaults rule makes the agent show each deploy or delete and wait for the user's yes. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "b909880f6b6e7e1e",
@@ -23,7 +38,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/create/create-hosted.md",
       "line": 113,
       "message": "forbidden instruction: 'without asking'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "6740c79e217b91a1",
@@ -31,7 +46,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/create/create-hosted.md",
       "line": 61,
       "message": "forbidden instruction: 'without asking'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "7be0223c1a390d12",
@@ -39,7 +54,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
       "line": 24,
       "message": "forbidden instruction: 'without asking'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "867bcadd0b1de64f",
@@ -47,7 +62,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
       "line": 301,
       "message": "forbidden instruction: 'do not ask the user'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "b2cc8f545760b1a2",
@@ -55,7 +70,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/create/quick-start-hosted.md",
       "line": 69,
       "message": "forbidden instruction: 'without asking'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "04f36ed49d18e0eb",
@@ -66,12 +81,20 @@
       "reason": ".env mentions in azd environment guidance. Reviewed 2026-09-10."
     },
     {
+      "fingerprint": "fb8d79fa10448dd8",
+      "rule": "P012",
+      "path": "skills/microsoft-foundry/foundry-agent/create/references/local-run.md",
+      "line": 102,
+      "message": "listener on all network interfaces or a debug server; bind to 127.0.0.1: '--host 0.0.0.0'",
+      "reason": "startupCommand of a hosted agent container: the process must listen on 0.0.0.0 inside the container for the platform to reach it; it is not a service on the user's machine. Reviewed 2026-09-11."
+    },
+    {
       "fingerprint": "ef515667adfccb57",
       "rule": "P006",
       "path": "skills/microsoft-foundry/foundry-agent/create/references/skills/skill-attach.md",
       "line": 120,
       "message": "forbidden instruction: 'skip approval'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "13040e098b01b6f2",
@@ -111,7 +134,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/deploy/deploy.md",
       "line": 217,
       "message": "forbidden instruction: 'skip confirmation'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "88790e5632b9b678",
@@ -119,7 +142,7 @@
       "path": "skills/microsoft-foundry/foundry-agent/deploy/references/container-deploy.md",
       "line": 8,
       "message": "forbidden instruction: 'without asking'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "204f9cefb6930a60",
@@ -159,7 +182,7 @@
       "path": "skills/microsoft-foundry/references/standard-agent-setup.md",
       "line": 37,
       "message": "forbidden instruction: 'Do not ask the user'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "864a05e9290e07f1",
@@ -167,7 +190,7 @@
       "path": "skills/microsoft-foundry/resource/private-network/references/deploy.md",
       "line": 26,
       "message": "forbidden instruction: 'auto-approve'",
-      "reason": "Microsoft's official Foundry agent workflow: 'without asking' refers to read-only preflight checks and to default choices (deploy mode, remote build); 'skip approval' and '--force' document SDK and CLI options; 'auto-approve' is Azure private-network rule approval. The one action taken without confirmation is submitting an asynchronous evaluation suite in the quick start. Reviewed 2026-09-10."
+      "reason": "Microsoft's official Foundry agent workflow. Several steps go ahead without the user's yes: quick-start-hosted.md submits an evaluation suite asynchronously, project creation shows a generated name and proceeds unless the user objects, and deploy.md documents `endpoint update --force` for breaking changes. Other matches are read-only preflight checks, default choices, SDK and CLI options, a Bicep setup that provisions a new project instead of asking for an endpoint, and Azure private-network rule approval. We cannot edit vendor text; the bob-essentials security-defaults rule makes the agent ask before each of these actions. Worth reporting upstream. Reviewed 2026-09-11."
     }
   ]
 }

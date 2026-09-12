@@ -2,9 +2,9 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "bob-essentials",
   "displayName": "Bob essentials",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "vendor": "ibm",
-  "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+  "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.",
   "license": "Apache-2.0",
   "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
   "minBob": "2.0.2",
@@ -12,12 +12,18 @@
     "marketplace",
     "skills",
     "security",
-    "bob"
+    "bob",
+    "audit"
   ],
   "skills": [
     "find-skills",
     "skill-creator",
-    "guard"
+    "guard",
+    "skill-audit",
+    "bob-doctor"
+  ],
+  "rules": [
+    "rules/security-defaults.md"
   ],
   "commands": [
     "commands/skills-add.md"
@@ -29,9 +35,12 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/find-skills": "sha256:d4a86847a4dd2d5af46d62e2da7a4eb793590bb403797938a93c97ee4cc931e1",
-    "skills/skill-creator": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11",
-    "skills/guard": "sha256:42938ecd6a6659749cd745c1de6ce98658d39ed5aa6ce91f0bf0ae297c60a373",
+    "skills/find-skills": "sha256:e78dd3e73d2f409b7922e48c5321c9ad5e821daffffe181ae78c9f12e6c3c507",
+    "skills/skill-creator": "sha256:bd3ff94f5de4c1be496d5daa8e1a20eebf18812ca58fe12681d7a0d7994232e0",
+    "skills/guard": "sha256:b1c9370de1e6daad95506d1c476dd6e4dc71fdabad7d47700f830af60331b06c",
+    "skills/skill-audit": "sha256:56d26596f93dded942f0fd391dd3b3620a6fc6e529f42b4241d3fbcb5ebf4ded",
+    "skills/bob-doctor": "sha256:d32b375db7ded67568afb51fc3223fe1c89b348ea25862f599e54270a0c27775",
+    "rules/security-defaults.md": "sha256:a05c443c8558730fce00553a47e4e7133ba1d7bd599a067ec374856064cf6c67",
     "commands/skills-add.md": "sha256:78efc9620cc474edfe9d52f22995823c47117bb46e955283bcdf1637a739f54b"
   },
   "generated": [

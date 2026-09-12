@@ -158,9 +158,12 @@ Rules that make the page feel real rather than mocked:
 
 ## Step 4 — Serve and verify end-to-end
 
-`file://` will not work — serve over http (`python3 -m http.server 8765
---directory <dir>`, or the Claude Code browser preview). Then verify in the
-browser, in this order:
+`file://` will not work — serve over http on the loopback address only:
+`python3 -m http.server 8765 --bind 127.0.0.1 --directory <dir>` (or the
+Claude Code browser preview), where `<dir>` holds only the page and its assets:
+never the project root, which holds `.env` and `data.db`. Without `--bind` the
+server listens on every network interface and anyone on the same network can
+open the page and its embedded chat. Then verify in the browser, in this order:
 
 1. Page renders, no horizontal scroll, background looks intentional.
 2. Launcher bubble appears (widget script loaded).

@@ -65,6 +65,14 @@
       "reason": "Eval fixture: a mock repository the skill reads as sample input for schema extraction; 'order-service' and 'user-service' are docker-compose service names, never contacted by the skill. Reviewed 2026-09-11."
     },
     {
+      "fingerprint": "906493d1fee7c38e",
+      "rule": "P012",
+      "path": "skills/kafka-schema-registry/evals/mock-repos/api-gateway/src/server.js",
+      "line": 24,
+      "message": "listener on all network interfaces or a debug server; bind to 127.0.0.1: '.listen(PORT, ('",
+      "reason": "Eval fixture: a mock repository that kafka-schema-registry reads as sample input; the skill never runs this server. Reviewed 2026-09-11."
+    },
+    {
       "fingerprint": "345df610cf6df90c",
       "rule": "P009",
       "path": "skills/kafka-streams-programming/evals/evals.json",
@@ -175,6 +183,30 @@
       "line": 29,
       "message": "reference to protected path '.env'",
       "reason": "Kafka client credentials come from the project's own .env through python-dotenv or `source .env`, so keys stay out of source code; the skill never reads .env files outside the user's project. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "274ff9fd4e3a8801",
+      "rule": "P013",
+      "path": "skills/kafka-streams-programming/scripts/teardown.sh",
+      "line": 85,
+      "message": "deletes, overwrites or deploys in an external system: 'rm -rf \"${STATE_DIR}/${A'; the skill must get the user's confirmation for this exact action first",
+      "reason": "teardown.sh lists the topics and local state it will delete and exits unless the user answers y at its 'Continue? (y/N)' prompt; it only removes the demo application's own topics and state directory. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "7826ad0aa8328a86",
+      "rule": "P013",
+      "path": "skills/kafka-streams-programming/scripts/teardown.sh",
+      "line": 48,
+      "message": "deletes, overwrites or deploys in an external system: 'confluent kafka topic delete'; the skill must get the user's confirmation for this exact action first",
+      "reason": "teardown.sh lists the topics and local state it will delete and exits unless the user answers y at its 'Continue? (y/N)' prompt; it only removes the demo application's own topics and state directory. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "9d132b5e7a7297bf",
+      "rule": "P013",
+      "path": "skills/kafka-streams-programming/scripts/teardown.sh",
+      "line": 50,
+      "message": "deletes, overwrites or deploys in an external system: 'kafka-topics --delete'; the skill must get the user's confirmation for this exact action first",
+      "reason": "teardown.sh lists the topics and local state it will delete and exits unless the user answers y at its 'Continue? (y/N)' prompt; it only removes the demo application's own topics and state directory. Reviewed 2026-09-11."
     },
     {
       "fingerprint": "e50766a17dbc8de8",

@@ -619,7 +619,7 @@
           <div class="chart-head">
             <span class="drag-zone">
               <span class="dot"></span>
-              <span class="type">${detectType(code)}</span>
+              <span class="type"></span>
               <span class="stamp">#${chartN} · ${new Date().toLocaleTimeString()}</span>
             </span>
             <button class="src-btn">source</button>
@@ -630,6 +630,7 @@
         </div>`;
       const content = el.querySelector('.grid-stack-item-content');
       el.querySelector('.chart-src').textContent = code;
+      el.querySelector('.type').textContent = detectType(code);  // agent output: never through innerHTML
       el.querySelector('.src-btn').addEventListener('click', () => content.classList.toggle('show-src'));
       el.querySelector('.close').addEventListener('click', () => {
         canvasApi.remove(el);

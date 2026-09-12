@@ -1,0 +1,491 @@
+{
+ "set": "Carbon Design System icons",
+ "publisher": "IBM",
+ "package": "@carbon/icons",
+ "version": "11.88.0",
+ "license": "Apache-2.0",
+ "licenseFile": "LICENSE",
+ "source": "github.com/carbon-design-system/carbon, packages/icons/src/svg/32",
+ "size": "32 x 32 viewBox, single path colour, no fill attribute so the colour is set by the caller",
+ "note": "One licence covers the whole set. Keep LICENSE and NOTICE next to the icons when copying them elsewhere.",
+ "groups": {
+  "data": [
+   "chart-line",
+   "chart-bar",
+   "chart-column",
+   "chart-pie",
+   "chart-bubble",
+   "chart-waterfall",
+   "analytics",
+   "data-table",
+   "data-base",
+   "data-share",
+   "dashboard",
+   "report",
+   "growth",
+   "decision-tree"
+  ],
+  "business": [
+   "money",
+   "wallet",
+   "purchase",
+   "delivery",
+   "store",
+   "enterprise",
+   "building",
+   "industry"
+  ],
+  "people": [
+   "user",
+   "users",
+   "partnership",
+   "collaborate",
+   "events",
+   "idea",
+   "chat",
+   "email",
+   "phone"
+  ],
+  "status": [
+   "calendar",
+   "time",
+   "timer",
+   "alarm",
+   "checkmark",
+   "checkmark-filled",
+   "close",
+   "error",
+   "warning",
+   "warning-alt",
+   "information"
+  ],
+  "security": [
+   "security",
+   "locked",
+   "unlocked",
+   "password",
+   "shield-alert",
+   "rule",
+   "policy",
+   "document",
+   "task",
+   "list"
+  ],
+  "technology": [
+   "settings",
+   "tools",
+   "build-tool",
+   "code",
+   "terminal",
+   "api",
+   "cloud",
+   "cloud-upload",
+   "cloud-download",
+   "network",
+   "deploy",
+   "laptop",
+   "mobile",
+   "devices",
+   "screen",
+   "flow",
+   "flow-data"
+  ],
+  "direction": [
+   "arrow-right",
+   "arrow-up",
+   "rocket",
+   "badge",
+   "trophy",
+   "star",
+   "thumbs-up",
+   "target",
+   "milestone",
+   "roadmap",
+   "globe",
+   "location"
+  ],
+  "actions": [
+   "search",
+   "filter",
+   "view",
+   "edit",
+   "copy",
+   "download",
+   "upload",
+   "share",
+   "bookmark",
+   "tag",
+   "folder"
+  ]
+ },
+ "icons": {
+  "alarm": {
+   "carbon": "alarm",
+   "keywords": "reminder, alert"
+  },
+  "analytics": {
+   "carbon": "analytics",
+   "keywords": "insight, analysis"
+  },
+  "api": {
+   "carbon": "api",
+   "keywords": "interface, integration"
+  },
+  "arrow-right": {
+   "carbon": "arrow--right",
+   "keywords": "next step, forward"
+  },
+  "arrow-up": {
+   "carbon": "arrow--up",
+   "keywords": "increase, priority"
+  },
+  "badge": {
+   "carbon": "badge",
+   "keywords": "certification, quality"
+  },
+  "bookmark": {
+   "carbon": "bookmark",
+   "keywords": "save for later"
+  },
+  "build-tool": {
+   "carbon": "build-tool",
+   "keywords": "pipeline, build"
+  },
+  "building": {
+   "carbon": "building",
+   "keywords": "office, site"
+  },
+  "calendar": {
+   "carbon": "calendar",
+   "keywords": "date, schedule"
+  },
+  "chart-bar": {
+   "carbon": "chart--bar",
+   "keywords": "comparison, ranking"
+  },
+  "chart-bubble": {
+   "carbon": "chart--bubble",
+   "keywords": "relationship, scatter"
+  },
+  "chart-column": {
+   "carbon": "chart--column",
+   "keywords": "comparison, quarters"
+  },
+  "chart-line": {
+   "carbon": "chart--line",
+   "keywords": "trend, over time, growth"
+  },
+  "chart-pie": {
+   "carbon": "chart--pie",
+   "keywords": "share, part of a whole"
+  },
+  "chart-waterfall": {
+   "carbon": "chart--waterfall",
+   "keywords": "bridge, composition of a change"
+  },
+  "chat": {
+   "carbon": "chat",
+   "keywords": "conversation, feedback"
+  },
+  "checkmark": {
+   "carbon": "checkmark",
+   "keywords": "done, approved"
+  },
+  "checkmark-filled": {
+   "carbon": "checkmark--filled",
+   "keywords": "confirmed, complete"
+  },
+  "close": {
+   "carbon": "close",
+   "keywords": "stop, rejected"
+  },
+  "cloud": {
+   "carbon": "cloud",
+   "keywords": "hosting, platform"
+  },
+  "cloud-download": {
+   "carbon": "cloud--download",
+   "keywords": "retrieve, restore"
+  },
+  "cloud-upload": {
+   "carbon": "cloud--upload",
+   "keywords": "publish, migrate up"
+  },
+  "code": {
+   "carbon": "code",
+   "keywords": "software, development"
+  },
+  "collaborate": {
+   "carbon": "collaborate",
+   "keywords": "working together"
+  },
+  "copy": {
+   "carbon": "copy",
+   "keywords": "duplicate, reuse"
+  },
+  "dashboard": {
+   "carbon": "dashboard",
+   "keywords": "monitoring, overview"
+  },
+  "data-base": {
+   "carbon": "data--base",
+   "keywords": "database, storage"
+  },
+  "data-share": {
+   "carbon": "data-share",
+   "keywords": "exchange, integration"
+  },
+  "data-table": {
+   "carbon": "data-table",
+   "keywords": "table, rows"
+  },
+  "decision-tree": {
+   "carbon": "decision-tree",
+   "keywords": "branching, options"
+  },
+  "delivery": {
+   "carbon": "delivery",
+   "keywords": "shipping, logistics"
+  },
+  "deploy": {
+   "carbon": "deploy",
+   "keywords": "release, rollout"
+  },
+  "devices": {
+   "carbon": "devices",
+   "keywords": "multi-device"
+  },
+  "document": {
+   "carbon": "document",
+   "keywords": "paper, contract"
+  },
+  "download": {
+   "carbon": "download",
+   "keywords": "export, save"
+  },
+  "edit": {
+   "carbon": "edit",
+   "keywords": "change, revise"
+  },
+  "email": {
+   "carbon": "email",
+   "keywords": "message, follow-up"
+  },
+  "enterprise": {
+   "carbon": "enterprise",
+   "keywords": "company, corporate"
+  },
+  "error": {
+   "carbon": "error",
+   "keywords": "failure, blocked"
+  },
+  "events": {
+   "carbon": "events",
+   "keywords": "meeting, conference"
+  },
+  "filter": {
+   "carbon": "filter",
+   "keywords": "narrow down"
+  },
+  "flow": {
+   "carbon": "flow",
+   "keywords": "process, sequence"
+  },
+  "flow-data": {
+   "carbon": "flow--data",
+   "keywords": "data pipeline"
+  },
+  "folder": {
+   "carbon": "folder",
+   "keywords": "collection"
+  },
+  "globe": {
+   "carbon": "globe",
+   "keywords": "global, market"
+  },
+  "growth": {
+   "carbon": "growth",
+   "keywords": "increase, expansion"
+  },
+  "idea": {
+   "carbon": "idea",
+   "keywords": "insight, proposal"
+  },
+  "industry": {
+   "carbon": "industry",
+   "keywords": "manufacturing, plant"
+  },
+  "information": {
+   "carbon": "information",
+   "keywords": "note, detail"
+  },
+  "laptop": {
+   "carbon": "laptop",
+   "keywords": "workstation, product"
+  },
+  "list": {
+   "carbon": "list",
+   "keywords": "steps, backlog"
+  },
+  "location": {
+   "carbon": "location",
+   "keywords": "place, region"
+  },
+  "locked": {
+   "carbon": "locked",
+   "keywords": "private, restricted"
+  },
+  "milestone": {
+   "carbon": "milestone",
+   "keywords": "checkpoint, date"
+  },
+  "mobile": {
+   "carbon": "mobile",
+   "keywords": "phone app"
+  },
+  "money": {
+   "carbon": "money",
+   "keywords": "cost, budget, revenue"
+  },
+  "network": {
+   "carbon": "network--2",
+   "keywords": "connections, topology"
+  },
+  "partnership": {
+   "carbon": "partnership",
+   "keywords": "deal, alliance"
+  },
+  "password": {
+   "carbon": "password",
+   "keywords": "credentials"
+  },
+  "phone": {
+   "carbon": "phone",
+   "keywords": "call, contact"
+  },
+  "policy": {
+   "carbon": "policy",
+   "keywords": "compliance, standard"
+  },
+  "purchase": {
+   "carbon": "purchase",
+   "keywords": "buy, order"
+  },
+  "report": {
+   "carbon": "report",
+   "keywords": "document, results"
+  },
+  "roadmap": {
+   "carbon": "roadmap",
+   "keywords": "plan, timeline"
+  },
+  "rocket": {
+   "carbon": "rocket",
+   "keywords": "launch, speed"
+  },
+  "rule": {
+   "carbon": "rule",
+   "keywords": "policy, governance"
+  },
+  "screen": {
+   "carbon": "screen",
+   "keywords": "display, demo"
+  },
+  "search": {
+   "carbon": "search",
+   "keywords": "find, research"
+  },
+  "security": {
+   "carbon": "security",
+   "keywords": "protection, trust"
+  },
+  "settings": {
+   "carbon": "settings",
+   "keywords": "configuration"
+  },
+  "share": {
+   "carbon": "share",
+   "keywords": "distribute"
+  },
+  "shield-alert": {
+   "carbon": "shield--alert",
+   "keywords": "threat, vulnerability"
+  },
+  "star": {
+   "carbon": "star",
+   "keywords": "highlight, favourite"
+  },
+  "store": {
+   "carbon": "store",
+   "keywords": "retail, shop"
+  },
+  "tag": {
+   "carbon": "tag",
+   "keywords": "label, category"
+  },
+  "target": {
+   "carbon": "crossroads",
+   "keywords": "decision point"
+  },
+  "task": {
+   "carbon": "task",
+   "keywords": "work item, action"
+  },
+  "terminal": {
+   "carbon": "terminal",
+   "keywords": "command line"
+  },
+  "thumbs-up": {
+   "carbon": "thumbs-up",
+   "keywords": "approval, satisfaction"
+  },
+  "time": {
+   "carbon": "time",
+   "keywords": "duration, clock"
+  },
+  "timer": {
+   "carbon": "timer",
+   "keywords": "deadline, speed"
+  },
+  "tools": {
+   "carbon": "tools",
+   "keywords": "maintenance, support"
+  },
+  "trophy": {
+   "carbon": "trophy",
+   "keywords": "win, achievement"
+  },
+  "unlocked": {
+   "carbon": "unlocked",
+   "keywords": "open access"
+  },
+  "upload": {
+   "carbon": "upload",
+   "keywords": "import, submit"
+  },
+  "user": {
+   "carbon": "user",
+   "keywords": "person, customer"
+  },
+  "users": {
+   "carbon": "group",
+   "keywords": "team, audience"
+  },
+  "view": {
+   "carbon": "view",
+   "keywords": "visibility, review"
+  },
+  "wallet": {
+   "carbon": "wallet",
+   "keywords": "spend, funding"
+  },
+  "warning": {
+   "carbon": "warning",
+   "keywords": "risk, caution"
+  },
+  "warning-alt": {
+   "carbon": "warning--alt",
+   "keywords": "attention, exception"
+  }
+ }
+}

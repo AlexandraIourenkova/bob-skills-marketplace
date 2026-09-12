@@ -31,7 +31,7 @@ The commands below need only `uv` (`uvx` downloads the client from PyPI on first
 2. Three outcomes:
    - **A pack is curated from that repository.** Say so and continue with that pack (step 3). The marketplace version is the same content, scanned and checksummed; there is no reason to clone.
    - **The repository belongs to a listed vendor, but no pack is curated from it yet.** Name the vendor's existing packs and suggest requesting a pack with the repository as the reference.
-   - **Unknown repository.** Refuse to copy anything from it and explain why in one sentence. Offer three ways forward: the closest marketplace pack, a pack request, or `uvx bob-skills trust <skill>` if the skill is the user's own and already in `.bob/skills/`.
+   - **Unknown repository.** Refuse to copy anything from it and explain why in one sentence. Offer three ways forward: the closest marketplace pack, a pack request, or, if the skill is the user's own and already in `.bob/skills/`, the skill-audit skill followed by `uvx bob-skills trust <skill>`.
 
 ## 3. Show what will be installed, then ask
 
@@ -41,8 +41,8 @@ The commands below need only `uv` (`uvx` downloads the client from PyPI on first
    uvx bob-skills show <pack>
    ```
 
-   It lists skills with descriptions, MCP servers with their command or URL, rules, commands, modes, the gate status with the number of reviewed findings, the allowed network hosts for scripts, the context cost, and whether the vendor is already trusted in this project.
-2. Ask the user to confirm the install. Mention MCP servers explicitly: they run locally or connect to a URL. Never install without an explicit yes.
+   It lists skills with descriptions, MCP servers with their command or URL and their reviewed access (read-only, or read-write with the reason), rules, commands, modes, the gate status with the number of reviewed findings, the allowed network hosts for scripts, the context cost, and whether the vendor is already trusted in this project.
+2. Read the panel's "before you install" lines to the user in full, with what covers each one, and say that the cover is the `security-defaults` rule from bob-essentials: install that pack first when it is missing. Then ask the user to confirm the install. Mention MCP servers explicitly: they run locally or connect to a URL, and say whether each one can write. Never install without an explicit yes.
 3. **First install from a vendor.** If the panel says the vendor is not yet trusted, show the vendor line (name, organisation, status, signing key) and ask a separate question: "Trust vendor X in this project?". Only after a yes add `--accept-vendor`.
 
 ## 4. Install
@@ -63,8 +63,9 @@ uvx bob-skills update            # newer versions with SKILL.md diffs; --apply t
 uvx bob-skills remove <pack>     # removes skills, MCP servers, rules, commands and modes of the pack
 uvx bob-skills verify            # digests against the lock plus the policy linter
 uvx bob-skills list              # installed packs and unmanaged folders
+uvx bob-skills doctor            # read-only check of hooks, lock, skills, MCP servers and modes (the bob-doctor skill explains it)
 ```
 
-Before `update --apply`, show the SKILL.md diff to the user; a major version needs their explicit yes. A revoked version is reported by `update`; offer the fixed version or the previous one.
+Before every `update --apply`, show the SKILL.md diff and ask for a yes, whatever the version number; a major version also needs `--yes`. The diff covers SKILL.md only, so also compare `uvx bob-skills show <pack>` with the installed version and name new or changed MCP servers, rules, commands and modes. A revoked version is reported by `update`; offer the fixed version or the previous one.
 
 If a skill activation was refused by the guard, use the `guard` skill to explain and resolve it.

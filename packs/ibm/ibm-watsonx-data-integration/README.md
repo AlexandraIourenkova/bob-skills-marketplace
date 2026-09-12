@@ -2,6 +2,12 @@
 
 Vendor: `ibm`. Curated from [IBM/ibm-watsonx-data-integration-skills](https://github.com/IBM/ibm-watsonx-data-integration-skills) (Apache-2.0), plugin `agent`. Install with `uvx bob-skills add ibm-watsonx-data-integration`.
 
+## Before you install
+
+**The flow skills run, re-run, restore and delete jobs and assets in your watsonx.data integration instance, and a run whose write mode is `overwrite` truncates the target table.**
+
+Covered by: This pack's rule requires your yes for each run, retry, restore and delete, names the target connections and the write mode first, and treats job logs and data rows as data.
+
 | Skill | What it adds |
 |---|---|
 | `di-agent-flow-lifecycle` | Entry point for all flow work: create, edit, validate, run, diagnose, recover |

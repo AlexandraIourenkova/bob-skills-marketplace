@@ -5,6 +5,13 @@
   "version": "1.0.0",
   "vendor": "anthropic",
   "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The mcp-builder evaluation harness calls every tool of the server under test, write tools included, and its HTTP server example listens on every network interface without authentication.",
+      "covered": "The security-defaults rule keeps servers you write on 127.0.0.1 and requires your yes before a write tool runs; point the harness at a sandbox account or at read-only tools."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/anthropics/skills",
   "source": {

@@ -41,7 +41,7 @@ Docs: ibm.com/docs → watsonx Orchestrate → "Securing the embedded chat" and
 ## 3. Widget does nothing on `file://`
 
 Opening the html directly from disk gives a dead widget (script/CORS). Always
-serve over http: `python3 -m http.server 8765 --directory <dir>`.
+serve over http on the loopback address: `python3 -m http.server 8765 --bind 127.0.0.1 --directory <dir>`.
 
 ## 4. `channels webchat embed` fails with CRN 403
 

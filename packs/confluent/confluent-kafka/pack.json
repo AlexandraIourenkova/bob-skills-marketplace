@@ -5,6 +5,18 @@
   "version": "1.0.0",
   "vendor": "confluent",
   "description": "Build Kafka producers, consumers and Kafka Streams apps with Schema Registry, bring unmanaged schemas under Schema Registry with PII tags, write Flink SQL and Java UDFs, set up CDC pipelines into Iceberg or Delta tables with Tableflow, and plan a move from AWS MSK to Confluent Cloud. Confluent's official skills, curated from confluentinc/agent-skills with the evals Confluent scores them against.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The Confluent Cloud skills create and delete environments, connectors, topics and Flink statements, and Flink statements consume CFUs while they run.",
+      "covered": "The skills present a plan and run EXPLAIN before CREATE; the security-defaults rule adds a yes per create or delete, named by object and environment. The teardown script asks once before it deletes the demo topics and local state."
+    },
+    {
+      "class": "transport",
+      "warning": "The bundled docker-compose files publish the broker, REST proxy and Schema Registry without authentication on every network interface, and the setup guides write cluster keys into local properties files.",
+      "covered": "Publish those ports as `127.0.0.1:PORT:PORT` when you run them, and add the key files to `.gitignore` as the Java skill does."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/confluentinc/agent-skills",
   "source": {

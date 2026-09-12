@@ -7,6 +7,22 @@
       "line": 293,
       "message": "forbidden instruction: 'without confirming'",
       "reason": "Description of an insecure pattern in a security reference (deriving HTTPS from X-Forwarded-Proto without a trusted proxy); documentation, not an instruction to skip confirmation. Reviewed 2026-09-10."
+    },
+    {
+      "fingerprint": "cb3e6360cf85a113",
+      "rule": "P011",
+      "path": "skills/security-best-practices/references/golang-general-backend-security.md",
+      "line": 786,
+      "message": "TLS certificate verification disabled: 'InsecureSkipVerify: true'",
+      "reason": "Security guidance that lists InsecureSkipVerify: true as a pattern to find and remove. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "51837cb1d3bfb14a",
+      "rule": "P012",
+      "path": "skills/security-best-practices/references/python-flask-web-server-security.md",
+      "line": 138,
+      "message": "listener on all network interfaces or a debug server; bind to 127.0.0.1: '.run(debug=True'",
+      "reason": "Security guidance that lists app.run(debug=True) as a pattern to find and remove. Reviewed 2026-09-11."
     }
   ]
 }

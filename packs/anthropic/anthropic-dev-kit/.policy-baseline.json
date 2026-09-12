@@ -1,0 +1,20 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "d55ef3974ee4ab9c",
+      "rule": "P012",
+      "path": "skills/mcp-builder/reference/node_mcp_server.md",
+      "line": 738,
+      "message": "listener on all network interfaces or a debug server; bind to 127.0.0.1: '.listen(port, ('",
+      "reason": "Anthropic reference code for an HTTP MCP server calls app.listen(port) without a host, so the example listens on every interface. We cannot edit vendor content; the bob-essentials security-defaults rule tells the agent to bind servers it writes to 127.0.0.1. Worth reporting upstream. Reviewed 2026-09-11."
+    },
+    {
+      "fingerprint": "e89def984dfe2332",
+      "rule": "P012",
+      "path": "skills/mcp-builder/reference/node_mcp_server.md",
+      "line": 843,
+      "message": "listener on all network interfaces or a debug server; bind to 127.0.0.1: '.listen(3000)'",
+      "reason": "Anthropic reference code for an HTTP MCP server calls app.listen(port) without a host, so the example listens on every interface. We cannot edit vendor content; the bob-essentials security-defaults rule tells the agent to bind servers it writes to 127.0.0.1. Worth reporting upstream. Reviewed 2026-09-11."
+    }
+  ]
+}

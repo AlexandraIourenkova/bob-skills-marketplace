@@ -5,6 +5,13 @@
   "version": "1.0.0",
   "vendor": "hashicorp",
   "description": "Terraform the way HashiCorp writes it: style guide, tests, policy as code, module refactoring, and importing existing infrastructure with search. Curated from hashicorp/agent-skills.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "terraform-test creates real infrastructure by default, and the import and refactor skills run `terraform apply` and `terraform state mv` on live state.",
+      "covered": "The security-defaults rule requires your yes for each apply or state move; run tests with `command = plan` or mocks first, and check that the plan shows no destroys before you approve it."
+    }
+  ],
   "license": "MPL-2.0",
   "homepage": "https://github.com/hashicorp/agent-skills",
   "source": {

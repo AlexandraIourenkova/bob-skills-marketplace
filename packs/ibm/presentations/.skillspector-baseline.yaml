@@ -1,0 +1,58 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: LP3
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+  path: '*SKILL.md'
+- id: AE1
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+  path: '*SKILL.md'
+fingerprints:
+- hash: sha256:d37a8aaa782d146462ca11b919b30865bf673d7e2b949866d4e15b0438e7a02f
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+- hash: sha256:028d466b8d22951843a83daa2329864e6ae5c07b9066312a1211176542903a00
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+- hash: sha256:4eb20bb6f9329131ac68f751ff36ec78600a6484ee9dee8c6229e57424ca45cc
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+- hash: sha256:b61f8370566d681474ad79b734bc09e3963ed1b3f725084c1b4ee7a3ac27c692
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+- hash: sha256:39eefd2b0929eb29a5c5c60a995c2ef6daa06f1f073d5fba66752aad3b3777ef
+  rule_id: AE1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'
+- hash: sha256:e9f825b32b8d5d9e7e74c59179f2d589e7679abb3346a95f3e4a0d86e7b54b37
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10 by the pack authors: LP3 is the missing per-skill licence
+    field (the pack ships Apache-2.0 at pack level, as in every IBM pack here); AE1
+    on deck-images/SKILL.md is the scanner reading only part of the skill''s own references/prompts.md,
+    which is shipped in the pack and inspectable.'

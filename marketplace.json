@@ -12,8 +12,8 @@
     {
       "name": "bob-essentials",
       "source": "./packs/ibm/bob-essentials",
-      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
-      "version": "1.1.2",
+      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.",
+      "version": "1.2.0",
       "author": {
         "name": "IBM"
       },
@@ -23,7 +23,8 @@
         "marketplace",
         "skills",
         "security",
-        "bob"
+        "bob",
+        "audit"
       ],
       "category": "ibm-bob"
     },
@@ -31,7 +32,7 @@
       "name": "ibm-watsonx-data-integration",
       "source": "./packs/ibm/ibm-watsonx-data-integration",
       "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "IBM"
       },
@@ -50,7 +51,7 @@
       "name": "office-docs",
       "source": "./packs/ibm/office-docs",
       "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "IBM"
       },
@@ -67,10 +68,32 @@
       "category": "ibm-bob"
     },
     {
+      "name": "presentations",
+      "source": "./packs/ibm/presentations",
+      "description": "From a topic or the user's data to a deck people remember, and the talk around it: story structures by audience and goal, a headline-per-slide storyboard, five conceptually different style concepts previewed for the user to choose, charts that say one thing, a bundled picture library, Carbon icons and pattern tiles. One storyboard builds three ways: an interactive HTML presentation, a printable HTML for PDF, and a styled 16:9 PowerPoint file. Original IBM skills, offline.",
+      "version": "1.9.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "presentations",
+        "pptx",
+        "html",
+        "slides",
+        "storytelling",
+        "dataviz",
+        "pitch",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "wxo-adk",
       "source": "./packs/ibm/wxo-adk",
       "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "IBM"
       },
@@ -88,8 +111,8 @@
     {
       "name": "wxo-talk-with-your-data",
       "source": "./packs/ibm/wxo-talk-with-your-data",
-      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
-      "version": "1.0.2",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.2.",
+      "version": "1.1.0",
       "author": {
         "name": "IBM"
       },

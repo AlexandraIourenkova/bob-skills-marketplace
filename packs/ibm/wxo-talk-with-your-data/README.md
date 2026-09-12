@@ -4,6 +4,12 @@ Vendor: `ibm`. Install with `uvx bob-skills add wxo-talk-with-your-data` or `/sk
 
 Start from a spreadsheet and end with an agent people can talk to.
 
+## Before you install
+
+**Importing a tool or an agent replaces objects with the same name in your Orchestrate tenant, and the chart tool uploads chart images built from your data.**
+
+Covered by: The skill and the pack rule name the environment and the objects and ask before each import; charts go to your own COS bucket by default with no silent fallback, and the free public hosting option is described as demo-only, for made-up data.
+
 | Component | Source | What it adds |
 |---|---|---|
 | `skills/excel-to-wxo-agent` | IBM tech garage, [excel-to-wxo](https://github.ibm.com/tech-garage-spgi/excel-to-wxo) | Excel or CSV to a SQLite database bundled inside a watsonx Orchestrate Python tool, agent YAML with the schema baked into the instructions, import through the ADK CLI |

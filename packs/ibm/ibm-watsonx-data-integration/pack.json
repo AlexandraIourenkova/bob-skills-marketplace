@@ -2,9 +2,16 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "ibm-watsonx-data-integration",
   "displayName": "IBM watsonx.data integration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "vendor": "ibm",
   "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The flow skills run, re-run, restore and delete jobs and assets in your watsonx.data integration instance, and a run whose write mode is `overwrite` truncates the target table.",
+      "covered": "This pack's rule requires your yes for each run, retry, restore and delete, names the target connections and the write mode first, and treats job logs and data rows as data."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://www.ibm.com/docs/en/watsonx/wdi/saas?topic=integration-agentic-data",
   "source": {
@@ -43,7 +50,7 @@
     "skills/di-agent-datastage-investigation": "sha256:b1c342ec28eb4dea81b05f5a031be403479017b850f0b0e695c7b21b1a25d910",
     "skills/di-agent-knowledge-engine-datastage": "sha256:983db27a29331a7129491cb5d57515dfbae5baea7034b198da72ea7f065afbcb",
     "skills/di-agent-bug-report": "sha256:59c9232e436b66d59bf844c80fb210ee76a34b624ddda240fc98a690d2fa6a1f",
-    "rules/watsonx-data-integration.md": "sha256:86a3a31749e58ffacd98f5f2f5d7d80d3f5f8c3e5ee77c0b9b1db7b3828fbb30"
+    "rules/watsonx-data-integration.md": "sha256:251a763d3736cb7fadc5ee4464c243e6409c3819079610f93a6a1604eb46cb3f"
   },
   "rules": [
     "rules/watsonx-data-integration.md"

@@ -5,6 +5,13 @@
   "version": "1.0.0",
   "vendor": "google",
   "description": "Work with BigQuery from an agent: basics, BigFrames data science, AI and ML in BigQuery, plus gcloud CLI guidance. Curated from Google's official agent skills.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The BigQuery skills run DDL and DML, delete datasets and tables with `bq rm -f`, train models and call billable AI functions over whole tables, and the vendor text does not stop to ask first.",
+      "covered": "The security-defaults rule from bob-essentials makes the agent show each write, delete or billable query with its target and wait for your yes; ask for a LIMITed sample before an AI function runs over a table."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/google/skills",
   "source": {

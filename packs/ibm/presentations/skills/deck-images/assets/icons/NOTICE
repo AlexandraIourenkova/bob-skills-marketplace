@@ -1,0 +1,13 @@
+Carbon Design System icons
+Copyright IBM Corp. 2016, 2023
+
+This product includes software developed at IBM Corp.
+Licensed under the Apache License, Version 2.0 (see the LICENSE file next to this notice).
+
+The SVG files in this folder are a curated subset of the @carbon/icons package
+(version 11.88.0, github.com/carbon-design-system/carbon, packages/icons/src/svg/32),
+copied unchanged. manifest.json records the original Carbon name of every file.
+
+The png/ folder holds the same icons rasterised at 256 x 256 pixels as black glyphs on a
+transparent ground, for the PowerPoint builder, which recolours them through the alpha
+channel. They are derived from the SVG files above under the same licence.

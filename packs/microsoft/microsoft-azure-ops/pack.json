@@ -5,6 +5,18 @@
   "version": "1.1.1",
   "vendor": "microsoft",
   "description": "Day-to-day Azure work from an agent: look up resources, manage storage, analyse cost, check compliance and quotas, diagnose failing resources and run compute. Curated from Microsoft's official skills repository.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The diagnostics and compute skills run commands inside virtual machines, reset passwords, exec into AKS pods and start privileged debug pods, and they apply fixes such as scaling a plan up.",
+      "covered": "The security-defaults rule makes the agent show each command and its target and wait for your yes; ask for read-only checks and `--dry-run` first, and delete debug pods when the investigation ends."
+    },
+    {
+      "class": "cost",
+      "warning": "Capacity reservations bill from the moment they exist, whether or not a virtual machine uses them, and several workflows create or enable billable resources.",
+      "covered": "The rule requires the monthly cost and the exact resource to be shown before creation, and your yes for that action."
+    }
+  ],
   "license": "MIT",
   "homepage": "https://github.com/microsoft/skills",
   "source": {

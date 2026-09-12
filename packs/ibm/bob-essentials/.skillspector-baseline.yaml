@@ -1,32 +1,205 @@
 version: 2
 scanner_version: 2.11.2
 rules:
+- id: AE1
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+  path: '*SKILL.md'
+- id: AE1
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+  path: '*references/catalog.md'
+- id: AS2
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+  path: '*SKILL.md'
+- id: RA2
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+  path: '*SKILL.md'
+- id: RA2
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+  path: '*references/catalog.md'
 - id: RP1
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
-    is the skill''s purpose.'
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
   path: '*SKILL.md'
 - id: RP1
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
-    is the skill''s purpose.'
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
   path: '*references/catalog.md'
 fingerprints:
-- hash: sha256:13a59038585f2645ef1eb55bed34c546356dbfb8685b237608f7ca25007e5b57
+- hash: sha256:5badd4939ca884c6eb5f2e914a9d00068b1d833ba6d02f3f4575925148ad6abb
   rule_id: RP1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:4f65c61c23014c1d6739367b036cda227025a3266abdf64a2f6700a6e2dac0e0
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:9524df174ae49b50ce295001c758405dcd4a723945d5cda1a039d3af95d1ed26
+  rule_id: RA2
   file: references/catalog.md
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
-    is the skill''s purpose.'
-- hash: sha256:625a64755e6ee00489b5f84e98ec5efbf3e5a3d65ccc775a8c15c38e4ed348a6
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:b33dfc8384117838c36b7aef1b776510ed7c217050a2db0343bd772025979d77
   rule_id: RP1
   file: SKILL.md
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
-    is the skill''s purpose.'
-- hash: sha256:2e16d964a80cca6c66de83eff3e3a3ec02004b4ffb15d356740f5e362e21de84
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:8db18269aafb2851c54d5e200d025de97a9e7cb5f679a5e9c1acbf04d5257b5d
   rule_id: RP1
   file: SKILL.md
   reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
     (never install without confirmation, refuse unknown repositories); enforcing them
-    is the skill''s purpose.'
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:49ac2aa323e933d55e7be94df543d57f613b4f569bc4fd371a148bee71220072
+  rule_id: RP1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:23c70f59370581718711f8fd4387a9ccf18a99369e7f86e9cc3cb172b0f723db
+  rule_id: AS2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:b10abbd495e0522fc329e2555abaf272b220c239ccd282470735a19ac5dd482e
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'
+- hash: sha256:a6af7fedd107eb90ae85267b273a7c8e40d99a78bf73346bddcb789f444bbdec
+  rule_id: RP1
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-10: RP1 flags the marketplace''s own imperative rules
+    (never install without confirmation, refuse unknown repositories); enforcing them
+    is the skill''s purpose. Reviewed 2026-09-11: AS2 in bob-doctor, which reads the
+    user''s MCP configuration by design to find secrets and risky entries; the doctor
+    command reports keys, never values, and the skill replaces a secret with an environment
+    reference without printing it. RA2 matches mentions of Bob rules, modes and commands
+    that the user installs or asks to create; nothing persists without the user''s
+    request. AE1: SkillSpector inspects only part of references/catalog.md, the offline
+    catalog that index.json and marketplace.json written generates from index.json;
+    the policy linter reads that file in full on every gate run.'

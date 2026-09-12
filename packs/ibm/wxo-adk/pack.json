@@ -2,9 +2,16 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "wxo-adk",
   "displayName": "watsonx Orchestrate ADK",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "vendor": "ibm",
   "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The ADK MCP server has no read-only mode: its tools create, import, remove, set connection credentials and chat with agents in the active tenant, and the ADK skills deploy agents and promote them to live.",
+      "covered": "This pack's rule and the wxo-builder mode require your yes for every write call, import, remove and promotion; deploys go through `/wxo-deploy`, which shows the plan and the environment first. `mcpAccess` in pack.json records the access level of both servers."
+    }
+  ],
   "license": "MIT",
   "homepage": "https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills",
   "source": {
@@ -33,12 +40,26 @@
     "watsonx-orchestrate-adk": {
       "command": "uvx",
       "args": [
+        "--from",
+        "ibm-watsonx-orchestrate-mcp-server==2.16.1",
+        "--with",
+        "ibm-watsonx-orchestrate==2.16.1",
         "ibm-watsonx-orchestrate-mcp-server"
       ]
     },
     "watsonx-orchestrate-adk-docs": {
       "type": "streamable-http",
       "url": "https://developer.watson-orchestrate.ibm.com/mcp"
+    }
+  },
+  "mcpAccess": {
+    "watsonx-orchestrate-adk": {
+      "access": "read-write",
+      "reason": "The ADK MCP server has no read-only mode: 64 tools, including remove_agent, create_tool with model-written code, set_credentials_connection and chat_with_agent, act on the active tenant. The mode uses it to list agents and tools; the wxo-adk rule and the bob-essentials security-defaults rule require the user's yes for every write call, and deploys go through /wxo-deploy. WXO_MCP_WORKING_DIRECTORY is left unset, so tools that read local paths refuse to run."
+    },
+    "watsonx-orchestrate-adk-docs": {
+      "access": "read-only",
+      "reason": "Documentation search: the server exposes two read-only tools over https and needs no credentials."
     }
   },
   "rules": [
@@ -63,9 +84,9 @@
     "skills/telemetry-analyzer": "sha256:28a666e771a0dd23c7b93ff126d2739d1cde6d06b1c2ed6f32c489cc6a91043f",
     "skills/agent-instructions-evaluator": "sha256:4000fb84eb01c92d0b2b3e8b36a362d2911dcd87c9d0f1444cf1ac974b557902",
     "skills/wxo-agent-architect": "sha256:c716450019dd17ef6dc3dd066e6233a3ff75dfb84ff7220215064cf2a80ea894",
-    "rules/wxo-adk.md": "sha256:54a09683667629b52ffd3e3e687aafa9a62989aa6eac7bbb4769c9660454e3d2",
-    "commands/wxo-deploy.md": "sha256:14d3ad8b8d350d810817783eea3a15c464bb177ddfee03445a4172a6339f0daf",
-    "custom_modes.yaml": "sha256:b6c152af5ea852830e4b24dbfa5851eb03a051c47e72f19b4acd5c5b9976b342"
+    "rules/wxo-adk.md": "sha256:4c86bdd9e82f0e7d2d073ade22e63d9877a6ff47b84ce47f8d53cfd0d247aa22",
+    "commands/wxo-deploy.md": "sha256:9e9d9ddb4a31e0eea87f06db26e93f5155fbf2b9ae2f076efbabf150139ee494",
+    "custom_modes.yaml": "sha256:9b92645ea02ad1290d25ab25b443d79aa660a72d3ece34b75587d274699c6523"
   },
   "sources": {
     "wxo-agent-architect": {

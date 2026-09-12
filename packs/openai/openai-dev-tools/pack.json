@@ -5,6 +5,13 @@
   "version": "1.1.0",
   "vendor": "openai",
   "description": "Everyday developer skills from the Codex skills catalog: work in Jupyter notebooks, fix failing GitHub CI runs from the logs, and scaffold command-line tools. PDF work lives in the IBM office-docs pack.",
+  "safety": [
+    {
+      "class": "content",
+      "warning": "gh-fix-ci reads the logs and text of pull requests, which their authors control, and can commit, push and re-run workflows; jupyter-notebook runs notebooks end to end.",
+      "covered": "The security-defaults rule treats that content as data and requires your yes before a commit, a push, a workflow run, or running a notebook this session did not write."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/openai/skills",
   "source": {

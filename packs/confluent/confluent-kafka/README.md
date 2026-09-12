@@ -2,6 +2,16 @@
 
 Vendor: `confluent` (an IBM company since March 2026). Curated from [confluentinc/agent-skills](https://github.com/confluentinc/agent-skills) (Apache-2.0) at commit `914d95eff7ff`. Install with `uvx bob-skills add confluent-kafka`.
 
+## Before you install
+
+**The Confluent Cloud skills create and delete environments, connectors, topics and Flink statements, and Flink statements consume CFUs while they run.**
+
+Covered by: The skills present a plan and run EXPLAIN before CREATE; the security-defaults rule adds a yes per create or delete, named by object and environment. The teardown script asks once before it deletes the demo topics and local state.
+
+**The bundled docker-compose files publish the broker, REST proxy and Schema Registry without authentication on every network interface, and the setup guides write cluster keys into local properties files.**
+
+Covered by: Publish those ports as `127.0.0.1:PORT:PORT` when you run them, and add the key files to `.gitignore` as the Java skill does.
+
 | Skill | What it adds |
 |---|---|
 | `developing-kafka-java-client` | Java producer and consumer projects on the Apache Kafka clients with Avro, JSON Schema or Protobuf through Schema Registry; Maven or Gradle |

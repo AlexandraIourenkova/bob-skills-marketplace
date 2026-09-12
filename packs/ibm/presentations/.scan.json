@@ -1,0 +1,159 @@
+{
+  "scannedAt": "2026-09-12T11:28:45Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:0eef7fc1f52e3c5f238d6e9570eac7c002b89d8991bfdcc5887bfd3ea5fa318a|sha256:61120cfa0166fd1a09bee224232dbe32ca9093ec0fec1e88ad968d5e7bf158f9",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "presentation": {
+      "digest": "sha256:94850c9c0a78a2addf513e6aef3395f4d86e9556f7b9957d3bd13de8f0e73d12",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "deck-story": {
+      "digest": "sha256:499635b753eee41e3c03d7b7c705a5476e2ac2afb0d967409ae941b448d19c03",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "deck-style": {
+      "digest": "sha256:bbf9dced38c859971e8a2663425fe7cd7b2ef9a6c9164bcadd458a87259cbdac",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "deck-dataviz": {
+      "digest": "sha256:03d1c1829ff1e13d7df88075a6c2098a6da7b03eea6dcd7e4d47d8713825999c",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "deck-images": {
+      "digest": "sha256:38a2ab26004817e1dea231406d09d87adc048b2f422b45704e5d5f648b4af619",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 1,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "deck-pitch": {
+      "digest": "sha256:1bcc35cdf6725967145fde090609579db1940842dedc18701ec744f0173f4486",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 6,
+    "ciscoAccepted": 1
+  }
+}

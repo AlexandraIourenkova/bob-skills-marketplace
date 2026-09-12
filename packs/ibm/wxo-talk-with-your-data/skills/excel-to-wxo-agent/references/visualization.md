@@ -19,7 +19,7 @@ Markdown image link the agent embeds in its answer). One switch at the top of
 the file selects the mode:
 
 ```python
-UPLOAD_MODE = "free"          # or "cos", or "cos_fallback"
+UPLOAD_MODE = "cos"           # default; "free" only for throwaway demos with made-up data
 ```
 
 Deploy alongside the SQL tool (requirements matter — matplotlib et al.):

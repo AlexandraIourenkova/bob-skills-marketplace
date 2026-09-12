@@ -5,6 +5,13 @@
   "version": "1.0.0",
   "vendor": "openai",
   "description": "Security review skills from the Codex skills catalog: apply security best practices to a codebase, build a threat model, and map security ownership across a repository.",
+  "safety": [
+    {
+      "class": "content",
+      "warning": "security-best-practices follows rules and instructions it finds in the repository's own documentation and prompt files.",
+      "covered": "The security-defaults rule keeps repository content as evidence rather than instructions; a change of approach needs your confirmation in the chat."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.com/openai/skills",
   "source": {

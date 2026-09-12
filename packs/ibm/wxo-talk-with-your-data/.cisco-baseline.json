@@ -22,43 +22,43 @@
       "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
     },
     {
-      "key": "14f3de7b8a600258",
+      "key": "b62c20f94ed7b79f",
       "skill": "excel-to-wxo-agent",
       "severity": "MEDIUM",
       "category": "data_exfiltration",
       "title": "Outbound network request primitives that can transmit data externally",
       "file": "assets/visualization_tool.py",
-      "line": 293,
+      "line": 294,
       "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
     },
     {
-      "key": "2f52d5a57d03fe31",
+      "key": "02238d1155886ffc",
       "skill": "excel-to-wxo-agent",
       "severity": "MEDIUM",
       "category": "data_exfiltration",
       "title": "Outbound network request primitives that can transmit data externally",
       "file": "assets/visualization_tool.py",
-      "line": 281,
+      "line": 282,
       "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
     },
     {
-      "key": "aac70265485690c3",
+      "key": "8c6c030ce4d4047b",
       "skill": "excel-to-wxo-agent",
       "severity": "MEDIUM",
       "category": "data_exfiltration",
       "title": "Outbound network request primitives that can transmit data externally",
       "file": "assets/visualization_tool.py",
-      "line": 253,
+      "line": 254,
       "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
     },
     {
-      "key": "fa95ad6e3d1f1917",
+      "key": "023991ae032c8372",
       "skill": "excel-to-wxo-agent",
       "severity": "MEDIUM",
       "category": "data_exfiltration",
       "title": "Outbound network request primitives that can transmit data externally",
       "file": "assets/visualization_tool.py",
-      "line": 263,
+      "line": 264,
       "reason": "Reviewed 2026-09-10: excel_to_sqlite.py builds CREATE TABLE and INSERT statements with identifiers taken from the user's own spreadsheet (Cisco CRITICAL, SQL f-string): a local conversion of the user's file, identifiers cannot be parameterised; demo-only chart upload to public image hosts (E1; Cisco data_exfiltration) accepted by the maintainer, see .policy-baseline.json; HTML template comments and template references in wxo-chat-demo-page (P2, AE1); unpinned visualization requirements (SC1, SC4)."
     },
     {

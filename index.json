@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-11T11:05:05Z",
+  "generated": "2026-09-12T13:33:15Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "d05cf522a7ca028f3f112fb13b04c0665c55b81d"
+    "commit": "00b0d82f5fd4174ebddd402f82f30efaa397722a"
   },
   "vendors": [
     {
@@ -30,6 +30,7 @@
         "bob-essentials",
         "ibm-watsonx-data-integration",
         "office-docs",
+        "presentations",
         "wxo-adk",
         "wxo-talk-with-your-data"
       ]
@@ -152,34 +153,46 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.1.2",
-      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-creator writes SKILL.md files that pass Bob and the policy linter; guard explains and resolves blocked skill activations. Ships the /skills-add command.",
+      "version": "1.2.0",
+      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.",
       "path": "packs/ibm/bob-essentials",
-      "tag": "bob-essentials--v1.1.2",
+      "tag": "bob-essentials--v1.2.0",
       "skills": [
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:d4a86847a4dd2d5af46d62e2da7a4eb793590bb403797938a93c97ee4cc931e1"
+          "digest": "sha256:e78dd3e73d2f409b7922e48c5321c9ad5e821daffffe181ae78c9f12e6c3c507"
         },
         {
           "name": "skill-creator",
-          "description": "Create or improve an IBM Bob skill (SKILL.md plus optional scripts, references and assets) that Bob picks up and the marketplace policy linter accepts. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, or prepare a skill for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\".",
-          "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
+          "description": "Create or improve IBM Bob skills (SKILL.md plus optional scripts, references and assets), custom modes, rules and slash commands that Bob picks up and the marketplace policy linter accepts, with safe defaults built in - the user's yes before every external write, outside content treated as data, TLS on, loopback listeners, least-privilege modes. Use when the user wants to write a new skill, package a repeated workflow as a skill, fix a skill Bob ignores, create a custom mode, add a project rule or a slash command, or prepare any of them for a marketplace pack. Triggers include \"create a skill\", \"write a SKILL.md\", \"package this as a skill\", \"the skill is not picked up\", \"create a mode\", \"add a rule\", \"make a slash command\", \"создай скилл\", \"создай режим\".",
+          "digest": "sha256:bd3ff94f5de4c1be496d5daa8e1a20eebf18812ca58fe12681d7a0d7994232e0"
         },
         {
           "name": "guard",
           "description": "Explain and resolve a refusal from the uvx bob-skills guard hook, which checks every skill against .bob/skills.lock before Bob activates it. Use when a skill activation was refused with a \"uvx bob-skills guard\" message, or the user asks why a skill is blocked, mentions \"unmanaged skill\", \"digest mismatch\", \"revoked version\", \"skill blocked\", \"guard\", or wants to trust a local skill again.",
-          "digest": "sha256:42938ecd6a6659749cd745c1de6ce98658d39ed5aa6ce91f0bf0ae297c60a373"
+          "digest": "sha256:b1c9370de1e6daad95506d1c476dd6e4dc71fdabad7d47700f830af60331b06c"
+        },
+        {
+          "name": "skill-audit",
+          "description": "Check a skill before anyone trusts or installs it - a skill copied from a repository, a web page or a colleague, the user's own skill, or an unmanaged skill the guard refused. Runs the marketplace policy linter, plus NVIDIA SkillSpector and Cisco skill-scanner when installed, then reads the skill for the holes scanners miss - writes or admin actions without the user's yes, instructions hidden in content the skill reads, TLS verification off, servers listening on all interfaces, stored credentials reused for unauthenticated requests. Use when the user asks \"is this skill safe\", \"check this skill\", \"audit the skill\", \"can I trust it\", \"проверь скилл\", or before `uvx bob-skills trust`.",
+          "digest": "sha256:56d26596f93dded942f0fd391dd3b3620a6fc6e529f42b4241d3fbcb5ebf4ded"
+        },
+        {
+          "name": "bob-doctor",
+          "description": "Check the Bob setup of this project and of ~/.bob and fix problems together with the user - guard hook missing, skills modified after install or unmanaged, skills Bob ignores, MCP servers with secrets in the config, unpinned versions, plain HTTP, TLS verification off, listeners on all interfaces, write tools approved in advance or telemetry on, and custom modes with unknown tool groups. Use when the user says \"check my Bob setup\", \"doctor\", \"why is my skill or MCP server not working\", \"is my mcp.json safe\", \"проверь настройки Bob\", or after installing packs or adding MCP servers by hand.",
+          "digest": "sha256:d32b375db7ded67568afb51fc3223fe1c89b348ea25862f599e54270a0c27775"
         }
       ],
       "mcpServers": [],
-      "rules": [],
+      "rules": [
+        "security-defaults.md"
+      ],
       "commands": [
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:013dc2fdbc848146c7b9071103190433b9cdc3544f245c9fc2f16785cf8dbe36",
+      "digest": "sha256:1275f5927798cb78dfb5e489bae9fb519a01baf6d5f6eb0cb6c45c52edcb40d3",
       "revokedVersions": [],
       "versions": [
         "1.1.2",
@@ -188,15 +201,15 @@
         "1.0.0"
       ],
       "baselineFindings": 0,
-      "components": 4,
+      "components": 7,
       "readme": "packs/ibm/bob-essentials/README.md",
       "scan": {
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-11T11:02:57Z",
+        "scannedAt": "2026-09-12T13:33:12Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 37,
+        "skillspectorSuppressed": 57,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
@@ -207,7 +220,8 @@
         "marketplace",
         "skills",
         "security",
-        "bob"
+        "bob",
+        "audit"
       ]
     },
     {
@@ -216,10 +230,10 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",
       "path": "packs/ibm/ibm-watsonx-data-integration",
-      "tag": "ibm-watsonx-data-integration--v1.0.0",
+      "tag": "ibm-watsonx-data-integration--v1.0.1",
       "skills": [
         {
           "name": "di-agent-flow-lifecycle",
@@ -258,7 +272,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:c8a0254f9a883b8981d9ba0256378c8ba5389dbc68032c6d6cbd27b5df966526",
+      "digest": "sha256:ab6c4e375cb9bfcca85a6b3ce5e6aa4ad5386176ec7859e9b9d0759d9ceb95ed",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -290,7 +304,14 @@
         "repo": "https://github.com/IBM/ibm-watsonx-data-integration-skills",
         "ref": "6249929d21ee",
         "path": "agent/skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The flow skills run, re-run, restore and delete jobs and assets in your watsonx.data integration instance, and a run whose write mode is `overwrite` truncates the target table.",
+          "covered": "This pack's rule requires your yes for each run, retry, restore and delete, names the target connections and the write mode first, and treats job logs and data rows as data."
+        }
+      ]
     },
     {
       "name": "office-docs",
@@ -298,10 +319,10 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
       "path": "packs/ibm/office-docs",
-      "tag": "office-docs--v1.0.0",
+      "tag": "office-docs--v1.0.1",
       "skills": [
         {
           "name": "docx",
@@ -330,7 +351,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:87a49072ecdff455ef624188cf5a2421633ff5e6618dea5e0fe9d52a666d3e2e",
+      "digest": "sha256:ba2c58bd7c0a77b721101b13f5056ea1d2b9a4e8a20d5392f5477f1674b27191",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -361,15 +382,99 @@
       ]
     },
     {
+      "name": "presentations",
+      "displayName": "Presentations that tell a story",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.9.0",
+      "description": "From a topic or the user's data to a deck people remember, and the talk around it: story structures by audience and goal, a headline-per-slide storyboard, five conceptually different style concepts previewed for the user to choose, charts that say one thing, a bundled picture library, Carbon icons and pattern tiles. One storyboard builds three ways: an interactive HTML presentation, a printable HTML for PDF, and a styled 16:9 PowerPoint file. Original IBM skills, offline.",
+      "path": "packs/ibm/presentations",
+      "tag": "presentations--v1.9.0",
+      "skills": [
+        {
+          "name": "presentation",
+          "description": "Make a presentation from scratch or from the user's material (data, documents, notes) as one workflow. A brief, a story with one headline per slide, five conceptually different style concepts previewed as an HTML page for the user to choose from, charts and pictures, then the deck itself, by default as an interactive HTML presentation to click through or share as a link, and on request as a PDF or a styled 16:9 PowerPoint file from the same storyboard. Ends with a talk kit (pitch versions, speaker notes, Q&A bank, one-pager, follow-up email). Use when the user asks for a presentation, a deck, slides, a pitch deck, a keynote, a board or investor update, a conference talk, a training deck, or says \"сделай презентацию\", \"подготовь слайды\", \"нужна дека\", \"презентация по этим данным\". The step skills deck-story, deck-style, deck-dataviz, deck-images and deck-pitch cover single steps; this skill runs them in order.",
+          "digest": "sha256:94850c9c0a78a2addf513e6aef3395f4d86e9556f7b9957d3bd13de8f0e73d12"
+        },
+        {
+          "name": "deck-story",
+          "description": "Build the story of a presentation. Choose a narrative structure, write one headline per slide, and check that the headlines alone tell the story. Works from scratch (an interview of eight questions), from the user's data (six lenses that turn a spreadsheet into three to five findings) or from a document. Use when the user asks how to structure a talk or a deck, says the deck has no story or \"too many slides\", wants an outline or a storyboard before slides exist, asks what to put on which slide, or says \"структура презентации\", \"как рассказать эту историю\", \"сделай сторилайн\". The presentation skill calls this as its story step.",
+          "digest": "sha256:499635b753eee41e3c03d7b7c705a5476e2ac2afb0d967409ae941b448d19c03"
+        },
+        {
+          "name": "deck-style",
+          "description": "Choose the visual style of a presentation with the user instead of guessing. Generates an HTML preview page with five conceptually different style concepts drawn on the deck's own five slides by the same renderer that builds the deck, so the preview is the deck, and turns the user's answer into a theme.json that the PowerPoint builder, the HTML deck, the chart renderer and the image scripts all read. Fifteen built-in concepts from minimal Swiss and IBM Carbon to a cyber steel HUD, pencil sketch, geometric poster and a dark midnight gold; each with its own ornament, every set of five keeps a dark option, contrast checked, brand colour and Cyrillic, Hebrew or Arabic fonts supported. Use when the user asks how the deck should look, wants to see options or a mockup before slides are built, mentions colours, fonts, corporate branding or a template, or says \"выбери стиль\", \"покажи варианты оформления\", \"не нравится дизайн\".",
+          "digest": "sha256:bbf9dced38c859971e8a2663425fe7cd7b2ef9a6c9164bcadd458a87259cbdac"
+        },
+        {
+          "name": "deck-dataviz",
+          "description": "Make the charts of a presentation say one thing and look like part of the deck. Chooses the chart from the message rather than the data shape, writes native PowerPoint chart blocks for bar, line, area and pie, and renders waterfall, slope, lollipop, bullet, small multiples, scatter and heatmap charts to PNG in the deck's theme colours with matplotlib, offline. Use when a slide needs a chart or a graph, when a chart is unreadable or cluttered, when the user asks which chart to use, how to visualise numbers, wants to highlight one bar or add a target line, or says \"как показать эти данные\", \"сделай график\", \"перерисуй диаграмму\".",
+          "digest": "sha256:03d1c1829ff1e13d7df88075a6c2098a6da7b03eea6dcd7e4d47d8713825999c"
+        },
+        {
+          "name": "deck-images",
+          "description": "Pictures for a presentation. Bundled Carbon icons and pattern tiles, generated backdrops, prompts for images the user makes once and reuses, plus where to get photographs legally and how to place everything so the deck looks designed. Covers open image sets (public domain, Creative Commons, Unsplash and similar, icon and illustration sets) with their licences and the credits record, prompts for image generators that match the deck's theme, and offline scripts that make on-theme abstract backdrops in SVG or PNG for title and section slides, apply one consistent treatment to the user's photos (crop, duotone, tint, scrim) and produce labelled placeholders for pictures that have not arrived yet. Use when a deck needs photos, illustrations, icons or a background, when the user asks where to find images, whether an image may be used, how to generate one, or says \"нужны картинки\", \"найди изображения\", \"сгенерируй фон\".",
+          "digest": "sha256:38a2ab26004817e1dea231406d09d87adc048b2f422b45704e5d5f648b4af619"
+        },
+        {
+          "name": "deck-pitch",
+          "description": "Everything around the slides. The spoken pitch at four lengths, a per-slide talk track with timings, a Q&A bank with prepared answers and backup slides, a one-page leave-behind, the follow-up email, a rehearsal plan and a day-of checklist. Written from the deck's own storyboard so every answer points at a slide. Use when the user has a deck and needs to present it, asks how to open or close, what to say per slide, how long it will take, what questions to expect, how to handle a hostile question, wants an elevator pitch or a one-pager, or says \"подготовь питч\", \"какие вопросы зададут\", \"что говорить на слайдах\".",
+          "digest": "sha256:1bcc35cdf6725967145fde090609579db1940842dedc18701ec744f0173f4486"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [
+        "presentations.md"
+      ],
+      "commands": [
+        "deck.md"
+      ],
+      "modes": [
+        "deck-studio"
+      ],
+      "digest": "sha256:95dfc3320dfd5b7072169edcf2cf3f66e449fec29566017fd4235b9d88c26889",
+      "revokedVersions": [],
+      "versions": [
+        "1.9.0"
+      ],
+      "baselineFindings": 2,
+      "components": 9,
+      "readme": "packs/ibm/presentations/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 2,
+        "verdict": "pass",
+        "scannedAt": "2026-09-12T11:28:45Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 6,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "minBob": "2.0.2",
+      "tags": [
+        "presentations",
+        "pptx",
+        "html",
+        "slides",
+        "storytelling",
+        "dataviz",
+        "pitch",
+        "ibm"
+      ]
+    },
+    {
       "name": "wxo-adk",
       "displayName": "watsonx Orchestrate ADK",
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
       "path": "packs/ibm/wxo-adk",
-      "tag": "wxo-adk--v1.1.0",
+      "tag": "wxo-adk--v1.1.1",
       "skills": [
         {
           "name": "solution-architect",
@@ -420,7 +525,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:dceec91bd92907c54a0b959065dc99491fa3243542d0a2b5b5036b6d97d5ab4c",
+      "digest": "sha256:d889730b48080b3029d47aa5e23d974ec13b49a220cfad510385322cad660ed7",
       "revokedVersions": [],
       "versions": [
         "1.1.0",
@@ -460,7 +565,14 @@
           "ref": "7a96fcd752f8",
           "path": "plugins/wxo-agent-architect/skills"
         }
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The ADK MCP server has no read-only mode: its tools create, import, remove, set connection credentials and chat with agents in the active tenant, and the ADK skills deploy agents and promote them to live.",
+          "covered": "This pack's rule and the wxo-builder mode require your yes for every write call, import, remove and promotion; deploys go through `/wxo-deploy`, which shows the plan and the environment first. `mcpAccess` in pack.json records the access level of both servers."
+        }
+      ]
     },
     {
       "name": "wxo-talk-with-your-data",
@@ -468,24 +580,23 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.2",
-      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+      "version": "1.1.0",
+      "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.2.",
       "path": "packs/ibm/wxo-talk-with-your-data",
-      "tag": "wxo-talk-with-your-data--v1.0.2",
+      "tag": "wxo-talk-with-your-data--v1.1.0",
       "skills": [
         {
           "name": "excel-to-wxo-agent",
           "description": "Build and deploy a minimal text-to-SQL prototype agent on IBM watsonx Orchestrate (wxo) from an Excel or CSV file. Converts the spreadsheet into a SQLite database bundled INSIDE the wxo Python tool (no external database to deploy), generates the agent YAML with the schema baked into its instructions, and imports both via the orchestrate ADK CLI. Use whenever the user wants a quick data agent, chat-with-my-Excel prototype, or text-to-SQL demo on watsonx Orchestrate — including phrasings like \"deploy a data agent to wxo\", \"text-to-SQL prototype\", or any mention of watsonx Orchestrate together with Excel/CSV/SQLite data.",
-          "digest": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d"
+          "digest": "sha256:12718c7b70f834718831d37777c0cc130d5c4cae53635f0252c97596939ebd7f"
         },
         {
           "name": "wxo-chat-demo-page",
           "description": "Build a polished demo web page with an embedded IBM watsonx Orchestrate (wxo) chat widget — a landing page for showing an agent to stakeholders. Fetches the official embed snippet, assembles a themed layout (hero, stat cards, example questions, mock chat preview, or full-page chat), serves it locally, and verifies the chat end-to-end in the browser. Use whenever the user wants a demo/landing page for a wxo agent, mentions embedding the wxo web chat into a site (\"embed code\", \"put the chat on a page\", \"demo page for the agent\", \"landing page with chat\"), wants charts or a dashboard built live from the agent's chat answers (\"render charts from the answers\", \"dashboard with chat\", mermaid charts from a wxo agent, analyst canvas), or reports the wxo chat widget loading forever.",
-          "digest": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66"
+          "digest": "sha256:aae24fae5a74cdada2251fabfa5f1f6d4fd1c2ddb2e01e38a5d5a09f668bfa29"
         }
       ],
       "mcpServers": [
-        "watsonx-orchestrate-adk",
         "watsonx-orchestrate-adk-docs"
       ],
       "rules": [
@@ -493,21 +604,21 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:e4a09404c5a9eac3b60a52ee7a30bebc8164e47a573e8018b64ae635aea11a92",
+      "digest": "sha256:2d0c00aa169250bf8c6a5671e04b1f2231fac64ca7753a97c480b4389adfc3e2",
       "revokedVersions": [],
       "versions": [
         "1.0.2",
         "1.0.1",
         "1.0.0"
       ],
-      "baselineFindings": 8,
+      "baselineFindings": 12,
       "components": 3,
       "readme": "packs/ibm/wxo-talk-with-your-data/README.md",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 8,
+        "policyFindings": 12,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T11:16:50Z",
+        "scannedAt": "2026-09-11T11:45:55Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 34,
         "ciscoMaxSeverity": "INFO",
@@ -529,7 +640,14 @@
         "repo": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
         "ref": "6bb7f04",
         "path": ".bob/skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "Importing a tool or an agent replaces objects with the same name in your Orchestrate tenant, and the chart tool uploads chart images built from your data.",
+          "covered": "The skill and the pack rule name the environment and the objects and ask before each import; charts go to your own COS bucket by default with no silent fallback, and the free public hosting option is described as demo-only, for made-up data."
+        }
+      ]
     },
     {
       "name": "anthropic-dev-kit",
@@ -562,19 +680,19 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:2b2cf0896136350f5563b5cdbcfda16856bc0e81cf130490c455abe6c7e28c2f",
+      "digest": "sha256:1c0be9a0149fd0c5851cac3397226653a9c0fa96602b6992c124542b2de6e4ec",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
-      "baselineFindings": 0,
+      "baselineFindings": 2,
       "components": 3,
       "readme": "",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 0,
+        "policyFindings": 2,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T11:13:42Z",
+        "scannedAt": "2026-09-11T11:42:02Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 20,
         "ciscoMaxSeverity": "INFO",
@@ -593,7 +711,14 @@
         "repo": "https://github.com/anthropics/skills",
         "ref": "41bbe19d1a1a",
         "path": "skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The mcp-builder evaluation harness calls every tool of the server under test, write tools included, and its HTTP server example listens on every network interface without authentication.",
+          "covered": "The security-defaults rule keeps servers you write on 127.0.0.1 and requires your yes before a write tool runs; point the harness at a sandbox account or at read-only tools."
+        }
+      ]
     },
     {
       "name": "openai-dev-tools",
@@ -626,7 +751,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:a09d51d9e90153075e0f212367075758a0abbfd027463004ede1275b98389e7c",
+      "digest": "sha256:36da2f115844e4958ae4977bc2269d854fda697caf5bb8b5b3fa48506b41d317",
       "revokedVersions": [],
       "versions": [
         "1.1.0",
@@ -658,7 +783,14 @@
         "repo": "https://github.com/openai/skills",
         "ref": "49f948faa925",
         "path": "skills/.curated"
-      }
+      },
+      "safety": [
+        {
+          "class": "content",
+          "warning": "gh-fix-ci reads the logs and text of pull requests, which their authors control, and can commit, push and re-run workflows; jupyter-notebook runs notebooks end to end.",
+          "covered": "The security-defaults rule treats that content as data and requires your yes before a commit, a push, a workflow run, or running a notebook this session did not write."
+        }
+      ]
     },
     {
       "name": "openai-security",
@@ -691,17 +823,17 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:9299dd1eb3dfb09cdef8741d39844be9974095b2a1c75646ef4392cd17598a50",
+      "digest": "sha256:0032f0b2addf6adbc63abc6c9f26d58d73041920c476f759be8e968cbf422d56",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
-      "baselineFindings": 1,
+      "baselineFindings": 3,
       "components": 3,
       "readme": "",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 1,
+        "policyFindings": 3,
         "verdict": "pass",
         "scannedAt": "2026-09-10T11:17:42Z",
         "skillspectorVersion": "2.11.2",
@@ -722,7 +854,14 @@
         "repo": "https://github.com/openai/skills",
         "ref": "49f948faa925",
         "path": "skills/.curated"
-      }
+      },
+      "safety": [
+        {
+          "class": "content",
+          "warning": "security-best-practices follows rules and instructions it finds in the repository's own documentation and prompt files.",
+          "covered": "The security-defaults rule keeps repository content as evidence rather than instructions; a change of approach needs your confirmation in the chat."
+        }
+      ]
     },
     {
       "name": "google-cloud-data",
@@ -760,7 +899,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:7ec0cd2ac1e8c6e3c73b37eb54652f4dc56a948d283b3a9a9018de2acf3ae1bd",
+      "digest": "sha256:e0ac6fc8ea9293248dbe67c583d3d8ef2ff7787f3a60626fc3b48af20f018202",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -791,7 +930,14 @@
         "repo": "https://github.com/google/skills",
         "ref": "6e209c43985f",
         "path": "skills/cloud"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The BigQuery skills run DDL and DML, delete datasets and tables with `bq rm -f`, train models and call billable AI functions over whole tables, and the vendor text does not stop to ask first.",
+          "covered": "The security-defaults rule from bob-essentials makes the agent show each write, delete or billable query with its target and wait for your yes; ask for a LIMITed sample before an AI function runs over a table."
+        }
+      ]
     },
     {
       "name": "hashicorp-terraform",
@@ -834,7 +980,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:c424875eb10fadff113f30b32cc93c8956fd207f0c7ed47d81fcb9e7fbf5d1b8",
+      "digest": "sha256:4805da8d0fcf530e007b2a4ba36a19bb41a89b7cc0cea30bb89723f8adcf549a",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -865,7 +1011,14 @@
         "repo": "https://github.com/hashicorp/agent-skills",
         "ref": "c2d65dfe492f",
         "path": "plugins/terraform/skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "terraform-test creates real infrastructure by default, and the import and refactor skills run `terraform apply` and `terraform state mv` on live state.",
+          "covered": "The security-defaults rule requires your yes for each apply or state move; run tests with `command = plan` or mocks first, and check that the plan shows no destroys before you approve it."
+        }
+      ]
     },
     {
       "name": "microsoft-azure-ops",
@@ -918,7 +1071,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:4b9d57fdc927b87ce6ec29ec6dd8fcddc012b1122d4e35a890b7f0a837f809d3",
+      "digest": "sha256:ae8ccea6e2b9c4ee7387c13d4f0eed4f96cd2e3ace055c533734a43ce128d523",
       "revokedVersions": [],
       "versions": [
         "1.1.1",
@@ -932,7 +1085,7 @@
         "riskScore": 0,
         "policyFindings": 16,
         "verdict": "pass",
-        "scannedAt": "2026-09-10T13:34:39Z",
+        "scannedAt": "2026-09-11T11:43:17Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 52,
         "ciscoMaxSeverity": "INFO",
@@ -951,7 +1104,19 @@
         "repo": "https://github.com/microsoft/skills",
         "ref": "39d230125298b39f2e432ff6e23831124d05b2b5",
         "path": ".github/plugins/azure-skills/skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The diagnostics and compute skills run commands inside virtual machines, reset passwords, exec into AKS pods and start privileged debug pods, and they apply fixes such as scaling a plan up.",
+          "covered": "The security-defaults rule makes the agent show each command and its target and wait for your yes; ask for read-only checks and `--dry-run` first, and delete debug pods when the investigation ends."
+        },
+        {
+          "class": "cost",
+          "warning": "Capacity reservations bill from the moment they exist, whether or not a virtual machine uses them, and several workflows create or enable billable resources.",
+          "covered": "The rule requires the monthly cost and the exact resource to be shown before creation, and your yes for that action."
+        }
+      ]
     },
     {
       "name": "microsoft-foundry",
@@ -974,18 +1139,18 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:ad29e8c4777062e985df9da1b8601cb36b0f3aa48c0fca81e71de1062bd38a8d",
+      "digest": "sha256:2f86a153f637b93b6ee2d383c91cf7cb3dfa6e455ea52c5000f357b348575d28",
       "revokedVersions": [],
       "versions": [
         "1.0.1",
         "1.0.0"
       ],
-      "baselineFindings": 21,
+      "baselineFindings": 24,
       "components": 1,
       "readme": "",
       "scan": {
         "riskScore": 0,
-        "policyFindings": 21,
+        "policyFindings": 24,
         "verdict": "pass",
         "scannedAt": "2026-09-10T13:36:01Z",
         "skillspectorVersion": "2.11.2",
@@ -1006,7 +1171,19 @@
         "repo": "https://github.com/microsoft/skills",
         "ref": "39d230125298",
         "path": ".github/plugins/azure-skills/skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The workflows deploy models, delete deployments and files, submit fine-tuning jobs and assign RBAC roles, and several steps tell the agent to go ahead on its own.",
+          "covered": "The security-defaults rule overrides those steps: each deploy, delete, role assignment or billable job needs your yes, with the SKU, capacity and cost shown first."
+        },
+        {
+          "class": "transport",
+          "warning": "Some steps collect secrets through the chat and write them into environment files, and the local-run examples listen on every network interface.",
+          "covered": "The rule keeps secrets in your environment or Key Vault and out of chat and project files, and keeps local servers on 127.0.0.1."
+        }
+      ]
     },
     {
       "name": "confluent-kafka",
@@ -1064,17 +1241,17 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:0ab18771f12d3e0c29755dbd2e081b2922ef85417b3c04e450aa7f0d3cea539d",
+      "digest": "sha256:fe5af22e4912798ce920b5a00bdfa814258ab4211723d34ae7e2fbe7e0b811e3",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
       ],
-      "baselineFindings": 23,
+      "baselineFindings": 27,
       "components": 8,
       "readme": "packs/confluent/confluent-kafka/README.md",
       "scan": {
         "riskScore": 5,
-        "policyFindings": 23,
+        "policyFindings": 27,
         "verdict": "pass",
         "scannedAt": "2026-09-11T10:27:19Z",
         "skillspectorVersion": "2.11.2",
@@ -1097,7 +1274,19 @@
         "repo": "https://github.com/confluentinc/agent-skills",
         "ref": "914d95eff7ff50513b34bfb9ac97eda7c7fce899",
         "path": "skills"
-      }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "The Confluent Cloud skills create and delete environments, connectors, topics and Flink statements, and Flink statements consume CFUs while they run.",
+          "covered": "The skills present a plan and run EXPLAIN before CREATE; the security-defaults rule adds a yes per create or delete, named by object and environment. The teardown script asks once before it deletes the demo topics and local state."
+        },
+        {
+          "class": "transport",
+          "warning": "The bundled docker-compose files publish the broker, REST proxy and Schema Registry without authentication on every network interface, and the setup guides write cluster keys into local properties files.",
+          "covered": "Publish those ports as `127.0.0.1:PORT:PORT` when you run them, and add the key files to `.gitignore` as the Java skill does."
+        }
+      ]
     }
   ],
   "planned": [

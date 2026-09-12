@@ -4,17 +4,18 @@ from ibm_watsonx_orchestrate.agent_builder.connections import ConnectionType, Ex
 from typing import Optional, List, Union, Any
 
 # ── Upload mode ──────────────────────────────────────────────
-#   "cos"          – IBM Cloud Object Storage only
-#   "free"         – Free services only (catbox / tmpfiles)
-#   "cos_fallback" – Try COS first, fall back to free services
-UPLOAD_MODE = "free"
+#   "cos"  – IBM Cloud Object Storage in the customer's own bucket (default)
+#   "free" – public third-party hosting (litterbox / freeimage): throwaway demos
+#            with made-up data only, and only after the user chose it
+# There is deliberately no automatic fallback from COS to public hosting.
+UPLOAD_MODE = "cos"
 
 # Only declare cos_connection as expected when UPLOAD_MODE actually needs COS.
 # WXO validates expected_credentials at invocation time — if the connection
 # isn't configured with team credentials, any tool call will fail even if
 # the code path never touches COS.
 _expected_creds = []
-if UPLOAD_MODE in ("cos", "cos_fallback"):
+if UPLOAD_MODE == "cos":
     _expected_creds = [ExpectedCredentials(
         app_id="cos_connection",
         type=ConnectionType.KEY_VALUE
@@ -303,14 +304,8 @@ def generate_and_upload_chart(
             image_url = _upload_cos(image_bytes)
         elif UPLOAD_MODE == "free":
             image_url = _upload_free(image_bytes)
-        else:  # cos_fallback
-            image_url = None
-            try:
-                image_url = _upload_cos(image_bytes)
-            except Exception:
-                pass
-            if not image_url:
-                image_url = _upload_free(image_bytes)
+        else:
+            return f"❌ Error: unknown UPLOAD_MODE '{UPLOAD_MODE}'; use 'cos' or 'free'."
 
         if not image_url:
             return "❌ Error: Failed to upload chart image."

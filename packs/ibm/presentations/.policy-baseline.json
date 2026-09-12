@@ -1,0 +1,20 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "12db396174bfd549",
+      "rule": "P008",
+      "path": "skills/deck-images/assets/icons/LICENSE",
+      "line": 3,
+      "message": "host 'www.apache.org' in instructions is not in the allow-list ['files.pythonhosted.org', 'pypi.org']",
+      "reason": "Reviewed 2026-09-11: the two hosts are inside the verbatim Apache-2.0 licence text shipped with the Carbon icon set; no script contacts them."
+    },
+    {
+      "fingerprint": "5b60622c1d12d3bb",
+      "rule": "P008",
+      "path": "skills/deck-images/assets/icons/LICENSE",
+      "line": 195,
+      "message": "host 'www.apache.org' in instructions is not in the allow-list ['files.pythonhosted.org', 'pypi.org']",
+      "reason": "Reviewed 2026-09-11: the two hosts are inside the verbatim Apache-2.0 licence text shipped with the Carbon icon set; no script contacts them."
+    }
+  ]
+}

@@ -5,6 +5,18 @@
   "version": "1.0.1",
   "vendor": "microsoft",
   "description": "Build and operate agents and models on Microsoft Foundry (Azure AI Foundry): projects, deployments, evaluation, tracing and the Foundry SDKs. Microsoft's most installed agent skill, curated from the official repository.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The workflows deploy models, delete deployments and files, submit fine-tuning jobs and assign RBAC roles, and several steps tell the agent to go ahead on its own.",
+      "covered": "The security-defaults rule overrides those steps: each deploy, delete, role assignment or billable job needs your yes, with the SKU, capacity and cost shown first."
+    },
+    {
+      "class": "transport",
+      "warning": "Some steps collect secrets through the chat and write them into environment files, and the local-run examples listen on every network interface.",
+      "covered": "The rule keeps secrets in your environment or Key Vault and out of chat and project files, and keeps local servers on 127.0.0.1."
+    }
+  ],
   "license": "MIT",
   "homepage": "https://github.com/microsoft/skills",
   "source": {

@@ -6,117 +6,130 @@ rules:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*SKILL.md'
 - id: EA5
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*reference/evaluation.md'
 - id: PE3
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*reference/mcp_best_practices.md'
 - id: LP3
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*SKILL.md'
 - id: RP1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*SKILL.md'
 - id: EA1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*reference/evaluation.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*reference/node_mcp_server.md'
 - id: E1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*reference/python_mcp_server.md'
 - id: SC1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*scripts/requirements.txt'
 - id: SC4
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*scripts/requirements.txt'
 - id: TM1
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*scripts/with_server.py'
 - id: AST4
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*scripts/with_server.py'
 - id: AR2
   reason: 'Reviewed 2026-09-10: references to the skill''s own reference files (AE1),
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
   path: '*SKILL.md'
 fingerprints:
 - hash: sha256:30265c66e092e5b4c25a6a175396c321b0f5a81c72be4a0598f414845937cbf6
@@ -126,9 +139,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:f14da7d262474d97a46553d01cfd1d508f24299ef0a2ad8b9c809248338105f5
   rule_id: EA5
   file: reference/evaluation.md
@@ -136,9 +150,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:427daf6e75eba2e91e1ac9bdf5f44f995a3ff2c8b9effc31ddd59f782e233917
   rule_id: PE3
   file: reference/mcp_best_practices.md
@@ -146,9 +161,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:f40474f13523d98921986092e06ffc529c412c99a115feabcee684a86eb8e9ce
   rule_id: LP3
   file: SKILL.md
@@ -156,9 +172,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:4c5645e662548da3628bc8eca41956c46566811264c3654e50fe0e0219467653
   rule_id: RP1
   file: SKILL.md
@@ -166,9 +183,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:71d94a5ae7274b31b1ef17b8c8f9b912cac0001f1c205d9294ede2b3b4c12942
   rule_id: EA1
   file: reference/evaluation.md
@@ -176,9 +194,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:b92cf4f4d015aeeba00a1ae0f16bb6af2caadcb6a65f820308602de483e3dc36
   rule_id: E1
   file: reference/python_mcp_server.md
@@ -186,9 +205,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:4fac7733cc957bd1b98724eec268e3dd4cd80492bc8228ecfd299f03cfaa04e1
   rule_id: SC1
   file: scripts/requirements.txt
@@ -196,9 +216,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:357f3b074ceda494ef6ba6efaa284c4616a8d01344296b02482a15a47921caf8
   rule_id: SC4
   file: scripts/requirements.txt
@@ -206,9 +227,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:028c012bbc7f2334d03a635b4e569395dd4b26dc5fe713e449e77d8a58829ec8
   rule_id: SC1
   file: scripts/requirements.txt
@@ -216,9 +238,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:6d6faa332b1a87499a2f67a59dbe59c117795f771b288e7f1bd867c5f9dc8dd4
   rule_id: SC4
   file: scripts/requirements.txt
@@ -226,9 +249,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:bea304443d09044043309b9c209149d245fc88dfcc19048d01e05d41879b47b7
   rule_id: TM1
   file: scripts/with_server.py
@@ -236,9 +260,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:4babe77e7c49ab33c8751fc8b9d874c85a28a6a60f9d2a8ae02deeb591dfa835
   rule_id: TM1
   file: scripts/with_server.py
@@ -246,9 +271,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:658fe47f3e75e23c6ad4d128230581ff5429ba2a0cd962f7f4ee82a074acc756
   rule_id: LP3
   file: SKILL.md
@@ -256,9 +282,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:2c8d22bbb2b2b3cd783c881cc01c74ed7cd5d21c0ed3baefac7024121277b287
   rule_id: AST4
   file: scripts/with_server.py
@@ -266,9 +293,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:9daba8e6909203dcf14c60eda665d109646ae689b897a212465f415040f7e26c
   rule_id: AST4
   file: scripts/with_server.py
@@ -276,9 +304,10 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'
 - hash: sha256:b0b0392ffa7a42d57c6c34de2490fce55f96dd3a39cf2646ff07d041ffa93a4e
   rule_id: AR2
   file: SKILL.md
@@ -286,6 +315,7 @@ fingerprints:
     example URLs api.example.com (E1), ''access tokens'' and ''call any tools'' phrases
     in MCP best-practice prose (PE3, EA1), a model name in an evaluation script option
     (EA5), unpinned anthropic and mcp requirements (SC1, SC4; Cisco MEDIUM). webapp-testing''s
-    with_server.py starts the user''s own dev-server command with shell=True (TM1,
-    AST4; Cisco HIGH): the command comes from the user''s CLI arguments, not from
-    model output.'
+    with_server.py runs the dev-server command it is given with shell=True (TM1, AST4;
+    Cisco HIGH). In Bob the agent writes that command, so it must come from the project''s
+    own scripts and be shown to the user first, as the bob-essentials security-defaults
+    rule requires; the tests target localhost only. Corrected 2026-09-11.'

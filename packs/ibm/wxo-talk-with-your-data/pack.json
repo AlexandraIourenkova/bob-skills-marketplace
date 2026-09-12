@@ -2,9 +2,16 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "wxo-talk-with-your-data",
   "displayName": "Talk with your data on watsonx Orchestrate",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "vendor": "ibm",
-  "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.1.",
+  "description": "Turn an Excel or CSV file into a text-to-SQL agent on watsonx Orchestrate and show it on a demo page with the embedded chat. SQLite bundled inside the Python tool, no external database for the prototype. Database sources and an Orchestrate refresh flow come in 1.2.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "Importing a tool or an agent replaces objects with the same name in your Orchestrate tenant, and the chart tool uploads chart images built from your data.",
+      "covered": "The skill and the pack rule name the environment and the objects and ask before each import; charts go to your own COS bucket by default with no silent fallback, and the free public hosting option is described as demo-only, for made-up data."
+    }
+  ],
   "license": "Apache-2.0",
   "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
   "source": {
@@ -27,15 +34,15 @@
     "wxo-chat-demo-page"
   ],
   "mcpServers": {
-    "watsonx-orchestrate-adk": {
-      "command": "uvx",
-      "args": [
-        "ibm-watsonx-orchestrate-mcp-server"
-      ]
-    },
     "watsonx-orchestrate-adk-docs": {
       "type": "streamable-http",
       "url": "https://developer.watson-orchestrate.ibm.com/mcp"
+    }
+  },
+  "mcpAccess": {
+    "watsonx-orchestrate-adk-docs": {
+      "access": "read-only",
+      "reason": "Documentation search: the server exposes two read-only tools over https and needs no credentials."
     }
   },
   "rules": [
@@ -53,8 +60,8 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/excel-to-wxo-agent": "sha256:bd646a7fdeff08f43e3af27557afc5ec7d5e3931b31084faf5cbda80f699e83d",
-    "skills/wxo-chat-demo-page": "sha256:3731d30b751dd8d512547a274f8910e318abcfb9a77a6301c5b30db08d861c66",
-    "rules/wxo-data-agent.md": "sha256:3c3e4cdd47e279587fe748989a56d596aec044c66ed149ab3a3a11f81e292733"
+    "skills/excel-to-wxo-agent": "sha256:12718c7b70f834718831d37777c0cc130d5c4cae53635f0252c97596939ebd7f",
+    "skills/wxo-chat-demo-page": "sha256:aae24fae5a74cdada2251fabfa5f1f6d4fd1c2ddb2e01e38a5d5a09f668bfa29",
+    "rules/wxo-data-agent.md": "sha256:7928446d82cab9c6f001e5b88f802ed3860a1a0f7a73241ab73650106104a15b"
   }
 }

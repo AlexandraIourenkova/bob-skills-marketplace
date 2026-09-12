@@ -1,24 +1,24 @@
 {
-  "scannedAt": "2026-09-11T11:02:57Z",
+  "scannedAt": "2026-09-12T13:33:12Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
   },
-  "baselineDigest": "sha256:f3750720edfa9a4ecf7fa6056e3233c51e5402573d868490ddd70cc93f0eb98a|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
+  "baselineDigest": "sha256:66af6b76926d71ad411a8599c562ef3b3dc63d8f0c056a8ae2badf1590a325a4|sha256:965ee951dd241c67a2b3df1c67bea19d70161c9ff3cd0affdc24c72bb88c0c1d",
   "thresholds": {
     "block": 30,
     "review": 10
   },
   "skills": {
     "find-skills": {
-      "digest": "sha256:d4a86847a4dd2d5af46d62e2da7a4eb793590bb403797938a93c97ee4cc931e1",
+      "digest": "sha256:e78dd3e73d2f409b7922e48c5321c9ad5e821daffffe181ae78c9f12e6c3c507",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
         "severity": "LOW",
         "issues": 0,
         "byRule": {},
-        "suppressed": 28,
+        "suppressed": 36,
         "version": "2.11.2",
         "complete": false
       },
@@ -34,13 +34,14 @@
       }
     },
     "skill-creator": {
+      "digest": "sha256:bd3ff94f5de4c1be496d5daa8e1a20eebf18812ca58fe12681d7a0d7994232e0",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
         "severity": "LOW",
         "issues": 0,
         "byRule": {},
-        "suppressed": 1,
+        "suppressed": 3,
         "version": "2.11.2",
         "complete": false
       },
@@ -53,10 +54,10 @@
           "INFO": 1
         },
         "version": null
-      },
-      "digest": "sha256:38069fbceca9598741fd70df5bc9c4bc2cd1fb2667be21b162ce82cf9dd07a11"
+      }
     },
     "guard": {
+      "digest": "sha256:b1c9370de1e6daad95506d1c476dd6e4dc71fdabad7d47700f830af60331b06c",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -76,15 +77,60 @@
           "INFO": 1
         },
         "version": null
+      }
+    },
+    "skill-audit": {
+      "digest": "sha256:56d26596f93dded942f0fd391dd3b3620a6fc6e529f42b4241d3fbcb5ebf4ded",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "SAFE",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 4,
+        "version": "2.11.2",
+        "complete": true
       },
-      "digest": "sha256:42938ecd6a6659749cd745c1de6ce98658d39ed5aa6ce91f0bf0ae297c60a373"
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "bob-doctor": {
+      "digest": "sha256:d32b375db7ded67568afb51fc3223fe1c89b348ea25862f599e54270a0c27775",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 6,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
     }
   },
   "summary": {
     "riskScore": 0,
     "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 37,
+    "skillspectorSuppressed": 57,
     "ciscoAccepted": 0
   }
 }
