@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T13:33:15Z",
+  "generated": "2026-09-12T13:46:42Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "00b0d82f5fd4174ebddd402f82f30efaa397722a"
+    "commit": "e406f6dc1ec0f117190b35a74ea416049c0ff1c6"
   },
   "vendors": [
     {
@@ -195,6 +195,7 @@
       "digest": "sha256:1275f5927798cb78dfb5e489bae9fb519a01baf6d5f6eb0cb6c45c52edcb40d3",
       "revokedVersions": [],
       "versions": [
+        "1.2.0",
         "1.1.2",
         "1.1.1",
         "1.1.0",
@@ -275,6 +276,7 @@
       "digest": "sha256:ab6c4e375cb9bfcca85a6b3ce5e6aa4ad5386176ec7859e9b9d0759d9ceb95ed",
       "revokedVersions": [],
       "versions": [
+        "1.0.1",
         "1.0.0"
       ],
       "baselineFindings": 1,
@@ -354,6 +356,7 @@
       "digest": "sha256:ba2c58bd7c0a77b721101b13f5056ea1d2b9a4e8a20d5392f5477f1674b27191",
       "revokedVersions": [],
       "versions": [
+        "1.0.1",
         "1.0.0"
       ],
       "baselineFindings": 0,
@@ -528,6 +531,7 @@
       "digest": "sha256:d889730b48080b3029d47aa5e23d974ec13b49a220cfad510385322cad660ed7",
       "revokedVersions": [],
       "versions": [
+        "1.1.1",
         "1.1.0",
         "1.0.0"
       ],
@@ -607,6 +611,7 @@
       "digest": "sha256:2d0c00aa169250bf8c6a5671e04b1f2231fac64ca7753a97c480b4389adfc3e2",
       "revokedVersions": [],
       "versions": [
+        "1.1.0",
         "1.0.2",
         "1.0.1",
         "1.0.0"
