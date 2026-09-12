@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-09-12T15:33:29Z",
+  "scannedAt": "2026-09-12T17:44:47Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
@@ -103,7 +103,7 @@
       }
     },
     "deck-images": {
-      "digest": "sha256:ef2772a3ee37b3cdffc1cff755749c5eae4c8c07d52c7d04dd57cbda0bc6cd43",
+      "digest": "sha256:d5da214d4fe48161adb5a875545ad864b2848a5254fa87fa4781c967c7b4a91e",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",

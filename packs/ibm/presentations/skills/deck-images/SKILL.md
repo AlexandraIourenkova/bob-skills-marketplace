@@ -42,7 +42,7 @@ Icons and patterns are SVG for the HTML deck. For the .pptx the builder uses the
 
 ## 4. The picture library ships with the skill
 
-`assets/library` holds 72 pictures in seven packs, made by the pack authors from the prompts in `references/library.md`: abstract vector (pack-a), black and white photo art (pack-b), dark technology (pack-c), people at work without faces (pack-d), paper craft (pack-e), desk objects (pack-f) and IBM-style isometric (pack-g). No search, no licence to chase; `assets/library/NOTICE` and `manifest.json` carry the provenance and the keywords.
+`assets/library` holds 86 pictures in eight packs, made by the pack authors from the prompts in `references/library.md`: abstract vector (pack-a), black and white photo art (pack-b), dark technology (pack-c), people at work without faces (pack-d), paper craft (pack-e), desk objects (pack-f), IBM-style isometric (pack-g) and IBM dark premium (pack-h). No search, no licence to chase; `assets/library/NOTICE` and `manifest.json` carry the provenance and the keywords.
 
 ```bash
 uv run --with pillow python scripts/visual_assets.py library --for-theme deck/theme.json
