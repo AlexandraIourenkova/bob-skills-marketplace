@@ -4,7 +4,7 @@
   "displayName": "Bob essentials",
   "version": "1.2.0",
   "vendor": "ibm",
-  "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.",
+  "description": "The marketplace inside Bob: find and install packs from chat, audit a skill before anyone trusts it, check the setup from hooks to MCP servers, and write new skills, modes, rules and commands. Ships /skills-add and a security rule that every task follows.",
   "license": "Apache-2.0",
   "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
   "minBob": "2.0.2",
@@ -35,7 +35,7 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/find-skills": "sha256:e78dd3e73d2f409b7922e48c5321c9ad5e821daffffe181ae78c9f12e6c3c507",
+    "skills/find-skills": "sha256:5806ee4b5d0ef523035113b25098ed30e641f105659baa3d2d5248a0e8caf146",
     "skills/skill-creator": "sha256:bd3ff94f5de4c1be496d5daa8e1a20eebf18812ca58fe12681d7a0d7994232e0",
     "skills/guard": "sha256:b1c9370de1e6daad95506d1c476dd6e4dc71fdabad7d47700f830af60331b06c",
     "skills/skill-audit": "sha256:56d26596f93dded942f0fd391dd3b3620a6fc6e529f42b4241d3fbcb5ebf4ded",

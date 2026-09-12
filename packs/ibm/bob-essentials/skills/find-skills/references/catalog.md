@@ -18,7 +18,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 ### bob-essentials — Bob essentials
 
 - Vendor: IBM (`ibm`, active). Version 1.2.0.
-- The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.
+- The marketplace inside Bob: find and install packs from chat, audit a skill before anyone trusts it, check the setup from hooks to MCP servers, and write new skills, modes, rules and commands. Ships /skills-add and a security rule that every task follows.
 - Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
 - Tags: marketplace, skills, security, bob, audit
 - Skills (5):
@@ -68,7 +68,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 ### presentations — Presentations that tell a story
 
 - Vendor: IBM (`ibm`, active). Version 1.9.0.
-- From a topic or the user's data to a deck people remember, and the talk around it: story structures by audience and goal, a headline-per-slide storyboard, five conceptually different style concepts previewed for the user to choose, charts that say one thing, a bundled picture library, Carbon icons and pattern tiles. One storyboard builds three ways: an interactive HTML presentation, a printable HTML for PDF, and a styled 16:9 PowerPoint file. Original IBM skills, offline.
+- From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint. Original IBM skills, offline.
 - Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
 - Tags: presentations, pptx, html, slides, storytelling, dataviz, pitch, ibm
 - Skills (6):

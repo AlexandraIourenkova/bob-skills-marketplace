@@ -75,12 +75,12 @@ flowchart LR
 
 | Pack | Vendor | Status | Contents |
 |---|---|---|---|
-| [`presentations`](packs/ibm/presentations) | IBM (marketplace team) | released 1.0.0 | Story, style and slides in one workflow: storyboard with one headline per slide, five style concepts the user picks from, charts and images, then a 16:9 .pptx, an interactive HTML deck and a printable HTML for PDF, plus the pitch and Q&A kit |
+| [`presentations`](packs/ibm/presentations) | IBM (marketplace team) | released 1.0.0 | One headline per slide, a style picked from five, charts and pictures, then an HTML deck, a printable PDF and a 16:9 PowerPoint, plus the pitch and Q&A kit |
 | [`office-docs`](packs/ibm/office-docs) | IBM (marketplace team) | released 1.0.1 | docx, pptx, xlsx, pdf: original skills with tested scripts on python-docx, python-pptx, openpyxl, pypdf, pdfplumber and reportlab |
 | [`wxo-talk-with-your-data`](packs/ibm/wxo-talk-with-your-data) | IBM (marketplace team) | released 1.1.0 | excel-to-wxo-agent, wxo-chat-demo-page, the read-only docs MCP server, data-agent rule. 1.1.0 dropped the unused ADK MCP server, keeps charts in the customer's COS bucket by default and serves the demo page on 127.0.0.1 only. 1.2: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
 | [`wxo-adk`](packs/ibm/wxo-adk) | IBM | released 1.1.1 | 6 official ADK skills plus IBM's official wxo-agent-architect, MCP servers `watsonx-orchestrate-adk` (pinned 2.16.1, read-write: every write call needs the user's yes) and `watsonx-orchestrate-adk-docs` (read-only), ADK rule, `/wxo-deploy`, mode `wxo-builder` |
 | [`ibm-watsonx-data-integration`](packs/ibm/ibm-watsonx-data-integration) | IBM | released 1.0.1 | six official watsonx.data integration skills (flow lifecycle, DataStage, pyflow, run investigation, engine knowledge, bug reports) and a rule that helps register the Agentic Data Integration MCP server |
-| [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.2.0 | find-skills (the marketplace inside Bob), skill-audit (check a skill before trusting it), bob-doctor (check hooks, lock, skills, MCP servers and modes), skill-creator (skills, modes, rules, commands), guard, `/skills-add`, and the `security-defaults` rule for every task |
+| [`bob-essentials`](packs/ibm/bob-essentials) | IBM (marketplace team) | released 1.2.0 | find-skills, skill-audit, bob-doctor, skill-creator, guard, `/skills-add`, and the `security-defaults` rule for every task |
 | [`anthropic-dev-kit`](packs/anthropic/anthropic-dev-kit) | Anthropic | released 1.0.0 | mcp-builder, webapp-testing, frontend-design from anthropics/skills (Apache-2.0) |
 | [`openai-security`](packs/openai/openai-security) | OpenAI | released 1.0.0 | security-best-practices, security-threat-model, security-ownership-map (Apache-2.0) |
 | [`openai-dev-tools`](packs/openai/openai-dev-tools) | OpenAI | released 1.1.0 | jupyter-notebook, gh-fix-ci, cli-creator (Apache-2.0) |

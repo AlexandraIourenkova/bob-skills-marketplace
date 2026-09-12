@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T15:33:33Z",
+  "generated": "2026-09-12T16:08:15Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "df2151f08cca8c514702603bf0ef0640d0861e77"
+    "commit": "87a61cecb640f17be5969b465fa5532edbf4ca87"
   },
   "vendors": [
     {
@@ -154,14 +154,14 @@
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
       "version": "1.2.0",
-      "description": "The marketplace inside Bob: find-skills searches the catalog offline, maps a pasted git link to a pack, shows what will be installed and asks before installing; skill-audit checks a skill before anyone trusts it; bob-doctor checks hooks, lock, skills, MCP servers and modes; skill-creator writes skills, modes, rules and commands with safe defaults; guard explains blocked skill activations. Ships the /skills-add command and a security-defaults rule for every task in the project.",
+      "description": "The marketplace inside Bob: find and install packs from chat, audit a skill before anyone trusts it, check the setup from hooks to MCP servers, and write new skills, modes, rules and commands. Ships /skills-add and a security rule that every task follows.",
       "path": "packs/ibm/bob-essentials",
       "tag": "bob-essentials--v1.2.0",
       "skills": [
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:e78dd3e73d2f409b7922e48c5321c9ad5e821daffffe181ae78c9f12e6c3c507"
+          "digest": "sha256:5806ee4b5d0ef523035113b25098ed30e641f105659baa3d2d5248a0e8caf146"
         },
         {
           "name": "skill-creator",
@@ -192,7 +192,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:1275f5927798cb78dfb5e489bae9fb519a01baf6d5f6eb0cb6c45c52edcb40d3",
+      "digest": "sha256:21f548d572fc5d173660ba8452247fa32b8484d6cab2d014939ae63b6225b139",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -208,7 +208,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-12T13:33:12Z",
+        "scannedAt": "2026-09-12T16:08:12Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 57,
         "ciscoMaxSeverity": "INFO",
@@ -391,7 +391,7 @@
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
       "version": "1.9.0",
-      "description": "From a topic or the user's data to a deck people remember, and the talk around it: story structures by audience and goal, a headline-per-slide storyboard, five conceptually different style concepts previewed for the user to choose, charts that say one thing, a bundled picture library, Carbon icons and pattern tiles. One storyboard builds three ways: an interactive HTML presentation, a printable HTML for PDF, and a styled 16:9 PowerPoint file. Original IBM skills, offline.",
+      "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint. Original IBM skills, offline.",
       "path": "packs/ibm/presentations",
       "tag": "presentations--v1.9.0",
       "skills": [
@@ -418,7 +418,7 @@
         {
           "name": "deck-images",
           "description": "Pictures for a presentation. Bundled Carbon icons and pattern tiles, generated backdrops, prompts for images the user makes once and reuses, plus where to get photographs legally and how to place everything so the deck looks designed. Covers open image sets (public domain, Creative Commons, Unsplash and similar, icon and illustration sets) with their licences and the credits record, prompts for image generators that match the deck's theme, and offline scripts that make on-theme abstract backdrops in SVG or PNG for title and section slides, apply one consistent treatment to the user's photos (crop, duotone, tint, scrim) and produce labelled placeholders for pictures that have not arrived yet. Use when a deck needs photos, illustrations, icons or a background, when the user asks where to find images, whether an image may be used, how to generate one, or says \"нужны картинки\", \"найди изображения\", \"сгенерируй фон\".",
-          "digest": "sha256:ef2772a3ee37b3cdffc1cff755749c5eae4c8c07d52c7d04dd57cbda0bc6cd43"
+          "digest": "sha256:18af162317b77595f3aa334711b7d861374f6ba1ea1012320e89b87023b73a63"
         },
         {
           "name": "deck-pitch",
@@ -436,7 +436,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:af082010fdd372dba0f1fd13f49b140b90ca90121c4d517396cf18f8f7fe70fb",
+      "digest": "sha256:8a104c98bda84a1a984f79dc372061283d76a5815031a7a2b1ba89702954acb3",
       "revokedVersions": [],
       "versions": [
         "1.9.0"
