@@ -1,6 +1,6 @@
 {
   "$comment": "Planned packs shown in the catalog. Votes are thumbs-up reactions on the request issue; scripts/refresh_roadmap.py creates missing issues and refreshes the counts. Status: coming-soon = the team will build it; candidate = depends on the vendor (licence, official repository).",
-  "updated": "2026-09-10",
+  "updated": "2026-09-12",
   "planned": [
     {
       "name": "app-modernization",
@@ -39,6 +39,42 @@
       "votes": 0
     },
     {
+      "name": "data-analyst",
+      "displayName": "Data analyst",
+      "vendor": "ibm",
+      "status": "coming-soon",
+      "description": "Ask a question of a CSV, Excel file, SQLite, PostgreSQL or Db2 table and get the query, the profile of the data and a chart, then the report through office-docs and presentations. watsonx.data and the data catalogue come in through IBM's own MCP servers.",
+      "source": "IBM/ibm-watsonxdata-mcp-server and IBM/data-intelligence-mcp-server, plus our own skills",
+      "blockedBy": "",
+      "vendorDisplayName": "IBM",
+      "issue": "",
+      "votes": 0
+    },
+    {
+      "name": "log-triage",
+      "displayName": "Log triage",
+      "vendor": "ibm",
+      "status": "coming-soon",
+      "description": "Parsers for JSON, syslog, Java stack traces and OpenShift and Cloud Pak logs, error clustering, a timeline correlated by request id, and a report with root-cause hypotheses. Everything runs on the machine, so logs and the secrets in them stay there.",
+      "source": "our own skills",
+      "blockedBy": "",
+      "vendorDisplayName": "IBM",
+      "issue": "",
+      "votes": 0
+    },
+    {
+      "name": "redhat-openshift",
+      "displayName": "Red Hat OpenShift",
+      "vendor": "redhat",
+      "status": "coming-soon",
+      "description": "Cluster troubleshooting with scripts, cluster updates, GitOps with an Argo knowledge base, and token lookup, curated from Red Hat's own OpenShift skills. Ansible follows when Red Hat publishes skills for it.",
+      "source": "https://github.com/openshift/agentic-skills",
+      "blockedBy": "",
+      "vendorDisplayName": "Red Hat",
+      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
+      "votes": 0
+    },
+    {
       "name": "hashicorp-packer",
       "displayName": "HashiCorp Packer",
       "vendor": "hashicorp",
@@ -63,15 +99,27 @@
       "votes": 0
     },
     {
-      "name": "redhat-openshift-ansible",
-      "displayName": "OpenShift and Ansible",
-      "vendor": "redhat",
+      "name": "oracle-database",
+      "displayName": "Oracle Database",
+      "vendor": "oracle",
       "status": "candidate",
-      "description": "Deploy to OpenShift and write Ansible playbooks with skills from Red Hat.",
-      "source": "no official Red Hat skills repository yet",
-      "blockedBy": "Red Hat has not published agent skills under a redistributable licence",
-      "vendorDisplayName": "Red Hat",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
+      "description": "Oracle's own database skills: administration, application development, migrations, PL/SQL, performance, SQLcl and vector search, plus OKE and Functions for OCI.",
+      "source": "https://github.com/oracle/skills",
+      "blockedBy": "The skills are UPL-1.0, which is not yet on the registry's licence list (Apache-2.0, MIT, MPL-2.0); the policy decision comes first",
+      "vendorDisplayName": "Oracle",
+      "issue": "",
+      "votes": 0
+    },
+    {
+      "name": "elastic-observability",
+      "displayName": "Elastic observability",
+      "vendor": "elastic",
+      "status": "candidate",
+      "description": "Elastic's own skills for SRE triage, Kubernetes investigation, ES|QL queries, alert triage and detection rules: logs, observability and SIEM from one vendor.",
+      "source": "https://github.com/elastic/agent-skills",
+      "blockedBy": "A new vendor: Elastic joins the registry with its first curated pack, and the votes here say whether teams want it",
+      "vendorDisplayName": "Elastic",
+      "issue": "",
       "votes": 0
     }
   ]

@@ -88,7 +88,10 @@ def test_registry_validates_and_builds_index() -> None:
     jsonschema.validate(index, json.loads((REPO / "schemas" / "index.schema.json").read_text()))
     roadmap = json.loads((REPO / "roadmap.json").read_text())["planned"]
     assert [p["name"] for p in index["planned"]] == [e["name"] for e in roadmap]
-    assert all(p["issue"].startswith("https://") and isinstance(p["votes"], int) for p in index["planned"])
+    # an entry waits for its request issue until refresh_roadmap.py --create-issues opens one;
+    # the catalog and the site show "Request pending" and no votes until then
+    assert all((p["issue"].startswith("https://") or p["issue"] == "") and isinstance(p["votes"], int) for p in index["planned"])
+    assert all(p["votes"] == 0 for p in index["planned"] if not p["issue"])
     assert "## Planned packs" in registry.build_catalog(index)
     wxo = next(p for p in index["packs"] if p["name"] == "wxo-adk")
     assert len(wxo["skills"]) == 7 and all(s["description"] for s in wxo["skills"])

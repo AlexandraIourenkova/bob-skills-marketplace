@@ -75,7 +75,7 @@ flowchart LR
 
 | Pack | Vendor | Status | Contents |
 |---|---|---|---|
-| [`presentations`](packs/ibm/presentations) | IBM (marketplace team) | released 1.0.0 | One headline per slide, a style picked from five, charts and pictures, then an HTML deck, a printable PDF and a 16:9 PowerPoint, plus the pitch and Q&A kit |
+| [`presentations`](packs/ibm/presentations) | IBM (marketplace team) | released 1.11.0 | One headline per slide, a style picked from five, charts and pictures, then an HTML deck, a printable PDF and a 16:9 PowerPoint, plus the pitch and Q&A kit |
 | [`office-docs`](packs/ibm/office-docs) | IBM (marketplace team) | released 1.0.1 | docx, pptx, xlsx, pdf: original skills with tested scripts on python-docx, python-pptx, openpyxl, pypdf, pdfplumber and reportlab |
 | [`wxo-talk-with-your-data`](packs/ibm/wxo-talk-with-your-data) | IBM (marketplace team) | released 1.1.0 | excel-to-wxo-agent, wxo-chat-demo-page, the read-only docs MCP server, data-agent rule. 1.1.0 dropped the unused ADK MCP server, keeps charts in the customer's COS bucket by default and serves the demo page on 127.0.0.1 only. 1.2: database sources (Db2, PostgreSQL), Orchestrate refresh flow |
 | [`wxo-adk`](packs/ibm/wxo-adk) | IBM | released 1.1.1 | 6 official ADK skills plus IBM's official wxo-agent-architect, MCP servers `watsonx-orchestrate-adk` (pinned 2.16.1, read-write: every write call needs the user's yes) and `watsonx-orchestrate-adk-docs` (read-only), ADK rule, `/wxo-deploy`, mode `wxo-builder` |
@@ -86,16 +86,18 @@ flowchart LR
 | [`openai-dev-tools`](packs/openai/openai-dev-tools) | OpenAI | released 1.1.0 | jupyter-notebook, gh-fix-ci, cli-creator (Apache-2.0) |
 | [`google-cloud-data`](packs/google/google-cloud-data) | Google | released 1.0.0 | bigquery-basics, bigquery-bigframes, bigquery-ai-ml, gcloud (Apache-2.0) |
 | [`hashicorp-terraform`](packs/hashicorp/hashicorp-terraform) | HashiCorp | released 1.0.0 | terraform-style-guide, terraform-test, terraform-policy, refactor-module, terraform-search-import (MPL-2.0) |
-| [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.1.0 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas, azure-diagnostics, azure-compute (MIT) |
-| [`microsoft-foundry`](packs/microsoft/microsoft-foundry) | Microsoft | released 1.0.0 | microsoft-foundry, Microsoft's most installed agent skill (MIT) |
+| [`microsoft-azure-ops`](packs/microsoft/microsoft-azure-ops) | Microsoft | released 1.1.1 | azure-resource-lookup, azure-storage, azure-cost, azure-compliance, azure-quotas, azure-diagnostics, azure-compute (MIT) |
+| [`microsoft-foundry`](packs/microsoft/microsoft-foundry) | Microsoft | released 1.0.1 | microsoft-foundry, Microsoft's most installed agent skill (MIT) |
 | [`confluent-kafka`](packs/confluent/confluent-kafka) | Confluent (an IBM company) | released 1.0.0 | Kafka Java and Python clients, Kafka Streams, Schema Registry migration with PII tags, Flink SQL and UDFs, CDC to Iceberg or Delta with Tableflow, MSK to Confluent Cloud planning (Apache-2.0) |
-| `app-modernization`, `building-blocks`, `dev-workflow` | IBM | coming soon | UI modernization, Client Engineering building-block modes, developer workflow skills; three more candidates in `roadmap.json` |
+| `app-modernization`, `building-blocks`, `dev-workflow`, `data-analyst`, `log-triage` | IBM | coming soon | UI modernization, Client Engineering building-block modes, developer workflow skills, a data analyst over files and databases, and local log triage |
+| `redhat-openshift` | Red Hat | coming soon | Cluster troubleshooting, cluster updates and GitOps from [openshift/agentic-skills](https://github.com/openshift/agentic-skills) (Apache-2.0) |
+| `hashicorp-packer`, `microsoft-azure-sdk-python`, `oracle-database`, `elastic-observability` | HashiCorp, Microsoft, Oracle, Elastic | candidate | Waiting on a licence decision or on demand; vote on the request issue in `roadmap.json` |
 
 The IBM packs are the marketplace's own product and come first in the catalog; packs from other vendors are curated alternatives for teams that already use those platforms.
 
 Planned packs live in [`roadmap.json`](roadmap.json) and show in the catalog as *coming soon* (the team will build it) or *candidate* (waiting on the vendor: a licence, an official repository). Each has a request issue labelled `pack-request`; a thumbs-up reaction on it is a vote, and `python3 scripts/refresh_roadmap.py` writes the counts back so the catalog, the website and the find-skills skill show them.
 
-Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services; vercel-labs/agent-skills publishes no licence. Red Hat now publishes OpenShift skills under Apache-2.0 in [openshift/agentic-skills](https://github.com/openshift/agentic-skills) (cluster troubleshooting with scripts, cluster updates, GitOps), so an OpenShift pack is a roadmap candidate; Ansible still has no official skills repository. A vendor is listed only when at least one pack is curated from it. Every vendored skill above is Apache-2.0, MIT or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
+Not eligible: Anthropic's document skills (docx, pdf, pptx, xlsx) are source-available under a licence that forbids copying them out of Anthropic's services; vercel-labs/agent-skills publishes no licence. Red Hat now publishes OpenShift skills under Apache-2.0 in [openshift/agentic-skills](https://github.com/openshift/agentic-skills) (cluster troubleshooting with scripts, cluster updates, GitOps), so `redhat-openshift` moved from candidate to coming soon; Ansible still has no official skills repository. Oracle's skills are UPL-1.0, which the licence list does not cover yet, so `oracle-database` stays a candidate until that policy decision is made. A vendor is listed only when at least one pack is curated from it. Every vendored skill above is Apache-2.0, MIT or MPL-2.0 and carries its upstream repository and commit in `pack.json` `source`; `scripts/sync_upstream.py <pack>` refreshes it.
 
 ## Even official skills need checking
 
