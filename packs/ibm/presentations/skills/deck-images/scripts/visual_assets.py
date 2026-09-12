@@ -369,7 +369,7 @@ def library_for_theme(theme_path: str | None, colors: dict) -> list[str]:
         chosen = matches[0] if matches else ("pack-c" if is_dark else "pack-a")
     info = manifest["packs"].get(chosen, {})
     covers = info.get("covers", [])
-    scrim = {"pack-a": "none", "pack-b": "dark", "pack-c": "none", "pack-d": "dark", "pack-e": "none", "pack-f": "none", "pack-g": "none"}.get(chosen, "dark")
+    scrim = {"pack-a": "none", "pack-b": "dark", "pack-c": "none", "pack-d": "dark", "pack-e": "none", "pack-f": "none", "pack-g": "none", "pack-h": "none"}.get(chosen, "dark")
     title_pick = f"{chosen}/{covers[0]}" if covers else "?"
     side = "left"  # every pack is generated with its subject on the right, so the title sits on the left
     title_name = covers[0] if covers else ""

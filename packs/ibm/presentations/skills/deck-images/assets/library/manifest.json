@@ -125,6 +125,22 @@
     "collaboration",
     "platform"
    ]
+  },
+  "pack-h": {
+   "name": "IBM dark premium",
+   "look": "cinematic 3D renders with glass and brushed metal on dark ground",
+   "suits": [
+    "cyber-steel",
+    "midnight",
+    "carbon",
+    "boardroom"
+   ],
+   "covers": [
+    "cube-ai",
+    "shield-lock",
+    "cloud-stack",
+    "lens"
+   ]
   }
  },
  "pictures": {
@@ -199,7 +215,19 @@
   "pack-g/workflow": "workflow steps process sequence",
   "pack-g/collaboration": "collaboration team shared panel",
   "pack-g/modernization": "modernization legacy modules migration",
-  "pack-g/network": "network global nodes connections"
+  "pack-g/network": "network global nodes connections",
+  "pack-h/cube-ai": "ai intelligence cube glass glow artificial",
+  "pack-h/shield-lock": "security shield protection lock defence",
+  "pack-h/cloud-stack": "cloud infrastructure stack layers server",
+  "pack-h/neural-mesh": "neural network mesh brain wires nodes",
+  "pack-h/pipeline": "pipeline data flow tube transport",
+  "pack-h/dashboard": "dashboard analytics panel chart monitor",
+  "pack-h/key-vault": "vault key encryption secure storage",
+  "pack-h/fabric": "fabric layers glass planes overlap integration",
+  "pack-h/handshake": "handshake partnership collaboration connect",
+  "pack-h/lens": "lens focus vision refraction analysis insight",
+  "pack-h/beacon": "beacon signal broadcast tower communication",
+  "pack-h/prism": "prism spectrum light split diversity transform"
  },
  "space": {
   "pack-a/build": "left",
@@ -273,7 +301,19 @@
   "pack-g/workflow": "left",
   "pack-g/collaboration": "left",
   "pack-g/modernization": "left",
-  "pack-g/network": "left"
+  "pack-g/network": "left",
+  "pack-h/cube-ai": "left",
+  "pack-h/shield-lock": "left",
+  "pack-h/cloud-stack": "left",
+  "pack-h/neural-mesh": "left",
+  "pack-h/pipeline": "left",
+  "pack-h/dashboard": "left",
+  "pack-h/key-vault": "left",
+  "pack-h/fabric": "left",
+  "pack-h/handshake": "left",
+  "pack-h/lens": "left",
+  "pack-h/beacon": "left",
+  "pack-h/prism": "left"
  },
  "space_note": "the title always sits on the left: every pack was generated with its subject on the right",
  "neutral": {
@@ -311,6 +351,11 @@
    "ai-assistant",
    "collaboration",
    "platform"
+  ],
+  "pack-h": [
+   "key-vault",
+   "fabric",
+   "beacon"
   ]
  },
  "neutral_note": "pictures quiet enough to repeat on every section divider; everything else is used once",
@@ -386,7 +431,19 @@
   "pack-g/network": 14.4,
   "pack-g/platform": 6.0,
   "pack-g/security": 16.0,
-  "pack-g/workflow": 12.2
+  "pack-g/workflow": 12.2,
+  "pack-h/beacon": 23.1,
+  "pack-h/cloud-stack": 28.8,
+  "pack-h/cube-ai": 14.6,
+  "pack-h/dashboard": 17.5,
+  "pack-h/fabric": 14.1,
+  "pack-h/handshake": 17.7,
+  "pack-h/key-vault": 6.7,
+  "pack-h/lens": 23.9,
+  "pack-h/neural-mesh": 17.9,
+  "pack-h/pipeline": 35.5,
+  "pack-h/prism": 25.8,
+  "pack-h/shield-lock": 7.7
  },
  "calm_note": "how busy the left half of each picture is where the title sits (lower is calmer); covers are the four calmest per pack, the first is the title picture"
 }

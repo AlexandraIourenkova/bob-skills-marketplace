@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T13:46:42Z",
+  "generated": "2026-09-12T15:33:33Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "e406f6dc1ec0f117190b35a74ea416049c0ff1c6"
+    "commit": "df2151f08cca8c514702603bf0ef0640d0861e77"
   },
   "vendors": [
     {
@@ -418,7 +418,7 @@
         {
           "name": "deck-images",
           "description": "Pictures for a presentation. Bundled Carbon icons and pattern tiles, generated backdrops, prompts for images the user makes once and reuses, plus where to get photographs legally and how to place everything so the deck looks designed. Covers open image sets (public domain, Creative Commons, Unsplash and similar, icon and illustration sets) with their licences and the credits record, prompts for image generators that match the deck's theme, and offline scripts that make on-theme abstract backdrops in SVG or PNG for title and section slides, apply one consistent treatment to the user's photos (crop, duotone, tint, scrim) and produce labelled placeholders for pictures that have not arrived yet. Use when a deck needs photos, illustrations, icons or a background, when the user asks where to find images, whether an image may be used, how to generate one, or says \"нужны картинки\", \"найди изображения\", \"сгенерируй фон\".",
-          "digest": "sha256:38a2ab26004817e1dea231406d09d87adc048b2f422b45704e5d5f648b4af619"
+          "digest": "sha256:ef2772a3ee37b3cdffc1cff755749c5eae4c8c07d52c7d04dd57cbda0bc6cd43"
         },
         {
           "name": "deck-pitch",
@@ -436,7 +436,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:95dfc3320dfd5b7072169edcf2cf3f66e449fec29566017fd4235b9d88c26889",
+      "digest": "sha256:af082010fdd372dba0f1fd13f49b140b90ca90121c4d517396cf18f8f7fe70fb",
       "revokedVersions": [],
       "versions": [
         "1.9.0"
@@ -448,7 +448,7 @@
         "riskScore": 0,
         "policyFindings": 2,
         "verdict": "pass",
-        "scannedAt": "2026-09-12T11:28:45Z",
+        "scannedAt": "2026-09-12T15:33:29Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 6,
         "ciscoMaxSeverity": "INFO",
