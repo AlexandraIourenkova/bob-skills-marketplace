@@ -163,6 +163,11 @@ def main() -> int:
     args = parser.parse_args()
     tool_versions = {"skillspector": subprocess.run([tool("skillspector"), "--version"], capture_output=True, text=True).stdout.strip().split()[-1].lstrip("v"),
                      "ciscoSkillScanner": subprocess.run([tool("skill-scanner"), "--version"], capture_output=True, text=True).stdout.strip().split()[-1].lstrip("v")}
+    # Bytecode caches a local python run leaves inside a pack are never hashed, shipped or
+    # installed, but the Cisco scanner reads them and reports unverifiable bytecode.
+    for cache in sorted(Path("packs").rglob("__pycache__")):
+        shutil.rmtree(cache, ignore_errors=True)
+        print(f"removed {cache} (bytecode is never shipped)")
     manifests = sorted(Path("packs").glob("*/*/pack.json"))
     if args.packs:
         manifests = [m for m in manifests if m.parent.name in args.packs]

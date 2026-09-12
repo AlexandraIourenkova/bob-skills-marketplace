@@ -36,7 +36,7 @@
     "midnight",
     "academic",
     "warm-human"
-   ],
+   , "carbon-dark"],
    "covers": [
     "stairs",
     "desk",
@@ -50,7 +50,7 @@
    "suits": [
     "cyber-steel",
     "midnight"
-   ],
+   , "carbon-dark"],
    "covers": [
     "orbit",
     "shield",
@@ -134,7 +134,7 @@
     "midnight",
     "carbon",
     "boardroom"
-   ],
+   , "carbon-dark"],
    "covers": [
     "cube-ai",
     "shield-lock",

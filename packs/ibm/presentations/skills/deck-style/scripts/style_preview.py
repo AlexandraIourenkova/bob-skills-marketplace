@@ -64,6 +64,21 @@ CONCEPTS: dict[str, dict] = {
                    "bullet": "—", "cards": True, "ornament": "grid"},
         "image": "clean product and workplace photography, blue duotone, or Carbon icons in one weight",
     },
+    "carbon-dark": {
+        "name": "IBM Carbon Dark", "tagline": "Carbon g100 canvas, Plex type, blue and purple on near-black",
+        "best_for": "IBM and enterprise audiences in a dark room, product launches, platform and architecture reviews",
+        "mood": "engineered, quiet, modern", "dark": True,
+        "colors": {"bg": "#161616", "surface": "#262626", "text": "#F4F4F4", "muted": "#C6C6C6", "accent": "#4589FF",
+                   "accent2": "#BE95FF", "line": "#393939", "on_accent": "#161616",
+                   "chart": ["#4589FF", "#BE95FF", "#08BDBA", "#FF7EB6", "#FA4D56", "#D2A106"]},
+        "fonts": {"heading": "IBM Plex Sans", "body": "IBM Plex Sans", "mono": "IBM Plex Mono",
+                  "css_heading": "'IBM Plex Sans', 'Segoe UI', Arial, sans-serif", "css_body": "'IBM Plex Sans', 'Segoe UI', Arial, sans-serif",
+                  "css_mono": "'IBM Plex Mono', Consolas, ui-monospace, monospace"},
+        "sizes": {"title": 42, "headline": 30, "body": 20, "small": 12, "number": 62},
+        "layout": {"align": "left", "accent_bar": "underline", "title_style": "plain", "section_style": "band", "corner": 0,
+                   "bullet": "\u2014", "cards": True, "ornament": "grid"},
+        "image": "dark product renders, glass and brushed metal, blue-lit machine rooms, Carbon icons in one weight; the IBM dark premium set (pack-h) is drawn for this look",
+    },
     "cyber-steel": {
         "name": "Cyber Steel", "tagline": "Steel black, hazard amber and cyan, HUD brackets, mono headlines",
         "best_for": "developer conferences, security and platform demos, launches, anything that should feel technical",
@@ -264,7 +279,7 @@ AUDIENCE_FIVE = {
     "training": ["sketch", "swiss", "carbon", "cyber-steel", "playful"],
     "research": ["swiss", "sketch", "carbon", "midnight", "academic"],
 }
-DARK_FALLBACK = ["cyber-steel", "midnight"]
+DARK_FALLBACK = ["carbon-dark", "cyber-steel", "midnight"]
 
 SERIF_FONTS = {"Georgia", "Cambria", "Book Antiqua", "Palatino Linotype", "Times New Roman", "Garamond", "Charter", "Baskerville"}
 SCRIPT_SAFE = {

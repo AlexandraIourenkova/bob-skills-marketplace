@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-09-12T17:50:54Z",
+  "scannedAt": "2026-09-12T18:13:16Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
@@ -11,7 +11,7 @@
   },
   "skills": {
     "presentation": {
-      "digest": "sha256:c5c758cec13334222a593c5ddfa616cff5e2b9b3fd32175e80ea516fadda2560",
+      "digest": "sha256:f60f6f927c6c48becf9979807b25dc984131dade71c548053be97958daa37b4a",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -57,7 +57,7 @@
       }
     },
     "deck-style": {
-      "digest": "sha256:3f0b86b642499557eddc6df995164d529330cf3975493d1cf885231e97979881",
+      "digest": "sha256:99b702529dbcfa4cbfcf69fffd3d1971b03ce612d8f46be24ac9c548a31e721c",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
@@ -103,7 +103,7 @@
       }
     },
     "deck-images": {
-      "digest": "sha256:d5da214d4fe48161adb5a875545ad864b2848a5254fa87fa4781c967c7b4a91e",
+      "digest": "sha256:9be64919e2f75b116fc6502301414a8e5d59e8275839bd98acf3f24cd43e22c9",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",

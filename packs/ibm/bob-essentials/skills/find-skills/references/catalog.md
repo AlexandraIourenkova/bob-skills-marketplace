@@ -67,7 +67,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### presentations — Presentations that tell a story
 
-- Vendor: IBM (`ibm`, active). Version 1.10.0.
+- Vendor: IBM (`ibm`, active). Version 1.11.0.
 - From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.
 - Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
 - Tags: presentations, pptx, html, slides, storytelling, dataviz, pitch, ibm

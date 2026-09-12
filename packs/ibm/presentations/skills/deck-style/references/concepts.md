@@ -1,13 +1,14 @@
 # Style concepts
 
-`scripts/style_preview.py` ships fifteen concepts. Each one is a complete look: canvas and accent colours, a six-colour chart palette, font names for the .pptx and CSS font stacks for HTML, point sizes, and layout traits (accent bar, title and section treatment, corner radius, bullet glyph, cards, ornament). The preview draws five of them on the user's own five slides through `deck_html.py`, the same engine that builds the HTML deck, so a card is the deck and not a mockup. The user picks one, `--choose <id>` writes it as `theme.json`, and every other script in the pack reads that file. This page says what each concept is for, how to pick five that genuinely differ, how to read the answer, and how to invent a concept when none of them fit.
+`scripts/style_preview.py` ships sixteen concepts. Each one is a complete look: canvas and accent colours, a six-colour chart palette, font names for the .pptx and CSS font stacks for HTML, point sizes, and layout traits (accent bar, title and section treatment, corner radius, bullet glyph, cards, ornament). The preview draws five of them on the user's own five slides through `deck_html.py`, the same engine that builds the HTML deck, so a card is the deck and not a mockup. The user picks one, `--choose <id>` writes it as `theme.json`, and every other script in the pack reads that file. This page says what each concept is for, how to pick five that genuinely differ, how to read the answer, and how to invent a concept when none of them fit.
 
-## The fifteen concepts
+## The sixteen concepts
 
 | id | Name | Look | Best for | Not for |
 |---|---|---|---|---|
 | `swiss` | Swiss Minimal | white, black Helvetica type, one signal red, no bars, no cards | product and design audiences, keynotes, calm confident decks | dense finance reviews |
 | `carbon` | IBM Carbon | white, Plex type, IBM blue and violet, column grid, cards | IBM and enterprise audiences, boards, status reviews, approvals | anything that must feel informal |
+| `carbon-dark` | IBM Carbon Dark | Carbon g100 near-black, Plex type, blue and purple accents, column grid, cards | IBM audiences in a dark room, launches, platform and architecture reviews | printed handouts, bright rooms |
 | `cyber-steel` | Cyber Steel | steel black canvas, amber and cyan, HUD brackets, mono headlines | developer conferences, security and platform demos, launches | printed handouts, bright rooms |
 | `sketch` | Pencil Sketch | paper white, pencil hatching, handwritten headlines, ink accents | workshops, early concepts, design reviews, teaching | boards, regulators, final numbers |
 | `geometric` | Geometric Poster | bone canvas, vermilion and cobalt shapes, geometric sans, big type | keynotes, campaigns, all-hands, back-row reading | dense data, long reading decks |
@@ -35,6 +36,10 @@ The empty one. No ornament, no cards, no accent bar: white paper, near-black Hel
 ### IBM Carbon (`carbon`)
 
 The corporate grid. Three hairline column rules run down every content slide, the title slide splits into an IBM blue panel and a text column, sections get a blue side band, and content sits on light grey cards. Type is IBM Plex Sans with IBM Plex Mono for code; the palette is IBM blue `#0F62FE` with violet, teal and magenta from Carbon for charts. Images: clean product and workplace photography, blue duotone, or Carbon icons in one weight.
+
+### IBM Carbon Dark (`carbon-dark`)
+
+The same corporate system on a dark canvas: Carbon g100 near-black `#161616`, layer grey `#262626` cards, IBM Plex Sans, blue `#4589FF` and purple `#BE95FF`, with the chart palette Carbon uses on dark. The title sits on the canvas under a short blue rule rather than in a blue panel, so the brightest thing on the slide stays the data. Sections keep the blue side band and content slides keep the column rules. Pick it when the room is dark or the deck is about a product, and `carbon` when it will be printed or read on a laptop. Images: dark product renders, glass and brushed metal, blue-lit machine rooms, Carbon icons in one weight; the IBM dark premium set (`pack-h`) is drawn for this look.
 
 ### Cyber Steel (`cyber-steel`)
 

@@ -27,7 +27,7 @@ Without `--audience` the five defaults are deliberately far apart: `swiss` (whit
 
 Run it without `--audience` unless the user named the audience; the default five are the concepts above. `--audience executives|investors|customers|technical|team|conference|training|research` reorders the set for a room the user has named, and every preset keeps one dark concept so that direction is never hidden.
 
-Other options: `--pick a,b,c,d,e` and `--exclude` override; `--brand-accent "#RRGGBB"` adds a concept built on the company colour and puts it first; `--script cyrillic|hebrew|arabic` swaps fonts that lack the glyphs; `--rtl` previews right-to-left; `--list` prints all fifteen concepts. `references/concepts.md` says what each concept is for and how to keep the five genuinely different.
+Other options: `--pick a,b,c,d,e` and `--exclude` override; `--brand-accent "#RRGGBB"` adds a concept built on the company colour and puts it first; `--script cyrillic|hebrew|arabic` swaps fonts that lack the glyphs; `--rtl` previews right-to-left; `--list` prints all sixteen concepts. `references/concepts.md` says what each concept is for and how to keep the five genuinely different.
 
 ## 2. Ask, and read the answer
 
