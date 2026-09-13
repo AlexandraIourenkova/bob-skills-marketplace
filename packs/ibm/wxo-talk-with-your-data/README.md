@@ -1,6 +1,6 @@
 # Pack `wxo-talk-with-your-data` — Talk with your data on watsonx Orchestrate
 
-Vendor: `ibm`. Install with `uvx bob-skills add wxo-talk-with-your-data` or `/skills-add wxo-talk-with-your-data` inside Bob.
+Vendor: `ibm`. Install with `uvx bob-skills add wxo-talk-with-your-data`, or with `/skills-add wxo-talk-with-your-data` inside Bob once bob-essentials is installed.
 
 Start from a spreadsheet and end with an agent people can talk to.
 

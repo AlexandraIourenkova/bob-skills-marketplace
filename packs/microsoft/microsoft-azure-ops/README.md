@@ -1,6 +1,6 @@
 # Pack `microsoft-azure-ops` — Microsoft Azure operations
 
-Vendor: `microsoft`. Curated from [microsoft/skills](https://github.com/microsoft/skills) (MIT), plugin `azure-skills`. Install with `uvx bob-skills add microsoft-azure-ops`.
+Vendor: `microsoft`. Curated from [microsoft/skills](https://github.com/microsoft/skills) (MIT), plugin `azure-skills`. Install with `uvx bob-skills add microsoft-azure-ops`, or with `/skills-add microsoft-azure-ops` inside Bob once bob-essentials is installed.
 
 ## Before you install
 

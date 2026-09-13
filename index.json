@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-12T18:49:14Z",
+  "generated": "2026-09-13T23:44:34Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "aa07d14357cb058f62f9a2e2709af54280fc44bc"
+    "commit": "3ca3daeda0d55b07f1a332b24ead05d53c5bcf32"
   },
   "vendors": [
     {
@@ -192,7 +192,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:a4a425b0d8c5a293ab1aa0dcc9c2d3d770a2e631d459c0793fe9e26863789c26",
+      "digest": "sha256:05802d32786f3e3f142c8b14ba213dfd7bcb72beca6e269dc3b015b0e92a3539",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -273,7 +273,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:ab6c4e375cb9bfcca85a6b3ce5e6aa4ad5386176ec7859e9b9d0759d9ceb95ed",
+      "digest": "sha256:d9b7d79bf7c51a9657ea5763babcc3507061a1e6fd8ee4546d6d53ecd95e0124",
       "revokedVersions": [],
       "versions": [
         "1.0.1",
@@ -353,7 +353,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:ba2c58bd7c0a77b721101b13f5056ea1d2b9a4e8a20d5392f5477f1674b27191",
+      "digest": "sha256:a9827c7e4c0f7b5375d02d6ec8f8381e53dc14efccb8cd75f8368a88b2c81f40",
       "revokedVersions": [],
       "versions": [
         "1.0.1",
@@ -436,7 +436,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:dfe88bebb75830b4cc2193dcd3fa8cdd728a2376085b8d54d896932514c514c1",
+      "digest": "sha256:cd92fc012db4393e5e86b4795ff6ae9f8a27d34995541ac503d5ce5385df7d84",
       "revokedVersions": [],
       "versions": [
         "1.11.0"
@@ -528,7 +528,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:d889730b48080b3029d47aa5e23d974ec13b49a220cfad510385322cad660ed7",
+      "digest": "sha256:5d2266c288918eda2fcc86cb503e9252721e14dd0f8720db54004bc96236e2c8",
       "revokedVersions": [],
       "versions": [
         "1.1.1",
@@ -608,7 +608,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:2d0c00aa169250bf8c6a5671e04b1f2231fac64ca7753a97c480b4389adfc3e2",
+      "digest": "sha256:8563902faa28aa22817dc8b97a046aef6fca183ffabf7aed0ba3a4aec22d49cb",
       "revokedVersions": [],
       "versions": [
         "1.1.0",
@@ -1076,7 +1076,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:ae8ccea6e2b9c4ee7387c13d4f0eed4f96cd2e3ace055c533734a43ce128d523",
+      "digest": "sha256:bad91e708c8e66b127d8e3fcced07d0f162553c951bc98890289709e7a315bbc",
       "revokedVersions": [],
       "versions": [
         "1.1.1",
@@ -1246,7 +1246,7 @@
       "rules": [],
       "commands": [],
       "modes": [],
-      "digest": "sha256:fe5af22e4912798ce920b5a00bdfa814258ab4211723d34ae7e2fbe7e0b811e3",
+      "digest": "sha256:ac0b33347a23118d892be694a497f2e57ba3e07a881bfc12726eb82ff92ccbb0",
       "revokedVersions": [],
       "versions": [
         "1.0.0"

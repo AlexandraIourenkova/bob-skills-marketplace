@@ -1,6 +1,6 @@
 # Pack `presentations` — Presentations that tell a story
 
-Vendor: `ibm` (marketplace team). Original skills written for this marketplace, Apache-2.0. Install with `uvx bob-skills add presentations` or `/skills-add presentations` inside Bob.
+Vendor: `ibm` (marketplace team). Original skills written for this marketplace, Apache-2.0. Install with `uvx bob-skills add presentations`, or with `/skills-add presentations` inside Bob once bob-essentials is installed.
 
 From a topic or a spreadsheet to a deck people remember, and to the talk around it. Two decisions stay with the user: the storyline and the visual style.
 

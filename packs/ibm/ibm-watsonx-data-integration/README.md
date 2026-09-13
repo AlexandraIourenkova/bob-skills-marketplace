@@ -1,6 +1,6 @@
 # Pack `ibm-watsonx-data-integration` — IBM watsonx.data integration
 
-Vendor: `ibm`. Curated from [IBM/ibm-watsonx-data-integration-skills](https://github.com/IBM/ibm-watsonx-data-integration-skills) (Apache-2.0), plugin `agent`. Install with `uvx bob-skills add ibm-watsonx-data-integration`.
+Vendor: `ibm`. Curated from [IBM/ibm-watsonx-data-integration-skills](https://github.com/IBM/ibm-watsonx-data-integration-skills) (Apache-2.0), plugin `agent`. Install with `uvx bob-skills add ibm-watsonx-data-integration`, or with `/skills-add ibm-watsonx-data-integration` inside Bob once bob-essentials is installed.
 
 ## Before you install
 

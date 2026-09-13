@@ -1,6 +1,6 @@
 # Pack `wxo-adk` — watsonx Orchestrate ADK
 
-Vendor: `ibm`. Curated by the marketplace team from the official ADK repository. Install with `uvx bob-skills add wxo-adk` or `/skills-add wxo-adk` inside Bob.
+Vendor: `ibm`. Curated by the marketplace team from the official ADK repository. Install with `uvx bob-skills add wxo-adk`, or with `/skills-add wxo-adk` inside Bob once bob-essentials is installed.
 
 ## Before you install
 

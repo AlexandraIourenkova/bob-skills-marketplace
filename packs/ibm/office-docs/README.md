@@ -1,6 +1,6 @@
 # Pack `office-docs` — Office documents
 
-Vendor: `ibm` (marketplace team). Original skills written for this marketplace, Apache-2.0. Install with `uvx bob-skills add office-docs` or `/skills-add office-docs` inside Bob.
+Vendor: `ibm` (marketplace team). Original skills written for this marketplace, Apache-2.0. Install with `uvx bob-skills add office-docs`, or with `/skills-add office-docs` inside Bob once bob-essentials is installed.
 
 | Skill | Library | Scripts |
 |---|---|---|

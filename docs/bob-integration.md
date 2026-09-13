@@ -41,7 +41,7 @@ Test the payload by pointing the hook at a script that dumps stdin to a file, th
 
 ## Slash command inside Bob
 
-The `bob-essentials` pack ships `.bob/commands/skills-add.md`. Users type `/skills-add wxo-adk`; Bob runs the installer through `execute_command` and shows the report. The same command works non-interactively for CI:
+The `bob-essentials` pack ships `.bob/commands/skills-add.md`, so Bob knows `/skills-add` only after that pack is installed: the first install is `uvx bob-skills add bob-essentials` in the terminal. After it, users type `/skills-add wxo-adk`; Bob runs the installer through `execute_command` and shows the report. The same command works non-interactively for CI:
 
 ```bash
 bob run "/skills-add wxo-adk"

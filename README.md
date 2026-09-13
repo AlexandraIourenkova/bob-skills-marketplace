@@ -152,7 +152,7 @@ sequenceDiagram
 
 - Locally: run `python3 -m http.server` in the registry checkout and open `http://localhost:8000/site/`.
 - GitHub Pages: enabled from branch `main`, folder `/` (root). The site is at https://pages.github.ibm.com/Maria-Startseva/bob-skills-marketplace/ (the root redirects to `site/`; viewers sign in with w3id). `.nojekyll` at the root keeps Pages from processing the files.
-- "Add to Bob" copies `/skills-add <pack>` to the clipboard. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
+- "Add to Bob" copies `/skills-add <pack>` to the clipboard; the `bob-essentials` page offers the terminal command instead, because that pack ships the slash command. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
 
 ## Quick start
 
@@ -163,7 +163,7 @@ uvx bob-skills verify               # digests and policy linter on what is insta
 uvx bob-skills update               # newer versions with SKILL.md diffs, revocations
 ```
 
-Inside Bob: `/skills-add wxo-adk`. The client installs straight from this repository with `uv tool install` (above); `uvx bob-skills` will work once the package is published to an index. From a checkout without installing: `uv run --project cli bob-skills ...`.
+Inside Bob: `/skills-add wxo-adk`, once `bob-essentials` is installed; that pack ships the command. The client installs straight from this repository with `uv tool install` (above); `uvx bob-skills` will work once the package is published to an index. From a checkout without installing: `uv run --project cli bob-skills ...`.
 
 ## Repository layout
 

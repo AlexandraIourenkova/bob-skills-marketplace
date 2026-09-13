@@ -1,6 +1,6 @@
 # Pack `confluent-kafka` — Kafka and Flink by Confluent
 
-Vendor: `confluent` (an IBM company since March 2026). Curated from [confluentinc/agent-skills](https://github.com/confluentinc/agent-skills) (Apache-2.0) at commit `914d95eff7ff`. Install with `uvx bob-skills add confluent-kafka`.
+Vendor: `confluent` (an IBM company since March 2026). Curated from [confluentinc/agent-skills](https://github.com/confluentinc/agent-skills) (Apache-2.0) at commit `914d95eff7ff`. Install with `uvx bob-skills add confluent-kafka`, or with `/skills-add confluent-kafka` inside Bob once bob-essentials is installed.
 
 ## Before you install
 

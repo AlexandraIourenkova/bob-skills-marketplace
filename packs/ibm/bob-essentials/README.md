@@ -1,6 +1,6 @@
 # Pack `bob-essentials`
 
-Vendor: `ibm`. The marketplace's own skills, installed with `uvx bob-skills add bob-essentials`.
+Vendor: `ibm`. The marketplace's own skills, installed with `uvx bob-skills add bob-essentials`. This pack brings the `/skills-add` command, so the first install runs in the terminal.
 
 | Component | What it adds |
 |---|---|
