@@ -221,7 +221,6 @@
     if (!p) { app.innerHTML = `<div class="wrap error">Pack "${esc(name)}" is not in the catalog. <a href="#/">Back to packs</a></div>`; return; }
     const v = vendorOf(p.vendor);
     const cmd = `uvx bob-skills add ${p.name}`;
-    const install = 'uv tool install bob-skills';
     const web = webUrl();
     const tag = p.tag || `${p.name}--v${p.version}`;
     const rows = [
@@ -260,10 +259,10 @@
         <div>
           <div class="panel">
             ${p.name === 'bob-essentials' ? `
-            <div><h5>First install</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div><div class="hint" style="margin-top:8px">Bob learns <span class="mono">/skills-add</span> from this pack, so the first install runs in the terminal. Needs only uv. Permanent command instead of uvx: <span class="mono">${esc(install)}</span> <button title="Copy" onclick="copyText('${esc(install)}')" style="background:transparent;border:0;cursor:pointer;vertical-align:middle">${ICON.copy}</button></div></div>` : `
-            <div><button class="btn wide" onclick="copyText('/skills-add ${esc(p.name)}', 'Paste into Bob')"><span>Add to Bob</span>${ICON.arrow}</button><div class="hint" style="margin-top:8px">Copies <span class="mono">/skills-add ${esc(p.name)}</span>. Paste it into Bob; it shows what will be installed and asks before writing anything. The command comes with <a href="#/pack/bob-essentials">bob-essentials</a>.</div></div>
-            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div><div class="hint" style="margin-top:8px">Needs only uv. Permanent command instead of uvx: <span class="mono">${esc(install)}</span> <button title="Copy" onclick="copyText('${esc(install)}')" style="background:transparent;border:0;cursor:pointer;vertical-align:middle">${ICON.copy}</button></div></div>`}
-            <div><h5>Or ask Bob</h5><div class="quote">Install the ${esc(p.displayName)} pack from the marketplace</div></div>
+            <div><h5>First install</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div><div class="hint" style="margin-top:8px">Bob learns the marketplace from this pack, so the first install runs in the terminal.</div></div>` : `
+            <div><button class="btn wide" onclick="copyText('/skills-add ${esc(p.name)}', 'Paste into Bob')"><span>Add to Bob</span>${ICON.arrow}</button></div>
+            <div><h5>Or ask Bob</h5><div class="quote">Install the ${esc(p.displayName)} pack from the marketplace</div><div class="hint" style="margin-top:8px">Both routes need <a href="#/pack/bob-essentials">bob-essentials</a>: it brings the command and the marketplace skills.</div></div>
+            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div></div>`}
             <div><h5>Download</h5><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.zip">${ICON.down} <span class="mono">${esc(tag)}.zip</span></a><div class="hint" style="margin-top:6px"><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.tar.gz">tar.gz</a> · <a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.sha256">sha256</a> · <a href="${web}/releases/tag/${esc(tag)}">release page</a></div></div>
           </div>
           <div class="facts">
