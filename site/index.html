@@ -209,11 +209,24 @@
           </div>
         </div>
       </div>`;
+    // renderCatalog replaces the whole page, so the control that had focus has to be found again
+    const again = (selector, caret) => {
+      renderCatalog();
+      const el = document.querySelector(selector);
+      if (!el) return;
+      el.focus();
+      if (caret) el.setSelectionRange(caret[0], caret[1]);
+    };
     const q = document.getElementById('q');
-    q.addEventListener('input', () => { state.q = q.value; renderCatalog(); q.focus(); q.setSelectionRange(q.value.length, q.value.length); });
-    app.querySelectorAll('input[data-vendor]').forEach(el => el.addEventListener('change', () => { el.checked ? state.vendors.add(el.dataset.vendor) : state.vendors.delete(el.dataset.vendor); renderCatalog(); }));
-    app.querySelectorAll('input[data-contains]').forEach(el => el.addEventListener('change', () => { el.checked ? state.contains.add(el.dataset.contains) : state.contains.delete(el.dataset.contains); renderCatalog(); }));
-    app.querySelectorAll('input[data-status]').forEach(el => el.addEventListener('change', () => { el.checked ? state.status.add(el.dataset.status) : state.status.delete(el.dataset.status); renderCatalog(); }));
+    q.addEventListener('input', () => { state.q = q.value; again('#q', [q.selectionStart, q.selectionEnd]); });
+    const filter = (attr, set) => app.querySelectorAll(`input[data-${attr}]`).forEach(el => el.addEventListener('change', () => {
+      const value = el.dataset[attr];
+      el.checked ? set.add(value) : set.delete(value);
+      again(`input[data-${attr}="${value}"]`);
+    }));
+    filter('vendor', state.vendors);
+    filter('contains', state.contains);
+    filter('status', state.status);
   }
 
   function renderPack(name) {
