@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-29T14:15:44Z",
+  "generated": "2026-09-29T18:40:39Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "185dbb7523dbdc96f28ff0678df6c8c0604eba33"
+    "commit": "9850d2eff7d6a46bd1bb138b6bb6d0f0d8035f7b"
   },
   "vendors": [
     {
@@ -193,7 +193,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:89c23002166cb7e2f6a5fa9faa7169c366a33e71446d7d950dc79fcd3f4909e1",
+      "digest": "sha256:f5e48d430fbe37b3bd25a3b3efe1430562b64035f4e22acb87a70154cead50b8",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -209,9 +209,9 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-12T16:12:33Z",
+        "scannedAt": "2026-09-29T18:40:37Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 57,
+        "skillspectorSuppressed": 58,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
@@ -526,6 +526,7 @@
       "digest": "sha256:cd7350e99ec1c673780e1d0b544c16a52ba6625774fb7164ce782e0223371dad",
       "revokedVersions": [],
       "versions": [
+        "1.11.1",
         "1.11.0"
       ],
       "baselineFindings": 2,
@@ -618,6 +619,7 @@
       "digest": "sha256:4ef6e3e872ddb849f2409c987c006ca8b95a27374a943ae13dba2e1bb0f40513",
       "revokedVersions": [],
       "versions": [
+        "1.1.2",
         "1.1.1",
         "1.1.0",
         "1.0.0"
