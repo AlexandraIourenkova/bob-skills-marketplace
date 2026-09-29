@@ -1,0 +1,55 @@
+[
+  {
+    "id": "aaaaaaaa-0000-4000-8000-000000000001",
+    "tenant_id": "tenant-0001",
+    "name": "hr_agent",
+    "display_name": "HR Agent",
+    "description": "Answers questions about time off and holidays.",
+    "instructions": "Use the tools to answer. Transfer payroll questions to the payroll agent.",
+    "tools": [
+      "bbbbbbbb-0000-4000-8000-000000000001",
+      "bbbbbbbb-0000-4000-8000-000000000002",
+      "bbbbbbbb-0000-4000-8000-000000000003",
+      "bbbbbbbb-0000-4000-8000-000000000004"
+    ],
+    "collaborators": [
+      "aaaaaaaa-0000-4000-8000-000000000002"
+    ],
+    "knowledge_base": [],
+    "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+    "style": "default",
+    "hide_reasoning": false,
+    "environments": [
+      {
+        "id": "env-draft-0001",
+        "name": "draft"
+      },
+      {
+        "id": "env-live-0001",
+        "name": "live"
+      }
+    ]
+  },
+  {
+    "id": "aaaaaaaa-0000-4000-8000-000000000002",
+    "tenant_id": "tenant-0001",
+    "name": "payroll_agent",
+    "display_name": "Payroll Agent",
+    "description": "Confirms time off against payroll.",
+    "instructions": "Confirm dates against payroll records.",
+    "tools": [
+      "bbbbbbbb-0000-4000-8000-000000000005"
+    ],
+    "collaborators": [],
+    "knowledge_base": [],
+    "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+    "style": "react",
+    "hide_reasoning": true,
+    "environments": [
+      {
+        "id": "env-draft-0002",
+        "name": "draft"
+      }
+    ]
+  }
+]

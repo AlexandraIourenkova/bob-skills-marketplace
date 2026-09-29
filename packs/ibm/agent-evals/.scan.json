@@ -1,0 +1,90 @@
+{
+  "scannedAt": "2026-09-29T23:11:40Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:2092d7895eca976e0c86b459039748e59fa1cdf52f8528c119842b4dbe475b63|sha256:cef9853a82ee82513270f8d63c6c56a151e51890df39c2b375ed5b04badd6c82",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "wxo-agent-api": {
+      "digest": "sha256:7e148582c25c49a0d9acdc8bfacb8243e2453034cdcdf198467b1071a68181d0",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 5,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 4,
+        "accepted": 3,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "wxo-eval-cases": {
+      "digest": "sha256:bcb87cd0f6c6d7947b65c790a997a8770fcf01db54858708658379e2e5ea5a60",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "wxo-eval-run": {
+      "digest": "sha256:cbb4733ee899375801e37a49807951f0e26f34783a5d84d450fb374dd4199586",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 6,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 12,
+    "ciscoAccepted": 3
+  }
+}

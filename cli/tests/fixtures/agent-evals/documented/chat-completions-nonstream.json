@@ -1,0 +1,21 @@
+{
+  "id": "cmpl-0001",
+  "object": "chat.completion",
+  "created": 1790000100,
+  "model": "agent-model",
+  "thread_id": "66666666-6666-4666-8666-666666666666",
+  "run_id": "77777777-7777-4777-8777-777777777777",
+  "trace_id": "5f0c2e7a9d1b4c3e8a6f0b2d4c6e8a01",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Your time off in 2025: 2025-04-11 and 2025-12-24.",
+        "reasoning_content": "Fetched the assignment, then the schedule.",
+        "_meta": {}
+      },
+      "finish_reason": "stop"
+    }
+  ]
+}

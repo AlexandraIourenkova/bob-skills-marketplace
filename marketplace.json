@@ -10,6 +10,27 @@
   },
   "plugins": [
     {
+      "name": "agent-evals",
+      "source": "./packs/ibm/agent-evals",
+      "description": "Test a deployed watsonx Orchestrate agent through its API and see every tool it called, with arguments, results and hand-offs. Cases in IBM's AgentOps Core format, runs that wait for your yes, offline scoring, Bob as the judge, and a report.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "watsonx-orchestrate",
+        "wxo",
+        "agents",
+        "evaluation",
+        "testing",
+        "agentops",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "bob-essentials",
       "source": "./packs/ibm/bob-essentials",
       "description": "The marketplace inside Bob: find and install packs from chat, audit a skill before anyone trusts it, check the setup from hooks to MCP servers, and write new skills, modes, rules and commands. Ships /skills-add and a security rule that every task follows.",

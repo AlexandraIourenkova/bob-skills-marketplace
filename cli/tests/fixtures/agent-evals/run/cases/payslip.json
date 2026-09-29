@@ -1,0 +1,28 @@
+{
+  "agent": "hr_agent",
+  "story": "An employee asks which payslips exist and then wants the March one as a PDF.",
+  "starting_sentence": "Which payslips do I have? My username is nwaters.",
+  "user_prompts": ["Send me the March one as a PDF."],
+  "goals": {
+    "payroll-1": ["answer"]
+  },
+  "goal_details": [
+    {
+      "type": "tool_call",
+      "name": "payroll-1",
+      "tool_name": "chat_with_collaborator_payroll_agent",
+      "args": {"message": "List the payslips of nwaters"},
+      "arg_matching": {"message": "fuzzy"}
+    },
+    {
+      "type": "text",
+      "name": "answer",
+      "response": "The March payslip is on its way as a PDF.",
+      "keywords": []
+    }
+  ],
+  "x_agent_evals": {
+    "forbidden_tools": ["delete_employee"],
+    "max_latency_s": 45
+  }
+}

@@ -1,0 +1,150 @@
+[
+  {
+    "id": "bbbbbbbb-0000-4000-8000-000000000001",
+    "name": "fetch_assignment_id",
+    "description": "Return the assignment id of an employee.",
+    "permission": "read_only",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Employee user name"
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "binding": {
+      "python": {
+        "function": "hr_tools:fetch_assignment_id",
+        "requirements": []
+      }
+    }
+  },
+  {
+    "id": "bbbbbbbb-0000-4000-8000-000000000002",
+    "name": "retrieve_timeoff_schedule",
+    "description": "Return the booked time off of an assignment between two dates.",
+    "permission": "read_only",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "assignment_id": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "YYYY-MM-DD"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "binding": {
+      "python": {
+        "function": "hr_tools:retrieve_timeoff_schedule",
+        "requirements": []
+      }
+    }
+  },
+  {
+    "id": "bbbbbbbb-0000-4000-8000-000000000003",
+    "name": "get_holiday_calendar",
+    "description": "Return the public holidays of a year.",
+    "permission": "read_only",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "year"
+      ]
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "binding": {
+      "python": {
+        "function": "hr_tools:get_holiday_calendar",
+        "requirements": []
+      }
+    }
+  },
+  {
+    "id": "bbbbbbbb-0000-4000-8000-000000000004",
+    "name": "delete_employee",
+    "description": "Remove an employee record.",
+    "permission": "read_write",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "left",
+            "duplicate"
+          ]
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "binding": {
+      "python": {
+        "function": "hr_tools:delete_employee",
+        "requirements": []
+      }
+    }
+  },
+  {
+    "id": "bbbbbbbb-0000-4000-8000-000000000005",
+    "name": "list_payslips",
+    "description": "List the payslip months of an employee.",
+    "permission": "read_only",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "binding": {
+      "python": {
+        "function": "hr_tools:list_payslips",
+        "requirements": []
+      }
+    }
+  }
+]

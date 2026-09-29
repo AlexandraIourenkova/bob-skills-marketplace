@@ -5,7 +5,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ## Vendors
 
-- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, ibm-cloud, ibm-watsonx-data-integration, office-docs, presentations, wxo-adk, wxo-talk-with-your-data.
+- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: agent-evals, bob-essentials, ibm-cloud, ibm-watsonx-data-integration, office-docs, presentations, wxo-adk, wxo-talk-with-your-data.
 - **Anthropic** (`anthropic`, active): sources github.com/anthropics. Packs: anthropic-dev-kit.
 - **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-dev-tools, openai-security.
 - **Google** (`google`, active): sources github.com/google. Packs: google-cloud-data.
@@ -14,6 +14,23 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 - **Confluent** (`confluent`, active): sources github.com/confluentinc. Packs: confluent-kafka.
 
 ## Packs
+
+### agent-evals — Agent evals for watsonx Orchestrate
+
+- Vendor: IBM (`ibm`, active). Version 1.0.0.
+- Test a deployed watsonx Orchestrate agent through its API and see every tool it called, with arguments, results and hand-offs. Cases in IBM's AgentOps Core format, runs that wait for your yes, offline scoring, Bob as the judge, and a report.
+- Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
+- Tags: watsonx-orchestrate, wxo, agents, evaluation, testing, agentops, ibm
+- Skills (3):
+  - `wxo-agent-api`: Call a deployed watsonx Orchestrate (wxo) agent from Python and get its answer with every tool call, tool result, hand-off and timing, through a small standard-library client. A one-time probe shows where the instance exposes tool calls; scripts ask an agent one or more questions or a CSV batch of them, and custom scripts build on the same client. Nothing reaches the agent before the user's yes. Use when the user wants to call or test a wxo agent from code, see which tools an agent run called, script against the Orchestrate runs API, or asks whether the API returns tool calls without streaming. Triggers include "call my Orchestrate agent from Python", "get the tool calls of a wxo agent run", "are tool calls only in the stream", "batch questions to my wxo agent", "напиши скрипт, который вызывает агента wxo", "где в API видны вызовы тулов", "проверь, как агент отвечает через API", "прогони вопросы из CSV через агента wxo".
+  - `wxo-eval-cases`: Write and check evaluation test cases for a deployed watsonx Orchestrate (wxo) agent in IBM's AgentOps Core format - a skeleton from the user's scenario, a draft from a real conversation thread, validation against the agent's tool catalog and argument schemas, and an export folder and ZIP for `orchestrate evaluations` and the server-side upload. Reads the tenant only (agents, tools, thread messages); never sends a message to the agent and never uploads. Use to create, draft or check test cases or a golden set for a wxo agent, to turn a good conversation into a regression test, or to prepare cases for `orchestrate evaluations`. Triggers include "write eval cases for my Orchestrate agent", "make a test case from this thread", "validate my wxo test cases", "export cases for IBM agentops", "тест-кейсы для агента wxo", "сделай тест из этого диалога", "проверь тест-кейсы агента Orchestrate".
+  - `wxo-eval-run`: Run test cases against a deployed watsonx Orchestrate (wxo) agent and score what it did. Nothing is sent before the user's yes to a read-only plan; one canary case first, the rest after a second yes. Each turn's tool calls, results and hand-offs are captured and scored offline (arguments, order, routing, forbidden tools); Bob judges answer quality with a rubric. Reports in Markdown, HTML and CSV and diffs two runs for regressions. Use when the user wants to run evals for a wxo agent, check a new version for regressions or measure tool-call accuracy. Triggers include "run the evals for my Orchestrate agent", "did the new agent version regress", "tool call accuracy of my wxo agent", "benchmark my wxo agent against test cases", "прогони тесты агента wxo", "оцени агента orchestrate", "сравни два прогона".
+- Also installs: rules: agent-evals.md; commands: /wxo-eval; modes: agent-evals.
+- Before you install: Every message sent to the agent creates a run, and usually a thread, on your watsonx Orchestrate tenant, and the agent may call tools that change external systems. The threads stay on the tenant. Covered by: Nothing is sent before your yes to a read-only plan or dry run that lists the host, the agent and every tool and collaborator it can reach; the runner then sends one canary case and stops. No script deletes, imports or removes anything, and every thread id is recorded. A forbidden tool is detected after it ran, so use a draft environment and a sandboxed test tenant.
+- Before you install: Test prompts go to your tenant, and the saved traces hold prompts, answers and tool outputs that may carry personal data from the agent's backends. If you run exported cases in IBM's own evaluation framework, it sends the transcripts to its judge model. Covered by: Traces stay in the project under `agent-evals/runs/` and `agent-evals/probe/raw/`, and the skills suggest git-ignoring both. Bob judges answers in your session, so nothing goes to a third service; export only writes local files. Credentials come from the environment only, and the token stays in memory, never printed or written. Captures become test fixtures only through `probe.py sanitize` and your review.
+- Before you install: Agent answers, tool results, thread messages and agent instructions come from the tenant and its backends and can carry text aimed at Bob. Covered by: The rule, the skills and the judge rubric treat them as data: quoted, never followed, and an instruction found in an answer is reported as a finding. Turns come from the case file, never from the agent's output, and `report.html` escapes everything.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 6 checksummed components.
+- Install: `uvx bob-skills add agent-evals`
 
 ### bob-essentials — Bob essentials
 

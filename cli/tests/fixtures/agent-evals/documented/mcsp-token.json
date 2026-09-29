@@ -1,0 +1,5 @@
+{
+  "token": "FAKE-MCSP-TOKEN-0001",
+  "token_type": "jwt",
+  "expires_in": 7200
+}

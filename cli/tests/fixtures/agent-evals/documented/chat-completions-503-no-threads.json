@@ -1,0 +1,1 @@
+{"error": {"message": "Stateful threads are not enabled on this deployment. Remove the X-IBM-THREAD-ID header to use stateless mode.", "code": 503}}

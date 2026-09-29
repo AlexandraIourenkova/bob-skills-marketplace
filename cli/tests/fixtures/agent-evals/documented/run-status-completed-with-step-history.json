@@ -1,0 +1,76 @@
+{
+  "id": "22222222-2222-4222-8222-222222222222",
+  "tenant_id": "tenant-0001",
+  "thread_id": "11111111-1111-4111-8111-111111111111",
+  "agent_id": "aaaaaaaa-0000-4000-8000-000000000001",
+  "created_at": "2026-09-29T10:00:00.000Z",
+  "started_at": "2026-09-29T10:00:00.120Z",
+  "completed_at": "2026-09-29T10:00:06.480Z",
+  "failed_at": null,
+  "cancelled_at": null,
+  "usage": {
+    "prompt_tokens": 2310,
+    "completion_tokens": 184,
+    "total_tokens": 2494
+  },
+  "last_error": null,
+  "result": {
+    "data": {
+      "message": {
+        "role": "assistant",
+        "content": [
+          {
+            "response_type": "text",
+            "text": "nwaters has assignment 15338303."
+          }
+        ],
+        "step_history": [
+          {
+            "role": "assistant",
+            "step_details": [
+              {
+                "type": "tool_calls",
+                "agent_display_name": "HR Agent",
+                "tool_calls": [
+                  {
+                    "id": "call-1",
+                    "name": "fetch_assignment_id",
+                    "args": {
+                      "username": "nwaters"
+                    }
+                  },
+                  {
+                    "id": "call-2",
+                    "name": "get_holiday_calendar",
+                    "args": {
+                      "year": 2025
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "role": "assistant",
+            "step_details": [
+              {
+                "type": "tool_response",
+                "name": "fetch_assignment_id",
+                "content": "{\"assignment_id\": \"15338303\"}",
+                "tool_call_id": "call-1"
+              },
+              {
+                "type": "tool_response",
+                "name": "get_holiday_calendar",
+                "content": "[\"2025-01-01\", \"2025-12-25\"]",
+                "tool_call_id": "call-2"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "trace_id": "5f0c2e7a9d1b4c3e8a6f0b2d4c6e8a01",
+  "status": "completed"
+}

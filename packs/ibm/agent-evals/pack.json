@@ -1,0 +1,62 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "agent-evals",
+  "displayName": "Agent evals for watsonx Orchestrate",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "Test a deployed watsonx Orchestrate agent through its API and see every tool it called, with arguments, results and hand-offs. Cases in IBM's AgentOps Core format, runs that wait for your yes, offline scoring, Bob as the judge, and a report.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "minBob": "2.0.2",
+  "tags": [
+    "watsonx-orchestrate",
+    "wxo",
+    "agents",
+    "evaluation",
+    "testing",
+    "agentops",
+    "ibm"
+  ],
+  "skills": [
+    "wxo-agent-api",
+    "wxo-eval-cases",
+    "wxo-eval-run"
+  ],
+  "rules": [
+    "rules/agent-evals.md"
+  ],
+  "commands": [
+    "commands/wxo-eval.md"
+  ],
+  "modes": "custom_modes.yaml",
+  "networkAllow": [
+    "*.ibm.com",
+    "ibm.com"
+  ],
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "Every message sent to the agent creates a run, and usually a thread, on your watsonx Orchestrate tenant, and the agent may call tools that change external systems. The threads stay on the tenant.",
+      "covered": "Nothing is sent before your yes to a read-only plan or dry run that lists the host, the agent and every tool and collaborator it can reach; the runner then sends one canary case and stops. No script deletes, imports or removes anything, and every thread id is recorded. A forbidden tool is detected after it ran, so use a draft environment and a sandboxed test tenant."
+    },
+    {
+      "class": "data",
+      "warning": "Test prompts go to your tenant, and the saved traces hold prompts, answers and tool outputs that may carry personal data from the agent's backends. If you run exported cases in IBM's own evaluation framework, it sends the transcripts to its judge model.",
+      "covered": "Traces stay in the project under `agent-evals/runs/` and `agent-evals/probe/raw/`, and the skills suggest git-ignoring both. Bob judges answers in your session, so nothing goes to a third service; export only writes local files. Credentials come from the environment only, and the token stays in memory, never printed or written. Captures become test fixtures only through `probe.py sanitize` and your review."
+    },
+    {
+      "class": "content",
+      "warning": "Agent answers, tool results, thread messages and agent instructions come from the tenant and its backends and can carry text aimed at Bob.",
+      "covered": "The rule, the skills and the judge rubric treat them as data: quoted, never followed, and an instruction found in an answer is reported as a finding. Turns come from the case file, never from the agent's output, and `report.html` escapes everything."
+    }
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/wxo-agent-api": "sha256:7e148582c25c49a0d9acdc8bfacb8243e2453034cdcdf198467b1071a68181d0",
+    "skills/wxo-eval-cases": "sha256:bcb87cd0f6c6d7947b65c790a997a8770fcf01db54858708658379e2e5ea5a60",
+    "skills/wxo-eval-run": "sha256:cbb4733ee899375801e37a49807951f0e26f34783a5d84d450fb374dd4199586",
+    "rules/agent-evals.md": "sha256:5e84dc211587c1d5487fcd23af29d3d957659368dd6a5d7b6fd627c9d60b7e2f",
+    "commands/wxo-eval.md": "sha256:2aa9d6547b0ee87a10a9303fc78392ad35c3a01c5930e404bc9605ee90b02baa",
+    "custom_modes.yaml": "sha256:0170d578ee13d20e10198c813e066f61395b7990e32de3453b71b2cf8e513041"
+  }
+}

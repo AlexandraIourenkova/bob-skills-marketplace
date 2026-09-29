@@ -1,0 +1,38 @@
+[
+  {
+    "id": "msg-0001",
+    "thread_id": "11111111-1111-4111-8111-111111111111",
+    "role": "user",
+    "content": [
+      {
+        "response_type": "text",
+        "text": "Hello, what can you do?"
+      }
+    ],
+    "created_on": "2026-09-29T10:00:00.050Z"
+  },
+  {
+    "id": "msg-0002",
+    "thread_id": "11111111-1111-4111-8111-111111111111",
+    "run_id": "22222222-2222-4222-8222-222222222222",
+    "role": "assistant",
+    "content": [
+      {
+        "response_type": "text",
+        "text": "I answer questions about time off and holidays."
+      }
+    ],
+    "step_history": [
+      {
+        "role": "assistant",
+        "step_details": [
+          {
+            "type": "thinking",
+            "content": "A greeting: no tool is needed."
+          }
+        ]
+      }
+    ],
+    "created_on": "2026-09-29T10:00:02.000Z"
+  }
+]

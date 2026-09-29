@@ -1,0 +1,7 @@
+{
+  "host": "api.dl.watson-orchestrate.ibm.com",
+  "auth_path": "wo_token",
+  "hide_reasoning": false,
+  "capture": "stream",
+  "note": "A minimal probe result for the runner tests: only host and capture are read."
+}

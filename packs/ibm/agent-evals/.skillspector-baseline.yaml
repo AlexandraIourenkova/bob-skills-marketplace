@@ -1,0 +1,120 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: PE3
+  path: '*references/auth.md'
+  message: '*credentials.yaml*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: auth.md names ~/.cache/orchestrate/credentials.yaml
+    only to say that the client never reads it. Credentials come from the WO_* environment
+    variables, and no script in the pack opens a path under ~/.cache/orchestrate or
+    ~/.config/orchestrate.'
+- id: LP3
+  path: '*SKILL.md'
+  reason: 'Reviewed 2026-09-29 by the pack authors: LP3 is the missing allowed-tools
+    field in SKILL.md frontmatter. Bob reads name and description only; the tool scope
+    comes from the agent-evals mode (read, execute, skill, edits only under agent-evals/)
+    and the agent-evals rule.'
+- id: E1
+  path: '*SKILL.md'
+  message: '*api.us-south.watson-orchestrate.cloud.ibm.com*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: https://api.us-south.watson-orchestrate.cloud.ibm.com/instances/<id>
+    is the documented example value of WO_INSTANCE (SKILL.md, api-routes.md, the wxo_client.py
+    usage text). Requests go only to the instance the user sets in WO_INSTANCE and
+    to IBM''s token hosts, inside networkAllow.'
+- id: E1
+  path: '*references/api-routes.md'
+  message: '*api.us-south.watson-orchestrate.cloud.ibm.com*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: https://api.us-south.watson-orchestrate.cloud.ibm.com/instances/<id>
+    is the documented example value of WO_INSTANCE (SKILL.md, api-routes.md, the wxo_client.py
+    usage text). Requests go only to the instance the user sets in WO_INSTANCE and
+    to IBM''s token hosts, inside networkAllow.'
+- id: E1
+  path: '*scripts/wxo_client.py'
+  message: '*api.us-south.watson-orchestrate.cloud.ibm.com*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: https://api.us-south.watson-orchestrate.cloud.ibm.com/instances/<id>
+    is the documented example value of WO_INSTANCE (SKILL.md, api-routes.md, the wxo_client.py
+    usage text). Requests go only to the instance the user sets in WO_INSTANCE and
+    to IBM''s token hosts, inside networkAllow.'
+- id: PE3
+  path: '*references/ibm-framework.md'
+  message: '*credentials.yaml*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: ibm-framework.md names ~/.cache/orchestrate/credentials.yaml
+    to warn the user that IBM''s own `orchestrate evaluations` rewrites it. No script
+    in the pack reads or writes the file.'
+- id: P3
+  path: '*references/ibm-framework.md'
+  message: '*send messages to*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: ''send messages to'' describes
+    what IBM''s `orchestrate evaluations evaluate` and `generate` do to the agent
+    under test, in a warning shown before the user runs them. It is not an instruction
+    to transmit data anywhere.'
+- id: E4
+  path: '*SKILL.md'
+  message: '*capture thread*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: ''capture thread'' is the option
+    syntax `--capture thread|stream|stream-alt|v2` in the wxo-eval-run SKILL.md and
+    the run_cases.py usage text. It picks how the runner reads the agent''s turn back
+    from the user''s own tenant; nothing goes to another service.'
+- id: E4
+  path: '*scripts/run_cases.py'
+  message: '*capture thread*'
+  reason: 'Reviewed 2026-09-29 by the pack authors: ''capture thread'' is the option
+    syntax `--capture thread|stream|stream-alt|v2` in the wxo-eval-run SKILL.md and
+    the run_cases.py usage text. It picks how the runner reads the agent''s turn back
+    from the user''s own tenant; nothing goes to another service.'
+fingerprints:
+- hash: sha256:c897db5ade3897c56e5b5ec84449b0b90be1c18d51f2f56eb635e872da1b6cf5
+  rule_id: PE3
+  file: references/auth.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: auth.md names ~/.cache/orchestrate/credentials.yaml
+    only to say that the client never reads it. Credentials come from the WO_* environment
+    variables, and no script in the pack opens a path under ~/.cache/orchestrate or
+    ~/.config/orchestrate.'
+- hash: sha256:3a33d07d725cadb86c0d851cc5af5384432b13fd36e86ce7f6ae7c3b44e34742
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: LP3 is the missing allowed-tools
+    field in SKILL.md frontmatter. Bob reads name and description only; the tool scope
+    comes from the agent-evals mode (read, execute, skill, edits only under agent-evals/)
+    and the agent-evals rule.'
+- hash: sha256:b138279b66665a4ee0001ce8b0a6795aa147233baa8775480c66dd6184bf2258
+  rule_id: E1
+  file: scripts/wxo_client.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: https://api.us-south.watson-orchestrate.cloud.ibm.com/instances/<id>
+    is the documented example value of WO_INSTANCE (SKILL.md, api-routes.md, the wxo_client.py
+    usage text). Requests go only to the instance the user sets in WO_INSTANCE and
+    to IBM''s token hosts, inside networkAllow.'
+- hash: sha256:0ee1e46c520665611b6a530c924ba477d672e4ad04bc10471658e6b5a0b081ed
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: LP3 is the missing allowed-tools
+    field in SKILL.md frontmatter. Bob reads name and description only; the tool scope
+    comes from the agent-evals mode (read, execute, skill, edits only under agent-evals/)
+    and the agent-evals rule.'
+- hash: sha256:122533324fa1eb800b16f209a8925476920368f695b51aa3640b4fa7dd670ce3
+  rule_id: PE3
+  file: references/ibm-framework.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: ibm-framework.md names ~/.cache/orchestrate/credentials.yaml
+    to warn the user that IBM''s own `orchestrate evaluations` rewrites it. No script
+    in the pack reads or writes the file.'
+- hash: sha256:9d675422235b942572bdf76931169bb91297522e0c63ba9a64a6c01a8037baf3
+  rule_id: P3
+  file: references/ibm-framework.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: ''send messages to'' describes
+    what IBM''s `orchestrate evaluations evaluate` and `generate` do to the agent
+    under test, in a warning shown before the user runs them. It is not an instruction
+    to transmit data anywhere.'
+- hash: sha256:532de9c2257a1bdb12dac258f6b94426a253531729078081c8bedf78485e2aa2
+  rule_id: E4
+  file: scripts/run_cases.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: ''capture thread'' is the option
+    syntax `--capture thread|stream|stream-alt|v2` in the wxo-eval-run SKILL.md and
+    the run_cases.py usage text. It picks how the runner reads the agent''s turn back
+    from the user''s own tenant; nothing goes to another service.'
+- hash: sha256:2ffe194ea8040fd9d17077937190e590a15ce4c12d0f37bb700931c93c9e5160
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: LP3 is the missing allowed-tools
+    field in SKILL.md frontmatter. Bob reads name and description only; the tool scope
+    comes from the agent-evals mode (read, execute, skill, edits only under agent-evals/)
+    and the agent-evals rule.'

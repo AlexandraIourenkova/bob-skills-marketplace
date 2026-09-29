@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentOps Core TestCase with the agent-evals extension",
+  "description": "One evaluation case for a watsonx Orchestrate agent. Mirrors the TestCase and GoalDetail models of IBM's evaluation framework (package agentops, type.py) and adds the optional x_agent_evals object. The framework ignores x_agent_evals; cases.py export removes it. agent and starting_sentence are optional in agentops and required here, because the runner needs them. cases.py validate applies this schema with a standard-library subset (type, enum, const, required, properties, additionalProperties, items, minLength, minItems, minProperties, minimum, maximum, exclusiveMinimum, uniqueItems, $ref, allOf, if/then/else) and adds the checks a schema cannot express: goals names equal goal_details names, no cycle, arg_matching paths, the tool catalog.",
+  "type": "object",
+  "required": ["agent", "story", "starting_sentence", "goals", "goal_details"],
+  "properties": {
+    "dataset_name": {
+      "description": "agentops uses it when set, else the file name without .json. Keep it equal to the file name, or leave it out.",
+      "type": ["string", "null"]
+    },
+    "agent": {
+      "description": "The agent name as GET /v1/orchestrate/agents lists it.",
+      "type": "string",
+      "minLength": 1
+    },
+    "story": {
+      "description": "Who the user is and what they want. Feeds the judge and IBM's simulated user; the runner never sends it.",
+      "type": "string",
+      "minLength": 1
+    },
+    "starting_sentence": {
+      "description": "Turn 0, sent as written.",
+      "type": "string",
+      "minLength": 1
+    },
+    "user_prompts": {
+      "description": "Turns 1..n, sent as written, in order. The same semantics as agentops scripted turns.",
+      "type": ["array", "null"],
+      "items": {"type": "string", "minLength": 1}
+    },
+    "max_user_turns": {"type": ["integer", "null"], "minimum": 1},
+    "runtime_context": {"type": ["object", "null"]},
+    "file_upload": {"type": ["object", "null"]},
+    "attack_data": {"type": ["object", "null"]},
+    "agents_list_or_path": {"type": ["array", "string", "null"], "items": {"type": "string"}},
+    "goals": {
+      "description": "The goals DAG: goal name -> names of the goals that come after it. Every name here is a goal_details name and the reverse.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "items": {"type": "string", "minLength": 1}
+      }
+    },
+    "goal_details": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/goal_detail"}
+    },
+    "x_agent_evals": {"$ref": "#/$defs/x_agent_evals"}
+  },
+  "$defs": {
+    "goal_detail": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {
+          "description": "tool_call, text and conversational_search are scored by this pack. interaction and tool_response are agentops types this pack does not score in 1.0.",
+          "enum": ["tool_call", "text", "conversational_search", "interaction", "tool_response"]
+        },
+        "tool_name": {"type": ["string", "null"]},
+        "args": {"type": ["object", "null"]},
+        "arg_matching": {
+          "description": "Argument path (dotted for nested args) -> strategy. Paths not listed are strict.",
+          "type": ["object", "null"],
+          "additionalProperties": {"enum": ["strict", "optional", "ignore", "fuzzy"]}
+        },
+        "response": {"type": ["string", "null"]},
+        "keywords": {
+          "description": "Literal strings the answer must contain, reported as assertion pass or fail, never as a score.",
+          "type": ["array", "null"],
+          "items": {"type": "string", "minLength": 1}
+        },
+        "summary": {"type": ["string", "null"]},
+        "identifier": {
+          "type": ["object", "null"],
+          "required": ["key", "value"],
+          "properties": {
+            "key": {"type": "string"},
+            "value": {"type": "string"}
+          }
+        },
+        "knowledge_base": {"type": "object"}
+      },
+      "allOf": [
+        {
+          "if": {"required": ["type"], "properties": {"type": {"const": "tool_call"}}},
+          "then": {"required": ["tool_name"], "properties": {"tool_name": {"type": "string", "minLength": 1}}}
+        },
+        {
+          "if": {"required": ["type"], "properties": {"type": {"const": "interaction"}}},
+          "then": {"required": ["identifier"], "properties": {"identifier": {"type": "object"}}}
+        }
+      ]
+    },
+    "x_agent_evals": {
+      "description": "This pack's extension. IBM's framework ignores it and cases.py export removes it.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "forbidden_tools": {
+          "description": "Tools the agent must not call in this case. Detected after the run, never prevented.",
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "max_latency_s": {
+          "description": "Budget for the client wall time of each turn, in seconds.",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "judge_notes": {
+          "description": "What the judge must check besides response.",
+          "type": "string"
+        },
+        "repeat": {
+          "description": "How many times the runner sends this case, 1 to 20 (the runner's limit). Every repeat creates new threads and runs on the tenant.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "agent": "hr_agent",
+  "story": "An employee with the username nwaters wants to know their booked time off for 2025.",
+  "starting_sentence": "What is my time off schedule for 2025? My username is nwaters.",
+  "user_prompts": [],
+  "goals": {
+    "fetch_id-1": [
+      "get_timeoff-1"
+    ],
+    "get_timeoff-1": [
+      "summarize"
+    ]
+  },
+  "goal_details": [
+    {
+      "type": "tool_call",
+      "name": "fetch_id-1",
+      "tool_name": "fetch_employee_id",
+      "args": {
+        "username": "nwaters"
+      }
+    },
+    {
+      "type": "tool_call",
+      "name": "get_timeoff-1",
+      "tool_name": "retrieve_timeoff_schedule",
+      "args": {
+        "assignment_id": "15338303",
+        "start_date": "2025-01-01",
+        "end_date": "2025-12-31"
+      },
+      "arg_matching": {
+        "start_date": "fuzzy",
+        "end_date": "fuzzy"
+      }
+    },
+    {
+      "type": "text",
+      "name": "summarize",
+      "response": "Your time off in 2025: 2025-04-11 and 2025-12-24.",
+      "keywords": [
+        "2025-04-11",
+        "2025-12-24"
+      ]
+    }
+  ],
+  "x_agent_evals": {
+    "forbidden_tools": [
+      "delete_employee"
+    ],
+    "max_latency_s": 30,
+    "judge_notes": "must list both dates",
+    "repeat": 1
+  }
+}

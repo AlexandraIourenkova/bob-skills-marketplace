@@ -1,0 +1,35 @@
+{
+  "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+  "accepted": [
+    {
+      "key": "e37f20759c18601b",
+      "skill": "wxo-agent-api",
+      "severity": "MEDIUM",
+      "category": "unauthorized_tool_use",
+      "title": "Undeclared network usage",
+      "file": "SKILL.md",
+      "line": null,
+      "reason": "Reviewed 2026-09-29 by the pack authors: the client's network use is declared at pack level (networkAllow *.ibm.com and ibm.com, localhost implicit), and SKILL.md says every request goes to the WO_INSTANCE the user sets. The frontmatter carries only name and description, which is what Bob reads."
+    },
+    {
+      "key": "e0dfc0d37629c64b",
+      "skill": "wxo-agent-api",
+      "severity": "MEDIUM",
+      "category": "unicode_steganography",
+      "title": "UNICODE STEGANOGRAPHY detected by YARA",
+      "file": "scripts/trace.py",
+      "line": 62,
+      "reason": "Reviewed 2026-09-29 by the pack authors: lines 60-62 are the HIDDEN regex, moved from wxo-eval-run/scripts/report.py so the console output (trace.format_turn), the report and the judge queue share it. It finds C0 and C1 control, zero-width, bidirectional (U+061C included), tag and other default-ignorable characters (variation selectors, Hangul fillers, the soft hyphen) in agent text and replaces each with a visible <U+XXXX> marker. It is the defence against Unicode smuggling, not an instance of it. Re-read and re-keyed 2026-09-30 after the sixth review round added the default-ignorable ranges and widened the tag range to U+E0000-U+E0FFF: the flagged escape \\U000e0000 moved from line 60 to line 62, and the file holds escape sequences, not the characters."
+    },
+    {
+      "key": "aece39d8fc726b80",
+      "skill": "wxo-agent-api",
+      "severity": "MEDIUM",
+      "category": "data_exfiltration",
+      "title": "Outbound network request primitives that can transmit data externally",
+      "file": "scripts/wxo_client.py",
+      "line": 884,
+      "reason": "Reviewed 2026-09-30 by the pack authors: line 884 is the client's single urllib transport. WxoClient.request() refuses any URL outside the scheme, host and port of WO_INSTANCE before it takes a token, and the token services it calls directly are IBM hosts (*.ibm.com) or the local Developer Edition. TLS verification stays on, redirects are not followed, every socket wait has a timeout, a body's deadline (an error body too, a stream the turn's time) is checked between reads, and every response has a size cap. A GET is repeated at most three times after a 502, 503, 504 or a dropped connection; a POST never is. Sending a message needs allow_send=True, which only the gated scripts set after the user's yes. Requests to localhost bypass any environment proxy. Re-keyed 2026-09-30 after the sixth review round corrected the read-deadline docstrings above it and added the GET retry in request(); the request line is unchanged."
+    }
+  ]
+}

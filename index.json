@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-29T18:40:39Z",
+  "generated": "2026-09-29T23:42:11Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "9850d2eff7d6a46bd1bb138b6bb6d0f0d8035f7b"
+    "commit": "d6f26399fa6bb704f1c882f0b8638cd3fd2d95f0"
   },
   "vendors": [
     {
@@ -27,6 +27,7 @@
       ],
       "notes": "IBM products (watsonx Orchestrate ADK, UI modernization, Carbon, Client Engineering building blocks) and the marketplace team's own accelerators. Packs are curated by the marketplace team from these official repositories with recorded provenance.",
       "packs": [
+        "agent-evals",
         "bob-essentials",
         "ibm-cloud",
         "ibm-watsonx-data-integration",
@@ -149,6 +150,91 @@
   ],
   "packs": [
     {
+      "name": "agent-evals",
+      "displayName": "Agent evals for watsonx Orchestrate",
+      "vendor": "ibm",
+      "vendorDisplayName": "IBM",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Test a deployed watsonx Orchestrate agent through its API and see every tool it called, with arguments, results and hand-offs. Cases in IBM's AgentOps Core format, runs that wait for your yes, offline scoring, Bob as the judge, and a report.",
+      "path": "packs/ibm/agent-evals",
+      "tag": "agent-evals--v1.0.0",
+      "skills": [
+        {
+          "name": "wxo-agent-api",
+          "description": "Call a deployed watsonx Orchestrate (wxo) agent from Python and get its answer with every tool call, tool result, hand-off and timing, through a small standard-library client. A one-time probe shows where the instance exposes tool calls; scripts ask an agent one or more questions or a CSV batch of them, and custom scripts build on the same client. Nothing reaches the agent before the user's yes. Use when the user wants to call or test a wxo agent from code, see which tools an agent run called, script against the Orchestrate runs API, or asks whether the API returns tool calls without streaming. Triggers include \"call my Orchestrate agent from Python\", \"get the tool calls of a wxo agent run\", \"are tool calls only in the stream\", \"batch questions to my wxo agent\", \"напиши скрипт, который вызывает агента wxo\", \"где в API видны вызовы тулов\", \"проверь, как агент отвечает через API\", \"прогони вопросы из CSV через агента wxo\".",
+          "digest": "sha256:7e148582c25c49a0d9acdc8bfacb8243e2453034cdcdf198467b1071a68181d0"
+        },
+        {
+          "name": "wxo-eval-cases",
+          "description": "Write and check evaluation test cases for a deployed watsonx Orchestrate (wxo) agent in IBM's AgentOps Core format - a skeleton from the user's scenario, a draft from a real conversation thread, validation against the agent's tool catalog and argument schemas, and an export folder and ZIP for `orchestrate evaluations` and the server-side upload. Reads the tenant only (agents, tools, thread messages); never sends a message to the agent and never uploads. Use to create, draft or check test cases or a golden set for a wxo agent, to turn a good conversation into a regression test, or to prepare cases for `orchestrate evaluations`. Triggers include \"write eval cases for my Orchestrate agent\", \"make a test case from this thread\", \"validate my wxo test cases\", \"export cases for IBM agentops\", \"тест-кейсы для агента wxo\", \"сделай тест из этого диалога\", \"проверь тест-кейсы агента Orchestrate\".",
+          "digest": "sha256:bcb87cd0f6c6d7947b65c790a997a8770fcf01db54858708658379e2e5ea5a60"
+        },
+        {
+          "name": "wxo-eval-run",
+          "description": "Run test cases against a deployed watsonx Orchestrate (wxo) agent and score what it did. Nothing is sent before the user's yes to a read-only plan; one canary case first, the rest after a second yes. Each turn's tool calls, results and hand-offs are captured and scored offline (arguments, order, routing, forbidden tools); Bob judges answer quality with a rubric. Reports in Markdown, HTML and CSV and diffs two runs for regressions. Use when the user wants to run evals for a wxo agent, check a new version for regressions or measure tool-call accuracy. Triggers include \"run the evals for my Orchestrate agent\", \"did the new agent version regress\", \"tool call accuracy of my wxo agent\", \"benchmark my wxo agent against test cases\", \"прогони тесты агента wxo\", \"оцени агента orchestrate\", \"сравни два прогона\".",
+          "digest": "sha256:cbb4733ee899375801e37a49807951f0e26f34783a5d84d450fb374dd4199586"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [
+        "agent-evals.md"
+      ],
+      "commands": [
+        "wxo-eval.md"
+      ],
+      "modes": [
+        "agent-evals"
+      ],
+      "digest": "sha256:1653f568c38126bcd3d4d0b008c7006ed46af3ab4617b68a1c64eb9debbcaa68",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 0,
+      "components": 6,
+      "readme": "packs/ibm/agent-evals/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 0,
+        "verdict": "pass",
+        "scannedAt": "2026-09-29T23:11:40Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 12,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "minBob": "2.0.2",
+      "tags": [
+        "watsonx-orchestrate",
+        "wxo",
+        "agents",
+        "evaluation",
+        "testing",
+        "agentops",
+        "ibm"
+      ],
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "Every message sent to the agent creates a run, and usually a thread, on your watsonx Orchestrate tenant, and the agent may call tools that change external systems. The threads stay on the tenant.",
+          "covered": "Nothing is sent before your yes to a read-only plan or dry run that lists the host, the agent and every tool and collaborator it can reach; the runner then sends one canary case and stops. No script deletes, imports or removes anything, and every thread id is recorded. A forbidden tool is detected after it ran, so use a draft environment and a sandboxed test tenant."
+        },
+        {
+          "class": "data",
+          "warning": "Test prompts go to your tenant, and the saved traces hold prompts, answers and tool outputs that may carry personal data from the agent's backends. If you run exported cases in IBM's own evaluation framework, it sends the transcripts to its judge model.",
+          "covered": "Traces stay in the project under `agent-evals/runs/` and `agent-evals/probe/raw/`, and the skills suggest git-ignoring both. Bob judges answers in your session, so nothing goes to a third service; export only writes local files. Credentials come from the environment only, and the token stays in memory, never printed or written. Captures become test fixtures only through `probe.py sanitize` and your review."
+        },
+        {
+          "class": "content",
+          "warning": "Agent answers, tool results, thread messages and agent instructions come from the tenant and its backends and can carry text aimed at Bob.",
+          "covered": "The rule, the skills and the judge rubric treat them as data: quoted, never followed, and an instruction found in an answer is reported as a finding. Turns come from the case file, never from the agent's output, and `report.html` escapes everything."
+        }
+      ]
+    },
+    {
       "name": "bob-essentials",
       "displayName": "Bob essentials",
       "vendor": "ibm",
@@ -162,7 +248,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:305e1d599ffb79fcb4abe30cee165d505b0c39e60bc21e7f0f715928aa5bfac5"
+          "digest": "sha256:a3c8152e1c803f55f0c3e9253d93cf2f9ff4ef992813b7c6e783423496e30f32"
         },
         {
           "name": "skill-creator",
@@ -193,7 +279,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:f5e48d430fbe37b3bd25a3b3efe1430562b64035f4e22acb87a70154cead50b8",
+      "digest": "sha256:0641ed6ba11109b5d57452009711865533098dd43419765a301485e72519f9ad",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -209,9 +295,9 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-09-29T18:40:37Z",
+        "scannedAt": "2026-09-29T23:42:10Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 58,
+        "skillspectorSuppressed": 59,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },

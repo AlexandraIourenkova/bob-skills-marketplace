@@ -1,0 +1,44 @@
+{
+  "agent": "hr_agent",
+  "story": "An employee with the username nwaters wants to know their booked time off for 2025, confirmed by payroll.",
+  "starting_sentence": "What is my time off schedule for 2025? My username is nwaters.",
+  "user_prompts": [],
+  "goals": {
+    "fetch_id-1": ["holidays-1"],
+    "holidays-1": ["payroll-1"],
+    "payroll-1": ["summarize"]
+  },
+  "goal_details": [
+    {
+      "type": "tool_call",
+      "name": "fetch_id-1",
+      "tool_name": "fetch_assignment_id",
+      "args": {"username": "nwaters"}
+    },
+    {
+      "type": "tool_call",
+      "name": "holidays-1",
+      "tool_name": "get_holiday_calendar",
+      "args": {"year": 2025}
+    },
+    {
+      "type": "tool_call",
+      "name": "payroll-1",
+      "tool_name": "chat_with_collaborator_payroll_agent",
+      "args": {"message": "Confirm the time off of assignment 15338303 for 2025"},
+      "arg_matching": {"message": "fuzzy"}
+    },
+    {
+      "type": "text",
+      "name": "summarize",
+      "response": "Your time off in 2025: 2025-04-11 and 2025-12-24, confirmed by payroll.",
+      "keywords": ["2025-04-11", "2025-12-24"]
+    }
+  ],
+  "x_agent_evals": {
+    "forbidden_tools": ["delete_employee"],
+    "max_latency_s": 30,
+    "judge_notes": "The answer must list both dates and say that payroll confirmed them.",
+    "repeat": 1
+  }
+}
