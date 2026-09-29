@@ -103,6 +103,7 @@ TLS_OFF = [re.compile(p) for p in (
     r"\bcurl\b[^\n|;]*\s(-k|--insecure)(?=\s|$)", r"--no-check-certificate\b", r"--insecure-skip-tls-verify\b",
     r"\bNODE_TLS_REJECT_UNAUTHORIZED\b['\"]?\s*[=:]\s*['\"]?0\b", r"\bPYTHONHTTPSVERIFY\b['\"]?\s*[=:]\s*['\"]?0\b",
     r"\bGIT_SSL_NO_VERIFY\b", r"\brejectUnauthorized\s*:\s*false\b",
+    r"--skip-ssl-validation\b",  # ibmcloud api
     r"\b(TrustAllCerts|trustAllCerts|NoopHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER)\b",
     r"\bssl\.endpoint\.identification\.algorithm\s*=\s*(\"\"|'')?\s*$",
 )]
@@ -126,6 +127,8 @@ DESTRUCTIVE = [re.compile(p, re.I) for p in (
     r"\b(DROP\s+(TABLE|DATABASE|SCHEMA)|TRUNCATE\s+TABLE)\b", r"\bDELETE\s+FROM\s+\w+\s*(;|['\"]|$)",
     r"\brm\s+-[a-z]*r[a-z]*\s+[^\n]*\$\{?\w",
     r"\borchestrate\s+[\w-]+\s+(remove|delete|import)\b",
+    # ibmcloud verbs are whole words or hyphen suffixes: instance-delete, image-rm, worker reload; shell or list form
+    r"\bibmcloud\b[^\n]*?(?<!\w)(?:\w+-)*(delete|rm|remove|purge|reload|replace|destroy)(?![\w-])",
 )]
 
 # A forbidden phrase preceded by a negation in the same sentence is protective

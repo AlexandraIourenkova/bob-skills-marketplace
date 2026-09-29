@@ -345,6 +345,35 @@ def test_policy_flags_external_writes_in_scripts_only(tmp_path: Path) -> None:
     assert [(f.path.endswith("clean.sh"), f.line) for f in findings] == [(True, 2)]
 
 
+def test_policy_catches_ibmcloud_tls_off_and_deletes(tmp_path: Path) -> None:
+    skill = make_skill(tmp_path, "cloud-risky")
+    (skill / "scripts").mkdir()
+    (skill / "scripts" / "cloud.py").write_text(
+        'import subprocess\n'
+        'subprocess.run(["ibmcloud", "resource", "service-instances", "--output", "json"])\n'
+        'subprocess.run(["ibmcloud", "billing", "resource-group-usage", "default", "--output", "json"])\n'
+        'subprocess.run(["ibmcloud", "schematics", "workspace", "new", "--file", "terraform.json"])\n'
+        'subprocess.run(["ibmcloud", "is", "instance-delete", name, "-f"])\n')
+    (skill / "scripts" / "cloud.sh").write_text(
+        "ibmcloud api https://cloud.ibm.com --skip-ssl-validation\n"
+        "ibmcloud ks worker reload --cluster demo --worker w1\n"
+        "ibmcloud cr image-rm us.icr.io/team/app:1\n")
+    findings = policy.lint_skill(skill, [], tmp_path)
+    writes = sorted((Path(f.path).name, f.line) for f in findings if f.rule == "P013")
+    assert writes == [("cloud.py", 5), ("cloud.sh", 2), ("cloud.sh", 3)]
+    assert "P011" in rules_of(findings, policy.BLOCK)
+
+
+def test_mcpcheck_flags_ibmcloud_builtin_server() -> None:
+    from bob_skills.mcpcheck import check_server
+    risky = {"command": "ibmcloud", "args": ["--mcp-transport", "stdio", "--mcp-allow-write",
+                                            "--mcp-api-key", "abcd1234efgh5678ijkl", "--skip-ssl-validation"]}
+    codes = [i.code for i in check_server("ibmcloud", risky, strict=True)]
+    assert sorted(codes) == ["M003", "M004", "M007", "M007"]
+    safe = {"command": "ibmcloud", "args": ["--mcp-transport", "stdio", "--mcp-tools", "resource_service-instances"]}
+    assert check_server("ibmcloud", safe, strict=True) == []
+
+
 def test_mcpcheck_flags_risky_server_entries() -> None:
     from bob_skills.mcpcheck import PROBLEM, WARNING, check_server
     risky = {"command": "npx", "args": ["-y", "some-mcp", "--host", "0.0.0.0"],

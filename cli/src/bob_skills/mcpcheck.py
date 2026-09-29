@@ -38,7 +38,8 @@ PLACEHOLDER = re.compile(
 SECRET_VALUE = re.compile(
     r"\bAKIA[0-9A-Z]{16}\b|\bghp_[A-Za-z0-9]{36}\b|\bgh[ousr]_[A-Za-z0-9]{36}\b|\bsk-[A-Za-z0-9_-]{32,}\b|"
     r"\bxox[abpr]-[A-Za-z0-9-]{10,}\b|-----BEGIN [A-Z ]*PRIVATE KEY-----")
-SECRET_ARG = re.compile(r"^--?(api[-_]?key|token|secret|password|passwd|access[-_]?key|auth[-_]?token)(=(?P<value>.+))?$", re.I)
+# a prefix is allowed: --mcp-api-key, --github-token
+SECRET_ARG = re.compile(r"^--?(?:[a-z0-9]+-)*(api[-_]?key|token|secret|password|passwd|access[-_]?key|auth[-_]?token)(=(?P<value>.+))?$", re.I)
 
 TLS_OFF_ENV = {
     "NODE_TLS_REJECT_UNAUTHORIZED": {"0", "false"},
@@ -47,7 +48,7 @@ TLS_OFF_ENV = {
 }
 TLS_OFF_KEY = re.compile(r"(verify[_-]?ssl|ssl[_-]?verify|tls[_-]?verify|verify[_-]?certs?)$", re.I)
 TLS_OFF_ARGS = {"--insecure", "--no-verify", "--no-verify-ssl", "--skip-tls-verify", "--insecure-skip-tls-verify",
-                "--tls-skip-verify", "--disable-ssl-verification", "--no-check-certificate", "--ssl-no-verify"}
+                "--tls-skip-verify", "--disable-ssl-verification", "--no-check-certificate", "--ssl-no-verify", "--skip-ssl-validation"}
 AUTH_OFF_ARGS = {"--disable-auth", "--no-auth", "--auth=none", "--allow-anonymous", "--unauthenticated"}
 LISTEN_FLAGS = {"--host", "--bind", "--listen", "--address", "--addr"}
 ALL_INTERFACES = {"0.0.0.0", "::", "[::]", "*"}
@@ -260,6 +261,17 @@ def check_server(name: str, spec: dict, strict: bool = False) -> list[McpIssue]:
     elif approved:
         add("M006", PROBLEM if strict else WARNING, f"tools approved in advance: {', '.join(approved)}",
             "packs never pre-approve tools; keep alwaysAllow empty" if strict else "keep only read-only tools there")
+
+    # M007: the MCP server built into the IBM Cloud CLI is read-only until --mcp-allow-write.
+    if _base(command) == "ibmcloud" and any(a.split("=")[0] == "--mcp-transport" for a in args):
+        flags = {a.split("=")[0] for a in args}
+        if "--mcp-allow-write" in flags:
+            add("M007", PROBLEM if strict else WARNING,
+                "ibmcloud MCP server runs with --mcp-allow-write: every command that creates, changes or deletes becomes a tool",
+                "remove --mcp-allow-write and show write commands to the user instead")
+        if "--mcp-tools" not in flags:
+            add("M007", PROBLEM if strict else WARNING, "ibmcloud MCP server exposes every command it supports",
+                "list the read commands the pack needs with --mcp-tools")
 
     # M007: servers whose risky defaults we know.
     for known in KNOWN_SERVERS:
