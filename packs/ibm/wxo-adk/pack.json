@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "wxo-adk",
   "displayName": "watsonx Orchestrate ADK",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "vendor": "ibm",
   "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
   "safety": [
@@ -86,7 +86,7 @@
     "skills/wxo-agent-architect": "sha256:c716450019dd17ef6dc3dd066e6233a3ff75dfb84ff7220215064cf2a80ea894",
     "rules/wxo-adk.md": "sha256:4c86bdd9e82f0e7d2d073ade22e63d9877a6ff47b84ce47f8d53cfd0d247aa22",
     "commands/wxo-deploy.md": "sha256:9e9d9ddb4a31e0eea87f06db26e93f5155fbf2b9ae2f076efbabf150139ee494",
-    "custom_modes.yaml": "sha256:9b92645ea02ad1290d25ab25b443d79aa660a72d3ece34b75587d274699c6523"
+    "custom_modes.yaml": "sha256:7ce5d924a8ac178efc57bf3eb98450f128c6591fed3a12b6f78a6ded2e314828"
   },
   "sources": {
     "wxo-agent-architect": {

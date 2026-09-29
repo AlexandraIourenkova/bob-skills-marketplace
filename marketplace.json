@@ -93,7 +93,7 @@
       "name": "presentations",
       "source": "./packs/ibm/presentations",
       "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
-      "version": "1.11.0",
+      "version": "1.11.1",
       "author": {
         "name": "IBM"
       },
@@ -115,7 +115,7 @@
       "name": "wxo-adk",
       "source": "./packs/ibm/wxo-adk",
       "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": {
         "name": "IBM"
       },

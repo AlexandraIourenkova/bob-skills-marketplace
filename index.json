@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-09-29T14:05:41Z",
+  "generated": "2026-09-29T14:15:44Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "c66231981848a2aee5c3bc17794737e92019215a"
+    "commit": "185dbb7523dbdc96f28ff0678df6c8c0604eba33"
   },
   "vendors": [
     {
@@ -162,7 +162,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:7c767c522d5fbb57a787b05e146ebc049141a60282395d5a2618e09c402380b2"
+          "digest": "sha256:305e1d599ffb79fcb4abe30cee165d505b0c39e60bc21e7f0f715928aa5bfac5"
         },
         {
           "name": "skill-creator",
@@ -193,7 +193,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:20cebab78100b061be3b970b3220b94a4428506f1b32f4f24c3c608c573e0656",
+      "digest": "sha256:89c23002166cb7e2f6a5fa9faa7169c366a33e71446d7d950dc79fcd3f4909e1",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -477,10 +477,10 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.11.0",
+      "version": "1.11.1",
       "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
       "path": "packs/ibm/presentations",
-      "tag": "presentations--v1.11.0",
+      "tag": "presentations--v1.11.1",
       "skills": [
         {
           "name": "presentation",
@@ -523,7 +523,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:cd92fc012db4393e5e86b4795ff6ae9f8a27d34995541ac503d5ce5385df7d84",
+      "digest": "sha256:cd7350e99ec1c673780e1d0b544c16a52ba6625774fb7164ce782e0223371dad",
       "revokedVersions": [],
       "versions": [
         "1.11.0"
@@ -561,10 +561,10 @@
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "description": "The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.",
       "path": "packs/ibm/wxo-adk",
-      "tag": "wxo-adk--v1.1.1",
+      "tag": "wxo-adk--v1.1.2",
       "skills": [
         {
           "name": "solution-architect",
@@ -615,7 +615,7 @@
       "modes": [
         "wxo-builder"
       ],
-      "digest": "sha256:5d2266c288918eda2fcc86cb503e9252721e14dd0f8720db54004bc96236e2c8",
+      "digest": "sha256:4ef6e3e872ddb849f2409c987c006ca8b95a27374a943ae13dba2e1bb0f40513",
       "revokedVersions": [],
       "versions": [
         "1.1.1",

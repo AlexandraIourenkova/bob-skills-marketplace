@@ -29,6 +29,8 @@ DEFAULT_REGISTRY = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplac
 # The find-skills skill carries a generated catalog so Bob can answer offline.
 CATALOG_PATH = Path("packs/ibm/bob-essentials/skills/find-skills/references/catalog.md")
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z.-]+)?$")
+# Tool groups listed in Bob's custom modes documentation. Unknown names grant nothing.
+BOB_GROUPS = {"read", "edit", "execute", "mcp", "skill", "workflow", "todo", "subtask", "subagent", "mode"}
 
 
 class RegistryError(Exception):
@@ -97,14 +99,17 @@ class Pack:
                 checksums[component] = path_digest(target)
         return checksums
 
-    def mode_slugs(self) -> list[str]:
+    def custom_modes(self) -> list[dict]:
         if not self.manifest.get("modes"):
             return []
         path = self.path / self.manifest["modes"]
         if not path.is_file():
             return []
         data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        return [m.get("slug") for m in data.get("customModes", []) if isinstance(m, dict) and m.get("slug")]
+        return [m for m in data.get("customModes", []) if isinstance(m, dict)]
+
+    def mode_slugs(self) -> list[str]:
+        return [m.get("slug") for m in self.custom_modes() if m.get("slug")]
 
     def skill_descriptions(self) -> list[dict]:
         out = []
@@ -241,6 +246,13 @@ class Registry:
                     problems.append(f"{label}: component '{component}' is missing")
             if pack.manifest.get("modes") and (pack.path / pack.manifest["modes"]).is_file() and not pack.mode_slugs():
                 problems.append(f"{label}: {pack.manifest['modes']} has no customModes with a slug")
+            for mode in pack.custom_modes():
+                # a group is a name, or a list of the name and its options (edit with a fileRegex)
+                groups = [str(g[0]) if isinstance(g, list) and g else str(g) for g in mode.get("groups", []) or []]
+                unknown = [g for g in groups if g not in BOB_GROUPS]
+                if unknown:
+                    problems.append(f"{label}: mode '{mode.get('slug', '?')}' uses group(s) {', '.join(unknown)} that Bob's documentation does not list, "
+                                    f"and unknown groups grant nothing; use {', '.join(sorted(BOB_GROUPS))} (terminal commands are `execute`)")
             if git_optional("rev-parse", "--verify", "--quiet", f"refs/tags/{pack.tag}", cwd=self.root):
                 rel = pack.path.relative_to(self.root).as_posix()
                 # Shipped components only: pack.json changes follow content changes, and

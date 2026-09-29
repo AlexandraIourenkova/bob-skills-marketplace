@@ -17,9 +17,7 @@ import yaml
 from .installer import Scope, verify
 from .mcpcheck import PROBLEM, WARNING, check_servers
 from .policy import read_frontmatter
-
-# Tool groups listed in Bob's custom modes documentation. Unknown names grant nothing.
-BOB_GROUPS = {"read", "edit", "execute", "mcp", "skill", "workflow", "todo", "subtask", "subagent", "mode"}
+from .registry import BOB_GROUPS
 
 
 @dataclass

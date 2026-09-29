@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/pack.schema.json",
   "name": "presentations",
   "displayName": "Presentations that tell a story",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "vendor": "ibm",
   "description": "From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.",
   "license": "Apache-2.0",
@@ -47,6 +47,6 @@
     "skills/deck-pitch": "sha256:1bcc35cdf6725967145fde090609579db1940842dedc18701ec744f0173f4486",
     "rules/presentations.md": "sha256:8e8bcc73a1e3aa8f18451598fb9a1f3e14d4d4528bfa43bab604dfcd35c25829",
     "commands/deck.md": "sha256:b277413211ab57cd21c3b5ec3d4a10f7c4453fb992f49c069043963ffcf276cc",
-    "custom_modes.yaml": "sha256:b691692372cd58d30b6695f607ba2ef72d6c97357d69def4d0b243f924e4b82d"
+    "custom_modes.yaml": "sha256:6cbb28ad065da0dc4bb597458f05649c37cff06bf2183d1b354fdc3020064f05"
   }
 }

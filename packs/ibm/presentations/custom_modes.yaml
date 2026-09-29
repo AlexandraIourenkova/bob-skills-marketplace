@@ -12,5 +12,5 @@ customModes:
     groups:
       - read
       - edit
-      - command
+      - execute
     source: project

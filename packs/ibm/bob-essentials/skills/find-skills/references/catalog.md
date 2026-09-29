@@ -84,7 +84,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### presentations — Presentations that tell a story
 
-- Vendor: IBM (`ibm`, active). Version 1.11.0.
+- Vendor: IBM (`ibm`, active). Version 1.11.1.
 - From a topic or your own data to a deck and the talk around it: one headline per slide, a style picked from five, charts and pictures. The same storyboard builds an interactive HTML deck, a printable PDF and a 16:9 PowerPoint.
 - Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
 - Tags: presentations, pptx, html, slides, storytelling, dataviz, pitch, ibm
@@ -101,7 +101,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ### wxo-adk — watsonx Orchestrate ADK
 
-- Vendor: IBM (`ibm`, active). Version 1.1.1.
+- Vendor: IBM (`ibm`, active). Version 1.1.2.
 - The six official watsonx Orchestrate ADK skills for the whole agent lifecycle (requirements, SOP, build, audit, telemetry, instruction quality) plus IBM's official wxo-agent-architect skill, the ADK and documentation MCP servers, an ADK rule, a /wxo-deploy command and a wxo-builder mode.
 - Source: https://github.com/IBM/ibm-watsonx-orchestrate-adk @ 128062277c49 (skills)
 - Homepage: https://github.com/IBM/ibm-watsonx-orchestrate-adk/tree/main/skills

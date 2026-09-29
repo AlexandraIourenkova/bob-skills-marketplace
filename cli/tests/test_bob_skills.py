@@ -399,6 +399,17 @@ def test_registry_refuses_mcp_server_without_pin_or_access(registry_copy: Path) 
     assert any("helper" in p and "mcpAccess" in p for p in problems)
 
 
+def test_registry_refuses_mode_groups_bob_does_not_know(registry_copy: Path) -> None:
+    # `command` and `browser` are not Bob groups, so the mode would silently lack those tools;
+    # edit limited by a fileRegex is a valid group with options
+    modes_path = registry_copy / "packs" / "ibm" / "presentations" / "custom_modes.yaml"
+    text = modes_path.read_text(encoding="utf-8")
+    modes_path.write_text(text.replace("      - edit\n      - execute\n",
+                                       "      - - edit\n        - fileRegex: ^slides/\n      - command\n      - browser\n"), encoding="utf-8")
+    problems = [p for p in Registry(registry_copy).validate() if "deck-studio" in p]
+    assert len(problems) == 1 and "group(s) command, browser " in problems[0]
+
+
 def test_validate_refuses_to_hash_ignored_files(registry_copy: Path) -> None:
     import subprocess
     subprocess.run(["git", "init", "-q"], cwd=registry_copy, check=True)
