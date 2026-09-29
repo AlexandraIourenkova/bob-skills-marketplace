@@ -1,0 +1,37 @@
+{
+  "id": "r006-acl1",
+  "name": "web-acl",
+  "rules": [
+    {
+      "id": "a1",
+      "name": "https-in",
+      "action": "allow",
+      "direction": "inbound",
+      "protocol": "tcp",
+      "source": "0.0.0.0/0",
+      "destination": "10.240.0.0/24",
+      "destination_port_min": 443,
+      "destination_port_max": 443,
+      "source_port_min": 1,
+      "source_port_max": 65535
+    },
+    {
+      "id": "a2",
+      "name": "all-out",
+      "action": "allow",
+      "direction": "outbound",
+      "protocol": "all",
+      "source": "0.0.0.0/0",
+      "destination": "0.0.0.0/0"
+    },
+    {
+      "id": "a3",
+      "name": "deny-in",
+      "action": "deny",
+      "direction": "inbound",
+      "protocol": "all",
+      "source": "0.0.0.0/0",
+      "destination": "0.0.0.0/0"
+    }
+  ]
+}

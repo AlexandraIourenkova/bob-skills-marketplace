@@ -1,0 +1,12 @@
+{
+  "name": "home",
+  "image_reference": "icr.io/codeengine/helloworld",
+  "image_port": 8080,
+  "status": "ready",
+  "endpoint": "https://home.abc.us-south.codeengine.appdomain.cloud",
+  "status_details": {
+    "latest_created_revision": "home-00003",
+    "latest_ready_revision": "home-00003",
+    "reason": "ready"
+  }
+}

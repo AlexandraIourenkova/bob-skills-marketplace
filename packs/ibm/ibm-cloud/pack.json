@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "ibm-cloud",
+  "displayName": "IBM Cloud",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "Find out what an IBM Cloud account holds, what it costs and why a VPC server, a cluster or a Code Engine app does not work. Read-only skills on the ibmcloud CLI; fixes come as commands you approve.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "minBob": "2.0.2",
+  "tags": [
+    "ibm-cloud",
+    "cloud",
+    "vpc",
+    "kubernetes",
+    "openshift",
+    "code-engine",
+    "finops",
+    "ibm"
+  ],
+  "skills": [
+    "ibmcloud-setup",
+    "ibmcloud-inventory",
+    "ibmcloud-diagnose",
+    "ibmcloud-cost"
+  ],
+  "rules": [
+    "rules/ibm-cloud.md"
+  ],
+  "commands": [
+    "commands/ibmcloud-report.md"
+  ],
+  "modes": "custom_modes.yaml",
+  "networkAllow": [
+    "cloud.ibm.com",
+    "*.cloud.ibm.com"
+  ],
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "The skills run the ibmcloud CLI in the session you opened, which carries every right your account gives you. A command outside the pack's read-only set could change or delete resources.",
+      "covered": "The pack's scripts only list and read. The `ibm-cloud` rule makes every changing command wait for your yes to that exact command, and `cloud-ops` mode writes only under `ibmcloud-reports/`. For the strictest setup, log in with an access group or service ID that has Viewer roles only."
+    },
+    {
+      "class": "content",
+      "warning": "Resource names, tags, event messages and application logs come from the account and can carry text aimed at the agent.",
+      "covered": "The rule and every skill treat them as data: they are quoted to you, never followed."
+    }
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/ibmcloud-setup": "sha256:9a91e24ce1c6197333fc3f237560aa6f3aebad0efbf38e27b496de8c1ce4b999",
+    "skills/ibmcloud-inventory": "sha256:6fb567ffc1ab77ca899cd6d06f42324fd985a6824ceb6b307606dafe1e563182",
+    "skills/ibmcloud-diagnose": "sha256:f1046751bcf1aab39dce17f44675e62633d7282fe021cdb7ba969de167ab9ce4",
+    "skills/ibmcloud-cost": "sha256:0e2163478cca12796c97c278962f7808db27fd294305b4a0ae2ad1a32fdb70e7",
+    "rules/ibm-cloud.md": "sha256:86a4d37965c14a61703d81229a23d012c2460ab314ebf569bfbb08148ee0d44d",
+    "commands/ibmcloud-report.md": "sha256:536ff07b6c6f5442d8480f90992d0173bf7c78f30ab24f842c6425c3196885d0",
+    "custom_modes.yaml": "sha256:1870096edaa2a279d80dedef6d01fa2b5251841bedcbadeedafd0dca2109660b"
+  }
+}

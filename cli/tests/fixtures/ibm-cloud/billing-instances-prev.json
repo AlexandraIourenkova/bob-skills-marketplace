@@ -1,0 +1,32 @@
+{
+  "resources": [
+    {
+      "resource_instance_name": "orders-db",
+      "resource_name": "Databases for PostgreSQL",
+      "plan_name": "Standard",
+      "resource_group_name": "Default",
+      "currency_code": "USD",
+      "month": "2026-08",
+      "usage": [
+        {
+          "quantity": 720,
+          "cost": 300.0
+        }
+      ]
+    },
+    {
+      "resource_instance_name": "analytics-cos",
+      "resource_name": "Cloud Object Storage",
+      "plan_name": "Standard",
+      "resource_group_name": "prod",
+      "currency_code": "USD",
+      "month": "2026-08",
+      "usage": [
+        {
+          "quantity": 3000,
+          "cost": 80.0
+        }
+      ]
+    }
+  ]
+}

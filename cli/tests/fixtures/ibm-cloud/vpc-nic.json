@@ -1,0 +1,24 @@
+{
+  "id": "0717-nic1",
+  "name": "eth0",
+  "primary_ip": {
+    "address": "10.240.0.4"
+  },
+  "security_groups": [
+    {
+      "id": "r006-sg1",
+      "name": "web-sg"
+    }
+  ],
+  "floating_ips": [
+    {
+      "id": "r006-fip1",
+      "address": "169.48.10.20",
+      "name": "web-fip"
+    }
+  ],
+  "subnet": {
+    "id": "0717-sub1",
+    "name": "web-subnet"
+  }
+}

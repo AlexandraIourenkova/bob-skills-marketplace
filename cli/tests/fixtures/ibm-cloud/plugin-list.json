@@ -1,0 +1,48 @@
+[
+  {
+    "Name": "code-engine",
+    "Aliases": [
+      "ce"
+    ],
+    "Version": {
+      "Major": 1,
+      "Minor": 54,
+      "Build": 2
+    }
+  },
+  {
+    "Name": "container-registry",
+    "Aliases": [
+      "cr"
+    ],
+    "Version": {
+      "Major": 1,
+      "Minor": 3,
+      "Build": 16
+    }
+  },
+  {
+    "Name": "container-service",
+    "Aliases": [
+      "kubernetes-service",
+      "ks"
+    ],
+    "Version": {
+      "Major": 1,
+      "Minor": 0,
+      "Build": 763
+    }
+  },
+  {
+    "Name": "vpc-infrastructure",
+    "Aliases": [
+      "infrastructure-service",
+      "is"
+    ],
+    "Version": {
+      "Major": 16,
+      "Minor": 5,
+      "Build": 0
+    }
+  }
+]

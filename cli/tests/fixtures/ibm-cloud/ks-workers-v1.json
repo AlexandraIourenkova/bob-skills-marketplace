@@ -1,0 +1,20 @@
+[
+  {
+    "id": "kube-dal10-w1",
+    "state": "normal",
+    "status": "Ready",
+    "kubeVersion": "1.30.4_1543",
+    "targetVersion": "1.30.4_1543",
+    "location": "dal10",
+    "poolName": "default"
+  },
+  {
+    "id": "kube-dal10-w2",
+    "state": "normal",
+    "status": "Ready",
+    "kubeVersion": "1.30.4_1543",
+    "targetVersion": "1.30.4_1543",
+    "location": "dal10",
+    "poolName": "default"
+  }
+]

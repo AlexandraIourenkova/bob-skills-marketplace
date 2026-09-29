@@ -1,0 +1,14 @@
+[
+  {
+    "id": "rg-default-id",
+    "name": "Default",
+    "state": "ACTIVE",
+    "default": true
+  },
+  {
+    "id": "rg-prod-id",
+    "name": "prod",
+    "state": "ACTIVE",
+    "default": false
+  }
+]

@@ -29,6 +29,28 @@
       "category": "ibm-bob"
     },
     {
+      "name": "ibm-cloud",
+      "source": "./packs/ibm/ibm-cloud",
+      "description": "Find out what an IBM Cloud account holds, what it costs and why a VPC server, a cluster or a Code Engine app does not work. Read-only skills on the ibmcloud CLI; fixes come as commands you approve.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "ibm-cloud",
+        "cloud",
+        "vpc",
+        "kubernetes",
+        "openshift",
+        "code-engine",
+        "finops",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "ibm-watsonx-data-integration",
       "source": "./packs/ibm/ibm-watsonx-data-integration",
       "description": "Build, run, diagnose and operate data flows in IBM watsonx.data integration (DataStage, pyflow) from natural language: flow lifecycle, DataStage and pyflow authoring, failed-run investigation, engine knowledge and bug reports. IBM's official skills, used with the Agentic Data Integration MCP server on IBM Cloud.",

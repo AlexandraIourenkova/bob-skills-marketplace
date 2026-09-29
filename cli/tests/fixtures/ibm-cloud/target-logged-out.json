@@ -1,0 +1,6 @@
+{
+  "api_endpoint": "https://cloud.ibm.com",
+  "region": {
+    "name": "us-east"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "0717_web1",
+  "name": "web-1",
+  "status": "running",
+  "status_reasons": [],
+  "vpc": {
+    "id": "r006-vpc",
+    "name": "prod-vpc"
+  },
+  "zone": {
+    "name": "us-south-1"
+  },
+  "primary_network_interface": {
+    "id": "0717-nic1",
+    "name": "eth0",
+    "primary_ip": {
+      "address": "10.240.0.4"
+    },
+    "subnet": {
+      "id": "0717-sub1",
+      "name": "web-subnet"
+    }
+  }
+}

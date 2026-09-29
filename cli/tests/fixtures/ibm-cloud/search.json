@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:cos-1::",
+      "name": "analytics-cos",
+      "tags": [
+        "owner:data",
+        "env:prod"
+      ]
+    },
+    {
+      "crn": "crn:v1:bluemix:public:databases-for-postgresql:us-south:a/1234567890abcdef1234567890abcdef:pg-1::",
+      "name": "orders-db",
+      "tags": []
+    },
+    {
+      "crn": "crn:v1:bluemix:public:codeengine:us-south:a/1234567890abcdef1234567890abcdef:ce-1::",
+      "name": "web-project",
+      "tags": [
+        "env:prod"
+      ]
+    },
+    {
+      "crn": "crn:v1:bluemix:public:logs:eu-de:a/1234567890abcdef1234567890abcdef:log-1::",
+      "name": "old-logs",
+      "tags": []
+    }
+  ]
+}

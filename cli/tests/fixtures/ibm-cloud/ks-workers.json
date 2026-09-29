@@ -1,0 +1,53 @@
+[
+  {
+    "id": "kube-c0ffee1-w1",
+    "location": "us-south-1",
+    "poolName": "default",
+    "health": {
+      "state": "normal",
+      "message": "Ready"
+    },
+    "kubeVersion": {
+      "actual": "4.16.21_openshift",
+      "desired": "4.16.21_openshift"
+    },
+    "lifecycle": {
+      "actualState": "deployed",
+      "desiredState": "deployed"
+    }
+  },
+  {
+    "id": "kube-c0ffee1-w2",
+    "location": "us-south-2",
+    "poolName": "default",
+    "health": {
+      "state": "critical",
+      "message": "The worker node is not ready"
+    },
+    "kubeVersion": {
+      "actual": "4.15.30_openshift",
+      "desired": "4.16.21_openshift"
+    },
+    "lifecycle": {
+      "actualState": "deployed",
+      "desiredState": "deployed"
+    }
+  },
+  {
+    "id": "kube-c0ffee1-w3",
+    "location": "us-south-3",
+    "poolName": "default",
+    "health": {
+      "state": "normal",
+      "message": "Ready"
+    },
+    "kubeVersion": {
+      "actual": "4.16.21_openshift",
+      "desired": "4.16.21_openshift"
+    },
+    "lifecycle": {
+      "actualState": "deployed",
+      "desiredState": "deployed"
+    }
+  }
+]

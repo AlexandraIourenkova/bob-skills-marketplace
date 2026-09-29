@@ -1,0 +1,13 @@
+{
+  "id": "0717-sub1",
+  "name": "web-subnet",
+  "ipv4_cidr_block": "10.240.0.0/24",
+  "network_acl": {
+    "id": "r006-acl1",
+    "name": "web-acl"
+  },
+  "public_gateway": null,
+  "zone": {
+    "name": "us-south-1"
+  }
+}

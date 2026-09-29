@@ -1,0 +1,10 @@
+{
+  "id": "c0ffee2",
+  "name": "dev-iks",
+  "state": "normal",
+  "status": "All Workers Normal",
+  "masterKubeVersion": "1.30.4_1543",
+  "masterStatus": "Ready",
+  "masterState": "deployed",
+  "masterHealth": "normal"
+}

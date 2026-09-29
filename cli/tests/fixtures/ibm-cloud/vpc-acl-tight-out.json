@@ -1,0 +1,28 @@
+{
+  "id": "r006-acl2",
+  "name": "tight-acl",
+  "rules": [
+    {
+      "id": "b1",
+      "name": "https-in",
+      "action": "allow",
+      "direction": "inbound",
+      "protocol": "tcp",
+      "source": "0.0.0.0/0",
+      "destination": "0.0.0.0/0",
+      "destination_port_min": 443,
+      "destination_port_max": 443
+    },
+    {
+      "id": "b2",
+      "name": "https-out-only",
+      "action": "allow",
+      "direction": "outbound",
+      "protocol": "tcp",
+      "source": "0.0.0.0/0",
+      "destination": "0.0.0.0/0",
+      "destination_port_min": 443,
+      "destination_port_max": 443
+    }
+  ]
+}

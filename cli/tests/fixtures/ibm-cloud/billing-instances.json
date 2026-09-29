@@ -1,0 +1,54 @@
+{
+  "limit": 30,
+  "count": 3,
+  "resources": [
+    {
+      "resource_instance_name": "orders-db",
+      "resource_name": "Databases for PostgreSQL",
+      "plan_name": "Standard",
+      "resource_group_name": "Default",
+      "region": "us-south",
+      "currency_code": "USD",
+      "month": "2026-09",
+      "usage": [
+        {
+          "metric": "MEMBER_HOURS",
+          "quantity": 720,
+          "cost": 412.5
+        }
+      ]
+    },
+    {
+      "resource_instance_name": "analytics-cos",
+      "resource_name": "Cloud Object Storage",
+      "plan_name": "Standard",
+      "resource_group_name": "prod",
+      "region": "global",
+      "currency_code": "USD",
+      "month": "2026-09",
+      "usage": [
+        {
+          "metric": "STORAGE",
+          "quantity": 3500,
+          "cost": 88.2
+        }
+      ]
+    },
+    {
+      "resource_instance_name": "reserved-vpn",
+      "resource_name": "Client VPN for VPC",
+      "plan_name": "Standard",
+      "resource_group_name": "prod",
+      "region": "us-south",
+      "currency_code": "USD",
+      "month": "2026-09",
+      "usage": [
+        {
+          "metric": "INSTANCE_HOURS",
+          "quantity": 0,
+          "cost": 36.0
+        }
+      ]
+    }
+  ]
+}

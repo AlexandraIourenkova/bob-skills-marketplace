@@ -1,0 +1,25 @@
+{
+  "account_id": "1234567890abcdef1234567890abcdef",
+  "month": "2026-09",
+  "currency_code": "USD",
+  "resources": [
+    {
+      "resource_id": "databases-for-postgresql",
+      "resource_name": "Databases for PostgreSQL",
+      "billable_cost": 412.5,
+      "non_billable_cost": 0
+    },
+    {
+      "resource_id": "cloud-object-storage",
+      "resource_name": "Cloud Object Storage",
+      "billable_cost": 88.2,
+      "non_billable_cost": 0
+    },
+    {
+      "resource_id": "codeengine",
+      "resource_name": "Code Engine",
+      "billable_cost": 21.3,
+      "non_billable_cost": 5
+    }
+  ]
+}

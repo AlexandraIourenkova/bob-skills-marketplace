@@ -5,7 +5,7 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 
 ## Vendors
 
-- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, ibm-watsonx-data-integration, office-docs, presentations, wxo-adk, wxo-talk-with-your-data.
+- **IBM** (`ibm`, active): sources github.com/IBM, https://github.ibm.com/tech-garage-spgi/excel-to-wxo, https://github.com/carbon-design-system, https://github.com/ibm-self-serve-assets. Packs: bob-essentials, ibm-cloud, ibm-watsonx-data-integration, office-docs, presentations, wxo-adk, wxo-talk-with-your-data.
 - **Anthropic** (`anthropic`, active): sources github.com/anthropics. Packs: anthropic-dev-kit.
 - **OpenAI** (`openai`, active): sources github.com/openai. Packs: openai-dev-tools, openai-security.
 - **Google** (`google`, active): sources github.com/google. Packs: google-cloud-data.
@@ -30,6 +30,23 @@ Install: `uvx bob-skills add <pack>`; details: `uvx bob-skills show <pack>`; map
 - Also installs: rules: security-defaults.md; commands: /skills-add.
 - Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 7 checksummed components.
 - Install: `uvx bob-skills add bob-essentials`
+
+### ibm-cloud — IBM Cloud
+
+- Vendor: IBM (`ibm`, active). Version 1.0.0.
+- Find out what an IBM Cloud account holds, what it costs and why a VPC server, a cluster or a Code Engine app does not work. Read-only skills on the ibmcloud CLI; fixes come as commands you approve.
+- Homepage: https://github.ibm.com/Maria-Startseva/bob-skills-marketplace
+- Tags: ibm-cloud, cloud, vpc, kubernetes, openshift, code-engine, finops, ibm
+- Skills (4):
+  - `ibmcloud-setup`: Check and prepare the IBM Cloud CLI before any IBM Cloud work - the CLI version, the plug-ins the ibm-cloud pack uses (VPC, Kubernetes Service, Code Engine), whether a session is open and which account, region and resource group it targets, and whether API tracing is on. Guides federated (SSO) login, where the user types the one-time passcode in their own terminal, and login with an API key from the environment. Use it first in any IBM Cloud task and whenever a command fails with "Not logged in", a missing plug-in or the wrong account. Triggers include "check my IBM Cloud setup", "log in to IBM Cloud", "which IBM Cloud account am I on", "ibmcloud says not logged in", "настрой ibmcloud", "в каком я аккаунте IBM Cloud".
+  - `ibmcloud-inventory`: Inventory an IBM Cloud account, read-only - every resource instance with its service, resource group, region, state and tags, exported to CSV and JSON, with the findings worth a look - untagged instances, instances that are not active, instances left in the default resource group, and groups the session cannot see. Use when the user asks what they have in IBM Cloud, wants a list or spreadsheet of their resources, a tagging or clean-up review, or a picture of the landscape by service and group. Triggers include "what is in my IBM Cloud account", "list my IBM Cloud resources", "IBM Cloud inventory", "find untagged resources", "что у меня в IBM Cloud", "список ресурсов в облаке", "инвентаризация IBM Cloud".
+  - `ibmcloud-diagnose`: Diagnose why something in IBM Cloud does not work, read-only. A VPC virtual server that cannot be reached or cannot reach out (instance state, floating IP and public gateway, security groups, stateless network ACLs in both directions); an IBM Cloud Kubernetes Service or Red Hat OpenShift on IBM Cloud cluster that is unhealthy (master, Ingress, workers, versions, zones); a Code Engine application that is not ready or whose newest revision failed (reasons, events, known failure patterns, log tail); and "not authorized" errors from the CLI. Every fix is shown as a command and runs only after the user says yes. Use when the user reports a timeout to a VSI, a closed port, a cluster in warning, a worker not ready, a failed Code Engine deployment or a 403. Triggers include "can't connect to my VSI", "port 443 not reachable", "cluster is in warning", "Code Engine app failed", "revision not ready", "не открывается сервер в VPC", "кластер в warning", "приложение Code Engine не стартует".
+  - `ibmcloud-cost`: Show where the IBM Cloud money goes, read-only - cost per service, per resource group and per instance for a month, the change against the previous month, the top spenders, and instances billed while their usage is zero, from the IBM Cloud usage reports. Works with the role the user has - account billing access gives the whole account, a resource group administrator gets that group - and names the role needed for anything the role does not allow. Never stops, scales or deletes anything. Use for "how much do we spend on IBM Cloud", "why did the bill go up", "what costs the most", "cost by resource group", "cloud cost report", "сколько мы тратим в IBM Cloud", "почему вырос счёт", "расходы по группам ресурсов".
+- Also installs: rules: ibm-cloud.md; commands: /ibmcloud-report; modes: cloud-ops.
+- Before you install: The skills run the ibmcloud CLI in the session you opened, which carries every right your account gives you. A command outside the pack's read-only set could change or delete resources. Covered by: The pack's scripts only list and read. The `ibm-cloud` rule makes every changing command wait for your yes to that exact command, and `cloud-ops` mode writes only under `ibmcloud-reports/`. For the strictest setup, log in with an access group or service ID that has Viewer roles only.
+- Before you install: Resource names, tags, event messages and application logs come from the account and can carry text aimed at the agent. Covered by: The rule and every skill treat them as data: they are quoted to you, never followed.
+- Gate: pass, SkillSpector risk 0/100, Cisco max severity INFO; 0 reviewed policy findings; 7 checksummed components.
+- Install: `uvx bob-skills add ibm-cloud`
 
 ### ibm-watsonx-data-integration — IBM watsonx.data integration
 

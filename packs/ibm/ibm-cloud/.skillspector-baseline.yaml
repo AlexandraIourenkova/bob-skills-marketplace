@@ -1,0 +1,147 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: LP3
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*SKILL.md'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/check_setup.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/inventory.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/cluster_health.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/code_engine_app.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/vpc_reachability.py'
+- id: AST4
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+  path: '*scripts/usage_report.py'
+fingerprints:
+- hash: sha256:1b67c7baa905ab26185f0a68bbd9df592fb0da211a4c9dc72f1c02a3de9333ca
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:93be141f10ceeaaaaa1938c3d18c61ad93ee137fbfd34790dd904a3c2c1e9dd0
+  rule_id: AST4
+  file: scripts/check_setup.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:99e7cc7bd70dba8e5449431328db36736154f61070e505f12df7eab2ce7415bd
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:aeed932630725eda89826ae264cc110bc6546a498f391bab0e4ff56898e29d89
+  rule_id: AST4
+  file: scripts/inventory.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:ba6dfa0ec7763b562a7ec9d8abba82d7cfcf19bf82392dc33e38daf39de4a4b8
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:91b32681d7d8c002f716b6fd81d4b14f36778acd35776279b69abcd55623ebd5
+  rule_id: AST4
+  file: scripts/cluster_health.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:fec70fe55fab2a3933b9b3c6dbcb224b9d696af67552a1999a26cdddd1f4f8a3
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'
+- hash: sha256:958ceb228f490ce31d6260be708532e44e522551467bf4c7a7348730d1126ca0
+  rule_id: AST4
+  file: scripts/usage_report.py
+  reason: 'Reviewed 2026-09-29 by the pack authors: AST4 is each script''s single
+    subprocess call, subprocess.run with the fixed binary ibmcloud, an argument list,
+    shell=False and a timeout; names from the user are separate arguments, so nothing
+    reaches a shell, and every command is read-only, which cli/tests/test_ibm_cloud_pack.py
+    checks against the policy linter''s write patterns. LP3 is the missing allowed-tools
+    field: Bob reads name and description, and the tool scope comes from the cloud-ops
+    mode groups and the ibm-cloud rule.'

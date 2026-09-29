@@ -1,0 +1,38 @@
+{
+  "id": "r006-sg1",
+  "name": "web-sg",
+  "rules": [
+    {
+      "id": "r1",
+      "direction": "inbound",
+      "ip_version": "ipv4",
+      "protocol": "tcp",
+      "port_min": 443,
+      "port_max": 443,
+      "remote": {
+        "cidr_block": "0.0.0.0/0"
+      }
+    },
+    {
+      "id": "r2",
+      "direction": "inbound",
+      "ip_version": "ipv4",
+      "protocol": "tcp",
+      "port_min": 22,
+      "port_max": 22,
+      "remote": {
+        "id": "r006-bastion",
+        "name": "bastion-sg"
+      }
+    },
+    {
+      "id": "r3",
+      "direction": "outbound",
+      "ip_version": "ipv4",
+      "protocol": "all",
+      "remote": {
+        "cidr_block": "0.0.0.0/0"
+      }
+    }
+  ]
+}

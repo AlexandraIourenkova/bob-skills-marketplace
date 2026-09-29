@@ -1,0 +1,12 @@
+{
+  "name": "catalog",
+  "image_reference": "private.de.icr.io/team/catalog:2.0",
+  "image_port": 8080,
+  "status": "failed",
+  "endpoint": "",
+  "status_details": {
+    "latest_created_revision": "catalog-00001",
+    "latest_ready_revision": "",
+    "reason": "image_pull_back_off"
+  }
+}

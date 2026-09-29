@@ -1,0 +1,21 @@
+{
+  "id": "c0ffee1",
+  "name": "prod-roks",
+  "region": "us-south",
+  "type": "openshift",
+  "provider": "vpc-gen2",
+  "state": "warning",
+  "status": "Some workers need attention",
+  "masterKubeVersion": "4.16.21_openshift",
+  "targetVersion": "4.16.21_openshift",
+  "lifecycle": {
+    "masterStatus": "Ready",
+    "masterState": "deployed",
+    "masterHealth": "normal"
+  },
+  "ingress": {
+    "hostname": "prod-roks.us-south.containers.appdomain.cloud",
+    "status": "warning",
+    "message": "The router is not ready on one worker"
+  }
+}

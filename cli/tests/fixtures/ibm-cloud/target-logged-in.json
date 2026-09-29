@@ -1,0 +1,21 @@
+{
+  "api_endpoint": "https://cloud.ibm.com",
+  "region": {
+    "name": "us-south"
+  },
+  "user": {
+    "display_name": "Test User",
+    "user_email": "test@example.com"
+  },
+  "account": {
+    "guid": "1234567890abcdef1234567890abcdef",
+    "name": "Demo federated account",
+    "owner": "owner@example.com"
+  },
+  "resource_group": {
+    "guid": "rg-prod-id",
+    "name": "prod",
+    "state": "ACTIVE",
+    "default": false
+  }
+}

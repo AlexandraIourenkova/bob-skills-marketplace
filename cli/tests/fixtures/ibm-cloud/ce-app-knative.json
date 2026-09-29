@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "name": "orders-api"
+  },
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "image": "private.us.icr.io/team/orders:1.4",
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "url": "https://orders-api.abc.us-south.codeengine.appdomain.cloud",
+    "latestCreatedRevisionName": "orders-api-00007",
+    "latestReadyRevisionName": "orders-api-00006",
+    "conditions": [
+      {
+        "type": "ConfigurationsReady",
+        "status": "False",
+        "reason": "RevisionFailed",
+        "message": "Revision \"orders-api-00007\" failed with message: Container failed with: exit code 1."
+      },
+      {
+        "type": "Ready",
+        "status": "False",
+        "reason": "RevisionFailed",
+        "message": "Revision failed"
+      },
+      {
+        "type": "RoutesReady",
+        "status": "True"
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:cos-1::",
+    "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:cos-1::",
+    "guid": "cos-1",
+    "name": "analytics-cos",
+    "region_id": "global",
+    "resource_group_id": "rg-prod-id",
+    "state": "active",
+    "type": "service_instance",
+    "created_at": "2026-02-11T09:12:00Z"
+  },
+  {
+    "id": "crn:v1:bluemix:public:databases-for-postgresql:us-south:a/1234567890abcdef1234567890abcdef:pg-1::",
+    "crn": "crn:v1:bluemix:public:databases-for-postgresql:us-south:a/1234567890abcdef1234567890abcdef:pg-1::",
+    "name": "orders-db",
+    "region_id": "us-south",
+    "resource_group_id": "rg-default-id",
+    "state": "active",
+    "type": "service_instance",
+    "created_at": "2025-11-03T14:00:00Z"
+  },
+  {
+    "id": "crn:v1:bluemix:public:codeengine:us-south:a/1234567890abcdef1234567890abcdef:ce-1::",
+    "crn": "crn:v1:bluemix:public:codeengine:us-south:a/1234567890abcdef1234567890abcdef:ce-1::",
+    "name": "web-project",
+    "region_id": "us-south",
+    "resource_group_id": "rg-prod-id",
+    "state": "active",
+    "type": "service_instance",
+    "created_at": "2026-06-20T08:00:00Z"
+  },
+  {
+    "id": "crn:v1:bluemix:public:logs:eu-de:a/1234567890abcdef1234567890abcdef:log-1::",
+    "crn": "crn:v1:bluemix:public:logs:eu-de:a/1234567890abcdef1234567890abcdef:log-1::",
+    "name": "old-logs",
+    "region_id": "eu-de",
+    "resource_group_id": "rg-hidden-id",
+    "state": "inactive",
+    "type": "service_instance",
+    "created_at": "2024-03-01T00:00:00Z"
+  }
+]
