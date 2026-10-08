@@ -1,0 +1,33 @@
+{
+  "seed": 7,
+  "tables": {
+    "suppliers": {
+      "rows": 25,
+      "fields": {
+        "supplier_id": {"type": "id", "prefix": "SUP-", "width": 4},
+        "name": {"type": "company"},
+        "contact": {"type": "person"},
+        "email": {"type": "email", "from": "contact"},
+        "country": {"type": "choice", "values": ["IL", "DE", "NL", "TR"], "weights": [5, 2, 2, 1]}
+      }
+    },
+    "invoices": {
+      "rows": 200,
+      "fields": {
+        "invoice_id": {"type": "id", "prefix": "INV-", "width": 5},
+        "supplier_id": {"type": "ref", "table": "suppliers", "field": "supplier_id"},
+        "issued": {"type": "date", "from": "2026-06-01", "to": "2026-08-31"},
+        "quantity": {"type": "int", "min": 1, "max": 40},
+        "order_amount": {"type": "float", "min": 200, "max": 9000, "decimals": 2},
+        "invoice_amount": {"type": "float", "min": 200, "max": 9000, "decimals": 2},
+        "status": {"type": "choice", "values": ["paid", "approved"], "weights": [3, 1]},
+        "note": {"type": "text", "values": [""]}
+      },
+      "cases": [
+        {"label": "matches the order", "count": 166, "set": {"invoice_amount": {"from": "order_amount"}}},
+        {"label": "price mismatch", "count": 20, "set": {"invoice_amount": {"from": "order_amount", "times": 1.07}, "status": "blocked", "note": "price differs from the order"}},
+        {"label": "freight added", "count": 14, "set": {"invoice_amount": {"from": "order_amount", "plus": 85.0}, "status": "blocked", "note": "freight line not on the order"}}
+      ]
+    }
+  }
+}

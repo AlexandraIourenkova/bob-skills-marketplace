@@ -1,0 +1,28 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "4f6178180bd9bfcc",
+      "rule": "P009",
+      "path": "skills/submission-check/scripts/submission_check.py",
+      "line": 195,
+      "message": "reference to protected path '.env'",
+      "reason": "Reviewed 2026-10-08 by the pack authors: these lines compare the lines of the project's .gitignore with the name .env, to tell the user when the file is not ignored. The script opens no file outside the repository it is pointed at; a .env file is read only when it is tracked in that repository, like every other tracked file, and a credential found in it is reported masked."
+    },
+    {
+      "fingerprint": "79b35efe2f000395",
+      "rule": "P009",
+      "path": "skills/submission-check/scripts/submission_check.py",
+      "line": 193,
+      "message": "reference to protected path '\".env'",
+      "reason": "Reviewed 2026-10-08 by the pack authors: these lines compare the lines of the project's .gitignore with the name .env, to tell the user when the file is not ignored. The script opens no file outside the repository it is pointed at; a .env file is read only when it is tracked in that repository, like every other tracked file, and a credential found in it is reported masked."
+    },
+    {
+      "fingerprint": "8d01e825fc1916a0",
+      "rule": "P009",
+      "path": "skills/submission-check/scripts/submission_check.py",
+      "line": 194,
+      "message": "reference to protected path '.env'",
+      "reason": "Reviewed 2026-10-08 by the pack authors: these lines compare the lines of the project's .gitignore with the name .env, to tell the user when the file is not ignored. The script opens no file outside the repository it is pointed at; a .env file is read only when it is tracked in that repository, like every other tracked file, and a credential found in it is reported masked."
+    }
+  ]
+}

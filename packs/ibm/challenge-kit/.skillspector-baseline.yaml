@@ -1,0 +1,65 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: LP3
+  path: '*SKILL.md'
+  reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
+    SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
+    challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
+    rule.'
+- id: PE3
+  path: '*scripts/submission_check.py'
+  message: '*.env*'
+  reason: 'Reviewed 2026-10-08 by the pack authors: PE3 matches the name .env in submission_check.py,
+    where the lines of the project''s .gitignore are compared with it to tell the user when
+    such a file is not ignored. The script opens no file outside the repository it is pointed
+    at, reads a .env only when it is tracked there, reports a credential masked, has no network
+    code and writes nothing but the optional --json result (cli/tests/test_challenge_kit.py:
+    values never reach the output, the repository is untouched). Limited to this file and to
+    findings that name .env.'
+fingerprints:
+- hash: sha256:31bfbd09cf3b97b318d4e8957d1d243886175fe61047e790a6bcd86755d36921
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
+    SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
+    challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
+    rule.'
+- hash: sha256:f10296a0431bfb7218475f4d80ca77389164ad1e0832f3760f0aba36b23dd385
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
+    SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
+    challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
+    rule.'
+- hash: sha256:e5d1824edba444b87c49cc0946ec6f139bf51f230222027c2d75c4bce496c8f0
+  rule_id: RA2
+  file: SKILL.md
+  reason: 'Reviewed 2026-10-08 by the pack authors: RA2 (session persistence) matches the words
+    ''write the spec ... every time'' in solution-blueprint/SKILL.md. The skill sets up no cron
+    job, startup script or hook; its only files are the spec and the rendered page under challenge/,
+    written at the user''s request and named in the hand-over. Kept as a fingerprint only, so
+    it expires when the text changes and never covers another skill.'
+- hash: sha256:8b4d84b391575e20abd8d02a8d1394433eed633d73c13b3ced78fde6da9be21b
+  rule_id: PE3
+  file: scripts/submission_check.py
+  reason: 'Reviewed 2026-10-08 by the pack authors: PE3 matches the name .env in submission_check.py,
+    where the lines of the project''s .gitignore are compared with it to tell the user when
+    such a file is not ignored. The script opens no file outside the repository it is pointed
+    at, reads a .env only when it is tracked there, reports a credential masked, has no network
+    code and writes nothing but the optional --json result (cli/tests/test_challenge_kit.py:
+    values never reach the output, the repository is untouched). Limited to this file and to
+    findings that name .env.'
+- hash: sha256:cdf7d964417acc7748255efa4537bebf3c834b6e5864ee51e12aaf21d65e2833
+  rule_id: LP3
+  file: SKILL.md
+  reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
+    SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
+    challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
+    rule.'
+- hash: sha256:8e763d3ae5f9fde04f21bd177afc90e85fcebd240f90b40ffff09289e0156a2c
+  rule_id: AST4
+  file: scripts/submission_check.py
+  reason: 'Reviewed 2026-10-08 by the pack authors: AST4 is the one subprocess call in submission_check.py.
+    It runs git with an argument list and no shell, and only the verbs ls-files, log and status,
+    which a test asserts from the syntax tree. Kept as a fingerprint only.'

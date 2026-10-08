@@ -35,7 +35,7 @@
   ],
   "revokedVersions": [],
   "checksums": {
-    "skills/find-skills": "sha256:a3c8152e1c803f55f0c3e9253d93cf2f9ff4ef992813b7c6e783423496e30f32",
+    "skills/find-skills": "sha256:5a2cf38932aac1be20b3ac04c2207bb9a9088f339a7e0b1119422827d5ec0c16",
     "skills/skill-creator": "sha256:bd3ff94f5de4c1be496d5daa8e1a20eebf18812ca58fe12681d7a0d7994232e0",
     "skills/guard": "sha256:b1c9370de1e6daad95506d1c476dd6e4dc71fdabad7d47700f830af60331b06c",
     "skills/skill-audit": "sha256:56d26596f93dded942f0fd391dd3b3620a6fc6e529f42b4241d3fbcb5ebf4ded",

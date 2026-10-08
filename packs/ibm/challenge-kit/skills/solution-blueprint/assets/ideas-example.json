@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Six ideas for three weeks",
+    "tagline": "Drawn from the team's own work: a logistics company, four developers, about ten hours a week each. **Example content: replace every value.**",
+    "team": "Team Ledger",
+    "challenge": "From <bob> to Business Impact",
+    "date": "2026-10-08",
+    "status": "ideas"
+  },
+  "ideas": {
+    "headline": "Six directions, one recommendation",
+    "lead": "Each idea names who it helps, the moment the demo turns on, and the reason it could fail. The scores are ours, against the four judging criteria.",
+    "items": [
+      {
+        "title": "Invoice exceptions, resolved before lunch",
+        "direction": "agent",
+        "pitch": "An agent reads a blocked supplier invoice, finds why it does not match the order, and hands the clerk a decision.",
+        "who": "Four accounts payable clerks who lose three days per blocked invoice waiting for answers.",
+        "demo": "A blocked invoice opens with the cause already named and the supplier's email quoted as proof.",
+        "why": "The pain is measured, the data can be synthetic, and a person approves every release, so it is safe to show.",
+        "risk": "The agent names the wrong cause; the approval step has to be visible in the demo.",
+        "scores": {"completeness": 4, "creativity": 4, "usability": 4, "effectiveness": 5},
+        "recommended": true,
+        "verdict": "Recommended: the only idea where the number that matters is already measured, and the demo is one screen."
+      },
+      {
+        "title": "The 2009 tariff engine, readable again",
+        "direction": "modernise",
+        "pitch": "Bob maps a legacy rating module, writes the tests it never had, and moves one tariff family to a service.",
+        "who": "Two developers who are the only people allowed to touch the tariff code.",
+        "demo": "The same shipment priced by the old module and the new service, with the test suite green on both.",
+        "why": "Modernisation is one of the four directions the challenge names, and the before and after are easy to prove.",
+        "risk": "The value is real but invisible to a non-technical judge unless the demo shows a change shipped in minutes.",
+        "scores": {"completeness": 4, "creativity": 2, "usability": 3, "effectiveness": 4}
+      },
+      {
+        "title": "Ask the warehouse",
+        "direction": "mcp",
+        "pitch": "An MCP server over the warehouse system, so Bob and any agent can answer stock questions in plain language.",
+        "who": "Sales staff who phone the warehouse about thirty times a day.",
+        "demo": "A salesperson asks where an order is and gets the shelf, the picker and the promised time.",
+        "why": "It opens the company's own system to every later agent, which is the scaling story.",
+        "risk": "Read-only access to the warehouse system must be granted in week one or the idea stalls.",
+        "scores": {"completeness": 3, "creativity": 3, "usability": 4, "effectiveness": 4}
+      },
+      {
+        "title": "Quote in a minute",
+        "direction": "new-app",
+        "pitch": "A small web app that turns a customer's email into a priced quote, checked against capacity.",
+        "who": "The sales desk, which answers a quote request in four hours on average.",
+        "demo": "Paste a real request, get a quote with the route, the price and the reasoning.",
+        "why": "Revenue is the easiest value to explain, and the app is a blank page Bob can fill fast.",
+        "risk": "Pricing rules live in people's heads; the first week goes into writing them down.",
+        "scores": {"completeness": 3, "creativity": 3, "usability": 5, "effectiveness": 4}
+      },
+      {
+        "title": "Customs papers that check themselves",
+        "direction": "agent",
+        "pitch": "An agent compares a customs declaration with the commercial invoice and flags what a broker would reject.",
+        "who": "Three customs coordinators and every customer whose cargo waits at the border.",
+        "demo": "A declaration with two planted errors: the agent finds both and cites the rule.",
+        "why": "The cost of one held container makes the business case in a single sentence.",
+        "risk": "The rules differ by country; the slice must be one corridor only.",
+        "scores": {"completeness": 2, "creativity": 5, "usability": 3, "effectiveness": 4}
+      },
+      {
+        "title": "Driver onboarding without the binder",
+        "direction": "other",
+        "pitch": "Replace the paper onboarding of contract drivers with a guided chat that collects documents and books the safety briefing.",
+        "who": "The fleet office and about twenty new drivers a month.",
+        "demo": "A driver finishes onboarding on a phone in the time it takes to drink a coffee.",
+        "why": "Not an improvement of the old process: the binder and two of its five approvals disappear.",
+        "risk": "Document checks touch personal data, so the proof of concept must run on invented drivers.",
+        "scores": {"completeness": 3, "creativity": 4, "usability": 5, "effectiveness": 3}
+      }
+    ]
+  }
+}

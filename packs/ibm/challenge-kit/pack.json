@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "challenge-kit",
+  "displayName": "Challenge kit: from the first idea to the submission",
+  "version": "1.0.0",
+  "vendor": "ibm",
+  "description": "For teams in an AI coding challenge or hackathon, newcomers and experienced alike. A guided first session, ideas when there is nothing to start from, a process rethought, a scope with invented data, a solution blueprint with an architecture diagram, a usability pass, the demo script and a check before submitting.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "minBob": "2.0.2",
+  "tags": [
+    "challenge",
+    "hackathon",
+    "ideas",
+    "proof-of-concept",
+    "process",
+    "architecture",
+    "diagram",
+    "business-case",
+    "synthetic-data",
+    "usability",
+    "demo",
+    "submission",
+    "ibm"
+  ],
+  "skills": [
+    "first-hour",
+    "idea-studio",
+    "process-redesign",
+    "poc-scope",
+    "solution-blueprint",
+    "usability-pass",
+    "demo-script",
+    "submission-check"
+  ],
+  "rules": [
+    "rules/challenge-kit.md"
+  ],
+  "commands": [
+    "commands/challenge.md"
+  ],
+  "modes": "custom_modes.yaml",
+  "networkAllow": [],
+  "safety": [
+    {
+      "class": "data",
+      "warning": "The skills write what you tell them about your company's processes, people, volumes and costs into files under `challenge/`, and a challenge entry is usually submitted as a public repository.",
+      "covered": "Nothing leaves the machine: the scripts have no network code and the page is one local HTML file. The rule assumes company data may not leave the company, `poc-scope` makes invented data for the build, and `submission-check` looks for credentials and real-looking data before a public push. Credentials never go into a file or a command line, and a found one is shown masked."
+    },
+    {
+      "class": "content",
+      "warning": "The skills read process documents, exports, emails and the files and git history of your repository, and `usability-pass` reads what your running solution shows. Such material can carry text aimed at Bob.",
+      "covered": "The rule, the mode and each skill treat that material as data: quoted and reported, never followed. The challenge-coach mode can edit only under `challenge/`, the renderer escapes every string of the spec, and the pack changes no code, rewrites no git history, rotates no key, pushes nothing and installs no other pack: those steps are yours."
+    }
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/first-hour": "sha256:c0effed8099c09603fc12e9e9180cad142be32153eb2df4c982f8bd24e9538ef",
+    "skills/idea-studio": "sha256:9355dfa0f45813c43fd39d828d68c4d4e460df931d61aebcefff675dc6e33f4d",
+    "skills/process-redesign": "sha256:cc1d83b25034c45e621a581217ca0e2066fcd22d6c96cbdb2f576ea9da0832eb",
+    "skills/poc-scope": "sha256:4dbbcfec781593450242ab8e4a2901eb886815b509a4a7f68d8346f500691bad",
+    "skills/solution-blueprint": "sha256:8baf1c46431416ac54b4cb2c1643d4c0451fe2eae6a9191de99cc4b520c4267d",
+    "skills/usability-pass": "sha256:24580443c8966ecf32a3f32f3c1d12d7bf666bc0714d2240c90d50a6b5f5033e",
+    "skills/demo-script": "sha256:40764657162ec2807f05bb1dd86dc755686fd76fe5dd1c4c1dc895ba7535ba68",
+    "skills/submission-check": "sha256:6c16665c9723dbde166bc8197be1a7b68052f21fa4e2e98d0f4644964bc10179",
+    "rules/challenge-kit.md": "sha256:c729494dc01f858425685d35b2aaa7c83cc8c2dbdc66f1123b7890a154573b39",
+    "commands/challenge.md": "sha256:5297741a40cb8305e5806e2c145db9174c90cbbe78d1968a9ae3ed319a8e96b5",
+    "custom_modes.yaml": "sha256:afa1361c4bc8b173d08f2b6fed50db7604317ffedb49e1c06a72f6d4538fd9cc"
+  }
+}

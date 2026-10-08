@@ -50,6 +50,33 @@
       "category": "ibm-bob"
     },
     {
+      "name": "challenge-kit",
+      "source": "./packs/ibm/challenge-kit",
+      "description": "For teams in an AI coding challenge or hackathon, newcomers and experienced alike. A guided first session, ideas when there is nothing to start from, a process rethought, a scope with invented data, a solution blueprint with an architecture diagram, a usability pass, the demo script and a check before submitting.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "challenge",
+        "hackathon",
+        "ideas",
+        "proof-of-concept",
+        "process",
+        "architecture",
+        "diagram",
+        "business-case",
+        "synthetic-data",
+        "usability",
+        "demo",
+        "submission",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "ibm-cloud",
       "source": "./packs/ibm/ibm-cloud",
       "description": "Find out what an IBM Cloud account holds, what it costs and why a VPC server, a cluster or a Code Engine app does not work. Read-only skills on the ibmcloud CLI; fixes come as commands you approve.",

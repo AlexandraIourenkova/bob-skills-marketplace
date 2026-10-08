@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "title": "Invoice exceptions, resolved before lunch",
+    "tagline": "An agent that reads a blocked supplier invoice, finds why it does not match the order, and hands the clerk a decision instead of a search. **Example content: replace every value.**",
+    "team": "Team Ledger",
+    "challenge": "From <bob> to Business Impact",
+    "date": "2026-10-08",
+    "status": "plan",
+    "language": "en",
+    "direction": "ltr"
+  },
+  "hero": {
+    "value": "3 days → 20 min",
+    "label": "from a blocked invoice to a decision the clerk can approve",
+    "basis": "estimate",
+    "source": "Timed on 12 real exceptions by the accounts payable lead; the 20 minutes is the target of the proof of concept.",
+    "note": "Twelve exceptions timed by hand in September."
+  },
+  "problem": {
+    "headline": "One invoice in six stops, and each stop costs **three days**",
+    "lead": "When an invoice does not match its purchase order, a clerk becomes a detective: three systems, two mailboxes and a buyer who is in a meeting.",
+    "who": "Four accounts payable clerks and the 30 buyers they chase for answers.",
+    "today": "The clerk opens the ERP, the order, the goods receipt and the supplier's email, compares them by eye, then writes to the buyer and waits.",
+    "cost": "About 310 blocked invoices a month. Late payment fees and lost early-payment discounts follow the delay.",
+    "why_now": "The supplier base grew by a third this year and the team did not.",
+    "facts": [
+      {"value": "17%", "label": "of invoices stop on a mismatch", "basis": "measured", "source": "ERP report, June to August"},
+      {"value": "310", "label": "exceptions a month", "basis": "measured", "source": "ERP report, June to August"},
+      {"value": "71%", "label": "of the three days is waiting for a reply", "basis": "estimate", "source": "12 timed cases"}
+    ],
+    "quote": "I do not need help paying invoices. I need help finding out why I cannot.",
+    "quote_by": "Accounts payable lead"
+  },
+  "process": {
+    "headline": "Nine steps and four hand-offs become **four steps and two**",
+    "lead": "The redesign does not make the detective faster. It removes the detective work: the evidence is gathered before a person looks.",
+    "basis": "estimate",
+    "source": "before: 12 exceptions timed by the accounts payable lead; after: the target the proof of concept is built to meet",
+    "before": {
+      "title": "Today",
+      "steps": [
+        {"actor": "Clerk", "title": "Notices the blocked invoice", "minutes": 5, "kind": "manual"},
+        {"actor": "Clerk", "title": "Opens order, receipt and email", "minutes": 20, "kind": "manual"},
+        {"actor": "Clerk", "title": "Compares lines by eye", "minutes": 25, "kind": "manual"},
+        {"actor": "Clerk", "title": "Writes to the buyer", "minutes": 10, "kind": "manual"},
+        {"actor": "Buyer", "title": "Reply sits in the inbox", "minutes": 2880, "kind": "wait"},
+        {"actor": "Buyer", "title": "Checks with the supplier", "minutes": 30, "kind": "manual"},
+        {"actor": "Supplier", "title": "Supplier answers", "minutes": 1200, "kind": "wait"},
+        {"actor": "Buyer", "title": "Decides: accept or dispute", "minutes": 10, "kind": "decision"},
+        {"actor": "Clerk", "title": "Corrects and releases", "minutes": 15, "kind": "manual"}
+      ]
+    },
+    "after": {
+      "title": "With the agent",
+      "steps": [
+        {"actor": "Agent", "title": "Reads the block and gathers the evidence", "minutes": 2, "kind": "ai"},
+        {"actor": "Agent", "title": "Names the cause and drafts the fix", "minutes": 1, "kind": "ai"},
+        {"actor": "Clerk", "title": "Reviews and approves", "minutes": 12, "kind": "decision"},
+        {"actor": "Agent", "title": "Releases the invoice, logs the reason", "minutes": 5, "kind": "auto"}
+      ]
+    }
+  },
+  "architecture": {
+    "headline": "Bob builds it, watsonx Orchestrate runs it, the ERP stays where it is",
+    "lead": "Nothing in the company's systems is replaced. The agent reads through two narrow tools and writes through one, and that one waits for a person.",
+    "caption": "Dashed nodes are mocked in the proof of concept with synthetic data; the interfaces are the real ones, so the mock is swapped for the system later.",
+    "layers": [
+      {"id": "people", "title": "People", "nodes": [
+        {"id": "clerk", "title": "AP clerk", "tech": "Reviews and approves", "kind": "user"},
+        {"id": "buyer", "title": "Buyer", "tech": "Asked only when needed", "kind": "user"}
+      ]},
+      {"id": "experience", "title": "Experience", "nodes": [
+        {"id": "inbox", "title": "Exception inbox", "tech": "Web app, React", "kind": "ui"},
+        {"id": "chat", "title": "Chat", "tech": "watsonx Orchestrate web chat", "kind": "ui", "ibm": true, "role": "the chat the buyer answers in"}
+      ]},
+      {"id": "agents", "title": "Agents", "nodes": [
+        {"id": "triage", "title": "Triage agent", "tech": "watsonx Orchestrate", "kind": "agent", "ibm": true, "role": "runs the triage and resolver agents and their tools"},
+        {"id": "resolver", "title": "Resolver agent", "tech": "watsonx Orchestrate", "kind": "agent", "ibm": true},
+        {"id": "model", "title": "Granite", "tech": "watsonx.ai", "kind": "model", "ibm": true, "role": "reads invoices and writes the explanation"}
+      ]},
+      {"id": "tools", "title": "Tools", "nodes": [
+        {"id": "match", "title": "Three-way match", "tech": "Python tool, read-only", "kind": "tool"},
+        {"id": "mail", "title": "Supplier mail search", "tech": "MCP server, read-only", "kind": "tool"},
+        {"id": "release", "title": "Release invoice", "tech": "Python tool, asks first", "kind": "tool"}
+      ]},
+      {"id": "systems", "title": "Company systems", "nodes": [
+        {"id": "erp", "title": "ERP", "tech": "Orders, receipts, invoices", "kind": "external", "status": "mock"},
+        {"id": "mailbox", "title": "Shared mailbox", "tech": "Exchange", "kind": "external", "status": "mock"},
+        {"id": "log", "title": "Decision log", "tech": "Cloudant", "kind": "data", "ibm": true, "role": "keeps every decision and its reason"}
+      ]}
+    ],
+    "edges": [
+      {"from": "clerk", "to": "inbox", "label": "reviews"},
+      {"from": "buyer", "to": "chat", "label": "answers"},
+      {"from": "inbox", "to": "triage", "label": "exception"},
+      {"from": "chat", "to": "resolver"},
+      {"from": "triage", "to": "resolver", "label": "hands off"},
+      {"from": "resolver", "to": "model"},
+      {"from": "triage", "to": "match", "label": "reads"},
+      {"from": "resolver", "to": "mail", "label": "reads"},
+      {"from": "resolver", "to": "release", "label": "after approval"},
+      {"from": "match", "to": "erp"},
+      {"from": "mail", "to": "mailbox"},
+      {"from": "release", "to": "erp", "label": "writes"},
+      {"from": "release", "to": "log"},
+      {"from": "inbox", "to": "log", "label": "history", "style": "dashed"}
+    ],
+    "decisions": [
+      {"title": "Two agents, not one", "why": "Triage only reads. The resolver is the one agent that can write, so the approval step guards a single door."},
+      {"title": "Mocks behind real interfaces", "why": "The proof of concept runs on synthetic invoices. No company data leaves the company, and the mock is replaced by the ERP adapter in the pilot."},
+      {"title": "Built in Bob from the first line", "why": "The plan, the tools, the agent definitions and the tests come from one Bob task history, which is also what the judges read."}
+    ]
+  },
+  "impact": {
+    "headline": "The clerk's hour stays an hour. The **three days of waiting** go.",
+    "metrics": [
+      {"label": "Time to a decision", "before": 70, "after": 0.33, "unit": "hours", "better": "lower", "basis": "estimate", "source": "12 timed cases against the target"},
+      {"label": "Clerk time per exception", "before": 75, "after": 12, "unit": "min", "better": "lower", "basis": "estimate", "source": "12 timed cases against the target"},
+      {"label": "Exceptions closed without the buyer", "before": 10, "after": 60, "unit": "%", "better": "higher", "basis": "assumption"},
+      {"label": "Early-payment discounts taken", "before": 41, "after": 80, "unit": "%", "better": "higher", "basis": "assumption"}
+    ],
+    "waterfall": {
+      "title": "Where the yearly value comes from",
+      "unit": "thousand USD a year",
+      "total_label": "Net value, year one",
+      "items": [
+        {"label": "Clerk hours returned", "value": 98, "basis": "estimate", "source": "310 a month × 63 min × loaded hourly cost"},
+        {"label": "Buyer hours returned", "value": 44, "basis": "estimate", "source": "40 min on half of the exceptions"},
+        {"label": "Discounts captured", "value": 120, "basis": "assumption", "source": "to confirm with treasury"},
+        {"label": "Late fees avoided", "value": 31, "basis": "measured", "source": "fees paid in the last 12 months"},
+        {"label": "Run cost", "value": -38, "basis": "estimate", "source": "platform and model usage at pilot volume"}
+      ]
+    },
+    "scale": [
+      "The same agent pattern fits credit notes and supplier onboarding, which use the same three systems.",
+      "Three sister companies run the same ERP; the tools are configuration, not code, per company."
+    ]
+  },
+  "alternatives": {
+    "headline": "Rules catch the easy third. Nothing today **explains** the rest.",
+    "criteria": ["Finds the cause", "Reads supplier emails", "Works with the current ERP", "Keeps a person in the decision", "Live in weeks"],
+    "options": [
+      {"name": "Do nothing", "note": "more clerks as volume grows", "status_quo": true, "values": ["no", "no", "yes", "yes", "yes"]},
+      {"name": "ERP matching rules", "note": "tolerance rules in the ERP", "values": ["partial", "no", "yes", "no", "partial"]},
+      {"name": "AP automation suite", "note": "a packaged product", "values": ["partial", "partial", "partial", "yes", "no"]},
+      {"name": "This solution", "ours": true, "values": ["yes", "yes", "yes", "yes", "yes"]}
+    ],
+    "difference": "Products in this market match numbers. This one reads the conversation around the numbers, which is where two thirds of the answers are, and it leaves the release with the clerk."
+  },
+  "demo": {
+    "headline": "Three minutes, one invoice, no slides",
+    "items": [
+      {"title": "A blocked invoice arrives", "detail": "The inbox shows it with the cause already named: price differs on line 3.", "time": "0:20"},
+      {"title": "The evidence", "detail": "Order, receipt and the supplier's email side by side, the differing line highlighted.", "time": "0:50"},
+      {"title": "The proposal", "detail": "The agent proposes to accept the new price and quotes the email that agreed it.", "time": "0:40"},
+      {"title": "The approval", "detail": "The clerk approves. The invoice is released and the reason is logged.", "time": "0:30"},
+      {"title": "The hard one", "detail": "An exception the agent cannot settle: it asks the buyer one question in chat.", "time": "0:40"}
+    ]
+  },
+  "adoption": {
+    "headline": "A clerk is useful with it in the **first ten minutes**",
+    "lead": "No new system to learn: the inbox replaces the ERP list the clerks already work from.",
+    "items": [
+      {"title": "Open the inbox", "detail": "Single sign-on, the clerk's own exceptions, sorted by due date."},
+      {"title": "Read one proposal", "detail": "Cause, evidence, proposed fix. Every claim links to its source document."},
+      {"title": "Approve or correct", "detail": "A correction teaches nothing silently: it is logged and reviewed weekly."},
+      {"title": "Fall back any time", "detail": "The ERP screen stays available. Nothing is taken away on day one."}
+    ],
+    "facts": [
+      {"value": "10 min", "label": "to the first approved exception", "basis": "assumption"},
+      {"value": "0", "label": "new logins or installs for the clerk", "basis": "estimate", "source": "single sign-on through the company directory"}
+    ]
+  },
+  "roadmap": {
+    "headline": "A working slice in three weeks, real invoices in ten",
+    "items": [
+      {"phase": "Proof of concept", "duration": "Weeks 1–3", "items": ["One exception type: price mismatch", "Synthetic invoices, mocked ERP", "Inbox, two agents, three tools"], "gate": "20 synthetic exceptions resolved with the right cause in at least 17"},
+      {"phase": "Pilot", "duration": "Weeks 4–10", "items": ["ERP adapter, read-only first", "Two clerks, real invoices", "Quantity and tax mismatches"], "gate": "Time to a decision under one hour on real cases"},
+      {"phase": "Production", "duration": "Quarter 2", "items": ["Release tool switched on", "All four clerks", "Monitoring and weekly review"], "gate": "Finance controller signs off the audit trail"}
+    ]
+  },
+  "criteria": {
+    "items": [
+      {"name": "Completeness and feasibility", "evidence": ["One exception type works end to end on synthetic data", "The architecture names every IBM component and what is mocked", "A three-phase plan with a gate after each phase"], "gap": "The ERP adapter is designed, not built."},
+      {"name": "Creativity and innovation", "evidence": ["The agent reads the email thread, not only the numbers", "Two agents so that a single tool can write"], "gap": "No patent or market search was done."},
+      {"name": "Design and usability", "evidence": ["The clerk works in one inbox and approves with one click", "Every claim links to the document it came from"], "gap": "Tested with one clerk so far."},
+      {"name": "Effectiveness and efficiency", "evidence": ["Three days to twenty minutes on the timed cases", "The same pattern covers credit notes and onboarding"], "gap": "Discount capture is an assumption until treasury confirms."}
+    ]
+  },
+  "risks": {
+    "items": [
+      {"risk": "The agent names the wrong cause", "level": "medium", "mitigation": "The clerk approves every release; wrong causes are logged and reviewed weekly."},
+      {"risk": "Supplier emails carry instructions aimed at the agent", "level": "medium", "mitigation": "Email text is quoted as evidence and never followed; the release tool takes its amount from the ERP, not from the email."},
+      {"risk": "The ERP adapter takes longer than planned", "level": "high", "mitigation": "The pilot starts read-only; release stays manual until the adapter is proven."}
+    ]
+  },
+  "assumptions": [
+    {"text": "Six in ten exceptions can be closed without the buyer", "check": "Label 50 past exceptions by hand: was the answer already in the documents?"},
+    {"text": "Discount capture rises to 80 percent", "check": "Ask treasury for the discounts offered and taken in the last quarter."},
+    {"text": "A clerk approves the first exception within ten minutes", "check": "Time two clerks on the proof of concept in week 3."}
+  ],
+  "sources": [
+    {"label": "ERP exception report", "detail": "June to August, exported by the accounts payable lead."},
+    {"label": "Timed cases", "detail": "Twelve exceptions followed from block to release in September."}
+  ]
+}
