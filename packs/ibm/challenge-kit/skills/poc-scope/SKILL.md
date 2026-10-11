@@ -1,6 +1,6 @@
 ---
 name: poc-scope
-description: Cut a real, complex case down to a proof of concept that can run in a few weeks without real company data. Chooses the thin slice (one case type carried end to end), sorts every component into real, mocked or out, designs mocks that sit behind the real interfaces so they can be swapped for the system later, and generates invented data with planted cases and an answer key from a small JSON schema. Use when the team wants to build on a real company process or system, asks what to include in the PoC, needs test or demo data, cannot use production data, asks for synthetic data or mocks, or says "с чего начать сборку", "что войдёт в PoC", "нужны тестовые данные", "синтетические данные", "scope the PoC".
+description: Cut a real, complex case down to a proof of concept that can run in a few weeks without real company data. Chooses the thin slice (one case type carried end to end), sorts every component into real, mocked or out, designs mocks that sit behind the real interfaces so they can be swapped for the system later, and generates invented data with planted cases and an answer key from a small JSON schema. Use when the team wants to build on a real company process or system, asks what to include in the PoC, needs test or demo data, cannot use production data, asks for synthetic data or mocks, or says "scope the PoC".
 ---
 
 # poc-scope

@@ -1,6 +1,6 @@
 ---
 name: usability-pass
-description: Walk a built proof of concept as a first-time user and find what would stop a real one - the first minute, the first screen, empty states, waiting, errors, wording, trust in the result, and for an agent or chat the opening, not knowing, clarifying questions and confirmation before acting. Returns findings rated blocks, slows or polish with the smallest fix for each, a five-minute test script for one real person, the time to first value, and the adoption section of the blueprint. Use when a PoC or demo runs and the user asks whether it is easy to use, wants UX feedback or a usability review, prepares for judging on design and usability, or says "проверь юзабилити", "удобно ли пользоваться", "посмотри глазами пользователя", "UX review".
+description: Walk a built proof of concept as a first-time user and find what would stop a real one - the first minute, the first screen, empty states, waiting, errors, wording, trust in the result, and for an agent or chat the opening, not knowing, clarifying questions and confirmation before acting. Returns findings rated blocks, slows or polish with the smallest fix for each, a five-minute test script for one real person, the time to first value, and the adoption section of the blueprint. Use when a PoC or demo runs and the user asks whether it is easy to use, wants UX feedback or a usability review, prepares for judging on design and usability, or says "UX review".
 ---
 
 # usability-pass

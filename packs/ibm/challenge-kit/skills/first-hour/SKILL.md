@@ -1,6 +1,6 @@
 ---
 name: first-hour
-description: A guided first session for someone who has never worked with a coding agent, done on their own challenge task instead of a tutorial. Checks the hackathon setup (the right Bob account, the Bobcoin budget, building inside Bob IDE so the session report exists), then walks through one small real task in five moves - say the goal, give the context, agree a plan, let Bob do one step and read what it did, check the result - and leaves a one-page card of working habits. Use when the user says they are new to Bob or to AI coding assistants, asks how to work with Bob or how to start, seems unsure what to type, or says "я первый раз", "как работать с Bob", "с чего начать", "never used a coding agent".
+description: A guided first session for someone who has never worked with a coding agent, done on their own challenge task instead of a tutorial. Checks the hackathon setup (the right Bob account, the Bobcoin budget, building inside Bob IDE so the session report exists), then walks through one small real task in five moves - say the goal, give the context, agree a plan, let Bob do one step and read what it did, check the result - and leaves a one-page card of working habits. Use when the user says they are new to Bob or to AI coding assistants, asks how to work with Bob or how to start, seems unsure what to type, or says "never used a coding agent".
 ---
 
 # first-hour

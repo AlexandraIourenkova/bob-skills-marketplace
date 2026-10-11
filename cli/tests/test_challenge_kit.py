@@ -278,11 +278,11 @@ def test_init_never_overwrites(tmp_path: Path) -> None:
 
 def test_labels_translate_the_fixed_text() -> None:
     spec = example()
-    spec["meta"]["language"] = "ru"
-    spec["labels"] = {"Before": "Было", "steps": "шагов", "min": "мин", "Process": "Процесс"}
+    spec["meta"]["language"] = "de"
+    spec["labels"] = {"Before": "Vorher", "steps": "Schritte", "min": "Min.", "Process": "Prozess"}
     html, _ = blueprint.render(spec, blueprint.THEMES["carbon"])
     text = "".join(parse(html).text)
-    assert "Было" in text and "шагов" in text and "45 мин" not in text and "5 мин" in text
+    assert "Vorher" in text and "Schritte" in text and "45 Min." not in text and "5 Min." in text
     _, warnings = blueprint.check({**spec, "labels": {"Nope": "x"}})
     assert any("'Nope' is not a label" in w for w in warnings)
     try:

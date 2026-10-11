@@ -18,21 +18,21 @@ rules:
     values never reach the output, the repository is untouched). Limited to this file and to
     findings that name .env.'
 fingerprints:
-- hash: sha256:31bfbd09cf3b97b318d4e8957d1d243886175fe61047e790a6bcd86755d36921
+- hash: sha256:e24c37d4a2a7f3d4566e94b189492f2dd1c8be9fa1b5ac8f0367beeac89f4293
   rule_id: LP3
   file: SKILL.md
   reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
     SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
     challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
     rule.'
-- hash: sha256:f10296a0431bfb7218475f4d80ca77389164ad1e0832f3760f0aba36b23dd385
+- hash: sha256:6223c917b7444f7d5959a1f421fff2550ba5cef6e2579e89d3e47375c5281ec7
   rule_id: LP3
   file: SKILL.md
   reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in
     SKILL.md frontmatter. Bob reads name and description only; the tool scope comes from the
     challenge-coach mode (read, execute, skill, edits only under challenge/) and the challenge-kit
     rule.'
-- hash: sha256:e5d1824edba444b87c49cc0946ec6f139bf51f230222027c2d75c4bce496c8f0
+- hash: sha256:e01d3a38f2046e230d0230071b55773e229d9c9eb84af31ce2e03048b476bbeb
   rule_id: RA2
   file: SKILL.md
   reason: 'Reviewed 2026-10-08 by the pack authors: RA2 (session persistence) matches the words
@@ -50,7 +50,7 @@ fingerprints:
     code and writes nothing but the optional --json result (cli/tests/test_challenge_kit.py:
     values never reach the output, the repository is untouched). Limited to this file and to
     findings that name .env.'
-- hash: sha256:cdf7d964417acc7748255efa4537bebf3c834b6e5864ee51e12aaf21d65e2833
+- hash: sha256:53b8c05d6798c690aeff35cac153109b39979c5cc614db63de4013f489007132
   rule_id: LP3
   file: SKILL.md
   reason: 'Reviewed 2026-10-08 by the pack authors: LP3 is the missing allowed-tools field in

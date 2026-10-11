@@ -1,6 +1,6 @@
 ---
 name: demo-script
-description: Plan the demonstration of a challenge or hackathon entry - one claim, one case carried from start to outcome on the real screen, the single moment the room understands, timings for each step, the demo data and its reset, a prepared answer for every way it can break, a recorded backup and a checklist for the day. Writes the run of show and fills the demo section of the blueprint. Use when the team prepares to show their PoC, asks how to demo, what to show in three minutes, how to prepare for demo day or what to do if the demo fails, or says "сценарий демо", "как показать решение", "подготовка к демо", "demo script", "run of show".
+description: Plan the demonstration of a challenge or hackathon entry - one claim, one case carried from start to outcome on the real screen, the single moment the room understands, timings for each step, the demo data and its reset, a prepared answer for every way it can break, a recorded backup and a checklist for the day. Writes the run of show and fills the demo section of the blueprint. Use when the team prepares to show their PoC, asks how to demo, what to show in three minutes, how to prepare for demo day or what to do if the demo fails, or says "demo script", "run of show".
 ---
 
 # demo-script

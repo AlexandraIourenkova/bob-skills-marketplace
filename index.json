@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-08T10:57:12Z",
+  "generated": "2026-10-11T08:23:47Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "e69223116a715c39541940f01079e4321d246d71"
+    "commit": "a72b79a6bbfc968fc5b1ad2546694846c5fb7497"
   },
   "vendors": [
     {
@@ -249,7 +249,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:5a2cf38932aac1be20b3ac04c2207bb9a9088f339a7e0b1119422827d5ec0c16"
+          "digest": "sha256:ea5588bad28a8daec22b6da93203d9bbfbf658cd52b8c4486f54116175b26eea"
         },
         {
           "name": "skill-creator",
@@ -280,7 +280,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:041db1a9e28f12cfa4ff674c8c951bc5d1bcec958cb5f466432ccd4d8b3542ae",
+      "digest": "sha256:9e987a36dea8772feaa21e4170b3ecefab1653b647fd843d08a5d7a69fe9cc94",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -296,7 +296,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-08T10:57:09Z",
+        "scannedAt": "2026-10-11T08:19:28Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 60,
         "ciscoMaxSeverity": "INFO",
@@ -326,43 +326,43 @@
       "skills": [
         {
           "name": "first-hour",
-          "description": "A guided first session for someone who has never worked with a coding agent, done on their own challenge task instead of a tutorial. Checks the hackathon setup (the right Bob account, the Bobcoin budget, building inside Bob IDE so the session report exists), then walks through one small real task in five moves - say the goal, give the context, agree a plan, let Bob do one step and read what it did, check the result - and leaves a one-page card of working habits. Use when the user says they are new to Bob or to AI coding assistants, asks how to work with Bob or how to start, seems unsure what to type, or says \"я первый раз\", \"как работать с Bob\", \"с чего начать\", \"never used a coding agent\".",
-          "digest": "sha256:c0effed8099c09603fc12e9e9180cad142be32153eb2df4c982f8bd24e9538ef"
+          "description": "A guided first session for someone who has never worked with a coding agent, done on their own challenge task instead of a tutorial. Checks the hackathon setup (the right Bob account, the Bobcoin budget, building inside Bob IDE so the session report exists), then walks through one small real task in five moves - say the goal, give the context, agree a plan, let Bob do one step and read what it did, check the result - and leaves a one-page card of working habits. Use when the user says they are new to Bob or to AI coding assistants, asks how to work with Bob or how to start, seems unsure what to type, or says \"never used a coding agent\".",
+          "digest": "sha256:3a2e3cb04ed06068c6c57da8d7bc2b92b54a670c522516674e2d0939779e78bf"
         },
         {
           "name": "idea-studio",
-          "description": "Find a challenge or hackathon idea worth building when there is nothing to start from, or sharpen half an idea. A short interview about the team's own world, then six to eight ideas forced apart across directions (new application, modernisation, Bob with MCP, AI agent) and kinds of value, each with who it helps, the demo moment, the argument for it and its main risk, scored against the four judging criteria, with one recommendation and the reasoning. Renders the ideas as an HTML board to choose from. Use when the user says they have no idea what to build, asks for project or PoC ideas, wants to brainstorm for the Bob challenge or a hackathon, wants to compare several ideas, or says \"придумай идею\", \"не знаю что делать на хакатоне\", \"идеи для PoC\", \"what should we build\".",
-          "digest": "sha256:9355dfa0f45813c43fd39d828d68c4d4e460df931d61aebcefff675dc6e33f4d"
+          "description": "Find a challenge or hackathon idea worth building when there is nothing to start from, or sharpen half an idea. A short interview about the team's own world, then six to eight ideas forced apart across directions (new application, modernisation, Bob with MCP, AI agent) and kinds of value, each with who it helps, the demo moment, the argument for it and its main risk, scored against the four judging criteria, with one recommendation and the reasoning. Renders the ideas as an HTML board to choose from. Use when the user says they have no idea what to build, asks for project or PoC ideas, wants to brainstorm for the Bob challenge or a hackathon, wants to compare several ideas, or says \"what should we build\".",
+          "digest": "sha256:78959e0bbb27d878f3ae5a2cb9dacfaf0eaee9817664592e108160494a447302"
         },
         {
           "name": "process-redesign",
-          "description": "Simplify, automate or improve an existing process, and question whether it should exist in its present shape. Interviews the user by slots (outcome, trigger, steps, actors, systems, work time and waiting time, volume, rules, expectations), closes the gaps between what they expect and what can be built, draws the process as lanes with its totals, then proposes two options, one that improves the process and one that replaces it, with an honest comparison, and turns the chosen one into a week-by-week plan for a proof of concept. Use when the user wants to automate or speed up a workflow, describes how something is done today, brings a process document or SOP, asks for a plan to improve a business process, or says \"автоматизировать процесс\", \"упростить процесс\", \"улучшить наш процесс\", \"as-is and to-be\", \"map this process\".",
-          "digest": "sha256:cc1d83b25034c45e621a581217ca0e2066fcd22d6c96cbdb2f576ea9da0832eb"
+          "description": "Simplify, automate or improve an existing process, and question whether it should exist in its present shape. Interviews the user by slots (outcome, trigger, steps, actors, systems, work time and waiting time, volume, rules, expectations), closes the gaps between what they expect and what can be built, draws the process as lanes with its totals, then proposes two options, one that improves the process and one that replaces it, with an honest comparison, and turns the chosen one into a week-by-week plan for a proof of concept. Use when the user wants to automate or speed up a workflow, describes how something is done today, brings a process document or SOP, asks for a plan to improve a business process, or says \"as-is and to-be\", \"map this process\".",
+          "digest": "sha256:1eb14cdf2936bbc1b9e75171de892ca07e310aee0196032dd8867c2df9d65a61"
         },
         {
           "name": "poc-scope",
-          "description": "Cut a real, complex case down to a proof of concept that can run in a few weeks without real company data. Chooses the thin slice (one case type carried end to end), sorts every component into real, mocked or out, designs mocks that sit behind the real interfaces so they can be swapped for the system later, and generates invented data with planted cases and an answer key from a small JSON schema. Use when the team wants to build on a real company process or system, asks what to include in the PoC, needs test or demo data, cannot use production data, asks for synthetic data or mocks, or says \"с чего начать сборку\", \"что войдёт в PoC\", \"нужны тестовые данные\", \"синтетические данные\", \"scope the PoC\".",
-          "digest": "sha256:4dbbcfec781593450242ab8e4a2901eb886815b509a4a7f68d8346f500691bad"
+          "description": "Cut a real, complex case down to a proof of concept that can run in a few weeks without real company data. Chooses the thin slice (one case type carried end to end), sorts every component into real, mocked or out, designs mocks that sit behind the real interfaces so they can be swapped for the system later, and generates invented data with planted cases and an answer key from a small JSON schema. Use when the team wants to build on a real company process or system, asks what to include in the PoC, needs test or demo data, cannot use production data, asks for synthetic data or mocks, or says \"scope the PoC\".",
+          "digest": "sha256:42e628919ce73dd54effd776973fe996687d73f9566a74c94c61c1be07dae134"
         },
         {
           "name": "solution-blueprint",
-          "description": "Write the solution blueprint of a challenge, hackathon or proof-of-concept entry as one impressive, self-contained HTML document with real diagrams - the one number that matters, the process before and after as lanes on a shared time scale, a layered architecture diagram with IBM technology marked, impact as before and after bars and a value waterfall, alternatives, demo storyboard, adoption path, roadmap, the judging criteria answered, risks and assumptions. Every number is marked measured, estimate or assumption, and the document says whether it is a plan or drawn from the working build. Three themes, print to PDF, a presenter mode, right-to-left languages. Use when the user asks for a solution document, a design paper, an architecture diagram, a business case, a one-pager for management, a submission document, or says \"сделай документ по решению\", \"диаграмма архитектуры\", \"бизнес-кейс\", \"blueprint\", \"write up our PoC\".",
-          "digest": "sha256:8baf1c46431416ac54b4cb2c1643d4c0451fe2eae6a9191de99cc4b520c4267d"
+          "description": "Write the solution blueprint of a challenge, hackathon or proof-of-concept entry as one impressive, self-contained HTML document with real diagrams - the one number that matters, the process before and after as lanes on a shared time scale, a layered architecture diagram with IBM technology marked, impact as before and after bars and a value waterfall, alternatives, demo storyboard, adoption path, roadmap, the judging criteria answered, risks and assumptions. Every number is marked measured, estimate or assumption, and the document says whether it is a plan or drawn from the working build. Three themes, print to PDF, a presenter mode, right-to-left languages. Use when the user asks for a solution document, a design paper, an architecture diagram, a business case, a one-pager for management, a submission document, or says \"blueprint\", \"write up our PoC\".",
+          "digest": "sha256:2158a3295ad3729958c13a0e4e63196f73a0cc576f861ba6ca9c29c361548622"
         },
         {
           "name": "usability-pass",
-          "description": "Walk a built proof of concept as a first-time user and find what would stop a real one - the first minute, the first screen, empty states, waiting, errors, wording, trust in the result, and for an agent or chat the opening, not knowing, clarifying questions and confirmation before acting. Returns findings rated blocks, slows or polish with the smallest fix for each, a five-minute test script for one real person, the time to first value, and the adoption section of the blueprint. Use when a PoC or demo runs and the user asks whether it is easy to use, wants UX feedback or a usability review, prepares for judging on design and usability, or says \"проверь юзабилити\", \"удобно ли пользоваться\", \"посмотри глазами пользователя\", \"UX review\".",
-          "digest": "sha256:24580443c8966ecf32a3f32f3c1d12d7bf666bc0714d2240c90d50a6b5f5033e"
+          "description": "Walk a built proof of concept as a first-time user and find what would stop a real one - the first minute, the first screen, empty states, waiting, errors, wording, trust in the result, and for an agent or chat the opening, not knowing, clarifying questions and confirmation before acting. Returns findings rated blocks, slows or polish with the smallest fix for each, a five-minute test script for one real person, the time to first value, and the adoption section of the blueprint. Use when a PoC or demo runs and the user asks whether it is easy to use, wants UX feedback or a usability review, prepares for judging on design and usability, or says \"UX review\".",
+          "digest": "sha256:8986630f099c6bc696afcf908f68797f16c57e0d50e54a76df9442d4ad9f519e"
         },
         {
           "name": "demo-script",
-          "description": "Plan the demonstration of a challenge or hackathon entry - one claim, one case carried from start to outcome on the real screen, the single moment the room understands, timings for each step, the demo data and its reset, a prepared answer for every way it can break, a recorded backup and a checklist for the day. Writes the run of show and fills the demo section of the blueprint. Use when the team prepares to show their PoC, asks how to demo, what to show in three minutes, how to prepare for demo day or what to do if the demo fails, or says \"сценарий демо\", \"как показать решение\", \"подготовка к демо\", \"demo script\", \"run of show\".",
-          "digest": "sha256:40764657162ec2807f05bb1dd86dc755686fd76fe5dd1c4c1dc895ba7535ba68"
+          "description": "Plan the demonstration of a challenge or hackathon entry - one claim, one case carried from start to outcome on the real screen, the single moment the room understands, timings for each step, the demo data and its reset, a prepared answer for every way it can break, a recorded backup and a checklist for the day. Writes the run of show and fills the demo section of the blueprint. Use when the team prepares to show their PoC, asks how to demo, what to show in three minutes, how to prepare for demo day or what to do if the demo fails, or says \"demo script\", \"run of show\".",
+          "digest": "sha256:5a1a2e9762ad1d174436fc37148c018ea3c26950dfde8e0cb0307180ffcb531b"
         },
         {
           "name": "submission-check",
-          "description": "Check a challenge or hackathon entry before it is submitted or its repository is made public. A read-only script looks for credentials in the tracked files and in the git history, for files that should not be tracked, and for the pieces an entry needs (README, blueprint, exported Bob session report, nothing uncommitted); then Bob reads the README as a stranger, checks the files for real company data, and scores the entry against the four judging criteria with evidence to find the weakest one while there is time to act. Reports only - it never rewrites history, rotates a key or pushes. Use before submitting, before making a repository public or pushing it to a public host, when the user asks whether the entry is ready, or says \"проверь перед сдачей\", \"готовы ли мы к сдаче\", \"можно ли пушить в публичный репозиторий\", \"pre-submission check\", \"are we ready to submit\".",
-          "digest": "sha256:6c16665c9723dbde166bc8197be1a7b68052f21fa4e2e98d0f4644964bc10179"
+          "description": "Check a challenge or hackathon entry before it is submitted or its repository is made public. A read-only script looks for credentials in the tracked files and in the git history, for files that should not be tracked, and for the pieces an entry needs (README, blueprint, exported Bob session report, nothing uncommitted); then Bob reads the README as a stranger, checks the files for real company data, and scores the entry against the four judging criteria with evidence to find the weakest one while there is time to act. Reports only - it never rewrites history, rotates a key or pushes. Use before submitting, before making a repository public or pushing it to a public host, when the user asks whether the entry is ready, or says \"pre-submission check\", \"are we ready to submit\".",
+          "digest": "sha256:6d98dbf2d1b3c4d22c5812f4973dfd1754b1486151f7a6983b9ba7125a21faac"
         }
       ],
       "mcpServers": [],
@@ -375,7 +375,7 @@
       "modes": [
         "challenge-coach"
       ],
-      "digest": "sha256:a786729c6d0264e9dbe0f96c96511d1ac55cbc408000489eecf41836d215e107",
+      "digest": "sha256:ffe4bf36e69f224824f85131b4a31317d575cae2ce2cf43d665652867d0d2e0d",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -387,7 +387,7 @@
         "riskScore": 0,
         "policyFindings": 3,
         "verdict": "pass",
-        "scannedAt": "2026-10-08T10:56:36Z",
+        "scannedAt": "2026-10-11T08:23:45Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 7,
         "ciscoMaxSeverity": "INFO",

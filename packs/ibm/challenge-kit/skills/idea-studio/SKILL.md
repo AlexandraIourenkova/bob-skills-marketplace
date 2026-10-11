@@ -1,6 +1,6 @@
 ---
 name: idea-studio
-description: Find a challenge or hackathon idea worth building when there is nothing to start from, or sharpen half an idea. A short interview about the team's own world, then six to eight ideas forced apart across directions (new application, modernisation, Bob with MCP, AI agent) and kinds of value, each with who it helps, the demo moment, the argument for it and its main risk, scored against the four judging criteria, with one recommendation and the reasoning. Renders the ideas as an HTML board to choose from. Use when the user says they have no idea what to build, asks for project or PoC ideas, wants to brainstorm for the Bob challenge or a hackathon, wants to compare several ideas, or says "придумай идею", "не знаю что делать на хакатоне", "идеи для PoC", "what should we build".
+description: Find a challenge or hackathon idea worth building when there is nothing to start from, or sharpen half an idea. A short interview about the team's own world, then six to eight ideas forced apart across directions (new application, modernisation, Bob with MCP, AI agent) and kinds of value, each with who it helps, the demo moment, the argument for it and its main risk, scored against the four judging criteria, with one recommendation and the reasoning. Renders the ideas as an HTML board to choose from. Use when the user says they have no idea what to build, asks for project or PoC ideas, wants to brainstorm for the Bob challenge or a hackathon, wants to compare several ideas, or says "what should we build".
 ---
 
 # idea-studio
