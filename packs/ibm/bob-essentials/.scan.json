@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-10-12T08:35:23Z",
+  "scannedAt": "2026-10-12T11:57:29Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
@@ -11,7 +11,7 @@
   },
   "skills": {
     "find-skills": {
-      "digest": "sha256:90d934faef626a8a6b520461afc540a0d39c444134241b0e8006834a4d5f74dd",
+      "digest": "sha256:4305b4c7691c84ebccf18b8b10badce57302e1989ede1358fe7da4316f3518b3",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",

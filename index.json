@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-12T09:05:17Z",
+  "generated": "2026-10-12T11:59:58Z",
   "registry": {
     "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace.git",
-    "commit": "315c7a17fcda27826067adc018ff800d11200ae7"
+    "commit": "b454f25c0a0796ad75fbe5cd2ab3c86ec5a214a2"
   },
   "vendors": [
     {
@@ -249,7 +249,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:90d934faef626a8a6b520461afc540a0d39c444134241b0e8006834a4d5f74dd"
+          "digest": "sha256:4305b4c7691c84ebccf18b8b10badce57302e1989ede1358fe7da4316f3518b3"
         },
         {
           "name": "skill-creator",
@@ -280,7 +280,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:32da0b9e912d1746a6afe4b310cbd7c6b7a4544697287202ee6f9dd443456265",
+      "digest": "sha256:83acb5c0bd4b77430018b49df7e8f1b5fcbf0e9a80aebcd8ca4e036e80ce3649",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -296,7 +296,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-12T08:35:23Z",
+        "scannedAt": "2026-10-12T11:57:29Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 60,
         "ciscoMaxSeverity": "INFO",
@@ -1591,7 +1591,7 @@
       "description": "Bring legacy screens to Carbon with IBM's UI modernization skills and modernize application code (Java EE to Quarkus, WebSphere) with watsonx Code Assistant guidance.",
       "source": "IBM UI modernization lab and IBM/application-modernization-javaee-quarkus",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/1",
       "votes": 0
     },
     {
@@ -1603,7 +1603,7 @@
       "description": "Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality. Modes and MCP configuration instead of skills.",
       "source": "https://github.com/ibm-self-serve-assets",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/2",
       "votes": 0
     },
     {
@@ -1615,7 +1615,7 @@
       "description": "Plan before implementing, review code, diagnose bugs, write architecture decision records. Original IBM skills for the everyday loop, the second most installed category on public skill directories.",
       "source": "written by the marketplace team",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/3",
       "votes": 0
     },
     {
@@ -1627,7 +1627,7 @@
       "description": "Ask a question of a CSV, Excel file, SQLite, PostgreSQL or Db2 table and get the query, the profile of the data and a chart, then the report through office-docs and presentations. watsonx.data and the data catalogue come in through IBM's own MCP servers.",
       "source": "IBM/ibm-watsonxdata-mcp-server and IBM/data-intelligence-mcp-server, plus our own skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/4",
       "votes": 0
     },
     {
@@ -1639,7 +1639,7 @@
       "description": "Parsers for JSON, syslog, Java stack traces and OpenShift and Cloud Pak logs, error clustering, a timeline correlated by request id, and a report with root-cause hypotheses. Everything runs on the machine, so logs and the secrets in them stay there.",
       "source": "our own skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/5",
       "votes": 0
     },
     {
@@ -1651,7 +1651,7 @@
       "description": "Cluster troubleshooting with scripts, cluster updates, GitOps with an Argo knowledge base, and token lookup, curated from Red Hat's own OpenShift skills. Ansible follows when Red Hat publishes skills for it.",
       "source": "https://github.com/openshift/agentic-skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/6",
       "votes": 0
     },
     {
@@ -1663,7 +1663,7 @@
       "description": "AWS and Azure image builders, Windows builder and push-to-registry skills from hashicorp/agent-skills.",
       "source": "https://github.com/hashicorp/agent-skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/7",
       "votes": 0
     },
     {
@@ -1675,7 +1675,7 @@
       "description": "Forty skills for the Azure SDKs in Python: identity, storage, Cosmos DB, AI services, monitoring, messaging.",
       "source": "https://github.com/microsoft/skills",
       "blockedBy": "",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/8",
       "votes": 0
     },
     {
@@ -1687,7 +1687,7 @@
       "description": "Oracle's own database skills: administration, application development, migrations, PL/SQL, performance, SQLcl and vector search, plus OKE and Functions for OCI.",
       "source": "https://github.com/oracle/skills",
       "blockedBy": "The skills are UPL-1.0, which is not yet on the registry's licence list (Apache-2.0, MIT, MPL-2.0); the policy decision comes first",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/9",
       "votes": 0
     },
     {
@@ -1699,7 +1699,7 @@
       "description": "Elastic's own skills for SRE triage, Kubernetes investigation, ES|QL queries, alert triage and detection rules: logs, observability and SIEM from one vendor.",
       "source": "https://github.com/elastic/agent-skills",
       "blockedBy": "A new vendor: Elastic joins the registry with its first curated pack, and the votes here say whether teams want it",
-      "issue": "",
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/10",
       "votes": 0
     }
   ]

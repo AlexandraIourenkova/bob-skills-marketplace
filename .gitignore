@@ -23,6 +23,9 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Local credentials never belong in the registry
+.env
+
 # Local install targets never belong in the registry
 .bob/skills.lock
 

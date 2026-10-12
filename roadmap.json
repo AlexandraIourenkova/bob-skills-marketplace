@@ -11,7 +11,8 @@
       "source": "IBM UI modernization lab and IBM/application-modernization-javaee-quarkus",
       "blockedBy": "",
       "vendorDisplayName": "IBM",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/1"
     },
     {
       "name": "building-blocks",
@@ -22,7 +23,8 @@
       "source": "https://github.com/ibm-self-serve-assets",
       "blockedBy": "",
       "vendorDisplayName": "IBM",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/2"
     },
     {
       "name": "dev-workflow",
@@ -33,7 +35,8 @@
       "source": "written by the marketplace team",
       "blockedBy": "",
       "vendorDisplayName": "IBM",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/3"
     },
     {
       "name": "data-analyst",
@@ -44,7 +47,8 @@
       "source": "IBM/ibm-watsonxdata-mcp-server and IBM/data-intelligence-mcp-server, plus our own skills",
       "blockedBy": "",
       "vendorDisplayName": "IBM",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/4"
     },
     {
       "name": "log-triage",
@@ -55,7 +59,8 @@
       "source": "our own skills",
       "blockedBy": "",
       "vendorDisplayName": "IBM",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/5"
     },
     {
       "name": "redhat-openshift",
@@ -66,7 +71,8 @@
       "source": "https://github.com/openshift/agentic-skills",
       "blockedBy": "",
       "vendorDisplayName": "Red Hat",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/6"
     },
     {
       "name": "hashicorp-packer",
@@ -77,7 +83,8 @@
       "source": "https://github.com/hashicorp/agent-skills",
       "blockedBy": "",
       "vendorDisplayName": "HashiCorp",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/7"
     },
     {
       "name": "microsoft-azure-sdk-python",
@@ -88,7 +95,8 @@
       "source": "https://github.com/microsoft/skills",
       "blockedBy": "",
       "vendorDisplayName": "Microsoft",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/8"
     },
     {
       "name": "oracle-database",
@@ -99,7 +107,8 @@
       "source": "https://github.com/oracle/skills",
       "blockedBy": "The skills are UPL-1.0, which is not yet on the registry's licence list (Apache-2.0, MIT, MPL-2.0); the policy decision comes first",
       "vendorDisplayName": "Oracle",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/9"
     },
     {
       "name": "elastic-observability",
@@ -110,7 +119,8 @@
       "source": "https://github.com/elastic/agent-skills",
       "blockedBy": "A new vendor: Elastic joins the registry with its first curated pack, and the votes here say whether teams want it",
       "vendorDisplayName": "Elastic",
-      "votes": 0
+      "votes": 0,
+      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/10"
     }
   ]
 }
