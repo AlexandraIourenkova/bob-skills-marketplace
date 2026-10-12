@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-12T08:35:24Z",
+  "generated": "2026-10-12T09:05:17Z",
   "registry": {
-    "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "036b969837c22091b0a5936e8af9caaff05038a8"
+    "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace.git",
+    "commit": "315c7a17fcda27826067adc018ff800d11200ae7"
   },
   "vendors": [
     {

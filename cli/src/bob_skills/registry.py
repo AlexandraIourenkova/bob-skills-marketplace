@@ -342,7 +342,9 @@ class Registry:
             "schemaVersion": 1,
             "generated": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
             "registry": {
-                "url": registry_url or git_optional("remote", "get-url", "origin", cwd=self.root) or "",
+                # The canonical address, so that a clone with another remote name or URL spelling
+                # (a CI checkout has no ".git" suffix) builds the same index.
+                "url": registry_url or DEFAULT_REGISTRY,
                 "commit": git_optional("rev-parse", "HEAD", cwd=self.root) or "",
             },
             "vendors": [{
