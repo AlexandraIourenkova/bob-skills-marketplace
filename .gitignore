@@ -34,7 +34,5 @@ cli/dist/
 # Local notes and drafts
 docs/marketplace-plan.md
 
-# Internal assessment of an outside hub: scan output, report and its HTML build.
-# Kept local on purpose. It names a sibling IBM team's project and is not part
-# of the registry.
+# Local review notes that are not part of the registry.
 docs/reviews/mode-hub-*

@@ -8,17 +8,17 @@
 # The marketplace team maintains the IBM vendor folder and curates its packs
 # from official IBM repositories.
 
-*                                   @Maria-Startseva
+*                                   @AlexandraIourenkova @CyberMaryVer
 
-/vendors.json                       @Maria-Startseva
-/schemas/                           @Maria-Startseva
-/.github/                           @Maria-Startseva
-/cli/                               @Maria-Startseva
+/vendors.json                       @AlexandraIourenkova @CyberMaryVer
+/schemas/                           @AlexandraIourenkova @CyberMaryVer
+/.github/                           @AlexandraIourenkova @CyberMaryVer
+/cli/                               @AlexandraIourenkova @CyberMaryVer
 
-/packs/ibm/                         @Maria-Startseva
-/packs/anthropic/                   @Maria-Startseva
-/packs/openai/                      @Maria-Startseva
-/packs/google/                      @Maria-Startseva
-/packs/hashicorp/                   @Maria-Startseva
-/packs/microsoft/                   @Maria-Startseva
-/packs/confluent/                   @Maria-Startseva
+/packs/ibm/                         @AlexandraIourenkova @CyberMaryVer
+/packs/anthropic/                   @AlexandraIourenkova @CyberMaryVer
+/packs/openai/                      @AlexandraIourenkova @CyberMaryVer
+/packs/google/                      @AlexandraIourenkova @CyberMaryVer
+/packs/hashicorp/                   @AlexandraIourenkova @CyberMaryVer
+/packs/microsoft/                   @AlexandraIourenkova @CyberMaryVer
+/packs/confluent/                   @AlexandraIourenkova @CyberMaryVer

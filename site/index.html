@@ -82,7 +82,7 @@
   <div class="right"><a id="request-link" href="#" target="_blank" rel="noopener">Request a pack</a></div>
 </header>
 <main id="app"><div class="wrap error">Loading the catalog…</div></main>
-<footer><div class="wrap"><span>Bob Skills Marketplace · skill packs for IBM Bob, checked and signed</span><span id="foot-right"></span></div></footer>
+<footer><div class="wrap"><span>Bob Skills Marketplace · skill packs for IBM Bob, checked and checksum-verified</span><span id="foot-right"></span></div></footer>
 <div class="toast" id="toast"></div>
 <script>
 (function () {
@@ -102,7 +102,7 @@
 
   function webUrl() {
     const url = (state.index.registry && state.index.registry.url || '').replace(/\.git$/, '');
-    return url || 'https://github.ibm.com/Maria-Startseva/bob-skills-marketplace';
+    return url || 'https://github.com/AlexandraIourenkova/bob-skills-marketplace';
   }
   function fileUrl(path) { return webUrl() + '/blob/main/' + path; }
   function toast(text) { const t = document.getElementById('toast'); t.textContent = text; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
@@ -181,8 +181,8 @@
     const vendors = Object.keys(vendorNames).map(id => ({ id, displayName: vendorNames[id] }));
     app.innerHTML = `
       <div class="hero"><div class="wrap">
-        <h1>Skill packs for IBM Bob, checked and signed before they reach your project</h1>
-        <p>Skills, MCP servers, rules and modes from official vendors, grouped by what you want to get done. One command to install, a lock file that keeps every project on the same version, a guard that refuses anything modified after install.</p>
+        <h1>Skill packs for IBM Bob, checked and checksum-verified before they reach your project</h1>
+        <p>Skills, MCP servers, rules and modes curated from the official repositories of the vendors whose products they are about, grouped by what you want to get done. One command to install, a lock file that keeps every project on the same version, a guard that refuses anything modified after install.</p>
         <div class="search"><input id="q" type="search" placeholder='Search packs, skills or vendors: try "orchestrate" or "excel"' value="${esc(state.q)}"></div>
       </div></div>
       <div class="wrap layout">
@@ -203,7 +203,7 @@
               <div class="foot">${gateLine(p)}<span class="btn ghost sm"><span>View pack</span>${ICON.arrow}</span></div>
             </a>`).join('') + planned.map(plannedCard).join('') || '<p>No packs match. Clear the filters, or request a pack.</p>'}</div>
           <div class="info">
-            <div><b>Only official vendors</b><p>A pack is published by the owner of the product it is about, or curated by the marketplace team from that vendor's official repository with provenance recorded.</p></div>
+            <div><b>Only official sources</b><p>A pack is curated by the marketplace team from the official repository of the vendor whose product it is about, with provenance recorded, or published by that vendor once it enrols. A vendor's name says where the skills come from, not that the vendor endorses this registry.</p></div>
             <div><b>Every version through the gate</b><p>Schema and checksums, policy linter, NVIDIA SkillSpector, Cisco skill-scanner, two human approvals. Accepted findings stay visible in a reviewed baseline.</p></div>
             <div><b>Guarded after install</b><p>The lock file records what was installed. A hook refuses any skill that is missing from it or was modified afterwards.</p></div>
           </div>
@@ -292,7 +292,7 @@
 
   function renderVendors() {
     const vendors = state.index.vendors || [];
-    app.innerHTML = `<div class="wrap"><div class="hero" style="background:transparent;padding:48px 0 0"><h1 style="font-size:32px;line-height:40px">Vendors</h1><p>Only the owner of a product publishes packs about it. The marketplace team curates packs from each vendor's official repositories, with provenance recorded, until the vendor enrols its own maintainers.</p></div>
+    app.innerHTML = `<div class="wrap"><div class="hero" style="background:transparent;padding:48px 0 0"><h1 style="font-size:32px;line-height:40px">Vendors</h1><p>Each pack is about one vendor's products. The marketplace team curates packs from each vendor's official repositories, with provenance recorded, until the vendor enrols its own maintainers. Apart from IBM, the vendors listed have not endorsed this registry.</p></div>
       <div class="vendors">${vendors.map(v => `<div class="tile">
         <div class="vendor"><div class="avatar">${esc(v.displayName.slice(0, 3).toUpperCase())}</div><span>${esc(v.displayName)}</span>${v.status === 'active' ? ICON.check : ''}<span class="tag ${v.status === 'active' ? 'green' : 'blue'}" style="margin-left:auto">${esc(v.status === 'active' ? 'Active' : v.status === 'planned' ? 'Candidate' : v.status)}</span></div>
         <div class="meta">${esc((v.github && v.github.host) || 'github.com')}/${esc((v.github && v.github.org) || '')}${(v.extraSources || []).map(s => ' · ' + esc(s.replace(/^https?:\/\//, ''))).join('')}</div>
@@ -318,7 +318,7 @@
     const web = webUrl();
     document.getElementById('docs-link').href = web + '#readme';
     document.getElementById('request-link').href = web + '/issues/new?template=request-pack.md';
-    document.getElementById('foot-right').innerHTML = `<a href="${web}" target="_blank" rel="noopener">Registry on GitHub Enterprise</a> · <a href="../index.json">index.json</a> · <a href="../marketplace.json">marketplace.json</a>`;
+    document.getElementById('foot-right').innerHTML = `<a href="${web}" target="_blank" rel="noopener">Registry on GitHub</a> · <a href="../index.json">index.json</a> · <a href="../marketplace.json">marketplace.json</a>`;
     route();
   }).catch(err => {
     app.innerHTML = `<div class="wrap error">Could not load <span class="mono">../index.json</span> (${esc(err.message)}). Serve the repository root over HTTP, for example <span class="mono">python3 -m http.server</span> in the registry checkout, then open <span class="mono">/site/</span>.</div>`;

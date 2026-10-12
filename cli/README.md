@@ -1,6 +1,6 @@
 # bob-skills
 
-Client for the Bob Skills Marketplace: installs vendor-signed skill packs into IBM Bob, keeps a lock file, and guards `use_skill` activations.
+Client for the Bob Skills Marketplace: installs curated, checksum-verified skill packs into IBM Bob, keeps a lock file, and guards `use_skill` activations.
 
 ```bash
 uvx bob-skills search orchestrate      # find packs
@@ -17,10 +17,10 @@ uvx bob-skills lint <pack-or-skill>    # marketplace policy linter (text or --fo
 bob-skills registry validate|build-index   # registry maintenance
 ```
 
-Install once, straight from the registry repository (needs git access to github.ibm.com):
+Install once, straight from the registry repository:
 
 ```bash
-uv tool install "git+https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git#subdirectory=cli"
+uv tool install "git+https://github.com/AlexandraIourenkova/bob-skills-marketplace.git#subdirectory=cli"
 ```
 
 Or run from a checkout without installing: `uv run --project cli bob-skills --help`. `uvx bob-skills` will work once the package is published to an index; the name is free on PyPI.

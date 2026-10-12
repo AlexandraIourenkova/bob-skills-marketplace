@@ -3,7 +3,8 @@
   "version": 1,
   "updated": "2026-09-10",
   "administrators": [
-    "Maria-Startseva"
+    "AlexandraIourenkova",
+    "CyberMaryVer"
   ],
   "vendors": [
     {
@@ -25,7 +26,8 @@
         "https://github.com/ibm-self-serve-assets"
       ],
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -57,7 +59,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -86,7 +89,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -113,7 +117,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -142,7 +147,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -167,7 +173,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [
@@ -201,7 +208,8 @@
         ]
       },
       "maintainers": [
-        "Maria-Startseva"
+        "AlexandraIourenkova",
+        "CyberMaryVer"
       ],
       "publicKey": null,
       "networkAllow": [

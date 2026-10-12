@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/schemas/vendors.schema.json",
+  "$id": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/schemas/vendors.schema.json",
   "title": "Bob Skills Marketplace vendor list (vendors.json)",
   "description": "The closed list of vendors allowed to publish packs. Only the owner of a product publishes packs about it. Changes require a PR with two marketplace-administrator approvals.",
   "type": "object",

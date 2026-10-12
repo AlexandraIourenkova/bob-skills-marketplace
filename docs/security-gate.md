@@ -14,7 +14,7 @@ No single scanner is a guarantee, so the gate is layered. Each layer catches its
 
 ## Three holes, checked in every pack
 
-The review of IBM's security MCP servers ([docs/reviews/ibm-security-mcp-servers.md](reviews/ibm-security-mcp-servers.md)) found three classes of holes. None of them may ship in a pack, and each has a check on both sides:
+A review of MCP servers for security products found three classes of holes. None of them may ship in a pack, and each has a check on both sides:
 
 | Hole | Registry gate | On the user's machine |
 |---|---|---|

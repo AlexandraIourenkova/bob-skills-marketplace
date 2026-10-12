@@ -6,7 +6,7 @@
   "vendor": "ibm",
   "description": "Create, edit, fill and extract Word documents, PowerPoint decks and Excel workbooks from Bob with python-docx, python-pptx and openpyxl. Original IBM skills with tested helper scripts; nothing leaves the machine.",
   "license": "Apache-2.0",
-  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
   "minBob": "2.0.2",
   "tags": [
     "documents",

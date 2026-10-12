@@ -2,7 +2,7 @@
   "name": "bob-skills-marketplace",
   "owner": {
     "name": "IBM Bob Skills Marketplace team",
-    "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
+    "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace"
   },
   "metadata": {
     "description": "Vendor-signed skill packs for IBM Bob. Install with `uvx bob-skills add <pack>`; other agents may read this manifest to discover packs.",
@@ -17,7 +17,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "watsonx-orchestrate",
@@ -38,7 +38,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "marketplace",
@@ -57,7 +57,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "challenge",
@@ -84,7 +84,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "ibm-cloud",
@@ -125,7 +125,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "documents",
@@ -145,7 +145,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "presentations",
@@ -186,7 +186,7 @@
       "author": {
         "name": "IBM"
       },
-      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "license": "Apache-2.0",
       "keywords": [
         "watsonx-orchestrate",

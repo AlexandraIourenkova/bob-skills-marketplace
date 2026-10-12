@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-11T08:23:47Z",
+  "generated": "2026-10-12T08:35:24Z",
   "registry": {
     "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git",
-    "commit": "a72b79a6bbfc968fc5b1ad2546694846c5fb7497"
+    "commit": "036b969837c22091b0a5936e8af9caaff05038a8"
   },
   "vendors": [
     {
@@ -187,7 +187,7 @@
       "modes": [
         "agent-evals"
       ],
-      "digest": "sha256:1653f568c38126bcd3d4d0b008c7006ed46af3ab4617b68a1c64eb9debbcaa68",
+      "digest": "sha256:5282b8c7add346f7ba901813d24a1c589b59303d4ae23cbab30e1e1189cda19f",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -206,7 +206,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "watsonx-orchestrate",
@@ -249,7 +249,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:ea5588bad28a8daec22b6da93203d9bbfbf658cd52b8c4486f54116175b26eea"
+          "digest": "sha256:90d934faef626a8a6b520461afc540a0d39c444134241b0e8006834a4d5f74dd"
         },
         {
           "name": "skill-creator",
@@ -280,7 +280,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:9e987a36dea8772feaa21e4170b3ecefab1653b647fd843d08a5d7a69fe9cc94",
+      "digest": "sha256:32da0b9e912d1746a6afe4b310cbd7c6b7a4544697287202ee6f9dd443456265",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -296,14 +296,14 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-11T08:19:28Z",
+        "scannedAt": "2026-10-12T08:35:23Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 60,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "marketplace",
@@ -375,7 +375,7 @@
       "modes": [
         "challenge-coach"
       ],
-      "digest": "sha256:ffe4bf36e69f224824f85131b4a31317d575cae2ce2cf43d665652867d0d2e0d",
+      "digest": "sha256:3a4eb535ea9e207a0dfd082824a09c896d8de4543e61f509f4fc5ce0c3f8e12c",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -394,7 +394,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "challenge",
@@ -466,7 +466,7 @@
       "modes": [
         "cloud-ops"
       ],
-      "digest": "sha256:f964984a2be85500d9989f87cab34fdcb2feb79e39947f3aea6e956dc02b1df0",
+      "digest": "sha256:28a1c450e5ba0d52f186ad3e2b4ea098714b25d9ab640b69e67254f496694115",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -485,7 +485,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "ibm-cloud",
@@ -638,7 +638,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:a9827c7e4c0f7b5375d02d6ec8f8381e53dc14efccb8cd75f8368a88b2c81f40",
+      "digest": "sha256:0e9f08d2371fe7330daa54bd164129f18b2763e6d6285f2a78a4c990e4193328",
       "revokedVersions": [],
       "versions": [
         "1.0.1",
@@ -658,7 +658,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "documents",
@@ -721,7 +721,7 @@
       "modes": [
         "deck-studio"
       ],
-      "digest": "sha256:cd7350e99ec1c673780e1d0b544c16a52ba6625774fb7164ce782e0223371dad",
+      "digest": "sha256:b5d07ec117795b160a1ba63d77824d4e2a50eb7960971c2804a6ede36ef11b4b",
       "revokedVersions": [],
       "versions": [
         "1.11.1",
@@ -741,7 +741,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "presentations",
@@ -895,7 +895,7 @@
       ],
       "commands": [],
       "modes": [],
-      "digest": "sha256:8563902faa28aa22817dc8b97a046aef6fca183ffabf7aed0ba3a4aec22d49cb",
+      "digest": "sha256:c29275790ef9c7c81af5c3c6cbbbed2d4af2c37d9cf957af58ff4ecce0f06838",
       "revokedVersions": [],
       "versions": [
         "1.1.0",
@@ -917,7 +917,7 @@
         "ciscoVersion": "2.1.0"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.ibm.com/tech-garage-spgi/excel-to-wxo",
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
       "minBob": "2.0.2",
       "tags": [
         "watsonx-orchestrate",
@@ -1591,7 +1591,7 @@
       "description": "Bring legacy screens to Carbon with IBM's UI modernization skills and modernize application code (Java EE to Quarkus, WebSphere) with watsonx Code Assistant guidance.",
       "source": "IBM UI modernization lab and IBM/application-modernization-javaee-quarkus",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/1",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1603,7 +1603,7 @@
       "description": "Bob modes from IBM Client Engineering: agent builder, RAG builder, text-to-SQL, data quality. Modes and MCP configuration instead of skills.",
       "source": "https://github.com/ibm-self-serve-assets",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/2",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1615,7 +1615,7 @@
       "description": "Plan before implementing, review code, diagnose bugs, write architecture decision records. Original IBM skills for the everyday loop, the second most installed category on public skill directories.",
       "source": "written by the marketplace team",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/3",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1627,7 +1627,7 @@
       "description": "Ask a question of a CSV, Excel file, SQLite, PostgreSQL or Db2 table and get the query, the profile of the data and a chart, then the report through office-docs and presentations. watsonx.data and the data catalogue come in through IBM's own MCP servers.",
       "source": "IBM/ibm-watsonxdata-mcp-server and IBM/data-intelligence-mcp-server, plus our own skills",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/9",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1639,7 +1639,7 @@
       "description": "Parsers for JSON, syslog, Java stack traces and OpenShift and Cloud Pak logs, error clustering, a timeline correlated by request id, and a report with root-cause hypotheses. Everything runs on the machine, so logs and the secrets in them stay there.",
       "source": "our own skills",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/10",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1651,7 +1651,7 @@
       "description": "Cluster troubleshooting with scripts, cluster updates, GitOps with an Argo knowledge base, and token lookup, curated from Red Hat's own OpenShift skills. Ansible follows when Red Hat publishes skills for it.",
       "source": "https://github.com/openshift/agentic-skills",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/7",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1663,7 +1663,7 @@
       "description": "AWS and Azure image builders, Windows builder and push-to-registry skills from hashicorp/agent-skills.",
       "source": "https://github.com/hashicorp/agent-skills",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/5",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1675,7 +1675,7 @@
       "description": "Forty skills for the Azure SDKs in Python: identity, storage, Cosmos DB, AI services, monitoring, messaging.",
       "source": "https://github.com/microsoft/skills",
       "blockedBy": "",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/6",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1687,7 +1687,7 @@
       "description": "Oracle's own database skills: administration, application development, migrations, PL/SQL, performance, SQLcl and vector search, plus OKE and Functions for OCI.",
       "source": "https://github.com/oracle/skills",
       "blockedBy": "The skills are UPL-1.0, which is not yet on the registry's licence list (Apache-2.0, MIT, MPL-2.0); the policy decision comes first",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/11",
+      "issue": "",
       "votes": 0
     },
     {
@@ -1699,7 +1699,7 @@
       "description": "Elastic's own skills for SRE triage, Kubernetes investigation, ES|QL queries, alert triage and detection rules: logs, observability and SIEM from one vendor.",
       "source": "https://github.com/elastic/agent-skills",
       "blockedBy": "A new vendor: Elastic joins the registry with its first curated pack, and the votes here say whether teams want it",
-      "issue": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/issues/12",
+      "issue": "",
       "votes": 0
     }
   ]

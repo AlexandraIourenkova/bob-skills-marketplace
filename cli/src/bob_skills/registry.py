@@ -25,7 +25,7 @@ from .hashing import IGNORED_NAMES, path_digest, tree_digest
 from .mcpcheck import PROBLEM as MCP_PROBLEM, check_server
 from .policy import host_allowed, read_frontmatter
 
-DEFAULT_REGISTRY = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git"
+DEFAULT_REGISTRY = "https://github.com/AlexandraIourenkova/bob-skills-marketplace.git"
 # The find-skills skill carries a generated catalog so Bob can answer offline.
 CATALOG_PATH = Path("packs/ibm/bob-essentials/skills/find-skills/references/catalog.md")
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z.-]+)?$")
@@ -437,7 +437,7 @@ class Registry:
         """Compatibility manifest in the marketplace.json shape used by other agents."""
         return {
             "name": "bob-skills-marketplace",
-            "owner": {"name": "IBM Bob Skills Marketplace team", "url": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"},
+            "owner": {"name": "IBM Bob Skills Marketplace team", "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace"},
             "metadata": {
                 "description": "Vendor-signed skill packs for IBM Bob. Install with `uvx bob-skills add <pack>`; other agents may read this manifest to discover packs.",
                 "version": "1.0.0",

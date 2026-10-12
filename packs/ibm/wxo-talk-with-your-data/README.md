@@ -12,7 +12,7 @@ Covered by: The skill and the pack rule name the environment and the objects and
 
 | Component | Source | What it adds |
 |---|---|---|
-| `skills/excel-to-wxo-agent` | IBM tech garage, [excel-to-wxo](https://github.ibm.com/tech-garage-spgi/excel-to-wxo) | Excel or CSV to a SQLite database bundled inside a watsonx Orchestrate Python tool, agent YAML with the schema baked into the instructions, import through the ADK CLI |
+| `skills/excel-to-wxo-agent` | IBM tech garage, excel-to-wxo (an IBM-internal repository, published here with its owner's consent) | Excel or CSV to a SQLite database bundled inside a watsonx Orchestrate Python tool, agent YAML with the schema baked into the instructions, import through the ADK CLI |
 | `skills/wxo-chat-demo-page` | same | Demo page with the embedded watsonx Orchestrate chat: hero, example questions, charts rendered from the agent's answers; served locally and verified end to end |
 | MCP server `watsonx-orchestrate-adk` | PyPI `ibm-watsonx-orchestrate-mcp-server` via `uvx` | ADK commands as tools |
 | MCP server `watsonx-orchestrate-adk-docs` | `https://developer.watson-orchestrate.ibm.com/mcp` | Current documentation on demand |

@@ -1,6 +1,6 @@
 [project]
 name = "bob-skills"
-version = "0.2.1"
+version = "0.2.2"
 description = "Install, verify and guard skill packs for IBM Bob from the Bob Skills Marketplace"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -26,9 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
-Repository = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace"
-Documentation = "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace#readme"
+Homepage = "https://github.com/AlexandraIourenkova/bob-skills-marketplace"
+Repository = "https://github.com/AlexandraIourenkova/bob-skills-marketplace"
+Documentation = "https://github.com/AlexandraIourenkova/bob-skills-marketplace#readme"
 
 [project.scripts]
 bob-skills = "bob_skills.cli:app"

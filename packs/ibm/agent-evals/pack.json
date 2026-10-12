@@ -6,7 +6,7 @@
   "vendor": "ibm",
   "description": "Test a deployed watsonx Orchestrate agent through its API and see every tool it called, with arguments, results and hand-offs. Cases in IBM's AgentOps Core format, runs that wait for your yes, offline scoring, Bob as the judge, and a report.",
   "license": "Apache-2.0",
-  "homepage": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+  "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
   "minBob": "2.0.2",
   "tags": [
     "watsonx-orchestrate",

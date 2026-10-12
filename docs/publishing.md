@@ -1,6 +1,6 @@
 # Publishing the client to PyPI
 
-The client lives in `cli/` and is published as `bob-skills` on PyPI (first release 0.1.0 on 2026-09-10) so that `uvx bob-skills add <pack>` works on any machine. Without PyPI access, install it from the repository with `uv tool install "git+https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git#subdirectory=cli"`.
+The client lives in `cli/` and is published as `bob-skills` on PyPI (first release 0.1.0 on 2026-09-10) so that `uvx bob-skills add <pack>` works on any machine. Without PyPI access, install it from the repository with `uv tool install "git+https://github.com/AlexandraIourenkova/bob-skills-marketplace.git#subdirectory=cli"`.
 
 ## Once: account and token
 

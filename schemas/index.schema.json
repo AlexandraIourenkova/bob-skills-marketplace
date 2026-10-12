@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace/schemas/index.schema.json",
+  "$id": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/schemas/index.schema.json",
   "title": "Bob Skills Marketplace search index (index.json)",
   "description": "Generated from vendors.json and every packs/<vendor>/<name>/pack.json by `bob-skills registry build-index`. Read by `bob-skills search`, the catalog page and the find-skills skill. Never edited by hand.",
   "type": "object",

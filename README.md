@@ -1,10 +1,10 @@
 # Bob Skills Marketplace
 
-One trusted place to get skills for [IBM Bob](https://bob.ibm.com). A few official vendors, IBM packs curated from official repositories, every version through a scanner gate, and three ways to install that all end in the same verified pack and the same lock entry.
+One trusted place to get skills for [IBM Bob](https://bob.ibm.com). Packs curated from the official repositories of a few vendors, IBM's own packs, every version through a scanner gate, and three ways to install that all end in the same verified pack and the same lock entry.
 
 ## The idea in four points
 
-- **A few official vendors.** Only large, reliable vendors publish, each for its own products: IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft and Confluent, and only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
+- **A few vendors' official repositories.** Each pack is about one vendor's products and is curated by the marketplace team from that vendor's own public repository: IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft and Confluent. A vendor's name says where the skills come from. Apart from IBM, the vendors named here did not publish these packs and have not endorsed this registry. Only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
 - **IBM packs first.** The team's own packs (office documents, talk with your data, the marketplace skills) and packs curated from official IBM repositories are the product; provenance (source repository, commit, checksum per component) is recorded for everything that was not written here.
 - **Every pack goes through a scanner gate.** Schema and checksums, a policy linter, NVIDIA SkillSpector, Cisco skill-scanner and two human approvals, for every version. Results are shown on the pack page, risk scores included, also for official vendor skills. After install, a lock file and a guard hook refuse anything unknown or modified.
 - **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or click "Add to Bob" on the website.
@@ -41,7 +41,7 @@ In chat, `find-skills` maps a pasted git URL to the pack whose source it is and 
 
 ```mermaid
 flowchart TD
-    src["Vendor's official repository"] -->|"sync with provenance:<br/>repo, ref, checksum per component"| pr["PR to packs/&lt;vendor&gt;/&lt;pack&gt;/<br/>author must be a vendor maintainer"]
+    src["Vendor's official repository"] -->|"sync with provenance:<br/>repo, ref, checksum per component"| pr["PR to packs/&lt;vendor&gt;/&lt;pack&gt;/<br/>by the marketplace team, or by the vendor once it enrols"]
     pr --> gate
     subgraph gate["Gate, for every version"]
         direction LR
@@ -59,7 +59,7 @@ Accepted false positives live in a reviewed per-pack baseline (`.policy-baseline
 
 ## Vendors and curation
 
-The registry does not wait for vendors to open PRs. The marketplace team curates packs from each vendor's official repositories, records where every file came from, runs the gate, and keeps the baselines. Vendors keep ownership: `vendors.json` names their organisation, maintainers, signing key and network allow-list, and CODEOWNERS gives them the last word on their folder.
+The registry does not wait for vendors to open PRs. The marketplace team curates packs from each vendor's official repositories, records where every file came from, runs the gate, and keeps the baselines. Each vendor's folder is ready for that vendor to take over: `vendors.json` has the place for its organisation, maintainers, signing key and network allow-list, and CODEOWNERS gives an enrolled vendor the last word on its folder. Until a vendor enrols, the marketplace team maintains its packs; so far no vendor other than IBM has.
 
 ```mermaid
 flowchart LR
@@ -122,7 +122,7 @@ Public catalogs report roughly a quarter of skills with security findings (NVIDI
 
 Every finding above was read by a reviewer and recorded with a reason in the pack's `.skillspector-baseline.yaml`, `.cisco-baseline.json` or `.policy-baseline.json`. After that the gate reports only new findings, so a future upstream change that adds a real problem fails the PR. The latest results per pack live in `.scan.json`, in `index.json`, in `uvx bob-skills show <pack>` and on the website. `python3 scripts/run_scanners.py --check` is the gate step and it is incremental: a skill is rescanned only when its content, the pack's baselines or the scanner versions changed since `.scan.json` was written (`--full` forces everything); `--write` refreshes the results; `--accept-skillspector` and `--accept-cisco` are the reviewer's acceptance, never automatic.
 
-The review of IBM's security MCP servers ([docs/reviews/ibm-security-mcp-servers.md](docs/reviews/ibm-security-mcp-servers.md)) found three holes that no pack may carry: write or admin rights by default, outside content that can steer those writes, and weak transport (TLS off, a listener on every interface, stored tokens used for unauthenticated requests). The linter now blocks TLS off (P011) and open listeners (P012) in scripts and instructions and makes every script line that deletes, overwrites or deploys in an external system (P013) carry a reviewed reason; every MCP server in a pack must be pinned, use https, keep secrets out of the config, pre-approve nothing and declare its access in `mcpAccess`. A pack whose skills write outside the workspace also carries a `safety` entry: what the skills do and what closes it, printed by `show`, by `add`, in the offline catalog and on the pack page before anyone installs. On the user's side, bob-essentials adds a `security-defaults` rule (outside content is data, the user's yes before each external write, security settings stay on), `trust` lints a skill before recording it, and `audit` and `doctor` run the same checks on any skill and on the user's own MCP configuration. Details: [docs/security-gate.md](docs/security-gate.md).
+A review of MCP servers for security products found three holes that no pack may carry: write or admin rights by default, outside content that can steer those writes, and weak transport (TLS off, a listener on every interface, stored tokens used for unauthenticated requests). The linter now blocks TLS off (P011) and open listeners (P012) in scripts and instructions and makes every script line that deletes, overwrites or deploys in an external system (P013) carry a reviewed reason; every MCP server in a pack must be pinned, use https, keep secrets out of the config, pre-approve nothing and declare its access in `mcpAccess`. A pack whose skills write outside the workspace also carries a `safety` entry: what the skills do and what closes it, printed by `show`, by `add`, in the offline catalog and on the pack page before anyone installs. On the user's side, bob-essentials adds a `security-defaults` rule (outside content is data, the user's yes before each external write, security settings stay on), `trust` lints a skill before recording it, and `audit` and `doctor` run the same checks on any skill and on the user's own MCP configuration. Details: [docs/security-gate.md](docs/security-gate.md).
 
 The client test suite replays the five red-team cases from the plan (exfiltration script, hidden Unicode, hook removal, typosquatting, tampering after install) and all five are refused.
 
@@ -154,7 +154,7 @@ sequenceDiagram
 [`site/index.html`](site/index.html) is the catalog as a static page: it reads `index.json`, renders the packs with filters and search, a page per pack with contents, gate status, versions and the install panel, and a vendors page. No build step and no server code.
 
 - Locally: run `python3 -m http.server` in the registry checkout and open `http://localhost:8000/site/`.
-- GitHub Pages: enabled from branch `main`, folder `/` (root). The site is at https://pages.github.ibm.com/Maria-Startseva/bob-skills-marketplace/ (the root redirects to `site/`; viewers sign in with w3id). `.nojekyll` at the root keeps Pages from processing the files.
+- GitHub Pages: from branch `main`, folder `/` (root). The site is at https://alexandraiourenkova.github.io/bob-skills-marketplace/ (the root redirects to `site/`). The site is static and reads `index.json`, so it needs no build step.
 - "Add to Bob" copies `/skills-add <pack>` to the clipboard; the `bob-essentials` page offers the terminal command instead, because that pack ships the slash command. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
 
 ## Quick start
@@ -204,7 +204,7 @@ Next, in order:
 1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
 3. The coming-soon packs in `roadmap.json`: `app-modernization`, `building-blocks`, `dev-workflow`.
-4. CI on github.ibm.com: GitHub Actions is disabled for user and team repositories on this instance and no runners exist, so the gate runs locally with `scripts/gate.sh` until an organisation with Actions (or another CI) is available. The workflows are ready.
+4. CI: the gate and release workflows in `.github/workflows` run on GitHub Actions; `scripts/gate.sh` runs the same steps locally.
 5. Day-one check from the plan: the `use_skill` hook payload carries the skill name.
 
 ## Docs

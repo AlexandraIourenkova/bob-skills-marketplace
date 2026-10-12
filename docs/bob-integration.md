@@ -26,7 +26,7 @@ Add to `.bob/settings.json` (project) or the user settings. `uvx bob-skills guar
 }
 ```
 
-The `bob-skills` command comes from a one-time `uv tool install "git+https://github.ibm.com/Maria-Startseva/bob-skills-marketplace.git#subdirectory=cli"`; it puts `bob-skills` on the PATH that Bob's hooks use. From a checkout without installing: `uv run --project /path/to/bob-skills-marketplace/cli bob-skills guard`.
+The `bob-skills` command comes from a one-time `uv tool install "git+https://github.com/AlexandraIourenkova/bob-skills-marketplace.git#subdirectory=cli"`; it puts `bob-skills` on the PATH that Bob's hooks use. From a checkout without installing: `uv run --project /path/to/bob-skills-marketplace/cli bob-skills guard`.
 
 For an organisation-wide rule, put the same `PreToolUse` entry in an **EnforcedHooks** policy (Bob 2.1.0+) with `uvx bob-skills guard --no-local`, so users cannot switch the guard off and only marketplace packs are activated.
 

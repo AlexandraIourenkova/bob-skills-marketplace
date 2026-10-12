@@ -392,7 +392,7 @@ def to_sarif(findings: list[Finding], version: str) -> dict:
             "tool": {"driver": {
                 "name": "bob-skills-policy",
                 "version": version,
-                "informationUri": "https://github.ibm.com/Maria-Startseva/bob-skills-marketplace",
+                "informationUri": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
                 "rules": [{"id": rule, "shortDescription": {"text": text}} for rule, text in RULES.items()],
             }},
             "results": [{
