@@ -166,7 +166,9 @@ uvx bob-skills verify               # digests and policy linter on what is insta
 uvx bob-skills update               # newer versions with SKILL.md diffs, revocations
 ```
 
-Inside Bob: `/skills-add wxo-adk`, once `bob-essentials` is installed; that pack ships the command. The client installs straight from this repository with `uv tool install` (above); `uvx bob-skills` will work once the package is published to an index. From a checkout without installing: `uv run --project cli bob-skills ...`.
+The client is published on PyPI as [`bob-skills`](https://pypi.org/project/bob-skills/), so the commands above work on any machine with [uv](https://docs.astral.sh/uv/getting-started/installation/) (`brew install uv` or `pipx install uv`). Run them in your project folder: packs go into its `.bob/`, or into `~/.bob/` with `--global`.
+
+Inside Bob: `/skills-add wxo-adk`, once `bob-essentials` is installed; that pack ships the command. From a checkout without installing: `uv run --project cli bob-skills ...`.
 
 ## Repository layout
 
