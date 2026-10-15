@@ -68,6 +68,16 @@
   .quote { border-left:3px solid var(--blue); padding-left:12px; }
   .facts { border-top:1px solid var(--border); margin-top:24px; } .facts div { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--border); } .facts span:first-child { color:var(--text-3); }
   .hint { font-size:12px; color:var(--text-3); line-height:16px; }
+  .install { display:flex; flex-direction:column; gap:16px; }
+  .tabs { display:flex; border-bottom:1px solid var(--border-strong); }
+  .tabs button { flex:1; background:transparent; border:0; border-bottom:3px solid transparent; margin-bottom:-1px; padding:10px 8px; font:inherit; color:var(--text-2); cursor:pointer; }
+  .tabs button[aria-selected="true"] { color:var(--text); border-bottom-color:var(--blue); font-weight:600; }
+  .tabs button:focus-visible { outline:2px solid var(--blue); outline-offset:-2px; }
+  .pane { display:flex; flex-direction:column; gap:12px; } .pane[hidden] { display:none; }
+  .steps { margin:0; padding-left:20px; color:var(--text); } .steps li { margin:2px 0; }
+  .prompt { background:var(--bg); border-left:3px solid var(--blue); padding:10px 12px; font-size:12px; line-height:18px; color:var(--text-2); }
+  .prompt code, .install .mono { font-family:"IBM Plex Mono",Menlo,Consolas,monospace; font-size:11.5px; }
+  .cmds { display:flex; flex-direction:column; gap:4px; }
   .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#161616; color:#f4f4f4; padding:12px 16px; display:none; }
   .toast.on { display:block; }
   footer { border-top:1px solid var(--border); padding:24px 0; font-size:12px; color:var(--text-3); } footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
@@ -108,7 +118,70 @@
     return url || 'https://github.com/AlexandraIourenkova/bob-skills-marketplace';
   }
   function fileUrl(path) { return webUrl() + '/blob/main/' + path; }
-  function toast(text) { const t = document.getElementById('toast'); t.textContent = text; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
+  function toast(text, ms) { const t = document.getElementById('toast'); t.textContent = text; t.classList.add('on'); clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove('on'), ms || 1800); }
+  // The install panel: a prompt for Bob by default, the terminal one tab away.
+  // Bob runs the commands itself after the user approves them, so the route works
+  // on the very first install, before bob-essentials brings /skills-add.
+  function installPrompt(p) {
+    const steps = p.name === 'bob-essentials'
+      ? 'run `uvx bob-skills add bob-essentials`'
+      : `run \`uvx bob-skills add bob-essentials\`, then \`uvx bob-skills add ${p.name}\``;
+    return `Install the ${p.name} pack from the Bob Skills Marketplace into this project. ` +
+      `In the project folder ${steps}. ` +
+      'A first install from a vendor stops and says who the vendor is: show me that notice, and rerun with `--accept-vendor` only after I say yes. ' +
+      'If uvx is not installed, tell me how to install uv and stop. ' +
+      'Then show me the report, including its "before you use it" notes.';
+  }
+  function installPanel(p, cmd) {
+    let tab = 'bob';
+    try { tab = localStorage.getItem('install-tab') || 'bob'; } catch (e) { /* private window */ }
+    const prompt = installPrompt(p);
+    const commands = (p.name === 'bob-essentials' ? [] : ['uvx bob-skills add bob-essentials']).concat([cmd]);
+    const cmdRows = commands.map(c => `<div class="cmd"><span class="mono">${esc(c)}</span><button title="Copy" data-copy="${esc(c)}" data-toast="Copied: run it in your project folder">${ICON.copy}</button></div>`).join('');
+    return `
+            <div class="install">
+              <div class="tabs" role="tablist">
+                <button role="tab" data-tab="bob" aria-selected="${tab === 'bob'}">In Bob</button>
+                <button role="tab" data-tab="term" aria-selected="${tab === 'term'}">In a terminal</button>
+              </div>
+              <div class="pane" data-pane="bob"${tab === 'bob' ? '' : ' hidden'}>
+                <ol class="steps"><li>Copy the prompt</li><li>Paste it into Bob's chat, in your project</li><li>Approve the commands Bob shows you</li></ol>
+                <div class="prompt">${codeSpans(prompt)}</div>
+                <button class="btn wide" data-copy="${esc(prompt)}" data-toast="Copied: paste it into Bob's chat"><span>Copy prompt for Bob</span>${ICON.copy}</button>
+              </div>
+              <div class="pane" data-pane="term"${tab === 'term' ? '' : ' hidden'}>
+                <div class="cmds">${cmdRows}</div>
+                <div class="hint" style="margin-top:8px">Run in your project folder; packs go into its <span class="mono">.bob/</span>. Needs <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">uv</a>. A first install from a vendor stops and asks you to confirm with <span class="mono">--accept-vendor</span>.${p.name === 'bob-essentials' ? '' : ' The first line is needed once per project.'}</div>
+              </div>
+              ${p.name === 'bob-essentials' ? '' : `<div class="hint">Have bob-essentials already? In Bob: <span class="mono">/skills-add ${esc(p.name)}</span></div>`}
+            </div>`;
+  }
+  // The Clipboard API needs a secure context and permission; an older route covers the rest.
+  function copyPlain(text) {
+    const legacy = () => {
+      const area = document.createElement('textarea');
+      area.value = text; area.setAttribute('readonly', ''); area.style.position = 'fixed'; area.style.opacity = '0';
+      document.body.appendChild(area); area.select();
+      const ok = document.execCommand('copy');
+      area.remove();
+      return ok ? Promise.resolve() : Promise.reject(new Error('copy refused'));
+    };
+    return navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(text).catch(legacy) : legacy();
+  }
+  document.addEventListener('click', ev => {
+    const copy = ev.target.closest('[data-copy]');
+    if (copy) {
+      copyPlain(copy.dataset.copy).then(() => toast(copy.dataset.toast || 'Copied', 3200), () => toast('Copy did not work here: select the text and press Ctrl+C or Cmd+C', 4000));
+      return;
+    }
+    const tab = ev.target.closest('[data-tab]');
+    if (tab) {
+      const box = tab.closest('.install');
+      box.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(b === tab)));
+      box.querySelectorAll('[data-pane]').forEach(pane => { pane.hidden = pane.dataset.pane !== tab.dataset.tab; });
+      try { localStorage.setItem('install-tab', tab.dataset.tab); } catch (e) { /* private window */ }
+    }
+  });
   window.copyText = function (text, label) {
     navigator.clipboard.writeText(text).then(() => toast((label || 'Copied') + ': ' + text), () => toast('Copy failed; select the text by hand'));
   };
@@ -274,11 +347,7 @@
         </div>
         <div>
           <div class="panel">
-            ${p.name === 'bob-essentials' ? `
-            <div><h5>First install</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div><div class="hint" style="margin-top:8px">Bob learns the marketplace from this pack, so the first install runs in the terminal.</div></div>` : `
-            <div><button class="btn wide" onclick="copyText('/skills-add ${esc(p.name)}', 'Paste into Bob')"><span>Add to Bob</span>${ICON.arrow}</button></div>
-            <div><h5>Or ask Bob</h5><div class="quote">Install the ${esc(p.displayName)} pack from the marketplace</div><div class="hint" style="margin-top:8px">Both routes need <a href="#/pack/bob-essentials">bob-essentials</a>: it brings the command and the marketplace skills.</div></div>
-            <div><h5>From the terminal</h5><div class="cmd"><span class="mono">${esc(cmd)}</span><button title="Copy" onclick="copyText('${esc(cmd)}')">${ICON.copy}</button></div></div>`}
+            ${installPanel(p, cmd)}
             <div><h5>Download</h5><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.zip">${ICON.down} <span class="mono">${esc(tag)}.zip</span></a><div class="hint" style="margin-top:6px"><a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.tar.gz">tar.gz</a> · <a href="${web}/releases/download/${esc(tag)}/${esc(tag)}.sha256">sha256</a> · <a href="${web}/releases/tag/${esc(tag)}">release page</a></div></div>
           </div>
           <div class="facts">

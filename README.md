@@ -7,7 +7,7 @@ One trusted place to get skills for [IBM Bob](https://bob.ibm.com). Packs curate
 - **A few vendors' official repositories.** Each pack is about one vendor's products and is curated by the marketplace team from that vendor's own public repository: IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft and Confluent. A vendor's name says where the skills come from. Apart from IBM, the vendors named here did not publish these packs and have not endorsed this registry. Only vendors with at least one curated pack are listed. Packs are grouped by outcome ("talk with your data on watsonx Orchestrate"), not by repository.
 - **IBM packs first.** The team's own packs (office documents, talk with your data, the marketplace skills) and packs curated from official IBM repositories are the product; provenance (source repository, commit, checksum per component) is recorded for everything that was not written here.
 - **Every pack goes through a scanner gate.** Schema and checksums, a policy linter, NVIDIA SkillSpector, Cisco skill-scanner and two human approvals, for every version. Results are shown on the pack page, risk scores included, also for official vendor skills. After install, a lock file and a guard hook refuse anything unknown or modified.
-- **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or click "Add to Bob" on the website.
+- **Three ways in, one registry.** Ask Bob in chat, paste a git link, run the CLI, or copy the install prompt for Bob from the website.
 
 ## Three ways in, one registry
 
@@ -15,7 +15,7 @@ One trusted place to get skills for [IBM Bob](https://bob.ibm.com). Packs curate
 flowchart LR
     subgraph ways["Three ways in"]
         chat["Chat with Bob<br/>find-skills: pack name or git link"]
-        site["Website<br/>Add to Bob, copy command, download"]
+        site["Website<br/>prompt for Bob, command, download"]
         cli["Terminal<br/>uvx bob-skills add"]
     end
     chat --> add
@@ -155,7 +155,7 @@ sequenceDiagram
 
 - Locally: run `python3 -m http.server` in the registry checkout and open `http://localhost:8000/site/`.
 - GitHub Pages: from branch `main`, folder `/` (root). The site is at https://alexandraiourenkova.github.io/bob-skills-marketplace/ (the root redirects to `site/`). The site is static and reads `index.json`, so it needs no build step.
-- "Add to Bob" copies `/skills-add <pack>` to the clipboard; the `bob-essentials` page offers the terminal command instead, because that pack ships the slash command. A deep link that opens Bob directly is pending the day-one check of Bob IDE's URL handling.
+- The install panel on a pack page has two tabs. "In Bob" (the default) copies a prompt that asks Bob to run `uvx bob-skills add bob-essentials` and then `uvx bob-skills add <pack>` in the project, to show the vendor notice of a first install and add `--accept-vendor` only after the user says yes; Bob asks before it runs each command. It works on the very first install, before `bob-essentials` brings `/skills-add`, which the panel mentions for users who have it. "In a terminal" shows the same commands. A deep link that opens Bob directly is pending the check of Bob IDE's URL handling.
 
 ## Quick start
 
@@ -203,7 +203,7 @@ Done: registry with seven vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Mi
 
 Next, in order:
 
-1. Confirm Bob IDE URL handling for an "Add to Bob" deep link.
+1. Confirm Bob IDE URL handling for a deep link that installs a pack in one click.
 2. `wxo-talk-with-your-data` 1.1 with database sources and the Orchestrate refresh flow; upstream the two policy fixes to the excel-to-wxo repository.
 3. The coming-soon packs in `roadmap.json`: `app-modernization`, `building-blocks`, `dev-workflow`.
 4. CI: the gate and release workflows in `.github/workflows` run on GitHub Actions; `scripts/gate.sh` runs the same steps locally.
