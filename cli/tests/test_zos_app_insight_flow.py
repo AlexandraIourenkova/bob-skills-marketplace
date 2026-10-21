@@ -19,6 +19,7 @@ import pytest
 REPO = Path(__file__).resolve().parents[2]
 SKILLS = REPO / "packs" / "ibm" / "zos-app-insight" / "skills"
 FIXTURES = Path(__file__).parent / "fixtures" / "zos-app-insight"
+LANG = Path(__file__).parent / "fixtures" / "zos-app-insight-lang"
 
 
 def load(path: Path, name: str):
@@ -61,11 +62,12 @@ def test_map_dictionary_docs_and_performance_in_order(tmp_path, monkeypatch, cap
 
     # 1. map
     out = run(capsys, zscan, "map", "src/cobol", "src/jcl", "src/proclib", "src/legacy", "--copy-dir", "src/copy")
-    assert "Programs: 5" in out
+    assert "Programs: 8 (COBOL 5, PL/I 1, REXX 1, Assembler 1)" in out
 
     # 2. data dictionary: build, describe from the queue, apply, approve three of four
     out = run(capsys, dd, "build")
-    assert "Programs: 5 (unchanged 0, changed 0, new 5, removed 0)" in out
+    assert "Programs: 8 (unchanged 0, changed 0, new 8, removed 0)" in out
+    assert "REXX execs, no entries (REXX has no declarations; the map lists their variables): CLEANUP" in out
     run(capsys, dd, "queue", "--program", "CUSTUPD", "--limit", "100")
     queue = json.loads((root / "zos-insight" / "dd" / "queue.json").read_text(encoding="utf-8"))
     queued = {it["id"] for it in queue["items"]}
@@ -105,7 +107,7 @@ def test_map_dictionary_docs_and_performance_in_order(tmp_path, monkeypatch, cap
     # 4. application context pack
     out = run(capsys, doc, "application")
     app_pack = json.loads((root / "zos-insight" / "docs" / "context" / "_application.json").read_text(encoding="utf-8"))
-    assert app_pack["counts"]["programs"] == 5
+    assert app_pack["counts"]["programs"] == 8  # the five COBOL programs and the three legacy ones
     assert {c["name"] for c in app_pack["shared_copybooks"]} == {"CUSTREC", "ORDREC"}
 
     # 5. performance review
@@ -151,3 +153,66 @@ def test_a_new_map_keeps_the_approved_descriptions(tmp_path, monkeypatch, capsys
 
 if __name__ == "__main__":  # pragma: no cover
     sys.exit(pytest.main([__file__, "-q"]))
+
+
+LANG_DESCRIBED = {
+    "pli:prog:BILLCALC:RATE": "Rate applied to every order total.",
+    "asm:prog:BILLRUN:MAXRECS": "Most usage records one run reads.",
+    "asm:copy:BILLREC:USAGEREC.UR_KEY.UR_ACCT": "Account the usage belongs to.",
+}
+
+
+def test_pli_rexx_and_assembler_through_map_dictionary_docs_and_performance(tmp_path, monkeypatch, capsys) -> None:
+    root = tmp_path / "proj"
+    shutil.copytree(FIXTURES, root / "src")
+    shutil.copytree(LANG, root / "lang")
+    monkeypatch.chdir(root)
+
+    # 1. one map for the COBOL application and the three other languages
+    out = run(capsys, zscan, "map", "src/cobol", "src/jcl", "src/proclib", "lang/pli/src", "lang/rexx", "lang/asm/src",
+              "lang/xlang", "--copy-dir", "src/copy", "--copy-dir", "lang/pli/inc", "--copy-dir", "lang/asm/copy",
+              "--copy-dir", "lang/asm/maclib")
+    assert "Programs: 13 (COBOL 6, PL/I 3, REXX 2, Assembler 2)" in out
+    app_map = zscan.load_map()
+    # PL/I and REXX reach the COBOL routine PRICECAL; COBOL reaches the PL/I and Assembler entries
+    calls = {(e["from"], e["to"]) for e in app_map["edges"] if e["kind"] == "call"}
+    assert {("BILLMAIN", "PRICECAL"), ("ORDLOAD", "PRICECAL"), ("BILLDRV", "BILLCALC"), ("BILLDRV", "BILLRUN")} <= calls
+
+    # 2. data dictionary: PL/I and Assembler entries get descriptions; REXX has none to get
+    out = run(capsys, dd, "build")
+    assert "REXX execs, no entries" in out and "ORDLOAD" in out
+    path = root / "zos-insight" / "dd" / "descriptions.json"
+    path.write_text(json.dumps({"source": "test-model", "descriptions": [
+        {"id": k, "description": v} for k, v in LANG_DESCRIBED.items()]}), encoding="utf-8")
+    assert "Proposed 3" in run(capsys, dd, "apply", "zos-insight/dd/descriptions.json")
+    assert "Approved 3" in run(capsys, dd, "approve", *LANG_DESCRIBED, "--by", "analyst")
+    out = run(capsys, dd, "queue", "--program", "ORDLOAD")
+    assert "ORDLOAD is a REXX exec: REXX has no declarations" in out
+
+    # 3. a pack per language; the approved descriptions reach PL/I and Assembler items
+    run(capsys, doc, "program", "BILLCALC")
+    calc = json.loads((root / "zos-insight" / "docs" / "context" / "BILLCALC.json").read_text(encoding="utf-8"))
+    items = {it["name"]: it for it in calc["data_items"]["items"]}
+    assert items["RATE"]["dd"] == {"description": LANG_DESCRIBED["pli:prog:BILLCALC:RATE"], "status": "approved"}
+    assert calc["runs"]["called_by"][0]["entry"] == "RECALC"
+    run(capsys, doc, "program", "BILLRUN")
+    asm = json.loads((root / "zos-insight" / "docs" / "context" / "BILLRUN.json").read_text(encoding="utf-8"))
+    items = {it["name"]: it for it in asm["data_items"]["items"]}
+    assert items["MAXRECS"]["dd"]["description"] == LANG_DESCRIBED["asm:prog:BILLRUN:MAXRECS"]
+    assert asm["business_rule_candidates"] == [] and asm["business_rules_note"]
+    run(capsys, doc, "program", "ORDLOAD")
+    rexx = json.loads((root / "zos-insight" / "docs" / "context" / "ORDLOAD.json").read_text(encoding="utf-8"))
+    assert rexx["data_items"]["items"] == [] and rexx["rexx"]["effects"]
+    assert any(c.get("target") == "PRICECAL" and c["status"] == "in the map" for c in rexx["calls"])
+    out = run(capsys, doc, "application")
+    app_pack = json.loads((root / "zos-insight" / "docs" / "context" / "_application.json").read_text(encoding="utf-8"))
+    assert app_pack["counts"]["by_language"] == {"cobol": 6, "pli": 3, "rexx": 2, "asm": 2}
+
+    # 4. performance: PL/I and REXX findings, Assembler listed as not reviewed
+    run(capsys, perf, "scan", "--min-confidence", "low")
+    findings = json.loads((root / "zos-insight" / "perf" / "findings.json").read_text(encoding="utf-8"))
+    checks = {(f["program"], f["check"]) for f in findings["findings"]}
+    assert {("BILLMAIN", "sql-in-loop"), ("BILLCALC", "static-call-in-loop"), ("ORDLOAD", "execio-in-loop")} <= checks
+    assert {n["program"] for n in findings["not_reviewed"]} == {"BILLRUN", "BILLSQL"}
+    written = files_outside_src(root)
+    assert all(p.startswith(("zos-insight/", "lang/")) for p in written), written

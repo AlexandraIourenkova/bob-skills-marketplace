@@ -72,21 +72,24 @@ def test_contract_top_level(app) -> None:
         assert key in app
     assert app["version"] == 1 and app["parser"] == "zscan 1.0"
     assert app["roots"] == ROOTS and app["copy_dirs"] == COPY
-    assert sorted(p["id"] for p in app["programs"]) == ["CUSTUPD", "ORDCICS", "ORDDB2", "ORDMAIN", "PRICECAL"]
+    assert sorted(p["id"] for p in app["programs"]) == [
+        "ASMUTIL", "CLEANUP", "CUSTUPD", "OLDRPT", "ORDCICS", "ORDDB2", "ORDMAIN", "PRICECAL"]
     json.dumps(app)  # serialisable as is
     for p in app["programs"]:
-        for key in ("id", "file", "sha256", "format", "lines", "copybooks", "files", "data_items", "paragraphs",
-                    "performs", "calls", "gotos", "sql", "cics", "conditions", "statements", "warnings"):
+        for key in ("id", "language", "file", "sha256", "format", "lines", "copybooks", "files", "data_items",
+                    "paragraphs", "performs", "calls", "gotos", "sql", "cics", "conditions", "statements", "warnings"):
             assert key in p, key
         assert len(p["sha256"]) == 64
+    assert {c["language"] for c in app["copybooks"]} == {"cobol"}
 
 
-def test_not_analysed_languages_are_listed_not_parsed(app) -> None:
-    na = app["not_analysed"]
-    assert na["pli"] == ["src/legacy/OLDRPT.pli"]
-    assert na["asm"] == ["src/legacy/ASMUTIL.asm"]
-    assert na["rexx"] == ["src/legacy/CLEANUP.rexx"]
-    assert not any(p["file"].startswith("src/legacy") for p in app["programs"])
+def test_the_legacy_languages_are_analysed_since_1_1(app) -> None:
+    assert app["not_analysed"] == {"pli": [], "asm": [], "rexx": []}
+    langs = {p["id"]: (p["language"], p["file"]) for p in app["programs"]}
+    assert langs["OLDRPT"] == ("pli", "src/legacy/OLDRPT.pli")
+    assert langs["ASMUTIL"] == ("asm", "src/legacy/ASMUTIL.asm")
+    assert langs["CLEANUP"] == ("rexx", "src/legacy/CLEANUP.rexx")
+    assert all(langs[pid][0] == "cobol" for pid in ("CUSTUPD", "ORDCICS", "ORDDB2", "ORDMAIN", "PRICECAL"))
 
 
 # --------------------------------------------------------------------------- source format
@@ -403,7 +406,8 @@ def test_cli_map_show_and_load(project, monkeypatch, capsys) -> None:
     assert not (project / ".bob" / "map").exists()
     assert zscan.main(["map", *ROOTS, "--copy-dir", *COPY]) == 0
     out = capsys.readouterr().out
-    assert "Programs: 5" in out and "Partial (a copybook was not found): ORDMAIN" in out
+    assert "Programs: 8 (COBOL 5, PL/I 1, REXX 1, Assembler 1)" in out
+    assert "Partial (a copybook or include member was not found): ORDMAIN" in out
     loaded = zscan.load_map()
     assert loaded["version"] == 1 and zscan.find_program(loaded, "ordmain")["id"] == "ORDMAIN"
     md = (project / "zos-insight" / "map" / "app-map.md").read_text()
@@ -667,3 +671,107 @@ def test_reports_name_the_scanned_folder_not_the_whole_path(tmp_path):
     text = zscan.render_markdown(app_map)
     assert str(outside / "cobol") + "/" not in text
     assert "cobol/" in text
+
+
+# --------------------------------------------------------------------------- languages (1.1): links across languages
+LANG = Path(__file__).parent / "fixtures" / "zos-app-insight-lang"
+LANG_ROOTS = ["src/pli/src", "src/rexx", "src/asm/src", "src/xlang"]
+LANG_COPY = ["src/pli/inc", "src/asm/copy", "src/asm/maclib"]
+
+
+@pytest.fixture(scope="module")
+def xproject(tmp_path_factory) -> Path:
+    root = tmp_path_factory.mktemp("xlang")
+    shutil.copytree(LANG, root / "src")
+    return root
+
+
+@pytest.fixture(scope="module")
+def xapp(xproject) -> dict:
+    return zscan.scan(LANG_ROOTS, LANG_COPY, root=xproject)
+
+
+def test_every_language_is_a_program_of_the_map(xapp) -> None:
+    langs = {p["id"]: p["language"] for p in xapp["programs"]}
+    assert langs == {"BILLMAIN": "pli", "BILLSUB": "pli", "BILLCALC": "pli", "ORDLOAD": "rexx", "ORDMENU": "rexx",
+                     "BILLRUN": "asm", "BILLSQL": "asm", "BILLDRV": "cobol"}
+    includes = {(c["name"], c["language"]) for c in xapp["copybooks"]}
+    assert {("BILLREC", "pli"), ("BILLREC", "asm"), ("ORDUTIL", "rexx"), ("BSAVE", "asm")} <= includes
+    assert xapp["not_analysed"]["rexx"] == ["src/rexx/ORDCLEAN.clist"]  # a CLIST: listed, not analysed
+
+
+def test_jcl_steps_run_pli_assembler_and_rexx(xapp) -> None:
+    progs = {p["id"]: p for p in xapp["programs"]}
+    runs = lambda pid: {(r["step"], r.get("via"), r.get("entry")) for r in progs[pid]["run_by"]}  # noqa: E731
+    assert runs("BILLMAIN") == {("PRICE", None, None)}
+    assert runs("BILLCALC") == {("RERATE", None, "RECALC")}  # EXEC PGM= of a PL/I secondary entry
+    assert runs("BILLRUN") == {("USAGE", None, None)}
+    assert runs("ORDLOAD") == {("LOAD", "IKJEFT01", None), ("BATCHRX", "IRXJCL", None)}
+    assert runs("ORDMENU") == {("LOAD", "IKJEFT01", None)}  # EXEC 'BILL.EXEC(ORDMENU)'
+    step = next(s for s in xapp["jobs"][0]["steps"] if s["name"] == "LOAD")
+    assert step["execs"] == [{"name": "ORDLOAD", "how": "%", "line": 13}, {"name": "ORDMENU", "how": "EXEC", "line": 14}]
+    edges = {(e["from"], e["to"], e.get("via"), e.get("entry")) for e in xapp["edges"] if e["kind"] == "exec-pgm"}
+    assert {("BILLJOB", "BILLMAIN", None, None), ("BILLJOB", "BILLCALC", None, "RECALC"), ("BILLJOB", "BILLRUN", None, None),
+            ("BILLJOB", "ORDLOAD", "IKJEFT01", None), ("BILLJOB", "ORDMENU", "IKJEFT01", None)} <= edges
+    # edges are unique by (from, to, kind): the IRXJCL step shows in run_by above
+    assert "LISTCAT" not in {u["name"] for u in xapp["unresolved"]["programs"]}  # a TSO command, not an exec
+    assert {u["name"] for u in xapp["utilities"]} == {"IKJEFT01", "IRXJCL"}
+
+
+def test_cobol_calls_reach_a_pli_entry_and_an_assembler_entry(xapp) -> None:
+    calls = {(e["to"], e.get("entry")) for e in xapp["edges"] if e["kind"] == "call" and e["from"] == "BILLDRV"}
+    assert calls == {("BILLCALC", "RECALC"), ("BILLRUN", "BILLALT")}
+    assert zscan.callers(xapp, "BILLCALC") == ["BILLDRV"] and zscan.callers(xapp, "BILLRUN") == ["BILLDRV"]
+    missing = {u["name"] for u in xapp["unresolved"]["programs"]}
+    assert not {"RECALC", "BILLALT", "BILLCALC", "BILLRUN"} & missing
+    # the languages' own calls: PL/I FETCH, REXX LINKMVS and TSO EXEC, Assembler LINK; system routines are neither
+    vias = {(e["from"], e["to"], e.get("via")) for e in xapp["edges"] if e["kind"] == "call"}
+    assert {("BILLMAIN", "BILLTX01", "FETCH"), ("ORDLOAD", "PRICECAL", "LINKMVS"), ("ORDMENU", "ORDLOAD", "TSO EXEC"),
+            ("BILLRUN", "PRTFMT", "LINK"), ("BILLMAIN", "BILLSUB", None)} <= vias
+    assert not {"BPXWDYN", "RXSUBCOM"} & missing and not any(e["to"] in ("BPXWDYN", "RXSUBCOM") for e in xapp["edges"])
+
+
+def test_unresolved_includes_and_macros(xapp) -> None:
+    un = xapp["unresolved"]
+    assert {c["name"]: [p["id"] for p in c["programs"]] for c in un["copybooks"]} == {
+        "AUDITDS": ["BILLRUN"], "AUDITPL": ["BILLMAIN"]}
+    assert un["macros"] == [{"name": "TRACEPT", "programs": [{"id": "BILLRUN", "file": "src/asm/src/BILLRUN.asm",
+                                                              "line": 34}]}]
+
+
+def test_a_rexx_exec_pulled_in_by_another_is_an_include(tmp_path) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src" / "MAINX.rexx").write_text("/* REXX - original test exec */\ncall helper\nexit 0\n"
+                                                  "/*%INCLUDE HELPX*/\n")
+    (tmp_path / "src" / "HELPX.rexx").write_text("/* REXX - original test exec, also included */\n"
+                                                  "say 'help'\nexit 0\n")
+    m = zscan.scan(["src"], root=tmp_path)
+    assert [p["id"] for p in m["programs"]] == ["MAINX"]
+    assert [(c["name"], c["language"], c["used_by"]) for c in m["copybooks"]] == [("HELPX", "rexx", ["MAINX"])]
+
+
+def test_tso_batch_input() -> None:
+    lines = ["  %ORDLOAD 2026", "  DSN SYSTEM(DB2P)", "  RUN PROGRAM(ORDDB2)", "  END",
+             "  EX 'BILL.EXEC(ORDMENU)'", "  CALL 'BILL.LOAD(PRICER)'", "  LISTDS 'BILL.X'", "  ORDHELP", "/* end"]
+    assert zscan.tso_commands(lines, 10) == [
+        {"name": "ORDLOAD", "how": "%", "line": 10}, {"name": "ORDMENU", "how": "EXEC", "line": 14},
+        {"name": "PRICER", "how": "CALL", "line": 15}, {"name": "ORDHELP", "how": "implicit", "line": 17}]
+
+
+def test_markdown_and_show_speak_each_language(xapp, xproject, monkeypatch, capsys) -> None:
+    md = zscan.render_markdown(xapp)
+    assert "| Program | Language |" in md and "| BILLRUN | Assembler |" in md and "margins 2-72" in md
+    assert "## Commands that change data" in md and "| ORDLOAD |" in md
+    assert "Assembler macro TRACEPT" in md and "BILLCALC (PL/I)" in md
+    monkeypatch.chdir(xproject)
+    zscan.write_map(xapp)
+    assert zscan.main(["show", "BILLRUN"]) == 0
+    out = capsys.readouterr().out
+    assert "BILLRUN  Assembler" in out and "BCT to READLOOP, count, confidence high" in out and "TRACEPT@34" in out
+    assert zscan.main(["show", "ORDMENU"]) == 0
+    out = capsys.readouterr().out
+    assert "Host command environments: TSO" in out and "Commands that change data or submit jobs:" in out
+    assert "BPXWDYN (function)  (supplied by z/OS)" in out
+    assert zscan.main(["show", "BILLMAIN"]) == 0
+    out = capsys.readouterr().out
+    assert "Procedures, BEGIN blocks and ON-units:" in out and "[on-unit]" in out and "handlers: ON ENDFILE@45" in out

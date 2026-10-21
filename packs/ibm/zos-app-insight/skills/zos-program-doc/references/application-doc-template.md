@@ -38,14 +38,17 @@ One paragraph: what the application does, built from the program summaries and t
 
 - Programs, one row each, from `inventory.programs`:
 
-  | Program | Kind | Lines | Run by | Called by | Calls | Doc |
-  |---|---|---|---|---|---|---|
+  | Program | Language | Kind | Lines | Run by | Called by | Calls | Doc |
+  |---|---|---|---|---|---|---|---|
 
-  Kind comes from `traits` (batch, cics, db2, subprogram). Doc links to the program doc, or says "not written".
+  Language comes from `language` (COBOL, PL/I, REXX, Assembler; `counts.by_language` has the totals). Kind comes from `traits` (batch, cics, db2, subprogram, changes data). Doc links to the program doc, or says "not written".
 - Jobs and procedures with their files; utilities the jobs run (`inventory.utilities`).
 - Copybooks: count, and a table only when there are fewer than about 40.
 
 ### Job flow (`job_flow`)
+
+A TSO batch step (IKJEFT01) or an IRXJCL step runs REXX execs: they are listed under `execs` of the step. A step can run a PL/I or Assembler secondary entry point; the program is found by its entry.
+
 
 Per job, its steps in order: program or procedure, the programs inside a procedure (`proc_steps`), COND and IF, and the data sets (`datasets`). Then, from `dataset_flow`, the hand-offs: a data set one step writes (DISP NEW or MOD, or a program that opens it OUTPUT or EXTEND) and a later step or job reads. Say "order between jobs is not in the JCL" unless the scheduler is known. Add `job_flow_mermaid` as given when `config.mermaid` is true.
 

@@ -1,6 +1,6 @@
 ---
 name: zos-app-map
-description: Map a COBOL and JCL application from its source, read-only - programs, copybooks, data items, paragraphs and PERFORM flow, CALL, EXEC SQL and EXEC CICS, files and their I/O, jobs, steps, procedures and data sets - into app-map.json and app-map.md with a call graph, copybook use and job flow in Mermaid. Can first download the members from z/OS with Zowe CLI, read-only, after the user's yes. The first skill of zos-app-insight; the data dictionary, program documentation and COBOL performance review build on its map. Use when the user wants to understand, inventory or map a mainframe application, see which programs call which, which copybooks and data sets they use or which jobs run them. Triggers include "map my COBOL application", "what is in this mainframe application", "COBOL call graph", "which jobs run this program", "which programs use this copybook", "download my COBOL from z/OS", "inventory of COBOL programs and JCL".
+description: Map a mainframe application from its source, read-only - COBOL, PL/I, REXX and Assembler programs with their copybooks and include members, data items, paragraphs, labels and PERFORM or CALL flow, EXEC SQL and EXEC CICS, files and their I/O, jobs, steps, procedures and data sets, and the links between languages (a job step running a PL/I program or a REXX exec, a COBOL CALL of an Assembler routine) - into app-map.json and app-map.md with a call graph, copybook use and job flow in Mermaid. Can first download the members from z/OS with Zowe CLI, read-only, after the user's yes. The first skill of zos-app-insight; the data dictionary, documentation and performance review build on its map. Use when the user wants to understand, inventory or map a mainframe application. Triggers include "map my COBOL application", "what is in this mainframe application", "COBOL call graph", "which jobs run this program", "which programs use this copybook", "map my PL/I and REXX", "download my COBOL from z/OS".
 ---
 
 # zos-app-map
@@ -9,7 +9,7 @@ Paths are relative to this skill folder; run from the project root. Every output
 
 ## Steps
 
-1. Ask where the COBOL programs, copybooks and JCL are. When they are in the project, go to step 3. When they are only on z/OS, offer step 2.
+1. Ask where the COBOL, PL/I, REXX and Assembler programs, their copybooks, include members and macro libraries, and the JCL are. When they are in the project, go to step 3. When they are only on z/OS, offer step 2.
 
 2. Optional: download with Zowe CLI. It needs Zowe CLI and a z/OSMF profile the user already set up; the script never asks for a password and never passes one. One plan per data set; `plan` runs nothing.
 
@@ -19,7 +19,7 @@ Paths are relative to this skill folder; run from the project root. Every output
    python3 scripts/zowe_fetch.py plan --dataset HLQ.APP.COPYLIB --profile lpar1
    ```
 
-   Without `--member` the plan downloads every member. The local extension comes from the last qualifiers (COBOL to `.cbl`, COPYLIB to `.cpy`, JCL or PROCLIB to `.jcl`); `--extension` sets it.
+   Without `--member` the plan downloads every member. The local extension comes from the last qualifiers (COBOL to `.cbl`, COPYLIB to `.cpy`, JCL or PROCLIB to `.jcl`, PLI to `.pli`, ASM or MACLIB to `.asm`, REXX, EXEC or CLIST to `.rexx`); `--extension` sets it.
 
    **Stop and ask the user.** Show the exact commands the plan printed, the data set, the local folder and the profile. After their yes, run the plan with the hash it printed. Never compute or reuse a hash yourself.
 
@@ -29,7 +29,7 @@ Paths are relative to this skill folder; run from the project root. Every output
 
    `run` checks the hash, then each command against the allow-list (`zowe zos-files list` and `zowe zos-files download`, nothing else), then each local path, before it calls Zowe. A changed plan is refused: make a new one and ask again. Members land in `zos-insight/src/<data set>/`, never in the user's own source folders; a second download replaces the earlier copy there.
 
-3. Map the application. Pass every folder with programs, copybooks, JCL and procedure libraries; add `--copy-dir` for copybook folders outside them (searched first).
+3. Map the application. Pass every folder with programs, copybooks, JCL and procedure libraries; add `--copy-dir` for copybook, include and macro folders outside them (searched first). PL/I, REXX and Assembler files are read by their own readers next to zscan.py; every folder given is searched for their include members and macros too.
 
    ```bash
    python3 scripts/zscan.py map src/cobol src/jcl src/proclib --copy-dir src/copy
@@ -40,9 +40,11 @@ Paths are relative to this skill folder; run from the project root. Every output
 
 4. Report from the printed summary and `app-map.md`:
    - programs, copybooks, jobs and procedures, with the call graph and the job flow;
-   - what was not found: copybooks (their programs are marked partial), called programs, procedures, JCL INCLUDE members;
+   - programs per language, and the links between languages (job steps, TSO batch execs, calls of PL/I and Assembler entries);
+   - what was not found: copybooks and include members (their programs are marked partial), Assembler macros, called programs, procedures, JCL INCLUDE members;
    - dynamic calls and the literals their identifiers can hold;
-   - PL/I, Assembler and REXX files, listed only: 1.0 does not analyse them;
+   - REXX commands that change data or submit jobs (app-map.md lists them), and Assembler loops with their confidence;
+   - files listed but not analysed (a CLIST, or a file a reader failed on);
    - the warnings, in the user's words, with file and line.
 
    The map is heuristic. When a copybook was not found, say its data items are unknown; never call them "none". Read `references/parser-limits.md` before you answer a question the map may get wrong.

@@ -391,7 +391,8 @@ def test_config_errors(capsys, project) -> None:
 # --------------------------------------------------------------------------- list
 def test_list_honours_existing_docs_and_force(capsys, project) -> None:
     code, out, _ = run(capsys, "list")
-    assert code == 0 and "0 of 5 written" in out and "To write: CUSTUPD, ORDCICS, ORDDB2, ORDMAIN, PRICECAL" in out
+    assert code == 0 and "0 of 8 written" in out
+    assert "To write: ASMUTIL, CLEANUP, CUSTUPD, OLDRPT, ORDCICS, ORDDB2, ORDMAIN, PRICECAL" in out
     docs = project / "zos-insight" / "docs" / "programs"
     docs.mkdir(parents=True)
     main = program(capsys, project, "ORDMAIN")
@@ -404,13 +405,14 @@ def test_list_honours_existing_docs_and_force(capsys, project) -> None:
     rows = {r["id"]: r for r in result["programs"]}
     assert rows["ORDMAIN"]["doc"] == "written" and rows["ORDMAIN"]["context"] is True
     assert rows["PRICECAL"]["doc"] == "stale" and rows["ORDDB2"]["doc"] == "written" and rows["ORDCICS"]["doc"] == "missing"
-    assert result["to_write"] == ["CUSTUPD", "ORDCICS"] and result["stale"] == ["PRICECAL"]
+    assert result["to_write"] == ["ASMUTIL", "CLEANUP", "CUSTUPD", "OLDRPT", "ORDCICS"] and result["stale"] == ["PRICECAL"]
     assert result["skipped"] == ["ORDDB2", "ORDMAIN", "PRICECAL"] and result["application_doc"] == "missing"
 
     code, out, _ = run(capsys, "list")
     assert "Skipped (doc exists; --force lists them too): ORDDB2, ORDMAIN, PRICECAL" in out and "Stale" in out
     code, out, _ = run(capsys, "list", "--force", "--json")
-    assert json.loads(out)["to_write"] == ["CUSTUPD", "ORDCICS", "ORDDB2", "ORDMAIN", "PRICECAL"]
+    assert json.loads(out)["to_write"] == ["ASMUTIL", "CLEANUP", "CUSTUPD", "OLDRPT", "ORDCICS", "ORDDB2", "ORDMAIN",
+                                          "PRICECAL"]
     code, out, _ = run(capsys, "list", "--force")
     assert "--force: every program is listed" in out
 
@@ -420,7 +422,8 @@ def test_application_context(capsys, project) -> None:
     code, out, _ = run(capsys, "application")
     assert code == 0 and "Wrote zos-insight/docs/context/_application.json" in out
     a = pack(project, "_application")
-    assert a["write_to"] == "zos-insight/docs/application.md" and a["counts"]["programs"] == 5
+    assert a["write_to"] == "zos-insight/docs/application.md" and a["counts"]["programs"] == 8
+    assert a["counts"]["by_language"] == {"cobol": 5, "pli": 1, "rexx": 1, "asm": 1}
     inv = {p["id"]: p for p in a["inventory"]["programs"]}
     assert inv["ORDDB2"]["traits"] == ["batch", "db2"] and inv["PRICECAL"]["traits"] == ["subprogram"]
     assert inv["ORDMAIN"]["run_by"] == ["ORDNIGHT.STEP020", "ORDNIGHT.STEP030.RPT010"] and inv["ORDMAIN"]["partial"] is True
@@ -441,13 +444,17 @@ def test_application_context(capsys, project) -> None:
         {"name": "ORDREC", "file": "src/copy/ORDREC.cpy", "used_by": ["CUSTUPD", "ORDMAIN"]}]
     entry = {e["program"]: e["reason"] for e in a["entry_points"]}
     assert entry["ORDDB2"] == "run by ORDNIGHT.STEP040" and "CICS" in entry["ORDCICS"]
-    assert a["without_callers_or_jobs"]["programs"] == ["CUSTUPD", "ORDCICS"] and "Not proof" in a["without_callers_or_jobs"]["note"]
+    assert a["without_callers_or_jobs"]["programs"] == ["ASMUTIL", "CLEANUP", "CUSTUPD", "OLDRPT", "ORDCICS"]
+    assert "Not proof" in a["without_callers_or_jobs"]["note"]
     files = [f for f in a["files_and_datasets"] if f["file"] == "RPT-FILE"]
     assert files[0]["datasets"] == ["SYSOUT"]
     assert {u["name"] for u in a["open_points"]["unresolved"]["programs"]} == {"ORDAUDIT", "ORDMENU", "TAXCALC"}
     assert a["open_points"]["partial_programs"] == ["ORDMAIN"] and a["open_points"]["warnings_total"] == 1
-    assert a["program_docs"]["missing"] == ["CUSTUPD", "ORDCICS", "ORDDB2", "ORDMAIN", "PRICECAL"]
-    assert a["inventory"]["not_analysed"]["pli"] == ["src/legacy/OLDRPT.pli"]
+    assert a["program_docs"]["missing"] == ["ASMUTIL", "CLEANUP", "CUSTUPD", "OLDRPT", "ORDCICS", "ORDDB2", "ORDMAIN",
+                                            "PRICECAL"]
+    assert a["inventory"]["not_analysed"]["pli"] == []  # analysed since 1.1
+    langs = {p["id"]: p["language"] for p in a["inventory"]["programs"]}
+    assert (langs["OLDRPT"], langs["CLEANUP"], langs["ASMUTIL"], langs["ORDMAIN"]) == ("pli", "rexx", "asm", "cobol")
 
 
 # --------------------------------------------------------------------------- flow edge cases
@@ -552,3 +559,70 @@ def test_unknown_program_and_missing_map(capsys, project, tmp_path, monkeypatch)
         code, _, err = run(capsys, *argv)
         assert code == 1 and "not found" in err
     assert not (empty / "zos-insight").exists()
+
+
+# --------------------------------------------------------------------------- languages (1.1)
+LANG = Path(__file__).parent / "fixtures" / "zos-app-insight-lang"
+
+
+@pytest.fixture(scope="module")
+def xproject(tmp_path_factory) -> Path:
+    root = tmp_path_factory.mktemp("xdoc")
+    shutil.copytree(LANG, root / "src")
+    zscan.write_map(zscan.scan(["src/pli/src", "src/rexx", "src/asm/src", "src/xlang"],
+                               ["src/pli/inc", "src/asm/copy", "src/asm/maclib"], root=root), root=root)
+    return root
+
+
+def xpack(capsys, monkeypatch, root: Path, pid: str) -> dict:
+    monkeypatch.chdir(root)
+    code, out, err = run(capsys, "program", pid)
+    assert code == 0, err
+    return pack(root, pid)
+
+
+def test_pli_pack_has_procedures_on_units_and_handlers(capsys, monkeypatch, xproject) -> None:
+    p = xpack(capsys, monkeypatch, xproject, "BILLMAIN")
+    assert p["program"]["language"] == "pli" and p["header"]["lines"][0].startswith("1:  /* BILLMAIN")
+    assert {"condition": "ENDFILE", "at": "BILLMAIN.pli:45", "unit": "ON-ENDFILE-45"} in p["error_handling"]["on_units"]
+    assert {"file": "ORDFILE", "condition": "ENDFILE", "at": "BILLMAIN.pli:45"} in p["error_handling"]["file_handlers"]
+    assert "ON-units are the error handling of PL/I" in p["error_handling"]["on_units_note"]
+    assert [x["condition"] for x in p["pli"]["on_units"]] == ["ENDFILE", "ERROR"]
+    assert "PRICE_ORDER" in {x["name"] for x in p["pli"]["procedures"]}
+    reached = {r["paragraph"] for r in p["flow"].get("not_reached_by_perform", [])}
+    assert not reached & {"ON-ENDFILE-45", "ON-ERROR-46"}  # ON-units run on a condition, not by CALL
+    items = {i["name"]: i for i in p["data_items"]["items"]}
+    assert items["ORD_CUST"]["type"] == "CHAR(8)" and items["WS_ORD_AMT"]["type"] == "FIXED DEC(11,2)"
+    sub = xpack(capsys, monkeypatch, xproject, "BILLCALC")["runs"]
+    assert {"job": "BILLJOB", "step": "RERATE", "jcl": "src/xlang/jcl/BILLJOB.jcl", "entry": "RECALC"} in [
+        {k: r[k] for k in ("job", "step", "jcl", "entry") if k in r} for r in sub["run_by"]]
+    assert {"program": "BILLDRV", "kind": "call", "at": "BILLDRV.cbl:12", "entry": "RECALC"} in sub["called_by"]
+
+
+def test_rexx_pack_lists_effects_traps_and_no_declarations(capsys, monkeypatch, xproject) -> None:
+    p = xpack(capsys, monkeypatch, xproject, "ORDLOAD")
+    assert p["program"]["language"] == "rexx"
+    data = p["data_items"]
+    assert data["items"] == [] and data["note"].startswith("REXX has no declarations")
+    assert {"name": "RUNDATE", "kind": "simple", "set_by": ["PARSE ARG at 6"]} in data["variables"]
+    effects = {e["at"]: e for e in p["rexx"]["effects"]}
+    assert effects["ORDLOAD.rexx:14-15"]["command"] == "ALLOC" and effects["ORDLOAD.rexx:23"]["in_loop"]["via"] == 19
+    assert p["rexx"]["environments"] == ["TSO", "ISPEXEC", "LINKMVS", "DSNREXX"]
+    assert p["error_handling"]["traps"][0]["condition"] == "NOVALUE"
+    kinds = {c["kind"] for c in p["calls"]}
+    assert {"LINKMVS", "CALL", "function"} <= kinds
+    assert {"kind": "function", "target": "RXSUBCOM", "status": "supplied by z/OS"} in [
+        {k: c[k] for k in ("kind", "target", "status") if k in c} for c in p["calls"]]
+
+
+def test_assembler_pack_has_sections_macros_loops_and_no_rules(capsys, monkeypatch, xproject) -> None:
+    p = xpack(capsys, monkeypatch, xproject, "BILLRUN")
+    assert p["program"]["language"] == "asm"
+    assert p["business_rule_candidates"] == [] and p["business_rules_note"].startswith("Assembler has no business-rule")
+    assert p["asm"]["macros_not_found"] == ["TRACEPT"]
+    assert [(lp["opcode"], lp["confidence"]) for lp in p["asm"]["loops"]] == [
+        ("BCT", "high"), ("BNZ", "medium"), ("BCTR", "medium")]
+    assert {s["name"]: s["kind"] for s in p["asm"]["sections"]}["BILLRUN"] == "CSECT"
+    assert {f["name"]: f["kind"] for f in p["files"]} == {"USAGEIN": "DCB", "INVOUT": "DCB"}
+    assert "R15" in p["error_handling"]["note_asm"]
+    assert p["header"]["lines"][0].startswith("2: * BILLRUN")

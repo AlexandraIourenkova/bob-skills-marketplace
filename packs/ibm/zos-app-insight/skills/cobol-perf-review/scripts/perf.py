@@ -44,7 +44,7 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "zos-app-map" / "scripts"))
 import zscan  # noqa: E402
 
-TOOL = "perf.py 1.0"
+TOOL = "perf.py 1.1"
 FINDINGS_VERSION = 1
 DEFAULT_OUT = "zos-insight/perf"
 LEVELS = ("high", "medium", "low")
@@ -63,7 +63,21 @@ CHECKS: Dict[str, str] = {
     "display-subscript-in-loop": "USAGE DISPLAY subscript inside a loop",
     "initialize-group-in-loop": "INITIALIZE of a group inside a loop",
     "string-op-in-loop": "STRING, UNSTRING or INSPECT inside a loop",
+    "execio-in-loop": "REXX EXECIO inside a loop",
+    "alloc-free-in-loop": "REXX ALLOC or FREE inside a loop",
+    "host-command-in-loop": "REXX host command inside a loop",
 }
+# Which checks run on which language. Assembler is not reviewed in 1.1.
+LANGUAGE_CHECKS = {
+    "cobol": ("io", "sql", "calls", "search", "numbers", "initialize", "strings"),
+    "pli": ("io", "sql", "calls"),
+    "rexx": ("sql", "calls", "execio", "alloc", "commands"),
+}
+NOT_REVIEWED = {"asm": "Assembler is not reviewed in 1.1: loops are inferred from branches and registers are not "
+                       "followed, so per-loop facts would be guesses. The map lists its loops with their confidence."}
+REXX_CALL_VIAS = {"LINKMVS", "ATTCHMVS", "LINKPGM", "ATTCHPGM", "LINK", "ATTACH"}
+REXX_HANDLED = {"EXECIO", "ALLOC", "ALLOCATE", "FREE"}
+REXX_HEAVY_ENVS = {"TSO", "MVS", "CONSOLE"}
 
 ARITH_VERBS = {"ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "COMPUTE"}
 STRING_VERBS = {"STRING", "UNSTRING", "INSPECT"}
@@ -307,6 +321,7 @@ class Prog:
     def __init__(self, rec: dict, label: str, root: Path, sources: "Sources"):
         self.rec = rec
         self.id = rec["id"]
+        self.lang = rec.get("language") or "cobol"
         self.label = label
         self.root = root
         self.sources = sources
@@ -479,10 +494,15 @@ class Sources:
         return lines[line - 1].rstrip()
 
 
-def _trailing_noise(text: str, fmt: str) -> bool:
-    """A blank or comment line, or a lone scope terminator (END-IF, END-PERFORM, a period)."""
+def _trailing_noise(text: str, fmt: str, lang: str = "cobol") -> bool:
+    """A blank or comment line, or a lone scope terminator (END-IF, END-PERFORM, a period; END; in PL/I and REXX)."""
     if not text.strip():
         return True
+    if lang == "asm":
+        return text[:1] == "*" or text[:2] == ".*"
+    if lang in ("pli", "rexx"):
+        code = text.strip()
+        return (code.startswith("/*") and code.endswith("*/")) or code.rstrip(";").strip().upper() in ("END", "")
     if fmt == "fixed":
         if len(text) > 6 and text[6] in "*/":
             return True
@@ -505,6 +525,7 @@ class Review:
         self.findings: List[dict] = []
         self.not_checked: List[dict] = []
         self.notes: List[dict] = []
+        self.not_reviewed: List[dict] = []
         self._nc_seen: set = set()
 
     # ---- helpers shared by the checks
@@ -579,6 +600,7 @@ class Review:
     def evidence(self, p: Prog, spans: List[Tuple[str, str, int, int]]) -> List[dict]:
         """spans: (role, file, start, end) -> [{role, file, line, text}], comment lines kept only inside."""
         fmt = p.rec.get("format", "fixed")
+        lang = p.lang
         out: List[dict] = []
         seen = set()
         for role, file, start, end in spans:
@@ -588,7 +610,7 @@ class Review:
                 if text is None:
                     break
                 block.append((n, text))
-            while len(block) > 1 and _trailing_noise(block[-1][1], fmt):
+            while len(block) > 1 and _trailing_noise(block[-1][1], fmt, lang):
                 block.pop()
             for n, text in block:
                 if (file, n) in seen:
@@ -681,10 +703,16 @@ class Review:
             if not q.get("in_loop"):
                 continue
             verb = q["verb"]
+            if verb in ("EXECUTE", "EXECUTE IMMEDIATE") and q.get("candidates"):
+                inner = {c.get("verb") for c in q["candidates"] if c.get("verb")}
+                if inner & SQL_ROW_VERBS:
+                    verb = sorted(inner & SQL_ROW_VERBS)[0]
             positioned = verb in ("UPDATE", "DELETE") and q.get("cursor")
             if verb in SQL_ROW_VERBS and not positioned:
                 conf = "high"
             elif verb == "OPEN" and q.get("cursor"):
+                conf = "medium"
+            elif verb == "PREPARE":
                 conf = "medium"
             else:
                 continue
@@ -693,7 +721,11 @@ class Review:
                 continue  # already a multi-row statement (ROWSET, FOR n ROWS)
             loop = self.loop_info(p, q["in_loop"])
             tables = ", ".join(q.get("tables") or []) or "(table not found by the map)"
-            if verb == "OPEN":
+            if verb == "PREPARE":
+                fact = (f"SQL PREPARE {q.get('statement') or ''} ({tables}) runs inside the loop of line "
+                        f"{loop['line']} ({loop['kind']}): the statement is compiled again on every pass").replace("  ", " ")
+                hint = "Prepare the statement once before the loop and EXECUTE it (or OPEN its cursor) in the loop."
+            elif verb == "OPEN":
                 fact = (f"EXEC SQL OPEN {q['cursor']} ({tables}) runs inside the loop of line {loop['line']} "
                         f"({loop['kind']}): a cursor opened once per iteration, a nested-cursor pattern")
                 hint = "Join the inner query into the outer cursor, or fetch the inner rows once into a table."
@@ -714,6 +746,8 @@ class Review:
                       "host_vars": q.get("host_vars") or []}, loop=loop, verb=f"EXEC SQL {verb}")
 
     def check_calls(self, p: Prog) -> None:
+        if p.lang != "cobol":
+            return self.check_lang_calls(p)
         cancels = [s for s in p.statements if s["verb"] == "CANCEL" and s.get("in_loop")]
         for c in p.rec.get("calls", []):
             if not c.get("in_loop"):
@@ -745,6 +779,118 @@ class Review:
                          "Pass the rows to the subprogram as a table in one CALL, or move small logic "
                          "in line; check the DYNAM option, which makes a literal CALL dynamic.",
                          spans, detail, loop=loop, verb="CALL")
+
+    def check_lang_calls(self, p: Prog) -> None:
+        """PL/I CALL and FETCH, REXX external routines and programs run, inside loops."""
+        for c in p.rec.get("calls", []):
+            if not c.get("in_loop") or c.get("system"):
+                continue
+            how = c.get("via") or c.get("form") or "CALL"
+            loop = self.loop_info(p, c["in_loop"])
+            target = c["target"]
+            detail: Dict[str, Any] = {"target": target, "dynamic": c["dynamic"], "how": how, "using": c.get("using", [])}
+            spans = [self.stmt_span(p, dict(c, verb=how))]
+            where = f"inside the loop of line {loop['line']} ({loop['kind']})"
+            if c["dynamic"]:
+                cands = c.get("candidates") or []
+                detail["candidates"] = cands
+                held = f"it holds {', '.join(repr(x) for x in cands)}" if cands else "its value was not found"
+                if p.lang == "pli" and how == "FETCH":
+                    fact = (f"FETCH {target} ({held}) runs once per iteration {where}: an entry already fetched is "
+                            "not loaded again, but each FETCH still asks the run time, and a RELEASE in the loop "
+                            "makes the next FETCH load it again")
+                    hint = "FETCH the routine once before the loop and RELEASE it after the loop, not inside it."
+                    conf = "low"
+                elif p.lang == "pli":
+                    fact = (f"{'CALL' if how == 'CALL' else 'Function reference'} of the fetched entry {target} "
+                            f"({held}) runs once per iteration {where}: its linkage and its own work repeat every pass")
+                    hint = ("Pass the rows in one call (an array or a based structure), and make sure the FETCH that "
+                            "loads it is outside the loop.")
+                    conf = "medium"
+                else:
+                    fact = (f"{how} {target} (a variable; {held}) runs once per iteration {where}: each one locates, "
+                            "loads and runs the program")
+                    hint = ("Call the program once with all the rows (a data set or a stem it reads), or move its "
+                            "work into the exec.")
+                    conf = "high"
+                self.add(p, "dynamic-call-in-loop", conf, dict(c, verb=how), fact + ".", hint, spans, detail,
+                         loop=loop, verb=how)
+                continue
+            if p.lang == "pli":
+                fact = (f"CALL {target} runs once per iteration {where}: its linkage and its own work repeat every "
+                        "pass")
+                hint = "Pass the rows in one CALL (an array or a based structure), or move small logic in line."
+            elif how in REXX_CALL_VIAS or how.startswith(("TSO", "ISPEXEC")):
+                fact = (f"{how} {target} runs once per iteration {where}: each one loads and runs the program "
+                        "(or exec) again")
+                hint = ("Run the program once for all the rows (pass a data set or a stem), or keep it loaded "
+                        "(a LOAD in an Assembler stub, or one ISPEXEC SELECT around the loop).")
+            else:
+                fact = (f"{how} of the external routine {target} runs once per iteration {where}: an external "
+                        "REXX routine is searched for and interpreted on every call")
+                hint = ("Bring the routine into the exec as an internal label, or call it once with all the data; "
+                        "compiled REXX or a function package avoids the search.")
+            self.add(p, "static-call-in-loop", "medium", dict(c, verb=how), fact + ".", hint, spans, detail,
+                     loop=loop, verb=how)
+
+    def check_execio(self, p: Prog) -> None:
+        for f in p.rec.get("files", []):
+            for io in f.get("io", []):
+                if io.get("verb") != "EXECIO" or not io.get("in_loop"):
+                    continue
+                count = str(io.get("count") or "?")
+                mode = io.get("mode") or "?"
+                loop = self.loop_info(p, io["in_loop"])
+                rec = dict(io, verb="EXECIO", paragraph=io.get("paragraph"))
+                one = count in ("1", "*")
+                fact = (f"EXECIO {count} {mode} {f['name']} runs once per iteration of the loop at line "
+                        f"{loop['line']} ({loop['kind']}): "
+                        + ("one record per I/O request" if count == "1" else
+                           "the whole file on every pass" if count == "*" else f"{count} records per request"))
+                hint = ("Read the file once into a stem before the loop (EXECIO * DISKR dd (STEM rec. FINIS) and "
+                        "loop over rec.1 to rec.0); collect output in a stem and write it once after the loop "
+                        "(EXECIO n DISKW dd (STEM out. FINIS).")
+                self.add(p, "execio-in-loop", "high" if one else "medium", rec, fact + ".", hint,
+                         [self.stmt_span(p, rec)], {"dd": f["name"], "mode": mode, "count": count,
+                                                    "stem": io.get("stem")}, loop=loop, verb="EXECIO",
+                         subject=f"{io.get('copybook') + ':' if io.get('copybook') else ''}{io['line']}:{f['name']}")
+
+    def check_alloc(self, p: Prog) -> None:
+        for f in p.rec.get("files", []):
+            for io in f.get("io", []):
+                if io.get("verb") not in ("ALLOC", "FREE") or not io.get("in_loop"):
+                    continue
+                loop = self.loop_info(p, io["in_loop"])
+                rec = dict(io, paragraph=io.get("paragraph"))
+                fact = (f"{io['verb']} of {f['name']}" + (f" ({', '.join(io['dsn'])})" if io.get("dsn") else "")
+                        + f" runs once per iteration of the loop at line {loop['line']} ({loop['kind']}): a dynamic "
+                        "allocation (catalog search, possibly a mount or ENQ) every pass")
+                self.add(p, "alloc-free-in-loop", "high", rec, fact + ".",
+                         "Allocate once before the loop and free once after; when the data set changes per "
+                         "iteration, group the work by data set.", [self.stmt_span(p, rec)],
+                         {"dd": f["name"], "verb": io["verb"], "dsn": io.get("dsn"), "via": io.get("via")},
+                         loop=loop, verb=io["verb"],
+                         subject=f"{io.get('copybook') + ':' if io.get('copybook') else ''}{io['line']}:{io['verb']}:{f['name']}")
+
+    def check_commands(self, p: Prog) -> None:
+        for st in p.statements:
+            command = st.get("command")
+            if not st.get("in_loop") or not command or str(command).upper() in REXX_HANDLED:
+                continue
+            if st["verb"] in REXX_CALL_VIAS or st["verb"] == "DSNREXX":
+                continue  # programs run and SQL have their own checks
+            loop = self.loop_info(p, st["in_loop"])
+            heavy = st["verb"] in REXX_HEAVY_ENVS
+            text = st.get("text") or " ".join(st.get("operands", []))
+            fact = (f"{st['verb']} command {command} runs once per iteration of the loop at line {loop['line']} "
+                    f"({loop['kind']})" + (": TSO attaches a command processor for each one" if heavy else
+                                           ": one host-command call per pass"))
+            self.add(p, "host-command-in-loop", "medium" if heavy else "low", st, fact + ".",
+                     "Issue the command once for the whole set (one LISTDS or LISTCAT with a pattern, one "
+                     "ISPF service call on a table), or move it before the loop when its result does not change.",
+                     [self.stmt_span(p, st)], {"environment": st["verb"], "command": command,
+                                               "text": text[:200], "changes": bool(st.get("changes"))},
+                     loop=loop, verb=f"{st['verb']} {command}")
 
     def check_search(self, p: Prog) -> None:
         conds = p.rec.get("conditions", [])
@@ -1012,12 +1158,14 @@ class Review:
         missing = sorted({(cb["name"], cb.get("library")) for cb in p.rec.get("copybooks", [])
                           if not cb.get("resolved")}, key=lambda x: (x[0], x[1] or ""))
         for name, lib in missing:
+            member = "copybook" if p.lang == "cobol" else "include member"
             self.note_not_checked(p, None, "all", None,
-                                  f"copybook {name}{' (library ' + lib + ')' if lib else ''} was not found: its "
+                                  f"{member} {name}{' (library ' + lib + ')' if lib else ''} was not found: its "
                                   "data items and code are missing from the map, so findings about them could "
                                   "not be made")
         if not p.statements:
-            self.note_not_checked(p, None, "all", None, "no PROCEDURE DIVISION statements in the map")
+            self.note_not_checked(p, None, "all", None, "no PROCEDURE DIVISION statements in the map"
+                                  if p.lang == "cobol" else "no statements in the map")
         path = Path(p.rec["file"])
         if not path.is_absolute():
             path = self.root / path
@@ -1031,15 +1179,17 @@ class Review:
                                "message": "the source file is not readable here: findings have no evidence lines"})
 
     def run(self, programs: List[Prog]) -> None:
+        steps = {"io": self.check_io, "sql": self.check_sql, "calls": self.check_calls, "search": self.check_search,
+                 "numbers": self.check_numbers, "initialize": self.check_initialize, "strings": self.check_strings,
+                 "execio": self.check_execio, "alloc": self.check_alloc, "commands": self.check_commands}
         for p in programs:
+            if p.lang in NOT_REVIEWED:
+                self.not_reviewed.append({"program": p.label, "file": p.rec["file"], "language": p.lang,
+                                          "reason": NOT_REVIEWED[p.lang]})
+                continue
             self.program_notes(p)
-            self.check_io(p)
-            self.check_sql(p)
-            self.check_calls(p)
-            self.check_search(p)
-            self.check_numbers(p)
-            self.check_initialize(p)
-            self.check_strings(p)
+            for name in LANGUAGE_CHECKS.get(p.lang, ()):
+                steps[name](p)
 
 
 def p_span(p: Prog, k: int) -> Tuple[str, str, int, int]:
@@ -1133,7 +1283,8 @@ def scan(app_map: dict, program: Optional[str] = None, min_confidence: str = "me
     programs = []
     for p in progs:
         programs.append({
-            "program": p.label, "id": p.id, "file": p.rec["file"], "partial": bool(p.rec.get("partial")),
+            "program": p.label, "id": p.id, "language": p.lang, "reviewed": p.lang not in NOT_REVIEWED,
+            "file": p.rec["file"], "partial": bool(p.rec.get("partial")),
             "findings": sum(1 for f in kept if f["program"] == p.label),
             "hidden": sum(1 for f in hidden if f["program"] == p.label),
             "not_checked": sum(1 for n in review.not_checked if n["program"] == p.label),
@@ -1156,6 +1307,7 @@ def scan(app_map: dict, program: Optional[str] = None, min_confidence: str = "me
         "findings": kept,
         "hidden": hidden_counts,
         "not_checked": review.not_checked,
+        "not_reviewed": review.not_reviewed,
         "notes": review.notes,
     }
 
@@ -1187,7 +1339,7 @@ def _loop_words(loop: Optional[dict]) -> str:
 def render_report(result: dict) -> str:
     out: List[str] = []
     kept = result["findings"]
-    out.append("# COBOL performance review")
+    out.append("# COBOL, PL/I and REXX performance review")
     out.append("")
     m = result["map"]
     out.append(f"Generated {result['generated']} by {result['tool']} from `{m['path']}` "
@@ -1225,12 +1377,21 @@ def render_report(result: dict) -> str:
     else:
         out.append("No finding at this confidence level. That is not a clean bill: see what was not checked below.")
     out.append("")
-    out.append("| Program | File | Findings | Not checked |")
-    out.append("|---|---|---|---|")
+    names = {"cobol": "COBOL", "pli": "PL/I", "rexx": "REXX", "asm": "Assembler"}
+    out.append("| Program | Language | File | Findings | Not checked |")
+    out.append("|---|---|---|---|---|")
     for p in result["programs"]:
         partial = " (partial)" if p["partial"] else ""
-        out.append(f"| {_cell(p['program'])}{partial} | `{_cell(p['file'])}` | {p['findings']} | {p['not_checked']} |")
+        found = p["findings"] if p.get("reviewed", True) else "not reviewed in 1.1"
+        out.append(f"| {_cell(p['program'])}{partial} | {names.get(p.get('language', 'cobol'), p.get('language'))} | "
+                   f"`{_cell(p['file'])}` | {found} | {p['not_checked']} |")
     out.append("")
+    if result.get("not_reviewed"):
+        out.append("## Not reviewed in 1.1")
+        out.append("")
+        for n in result["not_reviewed"]:
+            out.append(f"- {n['program']} (`{n['file']}`): {n['reason']}")
+        out.append("")
 
     for p in result["programs"]:
         mine = [f for f in kept if f["program"] == p["program"]]

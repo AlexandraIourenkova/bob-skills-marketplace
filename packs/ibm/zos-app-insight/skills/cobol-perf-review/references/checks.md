@@ -1,5 +1,14 @@
 # cobol-perf-review checks
 
+Since 1.1 the review covers PL/I and REXX as well as COBOL. Which checks run on which language:
+
+| Language | Checks |
+|---|---|
+| COBOL | every check below except the three REXX ones |
+| PL/I | io-open-close-in-loop, sql-in-loop, static-call-in-loop, dynamic-call-in-loop |
+| REXX | sql-in-loop (ADDRESS DSNREXX), static-call-in-loop and dynamic-call-in-loop (external routines, LINKMVS, ATTCHMVS, TSO CALL and EXEC, ISPEXEC SELECT), execio-in-loop, alloc-free-in-loop, host-command-in-loop |
+| Assembler | none in 1.1: the report lists Assembler programs as not reviewed. Their loops are inferred from branches (the map gives each a confidence) and registers are not followed, so a per-loop fact would be a guess. |
+
 `perf.py scan` reports patterns that cost CPU or I/O on z/OS when they run many times. Each finding is a fact: the statement, its file and line, the loop around it (the PERFORM line and its kind, plus the outer loops), the data items involved and the source lines as evidence. There is no score. A finding matters in proportion to how often its loop runs, which the map cannot know: measure before and after every change (see [Measuring](#measuring)).
 
 The heading of each check is its id, so `references/checks.md#<id>` in a finding points here. The COBOL samples are short illustrations, not drop-in code: adapt names, sizes and error handling to the program.
@@ -10,7 +19,7 @@ Confidence:
 - **medium**: the pattern is there, but whether the fix pays off depends on something the map cannot see: a record layout shared with files or callers, an IF around the statement, the size of the callee's work, a WHEN that does not test the key.
 - **low**: listed only with `--min-confidence low`. Besides STRING, UNSTRING and INSPECT, any finding whose loop is a `PERFORM n TIMES` with a literal n of 10 or less, inside no other loop, in a program that no other program calls from a loop, is made low; its fact says how many times the loop runs, and `detail.confidence_before_loop_count` keeps the level it had.
 
-A loop is what `in_loop` in app-map.json says: an inline PERFORM with UNTIL, VARYING or TIMES, or a paragraph reached through PERFORM from such a loop. GO TO loops are not seen. When another program calls this one inside its loop, the report says so in a note; the checks themselves look at loops inside each program.
+A loop is what `in_loop` in app-map.json says: an inline PERFORM with UNTIL, VARYING or TIMES, or a paragraph reached through PERFORM from such a loop (PL/I: a DO loop, or a procedure called from one; REXX: a repeating DO, or a label called from one). GO TO loops are not seen. When another program calls this one inside its loop, the report says so in a note; the checks themselves look at loops inside each program.
 
 ## io-open-close-in-loop
 
@@ -48,6 +57,8 @@ After:
 **Measure.** The step's EXCP count for that DD and its CPU and elapsed time (SMF type 30, or the step summary in the job log). The number of SMF type 14 or 15 records for the data set (one per CLOSE of a non-VSAM data set) or type 62 and 64 (VSAM OPEN and CLOSE) shows how many times it was opened.
 
 ## sql-in-loop
+
+PL/I: EXEC SQL as in COBOL. REXX: `ADDRESS DSNREXX "EXECSQL ..."`; an EXECUTE of a prepared singleton statement counts as that statement, and a PREPARE inside a loop is medium (the statement is compiled again on every pass: prepare it once before the loop).
 
 An EXEC SQL singleton SELECT, INSERT, searched UPDATE, searched DELETE or MERGE inside a loop: high. An OPEN of a cursor inside a loop (a nested cursor): medium. Not reported: FETCH, CLOSE, UPDATE or DELETE WHERE CURRENT OF, and statements that already work on many rows (ROWSET, or FOR n ROWS; the map's `multi_row`).
 
@@ -99,6 +110,8 @@ For a SELECT per row, the usual after-state is a cursor that joins the driving t
 
 ## static-call-in-loop
 
+PL/I: CALL of an external entry. REXX: CALL or a function call of an external exec (searched for and interpreted on every call), and the programs and execs a host command runs (LINKMVS, ATTCHMVS, LINKPGM, TSO CALL, TSO EXEC, `%name`, ISPEXEC SELECT): each loads and runs the program again. Fix for REXX: bring a small routine in as an internal label, or run the program once with all the rows (a data set or a stem it reads).
+
 `CALL 'literal'` inside a loop. Confidence medium.
 
 **Why it costs time.** A static call is a branch with a parameter list, which is cheap. What repeats is the callee: its own work, the re-initialization of a program compiled with the INITIAL attribute, LOCAL-STORAGE allocated on every call, and Language Environment set-up. With the DYNAM compiler option, `CALL 'literal'` is a dynamic call at run time; see [dynamic-call-in-loop](#dynamic-call-in-loop).
@@ -132,6 +145,8 @@ After:
 **Measure.** The step's CPU time (SMF type 30), and a sampling profiler (for example IBM Application Performance Analyzer) for the share of time in the callee and in the call linkage.
 
 ## dynamic-call-in-loop
+
+PL/I: a FETCH inside a loop is low (an entry already fetched is not loaded again, but a RELEASE in the loop makes the next FETCH load it), a CALL of a fetched entry is medium. REXX: LINKMVS, ATTCHMVS or CALL of a program whose name is in a variable, high.
 
 `CALL identifier` inside a loop. Confidence high. The finding lists the literals the identifier can hold and any CANCEL of it inside a loop.
 
@@ -361,6 +376,85 @@ After (only because every part is DELIMITED BY SIZE):
 
 **Measure.** The step's CPU time, and a profiler for the share of time in the paragraph.
 
+## execio-in-loop
+
+REXX `EXECIO` inside a loop. Confidence high when it reads or writes one record per call (`EXECIO 1`) or the whole file on every pass (`EXECIO *`); medium for a larger count.
+
+**Why it costs time.** Each EXECIO is a call into TSO/E with its own parameter checking, and with DISKW one record per call the buffer is handed over record by record. Interpreted REXX adds the cost of the command string itself. Thousands of one-record EXECIO calls cost far more than one call with a stem.
+
+**Fix.**
+
+```rexx
+/* before: one record per pass */
+do i = 1 to n
+  push line.i
+  "EXECIO 1 DISKW OUTDD"
+end
+/* after: build a stem, write it once */
+do i = 1 to n
+  out.i = line.i
+end
+out.0 = n
+"EXECIO" out.0 "DISKW OUTDD (STEM out. FINIS"
+```
+
+Reading: `"EXECIO * DISKR INDD (STEM rec. FINIS"` once, then loop over `rec.1` to `rec.0`. For a file too large for storage, read in blocks of a few thousand records (`EXECIO 5000 DISKR INDD (STEM rec.`) instead of one.
+
+**Known false positives.** A loop that runs a handful of times; a data set read one record at a time on purpose to stop early (then read in blocks); an exec waiting on a file another task writes.
+
+**Measure.** The step's CPU time and EXCP count for the DD (SMF type 30), before and after.
+
+## alloc-free-in-loop
+
+REXX `ALLOC` or `FREE` (TSO commands, or BPXWDYN) inside a loop. Confidence high.
+
+**Why it costs time.** Dynamic allocation searches the catalog, may wait for an ENQ on the data set name, and may mount a volume; FREE releases all of it. Per iteration it costs far more than the records the iteration reads.
+
+**Fix.** Allocate once before the loop, free once after. When the data set name changes per iteration, sort the work by data set and allocate each one once; keep a DD per data set open when there are few.
+
+```rexx
+/* before */
+do i = 1 to n
+  "ALLOC FI(WORK) DA('"dsn"') SHR REUSE"
+  "EXECIO * DISKR WORK (STEM rec. FINIS"
+  "FREE FI(WORK)"
+end
+/* after: one allocation for the data set the loop reads */
+"ALLOC FI(WORK) DA('"dsn"') SHR REUSE"
+"EXECIO * DISKR WORK (STEM rec. FINIS"
+do i = 1 to rec.0
+  /* work on rec.i */
+end
+"FREE FI(WORK)"
+```
+
+**Known false positives.** A loop over a list of data sets that must each be allocated once (that is one allocation per data set, the minimum).
+
+**Measure.** Elapsed time and CPU of the step; SMF type 30 allocation counts.
+
+## host-command-in-loop
+
+A host command (ADDRESS TSO, MVS, ISPEXEC, ISREDIT, SYSCALL...) inside a loop, other than EXECIO, ALLOC, FREE, programs run (see static-call-in-loop) and SQL. Confidence medium for TSO, MVS and CONSOLE commands, low for ISPF and z/OS UNIX services, which are made to be called per row.
+
+**Why it costs time.** Every TSO command is attached as a command processor: its load module is located, a parameter list is built and the command parses its operands. LISTDS, LISTCAT or SYSDSN-like checks per item multiply catalog searches.
+
+**Fix.** One command for the whole set (LISTCAT with a LEVEL pattern, one LISTDS with several names, OUTTRAP around one call), or move the command before the loop when its result does not change. For ISPF tables, use one TBSCAN or TBSORT instead of reading every row with TBSKIP when only some rows are needed.
+
+```rexx
+/* before: one LISTDS per name */
+do i = 1 to dsn.0
+  "LISTDS '"dsn.i"'"
+end
+/* after: one LISTCAT for the level, trapped once */
+call outtrap "cat."
+"LISTCAT LEVEL('"hlq"')"
+call outtrap "OFF"
+```
+
+**Known false positives.** Commands that must run per item (a SUBMIT per generated job, an ISPF display per screen).
+
+**Measure.** CPU time of the step or the TSO session; for ISPF, the number of service calls (ISPF trace).
+
 ## Measuring
 
 - Use the same input, the same volume and a quiet system for the run before and the run after; run each at least twice.
@@ -370,13 +464,15 @@ After (only because every part is DELIMITED BY SIZE):
 - Record the compile options of both builds: OPTIMIZE, ARCH, NUMPROC, TRUNC, SSRANGE and DYNAM change the generated code as much as some of these fixes.
 - Compare outputs: files byte for byte, report lines, Db2 row counts. A performance fix must not change results.
 
-## What 1.0 does not check
+## What 1.1 does not check
 
 - Loops built with GO TO, and loops in a calling program (a note in the report says when a program is called from another program's loop).
 - DISPLAY numbers compared in conditions inside loops, such as the UNTIL of the loop itself.
 - Packed (COMP-3) subscripts, which are converted too, at a lower cost than DISPLAY.
 - EXEC CICS commands inside loops, COMMIT frequency, SORT, READ INTO and WRITE FROM moves.
 - Buffering and blocking (BLKSIZE, BUFNO, VSAM BUFND and BUFNI) and anything set in JCL rather than in the program.
-- Programs in PL/I, Assembler or REXX.
+- Assembler programs (listed as not reviewed in 1.1).
+- PL/I: arithmetic and conversions on PICTURE and character data in loops, FIXED DECIMAL precision, STRING built-ins, ON-unit cost, and REPEAT/UNTIL loops built with GO TO.
+- REXX: string handling and stem growth in loops, INTERPRET, compiled versus interpreted execs, and anything after an ADDRESS VALUE whose environment is unknown.
 
 For a full performance analysis at scale, with IBM's own analysers and refactoring, point to the IBM Bob Premium Package for Z.

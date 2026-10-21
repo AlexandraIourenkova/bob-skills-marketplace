@@ -71,9 +71,10 @@ def at(result: dict, check: str, line: int, program: str = "PERFPOS") -> dict:
 
 # --------------------------------------------------------------------------- shape
 def test_every_finding_is_a_fact_with_lines_loop_evidence_and_fix(low) -> None:
-    assert low["version"] == 1 and low["tool"] == "perf.py 1.0"
+    assert low["version"] == 1 and low["tool"] == "perf.py 1.1"
     checks = {f["check"] for f in low["findings"]}
-    assert checks == set(perf.CHECKS), set(perf.CHECKS) - checks
+    rexx_only = {"execio-in-loop", "alloc-free-in-loop", "host-command-in-loop"}  # tested on REXX below
+    assert checks == set(perf.CHECKS) - rexx_only, set(perf.CHECKS) - rexx_only - checks
     for f in low["findings"]:
         for key in ("id", "check", "confidence", "program", "file", "line", "loop", "fact", "evidence", "fix"):
             assert key in f, key
@@ -107,7 +108,7 @@ def test_every_fix_pointer_has_its_section_in_checks_md() -> None:
         section = text.split(f"\n## {check}\n", 1)[1].split("\n## ", 1)[0]
         for part in ("**Why it costs time.**", "**Fix.**", "**Known false positives.**", "**Measure.**"):
             assert part in section, (check, part)
-        assert section.count("```cobol") >= 1, check
+        assert section.count("```cobol") + section.count("```rexx") + section.count("```pli") >= 1, check
 
 
 def test_ids_are_stable_between_runs(app, project, low) -> None:
@@ -342,6 +343,68 @@ def test_a_loop_in_a_copybook_is_told_apart_and_sqlca_names_need_sql(tmp_path) -
         # line 10 is a PERFORM in the program and the looping PERFORM in the copybook: the map's file tells them apart
         assert f["loop"]["line"] == 10 and f["loop"]["file"] == "src/copy/LOOPBODY.cpy"
         assert f["loop"]["text"].startswith("PERFORM VARYING WS-I")
+
+
+LANG = Path(__file__).parent / "fixtures" / "zos-app-insight-lang"
+LOOPREXX = """/* REXX - original test exec: work inside loops */
+do i = 1 to 50
+  "ALLOC FI(WORK) DA('BILL.PART"i"') SHR REUSE"
+  "EXECIO * DISKR WORK (STEM rec. FINIS"
+  "FREE FI(WORK)"
+  "LISTDS 'BILL.PART"i"'"
+  address ISPEXEC "TBADD ORDTAB"
+  address DSNREXX "EXECSQL PREPARE S1 FROM :stmt"
+  pgm = 'ORDSTAT'
+  address LINKMVS pgm "parm"
+end
+exit 0
+"""
+
+
+@pytest.fixture(scope="module")
+def lang_result(tmp_path_factory) -> dict:
+    root = tmp_path_factory.mktemp("langperf")
+    shutil.copytree(LANG, root / "src")
+    (root / "src" / "rexx" / "LOOPREXX.rexx").write_text(LOOPREXX)
+    app_map = zscan.scan(["src/pli/src", "src/rexx", "src/asm/src", "src/xlang"],
+                         ["src/pli/inc", "src/asm/copy", "src/asm/maclib"], root=root)
+    return perf.scan(app_map, min_confidence="low", root=root)
+
+
+def test_pli_loops_reuse_the_cobol_checks(lang_result) -> None:
+    by = {(f["program"], f["check"], f["line"]): f for f in lang_result["findings"]}
+    sql = by[("BILLMAIN", "sql-in-loop", 99)]
+    assert sql["confidence"] == "high" and sql["loop"]["kind"] == "while" and sql["evidence"][0]["line"] == 99
+    assert by[("BILLMAIN", "static-call-in-loop", 97)]["detail"]["target"] == "PRICECAL"
+    fetched = by[("BILLMAIN", "dynamic-call-in-loop", 101)]
+    assert fetched["confidence"] == "medium" and "fetched entry BILLTAX" in fetched["fact"]
+    assert by[("BILLCALC", "static-call-in-loop", 14)]["loop"]["kind"] == "iterative"
+    assert not any(f["program"] in ("BILLMAIN", "BILLCALC") and f["check"].startswith(("display-", "serial-"))
+                   for f in lang_result["findings"])
+
+
+def test_rexx_loops_have_their_own_checks(lang_result) -> None:
+    by = {(f["program"], f["check"], f["line"]): f for f in lang_result["findings"]}
+    assert by[("ORDLOAD", "execio-in-loop", 23)]["confidence"] == "high"
+    assert "STEM" in by[("ORDLOAD", "execio-in-loop", 28)]["suggestion"]
+    assert by[("ORDLOAD", "static-call-in-loop", 46)]["detail"]["how"] == "CALL"
+    assert by[("LOOPREXX", "alloc-free-in-loop", 3)]["confidence"] == "high"
+    assert by[("LOOPREXX", "alloc-free-in-loop", 5)]["detail"]["verb"] == "FREE"
+    assert by[("LOOPREXX", "execio-in-loop", 4)]["detail"]["count"] == "*"
+    assert by[("LOOPREXX", "host-command-in-loop", 6)]["confidence"] == "medium"
+    assert by[("LOOPREXX", "host-command-in-loop", 7)]["confidence"] == "low"
+    assert by[("LOOPREXX", "sql-in-loop", 8)]["confidence"] == "medium"  # PREPARE once per pass
+    dyn = by[("LOOPREXX", "dynamic-call-in-loop", 10)]
+    assert dyn["detail"]["how"] == "LINKMVS" and dyn["detail"]["candidates"] == ["ORDSTAT"]
+
+
+def test_assembler_is_listed_as_not_reviewed(lang_result) -> None:
+    assert {n["program"] for n in lang_result["not_reviewed"]} == {"BILLRUN", "BILLSQL"}
+    assert not any(f["program"] in ("BILLRUN", "BILLSQL") for f in lang_result["findings"])
+    rows = {p["program"]: p for p in lang_result["programs"]}
+    assert rows["BILLRUN"]["reviewed"] is False and rows["BILLMAIN"]["reviewed"] is True
+    report = perf.render_report(lang_result)
+    assert "## Not reviewed in 1.1" in report and "| BILLRUN (partial) | Assembler |" in report
 
 
 # --------------------------------------------------------------------------- CLI and the output guard

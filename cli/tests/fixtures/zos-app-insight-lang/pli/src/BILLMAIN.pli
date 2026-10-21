@@ -1,0 +1,120 @@
+ /* BILLMAIN: nightly billing run of the order-billing test app.     */ BM000100
+ /* Original test fixture for zos-app-insight, Apache-2.0.           */ BM000200
+ BILLMAIN: PROC OPTIONS(MAIN);                                          BM000300
+                                                                        BM000400
+   %INCLUDE BILLREC;                                                    BM000500
+   %INCLUDE SYSLIB(BILLCNT);                                            BM000600
+   %INCLUDE AUDITPL;                                                    BM000700
+                                                                        BM000800
+   DCL ORDFILE  FILE RECORD INPUT SEQUENTIAL ENV(FB RECSIZE(80));       BM000900
+   DCL BILLOUT  FILE RECORD OUTPUT;                                     BM001000
+                                                                        BM001100
+   DCL 1 BILL_LINE,                                                     BM001200
+         2 BL_ORDER     CHAR(10),                                       BM001300
+         2 BL_AMOUNT    PIC '(7)9V99',                                  BM001400
+         2 BL_TAX       FIXED DEC(9,2) INIT(0),                         BM001500
+         2 BL_ITEMS(5),                                                 BM001600
+           3 BL_SKU     CHAR(8),                                        BM001700
+           3 BL_QTY     FIXED BIN(31);                                  BM001800
+   DCL BILL_TEXT  CHAR(80) DEFINED BILL_LINE;                           BM001900
+   DCL TAX_PTR    POINTER;                                              BM002000
+   DCL 1 TAX_VIEW BASED(TAX_PTR),                                       BM002100
+         2 TV_RATE      FIXED DEC(5,4),                                 BM002200
+         2 TV_CODE      CHAR(2);                                        BM002300
+   DCL CUST_NAME  CHAR(40) VARYING INIT('');                            BM002400
+   DCL RATES(12)  FIXED DEC(5,4) STATIC INIT((12)0);                    BM002500
+   DCL EOF_ORD    BIT(1) INIT('0'B);                                    BM002600
+   DCL (I, J)     FIXED BIN(15);                                        BM002700
+   DCL WS_CUST    CHAR(8);                                              BM002800
+   DCL WS_TOTAL   FIXED DEC(11,2) INIT(0);                              BM002900
+   DCL TAX_MODULE CHAR(8) INIT('BILLTX01');                             BM003000
+   DCL PRICECAL   ENTRY OPTIONS(COBOL);                                 BM003100
+   DCL BILLTAX    ENTRY(FIXED DEC(11,2)) RETURNS(FIXED DEC(9,2));       BM003200
+   DCL BILLSUB    EXTERNAL ENTRY(CHAR(10), FIXED DEC(11,2));            BM003300
+   DCL (ADDR, SUBSTR) BUILTIN;                                          BM003400
+                                                                        BM003500
+   EXEC SQL INCLUDE SQLCA;                                              BM003600
+   EXEC SQL DECLARE CUR_ORD CURSOR FOR                                  BM003700
+            SELECT ORD_ID, ORD_AMT FROM ORDERS                          BM003800
+            WHERE CUST_ID = :WS_CUST;                                   BM003900
+                                                                        BM004000
+   %IF DEBUG = 'YES' %THEN %DO;                                         BM004100
+   DCL TRACE_ON   BIT(1) INIT('1'B);                                    BM004200
+   %END;                                                                BM004300
+                                                                        BM004400
+   ON ENDFILE(ORDFILE) EOF_ORD = '1'B;                                  BM004500
+   ON ERROR SNAP BEGIN;                                                 BM004600
+      PUT SKIP LIST('BILLMAIN FAILED');                                 BM004700
+      CALL PLIDUMP('TB');                                               BM004800
+   END;                                                                 BM004900
+                                                                        BM005000
+   OPEN FILE(ORDFILE) INPUT, FILE(BILLOUT) OUTPUT TITLE('BILLDD');      BM005100
+   FETCH BILLTAX TITLE(TAX_MODULE);                                     BM005200
+   READ FILE(ORDFILE) INTO(ORDER_REC);                                  BM005300
+   DO WHILE (^EOF_ORD);                                                 BM005400
+      CALL PRICE_ORDER;                                                 BM005500
+      SELECT (ORD_TYPE);                                                BM005600
+         WHEN ('R', 'S') CALL ADD_LINES;                                BM005700
+         WHEN ('X') DO;                                                 BM005800
+            CNT_SKIPPED = CNT_SKIPPED + 1;                              BM005900
+            GO TO NEXT_ORDER;                                           BM006000
+         END;                                                           BM006100
+         OTHERWISE PUT SKIP LIST('UNKNOWN TYPE ', ORD_TYPE);            BM006200
+      END;                                                              BM006300
+      WRITE FILE(BILLOUT) FROM(BILL_LINE);                              BM006400
+ NEXT_ORDER:                                                            BM006500
+      READ FILE(ORDFILE) INTO(ORDER_REC);                               BM006600
+   END;                                                                 BM006700
+                                                                        BM006800
+   WS_CUST = ORD_CUST;                                                  BM006900
+   EXEC SQL OPEN CUR_ORD;                                               BM007000
+   DO UNTIL (SQLCODE ^= 0);                                             BM007100
+      EXEC SQL FETCH CUR_ORD INTO :WS_ORD_ID, :WS_ORD_AMT;              BM007200
+      IF SQLCODE < 0 THEN GOTO SQL_ERROR;                               BM007300
+      IF SQLCODE = 0 THEN                                               BM007400
+         WS_TOTAL = WS_TOTAL + WS_ORD_AMT;                              BM007500
+      ELSE IF SQLCODE = 100 THEN                                        BM007600
+         PUT SKIP LIST('END OF ORDERS');                                BM007700
+      ELSE                                                              BM007800
+         CNT_SKIPPED = CNT_SKIPPED + 1;                                 BM007900
+   END;                                                                 BM008000
+   EXEC SQL CLOSE CUR_ORD;                                              BM008100
+                                                                        BM008200
+   CALL BILLSUB(BL_ORDER, WS_TOTAL);                                    BM008300
+   CLOSE FILE(ORDFILE), FILE(BILLOUT);                                  BM008400
+   RETURN;                                                              BM008500
+                                                                        BM008600
+ SQL_ERROR:                                                             BM008700
+   PUT SKIP LIST('SQL ERROR ', SQLCODE);                                BM008800
+   RETURN;                                                              BM008900
+                                                                        BM009000
+ PRICE_ORDER: PROC;                                                     BM009100
+   DCL LINE_AMT FIXED DEC(11,2) INIT(0);                                BM009200
+   DO I = 1 TO 5;                                                       BM009300
+      DO J = 1 TO ORD_QTY(I) BY 1;                                      BM009400
+         LINE_AMT = LINE_AMT + RATES(I);                                BM009500
+      END;                                                              BM009600
+      CALL PRICECAL(BL_SKU(I), LINE_AMT);                               BM009700
+   END;                                                                 BM009800
+   EXEC SQL SELECT TAX_RATE INTO :TV_RATE                               BM009900
+            FROM TAXTAB WHERE TAX_CODE = :TV_CODE;                      BM010000
+   BL_TAX = BILLTAX(LINE_AMT);                                          BM010100
+ END PRICE_ORDER;                                                       BM010200
+                                                                        BM010300
+ ADD_LINES: PROC;                                                       BM010400
+   DCL K FIXED BIN(15);                                                 BM010500
+   DO K = 1 TO ORD_COUNT WHILE (K <= 5);                                BM010600
+      BL_QTY(K) = ORD_QTY(K);                                           BM010700
+      CNT_LINES = CNT_LINES + 1;                                        BM010800
+   END;                                                                 BM010900
+   BL_AMOUNT = FMT_AMOUNT(WS_TOTAL);                                    BM011000
+ END ADD_LINES;                                                         BM011100
+                                                                        BM011200
+ FMT_AMOUNT: PROC(AMT) RETURNS(CHAR(12));                               BM011300
+   DCL AMT FIXED DEC(11,2);                                             BM011400
+   DCL TEXT CHAR(12);                                                   BM011500
+   PUT STRING(TEXT) EDIT(AMT)(P'ZZZ,ZZ9V.99');                          BM011600
+   RETURN(TEXT);                                                        BM011700
+ END FMT_AMOUNT;                                                        BM011800
+                                                                        BM011900
+ END BILLMAIN;                                                          BM012000

@@ -1,0 +1,18 @@
+ /* BILLCALC: prices one order. RECALC is a second entry point     */
+ /* that re-prices an order with the rates of each month.          */
+ BILLCALC: PROC(ORDER_ID, AMOUNT);
+   DCL ORDER_ID CHAR(10);
+   DCL AMOUNT   FIXED DEC(11,2);
+   DCL RATE     FIXED DEC(5,4) STATIC INIT(1.0500);
+   DCL I        FIXED BIN(31);
+   DCL PRICES(12) FIXED DEC(9,2) STATIC INIT((12)0);
+   DCL TAXRATE  ENTRY(FIXED BIN(31), FIXED DEC(9,2));
+   AMOUNT = AMOUNT * RATE;
+   RETURN;
+ RECALC: ENTRY(ORDER_ID, AMOUNT);
+   DO I = 1 TO 12;
+     CALL TAXRATE(I, PRICES(I));
+   END;
+   AMOUNT = AMOUNT + PRICES(1);
+   RETURN;
+ END BILLCALC;

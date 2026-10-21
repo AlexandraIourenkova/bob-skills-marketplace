@@ -68,6 +68,9 @@ PROGRAM_KEY_SECTIONS = {
     "business_rule_candidates": ("business_rules",),
     "data_items": ("data",),
     "error_handling": ("error_handling",),
+    "pli": ("processing_flow", "error_handling"),
+    "rexx": ("processing_flow", "inputs_outputs", "error_handling"),
+    "asm": ("processing_flow", "dependencies"),
 }
 APPLICATION_KEY_SECTIONS = {
     "inventory": ("overview", "inventory"),
@@ -97,6 +100,15 @@ MAX_TOUCHES = 12
 TEXT_CAP = 160
 
 TERMINATORS = ("GOBACK", "STOP RUN", "EXIT PROGRAM", "GO TO")
+# Statements that end a program, or a routine the flow should not fall through, per language.
+LANG_ENDS = {"pli": ("RETURN", "STOP", "EXIT"), "rexx": ("EXIT", "RETURN"), "asm": ("RETURN",)}
+ASM_RETURNS = {"BR", "PR", "BSM", "RETURN"}
+ASM_JUMPS = {"B", "J", "BRU", "JLU"}
+LANG_NAMES = {"cobol": "COBOL", "pli": "PL/I", "rexx": "REXX", "asm": "Assembler"}
+ASM_RULES_NOTE = ("Assembler has no business-rule candidates: the map does not pair a compare with the branch "
+                  "that acts on it, so it cannot state a condition. Describe decisions from the code, the labels "
+                  "and the loops, with line evidence, and mark a decision unclear when a branch goes to a register "
+                  "or a computed address.")
 ABEND_ROUTINES = {"CEE3ABD", "ILBOABN0", "CEE3DMP", "CEE3AB2"}
 SQLCA_NAMES = ("SQLCODE", "SQLSTATE", "SQLERRD", "SQLERRM", "SQLWARN", "SQLERRMC")
 CICS_RESP_NAMES = ("EIBRESP", "EIBRESP2")
@@ -324,13 +336,25 @@ class Source:
             return None
 
 
-def _area(text: str, fmt: str) -> str:
+def _area(text: str, fmt: str, lang: str = "cobol") -> str:
+    """The code columns of a line: COBOL 7-72 (fixed), Assembler 1-71, PL/I 1-72, REXX all."""
     text = text.expandtabs(8).rstrip("\r\n")
+    if lang == "asm":
+        return text[:71].rstrip()
+    if lang == "pli":
+        return text[:72].rstrip()
+    if lang == "rexx":
+        return text.rstrip()
     return text[6:72].rstrip() if fmt == "fixed" else text.rstrip()
 
 
-def _is_comment(text: str, fmt: str) -> bool:
+def _is_comment(text: str, fmt: str, lang: str = "cobol") -> bool:
     text = text.expandtabs(8)
+    if lang == "asm":
+        return text[:1] == "*" or text[:2] == ".*"
+    if lang in ("pli", "rexx"):
+        stripped = _area(text, fmt, lang).strip()
+        return stripped.startswith("/*") and stripped.endswith("*/")
     if fmt == "fixed":
         return (len(text) > 6 and text[6] in "*/") or text[7:].lstrip().startswith("*>")
     return text.lstrip().startswith("*>")
@@ -358,14 +382,55 @@ def program_id_index(lines: List[str], fmt: str, pid: str) -> int:
     return 0
 
 
+def _lang_header(lines: List[str], prog: dict, limit: int, notes: List[str]) -> dict:
+    """PL/I, REXX and Assembler: the comment lines at the top of the member, up to the first code."""
+    lang = prog.get("language", "cobol")
+    fmt = prog.get("format", "fixed")
+    quoted: List[str] = []
+    in_comment = False
+    end = 0
+    for n, raw in enumerate(lines):
+        text = _area(raw, fmt, lang)
+        stripped = text.strip()
+        if not stripped:
+            continue
+        if lang == "asm":
+            is_comment = _is_comment(raw, fmt, lang)
+        else:
+            if lang == "pli" and stripped.upper().startswith("*PROCESS"):
+                continue
+            is_comment = in_comment or stripped.startswith("/*")
+            if is_comment:
+                last_open, last_close = text.rfind("/*"), text.rfind("*/")
+                in_comment = last_open > last_close if last_open >= 0 else (in_comment and last_close < 0)
+                code_after = text[last_close + 2:].strip() if last_close >= 0 else ""
+                if code_after and not in_comment:
+                    is_comment = False
+        if not is_comment:
+            break
+        end = n + 1
+        if not _decoration(stripped.strip("/*")):
+            quoted.append(f"{n + 1}: {text}")
+    out = {"lines": quoted[:limit]}
+    if len(quoted) > limit:
+        out["cut"] = f"{len(quoted)} lines, the first {limit} kept; read {prog['file']}:1-{end}"
+        notes.append("header: " + out["cut"])
+    if not quoted:
+        out["note"] = "no comment block at the top of the member"
+    return out
+
+
 def header_block(src: Source, prog: dict, limit: int, notes: List[str]) -> dict:
     """The comment block above the program's IDENTIFICATION DIVISION and the lines up to the next division.
 
     Quoted as data with line numbers; lines of only asterisks, dashes or blanks are left out.
+    For PL/I, REXX and Assembler: the comment block at the top of the member.
     """
     lines = src.lines(prog["file"])
     if lines is None:
         return {"lines": [], "note": f"{prog['file']}: not readable"}
+    if prog.get("language", "cobol") != "cobol":
+        return _lang_header(lines, prog, limit, notes)
     fmt = prog.get("format", "fixed")
     start = program_id_index(lines, fmt, prog["id"])
     for j in range(start, -1, -1):
@@ -397,17 +462,18 @@ def paragraph_comment(src: Source, prog: dict, start_line: int) -> List[str]:
     """Comment lines right above a paragraph header and right after it, quoted with line numbers."""
     lines = src.lines(prog["file"]) or []
     fmt = prog.get("format", "fixed")
+    lang = prog.get("language", "cobol")
     above: List[str] = []
     n = start_line - 1
-    while n >= 1 and len(above) < PARA_COMMENT_LINES and n <= len(lines) and _is_comment(lines[n - 1], fmt):
-        text = _area(lines[n - 1], fmt)
+    while n >= 1 and len(above) < PARA_COMMENT_LINES and n <= len(lines) and _is_comment(lines[n - 1], fmt, lang):
+        text = _area(lines[n - 1], fmt, lang)
         if not _decoration(text):
             above.append(f"{n}: {text}")
         n -= 1
     below: List[str] = []
     n = start_line + 1
-    while n <= len(lines) and len(below) < PARA_COMMENT_LINES and (_is_comment(lines[n - 1], fmt) or not lines[n - 1].strip()):
-        text = _area(lines[n - 1], fmt)
+    while n <= len(lines) and len(below) < PARA_COMMENT_LINES and (_is_comment(lines[n - 1], fmt, lang) or not lines[n - 1].strip()):
+        text = _area(lines[n - 1], fmt, lang)
         if text.strip() and not _decoration(text):
             below.append(f"{n}: {text}")
         n += 1
@@ -500,6 +566,7 @@ class ProgramPack:
         self.src = Source(root)
         self.notes: List[str] = []
         self.fmt = prog.get("format", "fixed")
+        self.lang = prog.get("language", "cobol")
         self.items = zscan.data_item_index(prog)
         self.copy_files: Dict[str, str] = {c["name"]: c["resolved"] for c in prog.get("copybooks", []) if c.get("resolved")}
         self.para_by_name = {p["name"]: p for p in prog.get("paragraphs", [])}
@@ -659,6 +726,9 @@ class ProgramPack:
                 row["at"] = self.cite(caller["file"], e["line"]) if caller else e["line"]
             if e.get("dynamic"):
                 row["dynamic"] = True
+            for key in ("via", "entry"):
+                if e.get(key):
+                    row[key] = e[key]
             called_by.append(row)
         exec_by = [{"from": e["from"], "step": e.get("step"), **({"via": e["via"]} if e.get("via") else {})}
                    for e in zscan.edges_to(self.app_map, p["id"], ["exec-pgm"])]
@@ -680,6 +750,8 @@ class ProgramPack:
         row: Dict[str, Any] = {"job": run["job"], "step": run["step"], "jcl": run.get("file")}
         if run.get("via"):
             row["via"] = run["via"]
+        if run.get("entry"):
+            row["entry"] = run["entry"]
         step, proc_step = self._find_step(run)
         if step is None:
             row["note"] = "step record not found in the map"
@@ -760,18 +832,29 @@ class ProgramPack:
         return out[:MAX_PATHS]
 
     def calls(self) -> List[dict]:
-        by_id = zscan.programs_by_id(self.app_map)
+        by_id = dict(zscan.programs_by_id(self.app_map))
+        for prog in self.app_map.get("programs", []):
+            for e in prog.get("entries") or []:
+                by_id.setdefault(str(e.get("name") or "").upper(), prog)
 
         def status(name: str) -> str:
-            if name in by_id:
-                return "in the map"
+            found = by_id.get(str(name).upper())
+            if found is not None:
+                lang = found.get("language", "cobol")
+                where = "in the map" if found["id"] == str(name).upper() else f"in the map: entry of {found['id']}"
+                return where + ("" if lang == "cobol" else f" ({LANG_NAMES.get(lang, lang)})")
             if name in ABEND_ROUTINES:
                 return "Language Environment service"
             return "not found in the scanned folders"
 
         out: List[dict] = []
         for c in self.prog.get("calls", []):
-            row: Dict[str, Any] = {"line": c["line"], "paragraph": c.get("paragraph"), "kind": "CALL"}
+            how = c.get("via") or c.get("kind") or c.get("form") or "CALL"
+            row: Dict[str, Any] = {"line": c["line"], "paragraph": c.get("paragraph"), "kind": how}
+            if c.get("system"):
+                row["target"], row["status"] = c["target"], "supplied by z/OS"
+                out.append(row)
+                continue
             if c.get("dynamic"):
                 row["identifier"] = c["target"]
                 cands = c.get("candidates") or []
@@ -974,10 +1057,14 @@ class ProgramPack:
             word = verb if verb != "STOP" else ("STOP RUN" if ops[:1] == ["RUN"] else "STOP")
             if verb == "EXIT" and ops[:1] == ["PROGRAM"]:
                 word = "EXIT PROGRAM"
+            if self.lang == "asm":
+                word = "RETURN" if verb in ASM_RETURNS else ("GO TO" if verb in ASM_JUMPS else verb)
+            elif self.lang in ("pli", "rexx") and verb in ("GO", "GOTO", "GO TO", "SIGNAL"):
+                word = "GO TO"
             para = s.get("paragraph")
             if para not in ends or s["line"] >= ends[para][0]:
                 ends[para] = (s["line"], word)
-            if word in ("GOBACK", "STOP RUN", "EXIT PROGRAM"):
+            if word in ("GOBACK", "STOP RUN", "EXIT PROGRAM") or word in LANG_ENDS.get(self.lang, ()):
                 add(para, {"line": s["line"], "step": word})
         for g in p.get("gotos", []):
             if not g.get("copybook"):
@@ -989,7 +1076,8 @@ class ProgramPack:
         def ends_here(para: Optional[str]) -> bool:
             """The paragraph's last statement is GOBACK, STOP RUN, EXIT PROGRAM or GO TO outside any IF or EVALUATE."""
             line, word = ends.get(para, (0, ""))
-            return word in TERMINATORS and self.innermost_condition(line, para) is None
+            ending = TERMINATORS + LANG_ENDS.get(self.lang, ())
+            return word in ending and self.innermost_condition(line, para) is None
 
         order = [x["name"] for x in p.get("paragraphs", [])]
         declaratives = self._declarative_paragraphs()
@@ -1063,6 +1151,8 @@ class ProgramPack:
             if entry:
                 walk(entry, 0, ())
             terminated = ends_here(entry) if entry else True
+        if self.lang == "pli":
+            terminated = True  # a PL/I procedure runs only when it is called: no falling through
         i = start_index
         while not terminated and i < len(order) and not cut["hit"]:
             name = order[i]
@@ -1078,8 +1168,12 @@ class ProgramPack:
             for t in g.get("to", []):
                 goto_targets.setdefault(t, []).append(g["line"])
         not_reached = []
+        # entered another way: PL/I ON-units and BEGIN blocks, REXX trap labels, secondary entry points
+        other_way = {x["name"] for x in p.get("paragraphs", []) if x.get("kind") in ("on-unit", "begin")}
+        other_way |= {str(t.get("target") or "").upper() for t in p.get("traps") or []}
+        other_way |= {str(e.get("name") or "").upper() for e in p.get("entries") or []}
         for name in order:
-            if name in visited or name in declaratives:
+            if name in visited or name in declaratives or name in other_way:
                 continue
             row: Dict[str, Any] = {"paragraph": name}
             if name in goto_targets:
@@ -1122,7 +1216,11 @@ class ProgramPack:
         for s in p.get("statements", []):
             line = None if s.get("copybook") else s["line"]
             for tok in s.get("operands", []):
-                mark(tok, line)
+                if self.lang == "asm":
+                    for word in re.findall(r"[A-Za-z@#$_][A-Za-z0-9@#$_]*", re.sub(r"'[^']*'", " ", str(tok))):
+                        mark(word, line)
+                else:
+                    mark(tok, line)
         for c in p.get("conditions", []):
             for name in c.get("data_items", []):
                 mark(name, None if c.get("copybook") else c["start_line"])
@@ -1145,11 +1243,22 @@ class ProgramPack:
                 mark(name, None, f"record key of {f['name']}")
             for name in f.get("records") or []:
                 mark(name, None, f"record of {f['name']}")
+        using_role = {"pli": "parameter of the procedure", "rexx": "ARG of the exec",
+                      "asm": "parameter"}.get(self.lang, "PROCEDURE DIVISION USING")
         for name in p.get("procedure_using", []):
-            mark(name, None, "PROCEDURE DIVISION USING")
+            mark(name, None, using_role)
         return used
 
     def data_items(self) -> dict:
+        if self.lang == "rexx":
+            variables = self.prog.get("variables") or []
+            rows = [{"name": v["name"], "kind": v.get("kind"),
+                     "set_by": [f"{x.get('how')} at {x.get('line')}" for x in (v.get("set_by") or [])][:6]}
+                    for v in variables]
+            return {"total_in_program": 0, "listed": 0,
+                    "note": "REXX has no declarations: there are no data items. These are the stems and the "
+                            "variables the exec sets with PARSE, ARG, PULL, EXECIO or EXECSQL INTO.",
+                    "variables": _cap(rows, MAX_ITEMS, "variables", self.notes), "items": []}
         used = self.used_names()
         wanted: Set[str] = set(used)
         all_items = self.prog.get("data_items", [])
@@ -1170,6 +1279,11 @@ class ProgramPack:
             row: Dict[str, Any] = {"name": it["name"], "level": it["level"]}
             for key in ("pic", "usage", "value", "redefines", "parent"):
                 if it.get(key):
+                    row[key] = it[key]
+            extra = {"pli": ("type", "dimensions", "based", "defined", "like", "external"),
+                     "asm": ("type", "length", "dup", "op", "control_section", "offset")}.get(self.lang, ())
+            for key in extra:
+                if it.get(key) not in (None, "", False, []):
                     row[key] = it[key]
             if not it.get("parent") and it.get("section"):
                 row["section"] = it["section"]
@@ -1201,6 +1315,10 @@ class ProgramPack:
     def error_tag(self, c: dict, status_items: Set[str], resp_vars: Set[str]) -> Optional[str]:
         names = set(c.get("data_items", []))
         tokens = set(c["text"].upper().replace("(", " ").replace(")", " ").split())
+        if self.lang == "rexx" and ("RC" in names or "RC" in tokens):
+            return "return-code"
+        if self.lang == "pli" and ({"ONCODE", "ONKEY", "ONCHAR"} & tokens or any(t.startswith("ONCODE") for t in tokens)):
+            return "on-condition"
         if names & status_items:
             return "file-status"
         if any(t.startswith(SQLCA_NAMES) for t in tokens | names):
@@ -1208,6 +1326,63 @@ class ProgramPack:
         if tokens & set(CICS_RESP_NAMES) or names & resp_vars or "DFHRESP" in c["text"].upper():
             return "cics-resp"
         return None
+
+    @staticmethod
+    def _on_condition(name: str) -> str:
+        """ON-ENDFILE-45 -> ENDFILE: the condition of an ON-unit from its paragraph name."""
+        parts = name.split("-")
+        return "-".join(parts[1:-1]) if len(parts) >= 3 and parts[0] == "ON" else name
+
+    def language_detail(self) -> dict:
+        """What only this language has: PL/I blocks and entries, REXX environments and effects, Assembler sections."""
+        p = self.prog
+        if self.lang == "pli":
+            def rows(kind: str) -> List[dict]:
+                return [{"name": x["name"], "lines": [x["start_line"], x["end_line"]],
+                         **{k: x[k] for k in ("parent", "params", "external") if x.get(k)}}
+                        for x in p.get("paragraphs", []) if x.get("kind") == kind]
+            return {"procedures": rows("procedure"), "begin_blocks": rows("begin"),
+                    "on_units": [dict(r, condition=self._on_condition(r["name"])) for r in rows("on-unit")],
+                    "entries": p.get("entries") or [], "margins": p.get("margins")}
+        if self.lang == "rexx":
+            effects = []
+            for st in p.get("statements", []):
+                if st.get("changes"):
+                    row = {"at": self.cite(self.file_of(st), st["line"], st.get("end_line")), "environment": st["verb"],
+                           "command": st.get("command"), "text": _short(st.get("text") or " ".join(st.get("operands", [])), 140)}
+                    if st.get("datasets"):
+                        row["datasets"] = st["datasets"]
+                    if st.get("in_loop"):
+                        row["in_loop"] = st["in_loop"]
+                    if st.get("dynamic"):
+                        row["dynamic"] = True
+                    effects.append(row)
+            commands = sum(1 for st in p.get("statements", []) if st.get("command"))
+            return {"labels": [{"name": x["name"], "lines": [x["start_line"], x["end_line"]],
+                                **({"procedure": x["procedure"]} if x.get("procedure") else {})}
+                               for x in p.get("paragraphs", [])],
+                    "environments": p.get("environments") or [],
+                    "host_commands": commands,
+                    "effects": _cap(effects, 100, "commands that change data", self.notes),
+                    "effects_note": ("host commands the map marks `changes: true`: they create, delete or rewrite "
+                                     "data sets, members or files, or submit or cancel jobs. Text in braces is what "
+                                     "the scanner could not evaluate." if effects else
+                                     "no host command that changes data or submits jobs was found"),
+                    "loops": [{k: lp.get(k) for k in ("line", "end_line", "kind", "text", "paragraph")} for lp in p.get("loops") or []],
+                    "traps": p.get("traps") or []}
+        if self.lang == "asm":
+            return {"sections": [{k: x.get(k) for k in ("name", "kind", "start_line", "end_line", "amode", "rmode", "copybook")
+                                  if x.get(k) is not None} for x in p.get("sections", [])],
+                    "macros": [{k: m.get(k) for k in ("name", "found", "system", "definition", "line", "count") if m.get(k) is not None}
+                               for m in p.get("macros") or []],
+                    "macros_not_found": [m["name"] for m in p.get("macros") or [] if not m.get("found") and not m.get("system")],
+                    "loops": [{k: lp.get(k) for k in ("start_line", "end_line", "opcode", "top", "type", "confidence")}
+                              for lp in p.get("loops") or []],
+                    "loops_note": ("loops are inferred from backward branches: high for BCT, BXH, BXLE and DO macros, "
+                                   "medium for a conditional branch back, low for an unconditional one"),
+                    "entries": p.get("entries") or [], "externals": p.get("externals") or [],
+                    "usings": len(p.get("usings") or []), "equates": len(p.get("equates") or [])}
+        return {}
 
     def status_items(self) -> Set[str]:
         status = {f["status"] for f in self.prog.get("files", []) if f.get("status")}
@@ -1226,6 +1401,11 @@ class ProgramPack:
         return out
 
     def rule_candidates(self) -> List[dict]:
+        if self.lang == "asm":
+            self.slice_stats = {"slice_lines_per_condition": self.slice_lines, "slice_budget": self.slice_budget,
+                                "slice_lines_used": 0, "slices_cut": 0, "slices_omitted": 0,
+                                "max_rules": self.max_rules, "rules_as_one_line": 0}
+            return []
         status, resp = self.status_items(), self.resp_vars()
         shown: Set[Tuple[str, int]] = set()
         budget = self.slice_budget
@@ -1292,7 +1472,7 @@ class ProgramPack:
             for n in wanted:
                 if prev is not None and n != prev + 1:
                     text.append(f"... lines {prev + 1}-{n - 1} cut")
-                text.append(f"{n}: {_area(lines[n - 1], self.fmt)}")
+                text.append(f"{n}: {_area(lines[n - 1], self.fmt, self.lang)}")
                 prev = n
             row["slice"] = text
             if len(wanted) < total:
@@ -1359,6 +1539,25 @@ class ProgramPack:
         decl = self._declarative_paragraphs()
         if decl:
             out["declaratives"] = sorted(decl)
+        if self.lang == "pli":
+            units = [{"condition": self._on_condition(para["name"]), "at": self.cite(p["file"], para["start_line"], para["end_line"]),
+                      "unit": para["name"]} for para in p.get("paragraphs", []) if para.get("kind") == "on-unit"]
+            out["on_units"] = units
+            out["file_handlers"] = [{"file": f["name"], "condition": h.get("condition"),
+                                     "at": self.cite(self.file_of(h), h.get("line"), h.get("end_line"))}
+                                    for f in p.get("files", []) for h in f.get("handlers") or []]
+            out["on_units_note"] = ("ON-units are the error handling of PL/I: each runs when its condition is raised "
+                                    "while it is established. The map lists where they are written; which statements "
+                                    "they cover depends on run-time order and is approximated by the phrases below.")
+        if self.lang == "rexx":
+            out["traps"] = [{k: t.get(k) for k in ("condition", "action", "on", "target", "line", "paragraph", "resolved")}
+                            for t in p.get("traps") or []]
+            if not out["traps"]:
+                out["traps_note"] = "no SIGNAL ON or CALL ON trap: errors and failed commands go unnoticed unless RC is checked"
+        if self.lang == "asm":
+            out["note_asm"] = ("Assembler return codes travel in registers (R15 after a CALL, LINK or SVC) and are "
+                               "tested with compare-and-branch; the map does not follow register values. Read the "
+                               "code after each call and each I/O macro, and the EODAD and SYNAD exits of the DCBs.")
         phrases = []
         status_files = {f["name"] for f in p.get("files", []) if f.get("status")}
         io_files: Dict[Tuple[str, int], str] = {}
@@ -1418,8 +1617,8 @@ class ProgramPack:
             "pack": "zos-program-doc program context",
             "version": PACK_VERSION,
             "generated": _now(),
-            "program": {"id": p["id"], "file": p["file"], "format": p.get("format"), "lines": p.get("lines"),
-                        "sha256": p.get("sha256"), "partial": bool(p.get("partial"))},
+            "program": {"id": p["id"], "language": self.lang, "file": p["file"], "format": p.get("format"),
+                        "lines": p.get("lines"), "sha256": p.get("sha256"), "partial": bool(p.get("partial"))},
             "map": {"path": self.map_path, "generated": self.app_map.get("generated"), "parser": self.app_map.get("parser")},
             "config": {k: self.cfg[k] for k in ("language", "mermaid", "sections", "source")},
             "sources": {name: path for path, name in self.cite_names.items()},
@@ -1436,6 +1635,10 @@ class ProgramPack:
         for key, fn in builders:
             if key not in omitted:
                 pack[key] = fn()
+        if self.lang != "cobol" and self.lang not in omitted:
+            pack[self.lang] = self.language_detail()
+        if self.lang == "asm" and "business_rule_candidates" in pack:
+            pack["business_rules_note"] = ASM_RULES_NOTE
         pack["dependencies"] = {"programs_called": zscan.callees(self.app_map, p["id"]),
                                 "called_by": zscan.callers(self.app_map, p["id"]),
                                 "copybooks": [c["name"] for c in p.get("copybooks", [])],
@@ -1499,9 +1702,12 @@ def application_pack(app_map: dict, cfg: dict, docs_dir: str, map_path: str, roo
             traits.append("db2")
         if p.get("procedure_using") or callers[p["id"]]:
             traits.append("subprogram")
+        if any(st.get("changes") for st in p.get("statements", [])):
+            traits.append("changes data")
         status, path = doc_status(p, docs_dir, root)
         inventory.append({
-            "id": p["id"], "file": p["file"], "lines": p.get("lines"), "traits": traits,
+            "id": p["id"], "language": p.get("language", "cobol"), "file": p["file"], "lines": p.get("lines"),
+            "traits": traits,
             "partial": bool(p.get("partial")),
             "run_by": sorted({f"{r['job']}.{r['step']}" for r in p.get("run_by", [])}),
             "called_by": callers[p["id"]], "calls": zscan.callees(app_map, p["id"]),
@@ -1519,6 +1725,8 @@ def application_pack(app_map: dict, cfg: dict, docs_dir: str, map_path: str, roo
         "template": "references/application-doc-template.md",
         "notice": NOTICE,
         "counts": {"programs": len(progs), "program_records": len(app_map.get("programs", [])),
+                   "by_language": {lang: sum(1 for p in progs if p.get("language", "cobol") == lang)
+                                   for lang in ("cobol", "pli", "rexx", "asm")},
                    "copybooks": len(app_map.get("copybooks", [])), "jobs": len(app_map.get("jobs", [])),
                    "procs": len(app_map.get("procs", [])), "edges": len(app_map.get("edges", [])),
                    "not_analysed": {k: len(v) for k, v in app_map.get("not_analysed", {}).items()}},
@@ -1526,7 +1734,8 @@ def application_pack(app_map: dict, cfg: dict, docs_dir: str, map_path: str, roo
     if "inventory" not in omitted:
         pack["inventory"] = {
             "programs": _cap(inventory, 1000, "programs", notes),
-            "copybooks": _cap([{"name": c["name"], "file": c["file"], "used_by": c.get("used_by", [])}
+            "copybooks": _cap([{"name": c["name"], "language": c.get("language", "cobol"), "file": c["file"],
+                                "used_by": c.get("used_by", [])}
                                for c in app_map.get("copybooks", [])], 1000, "copybooks", notes),
             "jobs": [{"name": j["name"], "file": j["file"], "steps": len(j.get("steps", []))} for j in app_map.get("jobs", [])],
             "procs": [{"name": x["name"], "file": x["file"], "source": x.get("source")} for x in app_map.get("procs", [])],
@@ -1541,9 +1750,14 @@ def application_pack(app_map: dict, cfg: dict, docs_dir: str, map_path: str, roo
                 row: Dict[str, Any] = {"step": s["name"], "line": s.get("line")}
                 if s.get("pgm"):
                     row["pgm"] = s["pgm"]
-                    row["in_map"] = s["pgm"] in by_id
+                    row["in_map"] = s["pgm"] in by_id or any(
+                        s["pgm"] == str(e.get("name") or "").upper() for x in progs for e in x.get("entries") or [])
                 if s.get("runs"):
                     row["runs"] = s["runs"]
+                execs = [x["name"] for x in s.get("execs") or []
+                         if x["how"] != "implicit" or (by_id.get(x["name"]) or {}).get("language") == "rexx"]
+                if execs:
+                    row["execs"] = execs
                 if s.get("proc"):
                     row["proc"] = s["proc"]
                     row["proc_steps"] = [{"step": ps["name"], **{k: ps[k] for k in ("pgm", "proc", "runs") if ps.get(k)}}

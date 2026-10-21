@@ -1,0 +1,7 @@
+* BSAVE macro definition. Original test fixture.
+         MACRO
+&LABEL   BSAVE &BASE=R12
+.* save the caller's registers and load a base register
+&LABEL   STM   R14,R12,12(R13)
+         LR    &BASE,R15
+         MEND

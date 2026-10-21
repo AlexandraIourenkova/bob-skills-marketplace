@@ -1,14 +1,14 @@
 {
   "$schema": "../../../schemas/pack.schema.json",
   "name": "zos-app-insight",
-  "displayName": "COBOL and JCL application insight",
-  "version": "1.0.0",
+  "displayName": "z/OS application insight",
+  "version": "1.1.0",
   "vendor": "ibm",
-  "description": "Map a COBOL and JCL application, build its data dictionary, document its programs and business rules, and review COBOL for performance, from source in your workspace or downloaded read-only from z/OS. A starter pack; for IBM's own scanners, refactoring and IBM Z documentation in answers, use IBM Bob Premium Package for Z.",
+  "description": "Map a COBOL, PL/I, REXX and Assembler application with its JCL, build its data dictionary, document its programs and business rules, and review COBOL, PL/I and REXX for performance, from source in your workspace or downloaded read-only from z/OS. A starter pack; for IBM's own scanners, refactoring and IBM Z documentation in answers, use IBM Bob Premium Package for Z.",
   "safety": [
     {
       "class": "data",
-      "warning": "The COBOL, copybooks and JCL you analyse, and members downloaded from z/OS, go into Bob's model context like any file you open.",
+      "warning": "The COBOL, PL/I, REXX, Assembler and JCL you analyse, and members downloaded from z/OS, go into Bob's model context like any file you open.",
       "covered": "The scripts send nothing over the network; the only network step is the optional Zowe CLI download through your own profile, after your yes to the plan it prints. The rule keeps quotes to the cited lines and suggests git-ignoring zos-insight/src/."
     },
     {
@@ -22,6 +22,9 @@
   "minBob": "2.0.2",
   "tags": [
     "cobol",
+    "pli",
+    "rexx",
+    "assembler",
     "jcl",
     "mainframe",
     "z-os",
@@ -46,12 +49,12 @@
   "networkAllow": [],
   "revokedVersions": [],
   "checksums": {
-    "skills/zos-app-map": "sha256:189a810994826596396e8658a29dd579c787d9d7307559bc9fbc160c96fd3fe1",
-    "skills/zos-data-dictionary": "sha256:ab80f7cfba455344d646b5f7d96a20e403e79af42e17e10145b57789a85a1914",
-    "skills/zos-program-doc": "sha256:aac673847f997c15c592b28dfbbae8718e8ee2a63ffd7b0e56fb70d67f265982",
-    "skills/cobol-perf-review": "sha256:187d73089cac102812618e15ed0b71e110dd41c03c5ae3ee7955b96c120b91b4",
-    "rules/zos-app-insight.md": "sha256:190b8532c6d1009f9292d0ba80be7ce288b11788ec23e043dfe82082fbc2ee9a",
-    "commands/zos-insight.md": "sha256:c9d1ecb06a9217bc87a29de0d18b33656c014ad0f12d8ffb4c8aead089ed7f32",
-    "custom_modes.yaml": "sha256:44aee4734ee1dc779334779eb390e852abbd6962c520d868528b2c5e7128519b"
+    "skills/zos-app-map": "sha256:6673f51e38a372ef01e4b527015e7beaf7b86e209939a823de4ba0c955f0e189",
+    "skills/zos-data-dictionary": "sha256:74f44b3b5281722fa391ac9c94d82ae2ac556d0653d1478eac29d59ce5a065b0",
+    "skills/zos-program-doc": "sha256:cb9b4684e26a13ae09a00362c3c4324dba22b35e22e82fc985fddb9b61e1c42f",
+    "skills/cobol-perf-review": "sha256:3d714ac9d430dd8b80b5316244750d87ef0fd279ee6effd5f6564ea6029bd6cb",
+    "rules/zos-app-insight.md": "sha256:f0764d1ecc06d8db60579711857b594bfc1d36d09f064cd29212dbca0e221569",
+    "commands/zos-insight.md": "sha256:d98f55b8bf389ec36b2f9f9293e0b828ae1dba2e02f86d18ef1be022c596a817",
+    "custom_modes.yaml": "sha256:7ef8a7552ee93be0fd8de8dce1847d3e503588fe5395f18cb9b41929a91ff7c7"
   }
 }

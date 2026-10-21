@@ -6,10 +6,11 @@ Run from the project root:
   python3 scripts/zscan.py show <PROGRAM> [--map zos-insight/map/app-map.json] [--json]
 
 `map` scans COBOL programs (fixed and free format) with their copybooks, and JCL jobs
-with in-stream and cataloged procedures. It writes app-map.json (contract version 1,
-see references/map-format.md) and app-map.md (inventory tables and Mermaid diagrams).
-PL/I, Assembler and REXX files are listed as not analysed. `show` prints one program
-from an existing map.
+with in-stream and cataloged procedures. PL/I, REXX and Assembler files go to the
+readers next to this file (zscan_pli.py, zscan_rexx.py, zscan_asm.py), and programs of
+every language link to each other and to the jobs that run them. It writes
+app-map.json (contract version 1, see references/map-format.md) and app-map.md
+(inventory tables and Mermaid diagrams). `show` prints one program from an existing map.
 
 Library use (other skills import this file; see references/map-format.md):
   load_map(path) -> dict          read and check app-map.json
@@ -28,6 +29,7 @@ from __future__ import annotations
 import argparse
 import datetime as _dt
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -199,6 +201,51 @@ def iter_source_files(folders: Iterable[Path]) -> List[Path]:
     return out
 
 
+# The language readers next to this file (zos-app-insight 1.1). Each has LANGUAGE,
+# classify(path, text) -> "program" | "include" | "skip" and scan_program(path, include_dirs, root).
+LANG_MODULES = {"pli": "zscan_pli", "rexx": "zscan_rexx", "asm": "zscan_asm"}
+LANG_NAMES = {"cobol": "COBOL", "pli": "PL/I", "rexx": "REXX", "asm": "Assembler"}
+
+
+def language_module(lang: str):
+    """The reader module of a language, loaded once from this folder; None when it is not there.
+
+    The modules `import zscan`; this module is registered under that name first, so they use
+    the same helpers whichever name it was loaded under.
+    """
+    name = LANG_MODULES.get(lang)
+    if name is None:
+        return None
+    module = sys.modules.get(name)
+    if module is not None:
+        return module
+    path = Path(__file__).resolve().with_name(name + ".py")
+    if not path.is_file():
+        return None
+    sys.modules.setdefault("zscan", sys.modules[__name__])
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except Exception:
+        sys.modules.pop(name, None)
+        raise
+    return module
+
+
+def _looks_like_asm(lines: Sequence[str]) -> bool:
+    for ln in lines[:300]:
+        if ln[:1] in ("*", ".") or not ln.strip():
+            continue
+        parts = ln.split()
+        if len(parts) >= 2 and ln[0] != " " and parts[1].upper() in ("CSECT", "DSECT", "RSECT", "START"):
+            return True
+        if parts[0].upper() == "MACRO" and ln[0] == " ":
+            return True
+    return False
+
+
 def sniff(path: Path) -> str:
     """Classify a file: cobol, copybook, jcl, pli, asm, rexx or other."""
     ext = path.suffix.lower()
@@ -221,6 +268,8 @@ def sniff(path: Path) -> str:
             return "rexx"
         if "PROC OPTIONS" in upper.replace("  ", " ") or "%INCLUDE" in upper:
             return "pli"
+        if "PROGRAM-ID" not in upper and _looks_like_asm(lines):
+            return "asm"
     if "PROGRAM-ID" in upper:
         return "cobol"
     if ext in COBOL_EXT and ("PROCEDURE DIVISION" in upper or "IDENTIFICATION DIVISION" in upper):
@@ -2288,7 +2337,7 @@ def parse_program_file(path: Path, copy_index: CopyIndex, root: Path, default_fo
         for f in files:
             f.setdefault("records", [])
         programs.append({
-            "id": pid, "file": file_rel, "sha256": digest, "format": fmt, "lines": nlines,
+            "id": pid, "language": "cobol", "file": file_rel, "sha256": digest, "format": fmt, "lines": nlines,
             "copybooks": copybooks, "files": files, "data_items": items, "paragraphs": paragraphs,
             "sections": sections, "performs": parser.performs, "calls": parser.calls, "gotos": parser.gotos,
             "sql": parser.sql, "cics": parser.cics, "conditions": parser.conditions,
@@ -2419,6 +2468,7 @@ def jcl_statements(raw_lines: Sequence[str]) -> List[dict]:
             dlm = next((unquote(v) for k, v in ops if k == "DLM"), None)
             if positional and positional[0] in ("*", "DATA"):
                 data = []
+                stmt["data_line"] = i + 1
                 is_data = positional[0] == "DATA"
                 while i < n:
                     d = raw_lines[i].rstrip("\r\n")
@@ -2458,6 +2508,57 @@ def _dd_record(stmt: dict, prev_name: Optional[str]) -> dict:
     if stmt.get("data") is not None:
         dd["inline_lines"] = len(stmt["data"])
     return dd
+
+
+TSO_COMMANDS = {
+    "ALLOC", "ALLOCATE", "ATTRIB", "CANCEL", "DELETE", "DEL", "EDIT", "END", "FREE", "HELP", "LINK", "LISTALC",
+    "LISTBC", "LISTCAT", "LISTC", "LISTDS", "LOGOFF", "OUTPUT", "PRINTDS", "PROFILE", "PROTECT", "RECEIVE",
+    "RENAME", "RUN", "SEND", "STATUS", "SUBMIT", "SUB", "TERMINAL", "TIME", "TRANSMIT", "XMIT", "WHEN", "DSN",
+    "ISPSTART", "ALTLIB", "EXECUTIL", "SMCOPY", "TEST", "OPUT", "OGET", "OSHELL", "BPXBATCH", "SE",
+}
+_MEMBER = re.compile(r"[A-Za-z@#$][A-Za-z0-9@#$]{0,7}$")
+
+
+def tso_commands(lines: Sequence[str], first_line: Optional[int] = None) -> List[dict]:
+    """Execs and programs a TSO batch input (SYSTSIN, or an IKJEFT01 PARM) runs: {name, how, line}.
+
+    how is "%" (%NAME), "EXEC" (EXEC 'lib(NAME)' or EXEC NAME), "CALL" (CALL 'lib(NAME)'), or
+    "implicit" for a bare word that is not a TSO command (an exec only when the map has one by
+    that name). Lines between DSN and END are DSN subcommands and are left out. Data, read for
+    names only.
+    """
+    out: List[dict] = []
+    in_dsn = False
+    for k, raw in enumerate(lines):
+        text = raw[:72].strip()
+        if not text or text.startswith("/*") or text.startswith("*"):
+            continue
+        words = text.split()
+        head = words[0].upper()
+        line = first_line + k if first_line is not None else None
+        if head == "DSN":
+            in_dsn = True
+            continue
+        if in_dsn:
+            if head == "END":
+                in_dsn = False
+            continue
+        name, how = None, None
+        if head.startswith("%") and len(head) > 1:
+            name, how = head[1:], "%"
+        elif head in ("EXEC", "EX", "CALL") and len(words) > 1:
+            arg = words[1].strip("'\"")
+            m = re.search(r"\(([A-Za-z@#$][A-Za-z0-9@#$]{0,7})\)", arg)
+            name = m.group(1) if m else arg
+            how = "CALL" if head == "CALL" else "EXEC"
+        elif head not in TSO_COMMANDS:
+            name, how = head, "implicit"
+        if name and _MEMBER.match(name):
+            rec = {"name": name.upper(), "how": how}
+            if line is not None:
+                rec["line"] = line
+            out.append(rec)
+    return out
 
 
 def _tso_run_program(lines: Sequence[str]) -> Optional[str]:
@@ -2559,6 +2660,15 @@ def parse_jcl_file(path: Path, root: Path, jcl_index: Dict[str, Path]) -> Tuple[
                     "cond": kv.get("COND"), "parm": kv.get("PARM"), "dd": []}
             if if_stack:
                 step["if"] = " AND ".join(if_stack)
+            parm_text = unquote(kv["PARM"]).strip() if kv.get("PARM") else ""
+            if step["pgm"] == "IRXJCL" and parm_text:  # IRXJCL runs the exec named first in PARM
+                first = parm_text.split()[0].lstrip("%").upper()
+                if _MEMBER.match(first):
+                    step["execs"] = [{"name": first, "how": "PARM", "line": st["line"]}]
+            elif step["pgm"] in TSO_BATCH and parm_text:
+                found_execs = tso_commands([parm_text], st["line"])
+                if found_execs:
+                    step["execs"] = [dict(e, how="PARM" if e["how"] == "implicit" else e["how"]) for e in found_execs]
             if step["proc"]:
                 exec_keys = {"PARM", "COND", "REGION", "TIME", "ACCT", "ADDRSPC", "DPRTY", "DYNAMNBR",
                              "PERFORM", "RD", "MEMLIMIT", "CCSID", "PROC", "PGM", "TVSMSG", "TVSAMCOM"}
@@ -2580,6 +2690,9 @@ def parse_jcl_file(path: Path, root: Path, jcl_index: Dict[str, Path]) -> Tuple[
                     runs = _tso_run_program(st["data"])
                     if runs:
                         step["runs"] = runs
+                    found_execs = tso_commands(st["data"], st.get("data_line"))
+                    if found_execs:
+                        step.setdefault("execs", []).extend(found_execs)
             elif job is not None:
                 job["dd"].append(dd)
             if job is not None and proc is None:
@@ -2693,10 +2806,12 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
     warnings: List[dict] = []
     not_analysed: Dict[str, List[str]] = {"pli": [], "asm": [], "rexx": []}
     jcl_files: List[Path] = []
+    lang_includes: List[Tuple[Path, str]] = []
+    include_dirs = [rel(p, base) for p in copy_paths + root_paths]
+    lang_include_arg: Dict[str, Any] = {}
     for p, kind in classified:
-        if os.path.realpath(p) not in in_roots:
-            continue
-        if kind == "cobol":
+        in_root = os.path.realpath(p) in in_roots
+        if kind == "cobol" and in_root:
             try:
                 progs, fw, _used = parse_program_file(p, copy_index, base, default_format)
             except Exception as error:  # one odd file must not stop the map of the rest
@@ -2705,22 +2820,73 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
                 continue
             programs.extend(progs)
             warnings.extend(fw)
-        elif kind in not_analysed:
-            not_analysed[kind].append(rel(p, base))
-        elif kind == "jcl":
+        elif kind in LANG_MODULES:
+            module = language_module(kind)
+            if module is None:
+                if in_root:
+                    not_analysed[kind].append(rel(p, base))
+                continue
+            try:
+                role = module.classify(p, read_text(p))
+                if role == "program" and in_root:
+                    if kind not in lang_include_arg:
+                        index = getattr(module, "IncludeIndex", None)
+                        lang_include_arg[kind] = index(include_dirs, base) if index else include_dirs
+                    record = module.scan_program(p, lang_include_arg[kind], base)
+                    record.setdefault("language", kind)
+                    programs.append(record)
+                elif role in ("include", "program"):
+                    lang_includes.append((p, kind))
+                elif in_root:
+                    not_analysed[kind].append(rel(p, base))
+            except Exception as error:  # one odd file must not stop the map of the rest
+                warnings.append({"file": rel(p, base), "line": None,
+                                 "message": f"not analysed: the {LANG_NAMES[kind]} reader failed "
+                                            f"({type(error).__name__}: {error})"})
+                if in_root:
+                    not_analysed[kind].append(rel(p, base))
+        elif kind == "jcl" and in_root:
             jcl_files.append(p)
+
+    # a REXX exec that another exec pulls in with /*%INCLUDE*/ is an include member, not a program
+    rexx_included = {cb["resolved"] for prog in programs if prog.get("language") == "rexx"
+                     for cb in prog["copybooks"] if cb.get("resolved")}
+    if rexx_included:
+        kept = []
+        for prog in programs:
+            if prog.get("language") == "rexx" and prog["file"] in rexx_included:
+                lang_includes.append((_abs(prog["file"], base), "rexx"))
+            else:
+                kept.append(prog)
+        programs = kept
 
     prog_by_id: Dict[str, dict] = {}
     for prog in programs:
+        prog.setdefault("language", "cobol")
         prog["partial"] = any(cb["resolved"] is None for cb in prog["copybooks"])
         prog["run_by"] = []
         if prog["id"] in prog_by_id:
+            first = prog_by_id[prog["id"]]
+            label = "PROGRAM-ID" if prog.get("language") == "cobol" else "program id"
             warnings.append({"file": prog["file"], "line": None,
-                             "message": f"PROGRAM-ID {prog['id']} also in {prog_by_id[prog['id']]['file']}; links use that first one"})
+                             "message": f"{label} {prog['id']} also in {first['file']}; links use that first one"})
         else:
             prog_by_id[prog["id"]] = prog
+    entry_index: Dict[str, dict] = {}  # secondary entry points (PL/I entries, Assembler ENTRY)
+    for prog in programs:
+        for e in prog.get("entries") or []:
+            name = str(e.get("name") or "").upper()
+            if name and name not in prog_by_id:
+                entry_index.setdefault(name, prog)
 
-    # copybooks
+    def find(name: Optional[str]) -> Optional[dict]:
+        """The program a name runs or calls: a program id first, then a secondary entry point."""
+        if not name:
+            return None
+        key = str(name).upper()
+        return prog_by_id.get(key) or entry_index.get(key)
+
+    # copybooks, include members and macro definitions
     catalog: Dict[str, dict] = {}
     for prog in programs:
         resolved_by_name = {}
@@ -2729,19 +2895,24 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
                 continue
             resolved_by_name.setdefault(cb["name"], cb["resolved"])
             entry = catalog.setdefault(cb["resolved"], {"name": member_name(Path(cb["resolved"])), "file": cb["resolved"],
-                                                       "used_by": set(), "includes": set()})
+                                                       "used_by": set(), "includes": set(),
+                                                       "language": prog.get("language", "cobol")})
             entry["used_by"].add(prog["id"])
             if cb["nested_in"] and cb["nested_in"] in resolved_by_name:
                 catalog[resolved_by_name[cb["nested_in"]]]["includes"].add(cb["name"])
     for p, kind in classified:
         if kind == "copybook" and p.suffix.lower() in COPY_EXT | COBOL_EXT:
-            catalog.setdefault(rel(p, base), {"name": member_name(p), "file": rel(p, base), "used_by": set(), "includes": set()})
+            catalog.setdefault(rel(p, base), {"name": member_name(p), "file": rel(p, base), "used_by": set(),
+                                              "includes": set(), "language": "cobol"})
+    for p, kind in lang_includes:
+        catalog.setdefault(rel(p, base), {"name": member_name(p), "file": rel(p, base), "used_by": set(),
+                                          "includes": set(), "language": kind})
     copybooks = []
     for file, entry in sorted(catalog.items(), key=lambda kv: (kv[1]["name"], kv[0])):
         path = _abs(file, base)
-        copybooks.append({"name": entry["name"], "file": file, "lines": len(read_text(path).splitlines()),
-                          "sha256": sha256_file(path), "used_by": sorted(entry["used_by"]),
-                          "includes": sorted(entry["includes"])})
+        copybooks.append({"name": entry["name"], "file": file, "language": entry["language"],
+                          "lines": len(read_text(path).splitlines()), "sha256": sha256_file(path),
+                          "used_by": sorted(entry["used_by"]), "includes": sorted(entry["includes"])})
 
     # JCL
     jobs: List[dict] = []
@@ -2806,15 +2977,24 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
 
     for job in jobs:
         for path, st in _walk_steps(job["steps"]):
-            for target, via in ((st.get("pgm"), None), (st.get("runs"), st.get("pgm"))):
+            targets = [(st.get("pgm"), None, True), (st.get("runs"), st.get("pgm"), True)]
+            for ex in st.get("execs") or []:  # TSO batch: %NAME, EXEC 'lib(NAME)', CALL, a bare NAME
+                found = find(ex["name"])
+                if ex["how"] == "implicit" and (found is None or found.get("language") != "rexx"):
+                    continue  # a bare word is a TSO command unless an exec of the map has that name
+                targets.append((ex["name"], st.get("pgm"), ex["how"] != "implicit"))
+            for target, via, report in targets:
                 if not target:
                     continue
-                prog = prog_by_id.get(target)
+                prog = find(target)
                 if prog is not None:
                     link = {"job": job["name"], "step": path, "file": job["file"]}
                     if via:
                         link["via"] = via
-                    prog["run_by"].append(link)
+                    if target.upper() != prog["id"]:
+                        link["entry"] = target.upper()
+                    if link not in prog["run_by"]:
+                        prog["run_by"].append(link)
                     for f in prog["files"]:
                         if not f.get("dd"):
                             continue
@@ -2826,8 +3006,9 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
                                     "sysout": dd["sysout"], "inline": dd["inline"]})
                 elif target in KNOWN_UTILITIES:
                     utilities.setdefault(target, set()).add(job["name"])
-                else:
-                    missing_program(target, "exec-pgm", job["name"])
+                elif report:
+                    missing_program(target, "exec-pgm" if via is None or st.get("runs") == target else "tso-exec",
+                                    job["name"])
     for prog in programs:
         for f in prog["files"]:
             f.setdefault("datasets", [])
@@ -2837,15 +3018,19 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
     for prog in programs:
         pid = prog["id"]
         for c in prog["calls"]:
-            if not c["dynamic"]:
-                edges.add(pid, c["target"], "call", line=c["line"])
-                if c["target"] not in prog_by_id:
-                    missing_program(c["target"], "call", pid)
-            else:
-                for cand in c.get("candidates", []):
-                    edges.add(pid, cand, "call", line=c["line"], dynamic=True)
-                    if cand not in prog_by_id:
-                        missing_program(cand, "call", pid)
+            if c.get("system"):
+                continue  # a routine z/OS supplies (BPXWDYN, SYSCALLS...): neither a link nor missing
+            how = c.get("via") or c.get("kind") or c.get("form")  # REXX, Assembler, PL/I wording
+            how = None if how in (None, "CALL") else how
+            names = [c["target"]] if not c["dynamic"] else list(c.get("candidates") or [])
+            for name in names:
+                target = find(name)
+                to = target["id"] if target is not None else str(name).upper()
+                e = edges.add(pid, to, "call", line=c["line"], dynamic=True if c["dynamic"] else None, via=how)
+                if target is not None and str(name).upper() != to:
+                    e.setdefault("entry", str(name).upper())
+                if target is None:
+                    missing_program(str(name).upper(), "call", pid)
         for pr in prog["performs"]:
             if pr["to"]:
                 edges.add(f"{pid}:{pr['from'] or '(entry)'}", f"{pid}:{pr['to']}", "perform", line=pr["line"],
@@ -2867,13 +3052,15 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
             kind = "cics-link" if cmd == "LINK" else "cics-xctl"
             if isinstance(prog_opt, str) and prog_opt[:1] in ("'", '"'):
                 target = lit_value(prog_opt).strip().upper()
-                edges.add(pid, target, kind, line=c["line"])
-                if target not in prog_by_id:
+                found = find(target)
+                edges.add(pid, found["id"] if found else target, kind, line=c["line"])
+                if found is None:
                     missing_program(target, kind, pid)
             else:
                 for cand in c.get("candidates", []):
-                    edges.add(pid, cand, kind, line=c["line"], dynamic=True)
-                    if cand not in prog_by_id:
+                    found = find(cand)
+                    edges.add(pid, found["id"] if found else cand, kind, line=c["line"], dynamic=True)
+                    if found is None:
                         missing_program(cand, kind, pid)
         for f in prog["files"]:
             if f.get("dd"):
@@ -2882,11 +3069,19 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
         for path, st in _walk_steps(job["steps"]):
             owner = job["name"]
             if "." in path:  # a proc step: its program and proc come through the proc's own edges
-                st = dict(st, pgm=None, runs=None, proc=None)
+                st = dict(st, pgm=None, runs=None, proc=None, execs=None)
             if st.get("pgm"):
-                edges.add(owner, st["pgm"], "exec-pgm", step=path)
+                found = find(st["pgm"])
+                edges.add(owner, found["id"] if found else st["pgm"], "exec-pgm", step=path,
+                          entry=st["pgm"] if found and found["id"] != st["pgm"] else None)
             if st.get("runs"):
-                edges.add(owner, st["runs"], "exec-pgm", step=path, via=st.get("pgm"))
+                found = find(st["runs"])
+                edges.add(owner, found["id"] if found else st["runs"], "exec-pgm", step=path, via=st.get("pgm"))
+            for ex in st.get("execs") or []:
+                found = find(ex["name"])
+                if ex["how"] == "implicit" and (found is None or found.get("language") != "rexx"):
+                    continue
+                edges.add(owner, found["id"] if found else ex["name"], "exec-pgm", step=path, via=st.get("pgm"))
             if st.get("proc"):
                 edges.add(owner, st["proc"], "exec-proc", step=path)
             for dd in st["dd"]:
@@ -2896,7 +3091,8 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
     for pr in procs:
         for st in pr["steps"]:
             if st.get("pgm"):
-                edges.add(pr["name"], st["pgm"], "exec-pgm", step=st["name"])
+                found = find(st["pgm"])
+                edges.add(pr["name"], found["id"] if found else st["pgm"], "exec-pgm", step=st["name"])
             if st.get("proc"):
                 edges.add(pr["name"], st["proc"], "exec-proc", step=st["name"])
             if id(pr) not in used_procs:
@@ -2907,8 +3103,13 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
 
     # unresolved
     unresolved_copy: Dict[str, dict] = {}
+    unresolved_macros: Dict[str, dict] = {}
     dynamic_calls = []
     for prog in programs:
+        for m in prog.get("macros") or []:  # Assembler: a macro no folder defines and that is not IBM's
+            if not m.get("found") and not m.get("system"):
+                entry = unresolved_macros.setdefault(m["name"], {"name": m["name"], "programs": set()})
+                entry["programs"].add((prog["id"], prog["file"], m.get("line")))
         for cb in prog["copybooks"]:
             if cb["resolved"] is None:
                 entry = unresolved_copy.setdefault(cb["name"], {"name": cb["name"], "library": cb["library"],
@@ -2928,6 +3129,9 @@ def scan(roots: Sequence, copy_dirs: Sequence = (), root: Optional[Path] = None,
         "programs": [{"name": v["name"], "kinds": sorted(v["kinds"]), "referenced_by": sorted(v["referenced_by"])}
                      for _, v in sorted(unresolved_programs.items())],
         "procs": [{"name": k, "jobs": sorted(v)} for k, v in sorted(unresolved_procs.items())],
+        "macros": [{"name": v["name"], "programs": [{"id": pid, "file": f, "line": ln}
+                                                    for pid, f, ln in sorted(v["programs"], key=lambda x: (x[0], x[1]))]}
+                   for _, v in sorted(unresolved_macros.items())],
         "includes": [{"member": inc["member"], "job": job["name"], "line": inc["line"]}
                      for job in jobs for inc in job["includes"] if inc["resolved"] is None],
         "dynamic_calls": dynamic_calls,
@@ -3084,10 +3288,11 @@ def call_graph(app_map: dict, limit: int = MAX_DIAGRAM_NODES) -> str:
     keep, cut = _cap(nodes, weight, limit)
     m = _Mermaid("LR")
     for n in keep:
-        m.node(n, n, None if n in progs else "missing")
+        lang = progs[n].get("language", "cobol") if n in progs else "cobol"
+        m.node(n, n if lang == "cobol" else f"{n} ({LANG_NAMES.get(lang, lang)})", None if n in progs else "missing")
     for e in edges:
         if e["from"] in m.ids and e["to"] in m.ids:
-            label = None if e["kind"] == "call" else e["kind"].replace("cics-", "CICS ").upper()
+            label = (e.get("via") if e["kind"] == "call" else e["kind"].replace("cics-", "CICS ").upper())
             m.edge(e["from"], e["to"], dotted=bool(e.get("dynamic")), label=label)
     note = "Dashed boxes are programs not found in the scanned folders. Dotted arrows are dynamic calls whose target was read from a literal the identifier holds.\n"
     if not edges:
@@ -3125,7 +3330,10 @@ def job_flow(app_map: dict, limit: int = 50) -> str:
     jobs = app_map["jobs"]
     if not jobs:
         return "No jobs found.\n"
-    progs = programs_by_id(app_map)
+    progs = dict(programs_by_id(app_map))
+    for prog in app_map.get("programs", []):
+        for e in prog.get("entries") or []:
+            progs.setdefault(str(e.get("name") or "").upper(), prog)
     m = _Mermaid("TB")
     count = 0
     cut_jobs = []
@@ -3149,14 +3357,28 @@ def job_flow(app_map: dict, limit: int = 50) -> str:
                 targets.append(st["pgm"])
             if st.get("runs") and st["runs"] in progs:
                 targets.append(st["runs"])
+            for ex in st.get("execs") or []:
+                if ex["name"] in progs and (ex["how"] != "implicit" or progs[ex["name"]].get("language") == "rexx"):
+                    targets.append(ex["name"])
             for ps in st.get("proc_steps") or []:
                 if ps.get("pgm") in progs:
                     targets.append(ps["pgm"])
             for t in targets:
-                m.node(f"prog:{t}", f"program {t}")
-                m.edge(skey, f"prog:{t}", dotted=True)
+                prog = progs[t]
+                lang = prog.get("language", "cobol")
+                label = f"program {prog['id']}" + ("" if lang == "cobol" else f" ({LANG_NAMES.get(lang, lang)})")
+                m.node(f"prog:{prog['id']}", label)
+                m.edge(skey, f"prog:{prog['id']}", dotted=True)
     note = "Steps run top to bottom. Dotted arrows lead to programs of this map that the step runs, directly or through its procedure.\n"
     return m.render() + note + _cut_note(cut_jobs, "jobs")
+
+
+def _format_label(p: dict) -> str:
+    """The source format as each language states it."""
+    if p.get("language") == "pli" and p.get("margins"):
+        m = p["margins"]
+        return f"margins {m[0]}-{m[1]}" if isinstance(m, (list, tuple)) and len(m) >= 2 else str(m)
+    return str(p.get("format") or "-")
 
 
 def render_markdown(app_map: dict) -> str:
@@ -3172,48 +3394,77 @@ def render_markdown(app_map: dict) -> str:
     un = app_map["unresolved"]
     w("## Summary\n")
     w("| Item | Count |\n|---|---|")
-    w(f"| COBOL programs | {len(progs)} |")
-    w(f"| Copybooks found | {len(app_map['copybooks'])} |")
-    w(f"| Copybooks not found | {len(un['copybooks'])} |")
+    for lang, label in (("cobol", "COBOL programs"), ("pli", "PL/I programs"), ("rexx", "REXX execs"),
+                        ("asm", "Assembler programs")):
+        w(f"| {label} | {sum(1 for p in progs if p.get('language', 'cobol') == lang)} |")
+    w(f"| Copybooks and include members found | {len(app_map['copybooks'])} |")
+    w(f"| Copybooks and include members not found | {len(un['copybooks'])} |")
+    w(f"| Assembler macros not found | {len(un.get('macros', []))} |")
     w(f"| Jobs | {len(app_map['jobs'])} |")
     w(f"| Procedures | {len(app_map['procs'])} |")
-    for lang, label in (("pli", "PL/I files, not analysed in 1.0"), ("asm", "Assembler files, not analysed in 1.0"),
-                        ("rexx", "REXX files, not analysed in 1.0")):
-        w(f"| {label} | {len(app_map['not_analysed'].get(lang, []))} |")
+    w(f"| Files listed, not analysed (CLIST and others the readers skip) | "
+      f"{sum(len(v) for v in app_map['not_analysed'].values())} |")
     w(f"| Warnings | {n_warn} |\n")
     w("## Programs\n")
     if progs:
-        w("| Program | File | Format | Lines | Paragraphs | Calls | Called by | Copybooks | Files | SQL | CICS | Run by | Notes |")
-        w("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+        w("| Program | Language | File | Format | Lines | Paragraphs, labels | Calls | Called by | Copybooks, includes | Files | SQL | CICS | Run by | Notes |")
+        w("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
         for p in progs:
+            lang = p.get("language", "cobol")
             notes = []
             if p.get("partial"):
-                notes.append("partial: copybook not found")
+                notes.append("partial: " + ("copybook" if lang in ("cobol", "asm") else "include member") + " not found")
             dyn = [c for c in p["calls"] if c["dynamic"]]
             if dyn:
                 notes.append(f"{len(dyn)} dynamic call(s)")
+            changing = [s for s in p["statements"] if s.get("changes")]
+            if changing:
+                notes.append(f"{len(changing)} command(s) that change data or submit jobs")
+            if p.get("loops") and lang == "asm":
+                conf = {}
+                for lp in p["loops"]:
+                    conf[lp.get("confidence") or "?"] = conf.get(lp.get("confidence") or "?", 0) + 1
+                notes.append("loops " + ", ".join(f"{n} {k}" for k, n in sorted(conf.items())))
+            missing_macros = [m["name"] for m in p.get("macros") or [] if not m.get("found") and not m.get("system")]
+            if missing_macros:
+                notes.append("macros not found: " + ", ".join(missing_macros))
             if p["warnings"]:
                 notes.append(f"{len(p['warnings'])} warning(s)")
             calls = sorted({c["target"] if not c["dynamic"] else
                             f"{c['target']} (dynamic" + (f", holds {'/'.join(c['candidates'])})" if c.get("candidates") else ")")
-                            for c in p["calls"]})
+                            for c in p["calls"] if not c.get("system")})
             run_by = sorted({f"{r['job']}.{r['step']}" for r in p["run_by"]})
-            w(f"| {_md(p['id'])} | {_md(p['file'])} | {p['format']} | {p['lines']} | {len(p['paragraphs'])} | "
+            w(f"| {_md(p['id'])} | {LANG_NAMES.get(lang, lang)} | {_md(p['file'])} | {_format_label(p)} | {p['lines']} | {len(p['paragraphs'])} | "
               f"{_md(', '.join(calls)) or '-'} | {_md(', '.join(callers(app_map, p['id']))) or '-'} | "
               f"{_md(', '.join(sorted({c['name'] for c in p['copybooks']}))) or '-'} | "
               f"{_md(', '.join(f['name'] + (' (' + f['dd'] + ')' if f.get('dd') else '') for f in p['files'])) or '-'} | "
               f"{len(p['sql'])} | {len(p['cics'])} | {_md(', '.join(run_by)) or '-'} | {_md('; '.join(notes)) or '-'} |")
         w("")
     else:
-        w("No COBOL program was found in the scanned folders.\n")
-    w("## Copybooks\n")
+        w("No COBOL, PL/I, REXX or Assembler program was found in the scanned folders.\n")
+    changing = [(p, s) for p in progs for s in p["statements"] if s.get("changes")]
+    if changing:
+        w("## Commands that change data\n")
+        w("REXX host commands the map marks `changes: true`: they create, delete or rewrite data sets, members or "
+          "files, or submit or cancel jobs. Text in braces is what the scanner could not evaluate.\n")
+        w("| Program | Line | Environment | Command |\n|---|---|---|---|")
+        for p, st in changing[:80]:
+            text = st.get("text") or " ".join(st.get("operands", []))
+            where = f"{st['line']}" + (f" ({st['copybook']})" if st.get("copybook") else "")
+            w(f"| {_md(p['id'])} | {where} | {_md(st['verb'])} | {_md(text[:120])} |")
+        if len(changing) > 80:
+            w(f"\n{len(changing) - 80} more in app-map.json (statements with `changes: true`).")
+        w("")
+    w("## Copybooks and include members\n")
     if app_map["copybooks"]:
-        w("| Copybook | File | Used by | Includes |\n|---|---|---|---|")
+        w("| Name | Language | File | Used by | Includes |\n|---|---|---|---|---|")
         for c in app_map["copybooks"]:
-            w(f"| {_md(c['name'])} | {_md(c['file'])} | {_md(', '.join(c['used_by'])) or 'not used by a scanned program'} | {_md(', '.join(c['includes'])) or '-'} |")
+            lang = c.get("language", "cobol")
+            w(f"| {_md(c['name'])} | {LANG_NAMES.get(lang, lang)} | {_md(c['file'])} | "
+              f"{_md(', '.join(c['used_by'])) or 'not used by a scanned program'} | {_md(', '.join(c['includes'])) or '-'} |")
         w("")
     else:
-        w("No copybook files were found.\n")
+        w("No copybook or include member was found.\n")
     w("## Jobs\n")
     if app_map["jobs"]:
         w("| Job | File | Steps | Programs | Procedures |\n|---|---|---|---|---|")
@@ -3240,6 +3491,9 @@ def render_markdown(app_map: dict) -> str:
         rows.append(f"- Program {p['name']} ({', '.join(p['kinds'])}), referenced by {', '.join(p['referenced_by'])}")
     for p in un["procs"]:
         rows.append(f"- Procedure {p['name']}, used by {', '.join(p['jobs'])}")
+    for m in un.get("macros", []):
+        users = ", ".join(f"{x['id']} (line {x['line']})" if x.get("line") else x["id"] for x in m["programs"])
+        rows.append(f"- Assembler macro {m['name']} (no definition in the scanned folders, not an IBM macro), used by {users}")
     for inc in un["includes"]:
         rows.append(f"- JCL INCLUDE member {inc['member']} in job {inc['job']}")
     for d in un["dynamic_calls"]:
@@ -3248,15 +3502,15 @@ def render_markdown(app_map: dict) -> str:
     if app_map.get("utilities"):
         w("System utilities run by the jobs (not part of the application): "
           + ", ".join(u["name"] for u in app_map["utilities"]) + ".\n")
-    w("## Not analysed in 1.0\n")
+    w("## Not analysed\n")
     na = [(lang, files) for lang, files in app_map["not_analysed"].items() if files]
     if na:
-        names = {"pli": "PL/I", "asm": "Assembler", "rexx": "REXX"}
         for lang, files in na:
-            w(f"- {names.get(lang, lang)}: {', '.join(_md(f) for f in files)}")
-        w("\nThese files are listed only. Calls into them and their data are not in the map.\n")
+            w(f"- {LANG_NAMES.get(lang, lang)} reader skipped: {', '.join(_md(f) for f in files)}")
+        w("\nThese files are listed only (a CLIST, for example, or a file the reader failed on: see the warnings). "
+          "Calls into them and their data are not in the map.\n")
     else:
-        w("No PL/I, Assembler or REXX files were found.\n")
+        w("Every COBOL, PL/I, REXX and Assembler file found was analysed.\n")
     w("## Call graph\n")
     w(call_graph(app_map))
     w("## Copybook use\n")
@@ -3293,17 +3547,24 @@ def summary_lines(app_map: dict, json_path: Optional[Path] = None, md_path: Opti
     progs = app_map["programs"]
     un = app_map["unresolved"]
     n_warn = len(app_map["warnings"]) + sum(len(p["warnings"]) for p in progs)
+    by_lang = [f"{LANG_NAMES[k]} {n}" for k in ("cobol", "pli", "rexx", "asm")
+               for n in [sum(1 for p in progs if p.get("language", "cobol") == k)] if n]
     lines = [
-        f"Programs: {len(progs)}   copybooks: {len(app_map['copybooks'])}   jobs: {len(app_map['jobs'])}   "
+        f"Programs: {len(progs)}" + (f" ({', '.join(by_lang)})" if by_lang else "") +
+        f"   copybooks and includes: {len(app_map['copybooks'])}   jobs: {len(app_map['jobs'])}   "
         f"procedures: {len(app_map['procs'])}   edges: {len(app_map['edges'])}",
-        f"Not found: {len(un['copybooks'])} copybook(s), {len(un['programs'])} program(s), {len(un['procs'])} procedure(s), "
-        f"{len(un['includes'])} include(s), {len(un['dynamic_calls'])} dynamic call(s) with no known target",
-        "Not analysed in 1.0: " + ", ".join(f"{k} {len(v)}" for k, v in app_map["not_analysed"].items()),
+        f"Not found: {len(un['copybooks'])} copybook(s) or include(s), {len(un.get('macros', []))} macro(s), "
+        f"{len(un['programs'])} program(s), {len(un['procs'])} procedure(s), {len(un['includes'])} JCL include(s), "
+        f"{len(un['dynamic_calls'])} dynamic call(s) with no known target",
+        "Listed, not analysed: " + ", ".join(f"{k} {len(v)}" for k, v in app_map["not_analysed"].items()),
         f"Warnings: {n_warn}",
     ]
     partial = [p["id"] for p in progs if p.get("partial")]
     if partial:
-        lines.append("Partial (a copybook was not found): " + ", ".join(partial))
+        lines.append("Partial (a copybook or include member was not found): " + ", ".join(partial))
+    changing = sum(1 for p in progs for st in p["statements"] if st.get("changes"))
+    if changing:
+        lines.append(f"Commands that change data or submit jobs (REXX): {changing}; app-map.md lists them")
     if json_path:
         lines.append(f"Wrote {json_path} and {md_path}")
     return lines
@@ -3314,35 +3575,56 @@ def show_program(app_map: dict, program_id: str) -> str:
     if p is None:
         known = ", ".join(sorted(programs_by_id(app_map))) or "none"
         raise MapError(f"program {program_id} is not in the map; programs: {known}")
-    out = [f"{p['id']}  {p['file']}  ({p['format']} format, {p['lines']} lines)"]
+    lang = p.get("language", "cobol")
+    includes = "Copybooks" if lang in ("cobol", "asm") else "Includes"
+    out = [f"{p['id']}  {LANG_NAMES.get(lang, lang)}  {p['file']}  ({_format_label(p)} format, {p['lines']} lines)"]
     if p.get("partial"):
-        out.append("PARTIAL: at least one copybook was not found; data items and code from it are missing")
+        out.append(f"PARTIAL: at least one {includes[:-1].lower()} member was not found; definitions and code from it are missing")
     if p.get("procedure_using"):
-        out.append("PROCEDURE DIVISION USING " + ", ".join(p["procedure_using"]))
+        head = "PROCEDURE DIVISION USING" if lang == "cobol" else ("ARG" if lang == "rexx" else "parameters")
+        out.append(f"{head} " + ", ".join(p["procedure_using"]))
+    if p.get("entries"):
+        out.append("Entries: " + ", ".join(f"{e['name']}@{e.get('line')}" for e in p["entries"]))
+    if p.get("environments"):
+        out.append("Host command environments: " + ", ".join(p["environments"]))
     out.append(f"Called by: {', '.join(callers(app_map, p['id'])) or '-'}")
-    run_by = sorted({f"{r['job']}.{r['step']}" for r in p.get("run_by", [])})
+    run_by = sorted({f"{r['job']}.{r['step']}" + (f" via {r['via']}" if r.get("via") else "") for r in p.get("run_by", [])})
     out.append(f"Run by: {', '.join(run_by) or '-'}")
-    out.append("Paragraphs:")
+    out.append({"cobol": "Paragraphs:", "pli": "Procedures, BEGIN blocks and ON-units:", "rexx": "Labels:",
+                "asm": "Labels:"}.get(lang, "Paragraphs:"))
     for para in p["paragraphs"]:
-        out.append(f"  {para['start_line']:>6}-{para['end_line']:<6} {para['name']}" + (f"  (section {para['section']})" if para["section"] else ""))
+        kind = f" [{para['kind']}]" if para.get("kind") and lang == "pli" else ""
+        out.append(f"  {para['start_line']:>6}-{para['end_line']:<6} {para['name']}{kind}"
+                   + (f"  (section {para['section']})" if para.get("section") else ""))
+    if lang == "asm" and p.get("sections"):
+        out.append("Control sections: " + ", ".join(f"{x['name']} {x.get('kind', '')}".strip() for x in p["sections"]))
     if p["calls"]:
         out.append("Calls:")
         for c in p["calls"]:
+            how = c.get("via") or c.get("kind") or c.get("form")
             dyn = " dynamic" + (f", holds {', '.join(c.get('candidates', []))}" if c.get("candidates") else ", target unknown") if c["dynamic"] else ""
             loop = f"  [in loop via line {c['in_loop']['via']}]" if c.get("in_loop") else ""
-            out.append(f"  line {c['line']}: {c['target']}{dyn}{loop}")
+            system = "  (supplied by z/OS)" if c.get("system") else ""
+            out.append(f"  line {c['line']}: {c['target']}" + (f" ({how})" if how and how != "CALL" else "") + f"{dyn}{loop}{system}")
     if p["copybooks"]:
-        out.append("Copybooks:")
+        out.append(f"{includes}:")
         for cb in p["copybooks"]:
             where = cb["resolved"] or "NOT FOUND"
             nested = f" (in {cb['nested_in']})" if cb["nested_in"] else ""
-            out.append(f"  line {cb['line']}: {cb['name']}{nested} -> {where}" + (" REPLACING" if cb["replacing"] else ""))
+            lib = f" [{cb['library']}]" if cb.get("library") in ("MACRO", "SQL INCLUDE") else ""
+            out.append(f"  line {cb['line']}: {cb['name']}{nested}{lib} -> {where}" + (" REPLACING" if cb.get("replacing") else ""))
+    missing_macros = [m for m in p.get("macros") or [] if not m.get("found") and not m.get("system")]
+    if missing_macros:
+        out.append("Macros not found: " + ", ".join(f"{m['name']}@{m.get('line')}" for m in missing_macros))
     if p["files"]:
         out.append("Files:")
         for f in p["files"]:
             io = ", ".join(f"{x['verb']}@{x['line']}" for x in f["io"]) or "no I/O statement found"
             dsns = ", ".join(sorted({d.get("dsn_resolved") or d.get("dsn") or "?" for d in f.get("datasets", [])}))
-            out.append(f"  {f['name']} ASSIGN {f.get('assign')} {f.get('organization')}/{f.get('access')}: {io}" + (f"  datasets: {dsns}" if dsns else ""))
+            kind = f.get("kind") if lang != "cobol" else "ASSIGN " + str(f.get("assign"))
+            handlers = ", ".join(f"ON {h['condition']}@{h['line']}" for h in f.get("handlers") or [])
+            out.append(f"  {f['name']} {kind} {f.get('organization')}/{f.get('access')}: {io}"
+                       + (f"  handlers: {handlers}" if handlers else "") + (f"  datasets: {dsns}" if dsns else ""))
     if p["sql"]:
         out.append("SQL:")
         for s in p["sql"]:
@@ -3352,6 +3634,16 @@ def show_program(app_map: dict, program_id: str) -> str:
         for c in p["cics"]:
             opts = ", ".join(f"{k}={v}" for k, v in c["options"].items() if v is not True)
             out.append(f"  line {c['line']}: {c['command']} {opts}")
+    changing = [st for st in p["statements"] if st.get("changes")]
+    if changing:
+        out.append("Commands that change data or submit jobs:")
+        for st in changing:
+            out.append(f"  line {st['line']}: {st['verb']} {(st.get('text') or ' '.join(st.get('operands', [])))[:100]}")
+    if lang == "asm" and p.get("loops"):
+        out.append("Loops (backward branches; not proven):")
+        for lp in p["loops"]:
+            out.append(f"  lines {lp.get('start_line')}-{lp.get('end_line')}: {lp.get('opcode')} to {lp.get('top')}, "
+                       f"{lp.get('type')}, confidence {lp.get('confidence')}")
     loops = statements_in_loop(p)
     out.append(f"Statements: {len(p['statements'])}, {len(loops)} inside a loop")
     if p["warnings"]:

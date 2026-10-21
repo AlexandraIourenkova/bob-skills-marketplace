@@ -42,7 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "zos-app-map" / "sc
 import zscan  # noqa: E402  (sibling skill of the same pack)
 
 DD_VERSION = 1
-BUILDER = "dd 1.0"
+BUILDER = "dd 1.1"
 DEFAULT_DIR = "zos-insight/dd"
 DD_FILE = "DD.json"
 QUEUE_FILE = "queue.json"
@@ -55,10 +55,14 @@ MAX_SOURCE = 200
 PLACEHOLDER = "<one or two sentences>"
 
 # Fields that come from the map. The rest of an entry (description, status...) belongs to people.
-DEF_FIELDS = ("scope", "owner", "name", "parents", "parent_id", "level", "pic", "usage", "occurs", "redefines",
-              "value", "renames", "conditions", "section", "copybook", "file", "line", "children")
+DEF_FIELDS = ("scope", "language", "owner", "name", "parents", "parent_id", "level", "pic", "usage", "occurs",
+              "redefines", "value", "renames", "conditions", "section", "copybook", "file", "line", "children")
 # A change in one of these after a description was written puts the entry up for review.
-COMPARE_FIELDS = ("level", "pic", "usage", "occurs", "redefines", "value", "renames", "conditions")
+COMPARE_FIELDS = ("level", "pic", "usage", "occurs", "redefines", "value", "renames", "conditions", "type", "attributes")
+# The languages with declarations. REXX has none: its execs get no entries (the map lists their variables).
+DECLARING = ("cobol", "pli", "asm")
+PLI_ATTRIBUTES = ("dimensions", "based", "defined", "like", "external")
+ASM_ATTRIBUTES = ("op", "length", "dup", "nominal", "size", "offset", "control_section")
 DESC_FIELDS = ("description", "status", "source", "described_at", "approved_by", "approved_at", "review")
 
 
@@ -142,8 +146,19 @@ class Lines:
         return lines[n - 1]
 
 
-def _body(text: str, fmt: str) -> Tuple[str, bool]:
-    """(code text, is_comment) of a physical line; fixed format drops columns 1-6 and 73-80."""
+def _body(text: str, fmt: str, lang: str = "cobol") -> Tuple[str, bool]:
+    """(code text, is_comment) of a physical line.
+
+    COBOL fixed format drops columns 1-6 and 73-80; Assembler keeps columns 1-71 (the name
+    field is in column 1); PL/I keeps the line up to column 72; a line that is only a comment
+    counts as one.
+    """
+    if lang == "asm":
+        return text[:71].rstrip(), text[:1] == "*" or text[:2] == ".*"
+    if lang in ("pli", "rexx"):
+        body = text[:72].rstrip() if lang == "pli" else text.rstrip()
+        stripped = body.strip()
+        return body, stripped.startswith("/*") and stripped.endswith("*/")
     if fmt == "fixed":
         if len(text) > 6 and text[6] in "*/":
             return text[6:72].rstrip(), True
@@ -151,7 +166,45 @@ def _body(text: str, fmt: str) -> Tuple[str, bool]:
     return text.rstrip(), text.lstrip().startswith("*>")
 
 
+def _ends(text: str, body: str, lang: str) -> bool:
+    """The line closes the definition or sentence: a period (COBOL), a semicolon (PL/I), no continuation (Assembler)."""
+    if lang == "asm":
+        return len(text) < 72 or text[71] == " "
+    if lang == "pli":
+        return body.rstrip().endswith(";")
+    return body.rstrip().endswith(".")
+
+
 # --------------------------------------------------------------------------- one program
+def _chains(items: List[dict]) -> List[List[int]]:
+    """Ancestor indices of each data item (outermost first) from the map's parent_index."""
+    out: List[List[int]] = []
+    for it in items:
+        anc: List[int] = []
+        p = it.get("parent_index")
+        while isinstance(p, int) and 0 <= p < len(items) and p not in anc:
+            anc.insert(0, p)
+            p = items[p].get("parent_index")
+        out.append(anc)
+    return out
+
+
+def _word_refs(operand: str) -> List[str]:
+    """Names in an Assembler operand (AMOUNT+4, 0(R2), L'FIELD), without the text of literals (=C'ABC')."""
+    out, quote = [], False
+    cleaned = []
+    for ch in operand:
+        if ch == "'":
+            quote = not quote
+            cleaned.append(" ")
+            continue
+        cleaned.append(" " if quote else ch)
+    for word in _word_tokens("".join(cleaned)):
+        if word[:1].isalpha() or word[:1] in "@#$_":
+            out.append(word)
+    return out
+
+
 def _walk(items: List[dict]) -> List[List[int]]:
     """Ancestor indices of each data item, by the level rules zscan uses for `parent`."""
     chains: List[List[int]] = []
@@ -215,8 +268,9 @@ class Program:
     def __init__(self, prog: dict, lines: Lines) -> None:
         self.prog = prog
         self.pid = prog["id"]
+        self.lang = prog.get("language") or "cobol"
         self.items: List[dict] = list(prog.get("data_items", []))
-        self.chains = _walk(self.items)
+        self.chains = _walk(self.items) if self.lang == "cobol" else _chains(self.items)
         self.lines = lines
         # REPLACING changes the copybook's own text only, not the copybooks it nests (as zscan expands it)
         self.replacing = {cb["name"] for cb in prog.get("copybooks", []) if cb.get("replacing")}
@@ -241,34 +295,42 @@ class Program:
             return it["name_in_copybook"]
         return it.get("name") or "FILLER"
 
+    def _unnamed(self, i: int) -> bool:
+        return (self.items[i].get("name") or "FILLER") in ("FILLER", "*")
+
     def _segment(self, i: int) -> str:
         it = self.items[i]
-        if it.get("name") == "FILLER":
+        if self._unnamed(i):
             return f"FILLER@{it.get('line')}"
         return self.orig[i] if it.get("copybook") else it["name"]
+
+    def _key_prefix(self) -> str:
+        """COBOL ids stay as in 1.0; the other languages carry theirs (a PL/I and an Assembler BILLREC differ)."""
+        return "" if self.lang == "cobol" else f"{self.lang}:"
 
     def _local(self, i: int) -> List[int]:
         """Ancestors that count for the key: in the same copybook for a copybook item, all otherwise; no FILLER."""
         cb = self.items[i].get("copybook")
-        anc = [a for a in self.chains[i] if self.items[a].get("name") != "FILLER"]
+        anc = [a for a in self.chains[i] if not self._unnamed(a)]
         if cb:
             anc = [a for a in anc if self.items[a].get("copybook") == cb]
         return anc
 
     def _assign_keys(self) -> None:
         seen: Dict[str, int] = {}
+        prefix = self._key_prefix()
         for i, it in enumerate(self.items):
             if it.get("level") == 88:
                 continue
-            if it.get("name") == "FILLER" and i not in self.has_88:
+            if self._unnamed(i) and i not in self.has_88:
                 continue
             anc = self._local(i)
             cb = it.get("copybook")
             path = ".".join([self._segment(a) for a in anc] + [self._segment(i)])
             if cb:
-                key = f"copy:{cb}:{path}"
+                key = f"{prefix}copy:{cb}:{path}"
             else:
-                key = f"prog:{self.pid}:{path}"
+                key = f"{prefix}prog:{self.pid}:{path}"
                 seen[key] = seen.get(key, 0) + 1
                 if seen[key] > 1:
                     key = f"{key}#{seen[key]}"
@@ -304,8 +366,9 @@ class Program:
                       for j in self.kids.get(i, []) if self.items[j].get("level") == 88]
         children = [self._segment(j).split("@")[0] for j in self.kids.get(i, [])
                     if self.items[j].get("level") not in (66, 88)]
-        return {
+        out = {
             "scope": "copybook" if cb else "program",
+            "language": self.lang,
             "owner": cb or self.pid,
             "name": self._segment(i).split("@")[0],
             "parents": [self._segment(a) for a in anc],
@@ -324,6 +387,43 @@ class Program:
             "line": it.get("line"),
             "children": children,
         }
+        if self.lang != "cobol":
+            out["type"] = it.get("type")
+            names = PLI_ATTRIBUTES if self.lang == "pli" else ASM_ATTRIBUTES
+            out["attributes"] = {k: it.get(k) for k in names if it.get(k) not in (None, "", False, [])}
+        return out
+
+    def _equates(self) -> None:
+        """Assembler EQU symbols: named constants, one entry each, owned by the program or its COPY member."""
+        if self.lang != "asm":
+            return
+        names: Dict[str, str] = {}
+        for eq in self.prog.get("equates") or []:
+            name = str(eq.get("name") or "").upper()
+            if not name or name in self.by_name:
+                continue
+            cb = eq.get("copybook")
+            key = f"asm:equ:{cb or self.pid}:{name}"
+            names[name] = key
+            if key in self.contrib:
+                continue
+            self.contrib[key] = {"def": {
+                "scope": "copybook" if cb else "program", "language": "asm", "owner": cb or self.pid, "name": name,
+                "parents": [], "parent_id": None, "level": None, "pic": None, "usage": "named constant (EQU)",
+                "occurs": None, "redefines": None, "value": eq.get("value"), "renames": None, "conditions": [],
+                "section": "EQU", "copybook": cb, "file": eq.get("file"), "line": eq.get("line"), "children": [],
+                "type": "EQU", "attributes": {k: eq.get(k) for k in ("control_section",) if eq.get(k)}},
+                "declared": [{"program": self.pid, "parents": []}] if cb else [], "used_in": [], "roles": [],
+                "aliases": []}
+        if not names:
+            return
+        for s in self.prog.get("statements", []):
+            refs = {w.upper() for o in s.get("operands") or [] for w in _word_refs(str(o))}
+            for name in refs & set(names):
+                base = {"program": self.pid, "paragraph": s.get("paragraph"), "verb": s.get("verb"), "line": s.get("line")}
+                if s.get("copybook"):
+                    base["copybook"] = s["copybook"]
+                self.contrib[names[name]]["used_in"].append(base)
 
     # references
     def _resolve(self, name: str, qualifiers: Sequence[str] = ()) -> List[Tuple[int, Optional[str]]]:
@@ -398,7 +498,10 @@ class Program:
             base = {"program": self.pid, "paragraph": s.get("paragraph"), "verb": s.get("verb"), "line": s.get("line")}
             if s.get("copybook"):
                 base["copybook"] = s["copybook"]
-            self._operand_refs(s.get("operands") or [], base)
+            operands = s.get("operands") or []
+            if self.lang == "asm":
+                operands = [w for o in operands for w in _word_refs(str(o))]
+            self._operand_refs(operands, base)
         for c in p.get("conditions", []):
             if c.get("kind") not in ("WHEN", "SEARCH-WHEN"):
                 continue  # IF, EVALUATE and UNTIL are statements already
@@ -427,6 +530,7 @@ class Program:
                     base["copybook"] = c["copybook"]
                 self._operand_refs(_word_tokens(value), base)
         self._roles()
+        self._equates()
         return self.contrib
 
     def _role(self, name: Optional[str], text: str) -> None:
@@ -551,7 +655,7 @@ def _entry_order(item: Tuple[str, dict]) -> tuple:
             e.get("line") or 0, key)
 
 
-ENTRY_LAYOUT = ("scope", "owner", "name", "aliases", "parents", "parent_id", "level", "pic", "usage", "occurs",
+ENTRY_LAYOUT = ("scope", "language", "owner", "name", "aliases", "parents", "parent_id", "level", "pic", "usage", "occurs",
                 "redefines", "value", "renames", "conditions", "section", "copybook", "file", "line", "children",
                 "programs", "declared_in", "roles", "used_in", "built_from", "description", "status", "source",
                 "described_at", "approved_by", "approved_at", "review", "stale", "stale_since", "warnings")
@@ -604,11 +708,13 @@ def build(app_map: dict, old: Optional[dict] = None, root: Optional[Path] = None
             built = prev.get("built") or stamp
             report["unchanged"].append(pid)
         else:
-            per_program[pid] = Program(prog, lines).collect()
+            lang = prog.get("language") or "cobol"
+            per_program[pid] = Program(prog, lines).collect() if lang in DECLARING else {}
             built = stamp
             report["changed" if prev else "new"].append(pid)
         programs[pid] = {
             "file": prog.get("file"),
+            "language": prog.get("language") or "cobol",
             "sha256": prog.get("sha256"),
             "format": prog.get("format"),
             "fingerprint": fp,
@@ -618,6 +724,11 @@ def build(app_map: dict, old: Optional[dict] = None, root: Optional[Path] = None
             "entries": len(per_program[pid]),
             "built": built,
         }
+        if (prog.get("language") or "cobol") not in DECLARING:
+            programs[pid]["note"] = ("REXX has no declarations: no entries; the map lists the exec's variables "
+                                     "(`variables`), set by PARSE, ARG, PULL, EXECIO and EXECSQL")
+        elif prog.get("language") == "pli" and prog.get("margins"):
+            programs[pid]["margins"] = prog["margins"]
     report["removed"] = sorted(set(old_programs) - set(programs))
 
     merged = _merge(per_program, shas)
@@ -687,22 +798,22 @@ def _boundaries(prog: Optional[dict]) -> Dict[str, List[int]]:
     return {k: sorted(v) for k, v in out.items()}
 
 
-def _slice(lines: Lines, file: Optional[str], start: int, end: int, fmt: str) -> List[list]:
-    """Lines start..end, ending early after the line that closes the sentence with a period."""
+def _slice(lines: Lines, file: Optional[str], start: int, end: int, fmt: str, lang: str = "cobol") -> List[list]:
+    """Lines start..end, ending early after the line that closes the sentence (period, semicolon)."""
     out = []
     for n in range(max(1, start), end + 1):
         text = lines.line(file, n)
         if text is None:
             break
-        body, comment = _body(text, fmt)
+        body, comment = _body(text, fmt, lang)
         out.append([n, body])
-        if not comment and body.rstrip().endswith("."):
+        if not comment and lang != "asm" and _ends(text, body, lang):
             break
     return out
 
 
-def _definition_slice(lines: Lines, file: Optional[str], line: int, fmt: str) -> List[list]:
-    """Comment lines right above a definition, then the definition up to its period (at most 4 lines)."""
+def _definition_slice(lines: Lines, file: Optional[str], line: int, fmt: str, lang: str = "cobol") -> List[list]:
+    """Comment lines right above a definition, then the definition to its end (at most 4 lines)."""
     if not file or not line:
         return []
     above = []
@@ -711,8 +822,8 @@ def _definition_slice(lines: Lines, file: Optional[str], line: int, fmt: str) ->
         text = lines.line(file, n)
         if text is None:
             break
-        body, comment = _body(text, fmt)
-        if not comment or not body.strip("*/ "):
+        body, comment = _body(text, fmt, lang)
+        if not comment or not body.strip("*/ ."):
             break
         above.insert(0, [n, body])
         n -= 1
@@ -722,9 +833,9 @@ def _definition_slice(lines: Lines, file: Optional[str], line: int, fmt: str) ->
         text = lines.line(file, n)
         if text is None:
             break
-        body, comment = _body(text, fmt)
+        body, comment = _body(text, fmt, lang)
         below.append([n, body])
-        if not comment and body.rstrip().endswith("."):
+        if not comment and _ends(text, body, lang):
             break
         n += 1
     return above + below
@@ -762,6 +873,7 @@ def queue_item(key: str, e: dict, dd: dict, maps: Dict[str, dict], lines: Lines,
     entries = dd["entries"]
     first_pid = (e.get("programs") or [None])[0]
     fmt = ((dd.get("programs") or {}).get(first_pid) or {}).get("format") or "fixed"
+    lang = e.get("language") or "cobol"
     parent = None
     if e.get("parent_id") and e["parent_id"] in entries:
         pe = entries[e["parent_id"]]
@@ -777,7 +889,9 @@ def queue_item(key: str, e: dict, dd: dict, maps: Dict[str, dict], lines: Lines,
     for u in _pick_refs(used, refs):
         pid = u.get("program")
         file = _file_of(dd, pid, u.get("copybook"))
-        pfmt = ((dd.get("programs") or {}).get(pid) or {}).get("format") or "fixed"
+        pinfo = (dd.get("programs") or {}).get(pid) or {}
+        pfmt = pinfo.get("format") or "fixed"
+        plang = pinfo.get("language") or "cobol"
         if pid not in bounds_cache:
             bounds_cache[pid] = _boundaries(maps.get(pid))
         start = int(u.get("line") or 0)
@@ -785,14 +899,15 @@ def queue_item(key: str, e: dict, dd: dict, maps: Dict[str, dict], lines: Lines,
         end = min(start + 2, (nxt[0] - 1) if nxt else start + 2)
         rec = {k: u[k] for k in ("program", "paragraph", "verb", "line", "copybook", "option", "via", "as") if k in u}
         rec["file"] = file
-        rec["code"] = _slice(lines, file, start, max(start, end), pfmt) if file else []
+        rec["code"] = _slice(lines, file, start, max(start, end), pfmt, plang) if file else []
         shown.append(rec)
     item = {
         "id": key,
+        "language": lang,
         "name": e.get("name"),
         "aliases": e.get("aliases") or {},
         "qualified": ".".join((e.get("parents") or []) + [e.get("name") or ""]),
-        "level": e.get("level"), "pic": e.get("pic"), "usage": e.get("usage") or ("DISPLAY (default)" if e.get("pic") else None),
+        "level": e.get("level"), "pic": e.get("pic"), "usage": e.get("usage") or ("DISPLAY (default)" if e.get("pic") and lang == "cobol" else None),
         "occurs": _occurs_text(e.get("occurs")) or None, "redefines": e.get("redefines"), "value": e.get("value"),
         "renames": e.get("renames"), "conditions": e.get("conditions") or [], "section": e.get("section"),
         "copybook": e.get("copybook"), "programs": e.get("programs") or [], "file": e.get("file"), "line": e.get("line"),
@@ -800,10 +915,16 @@ def queue_item(key: str, e: dict, dd: dict, maps: Dict[str, dict], lines: Lines,
         "parent": parent,
         "children": e.get("children") or [],
         "roles": [f"{r['program']}: {r['role']}" for r in e.get("roles") or []],
-        "definition": _definition_slice(lines, e.get("file"), int(e.get("line") or 0), fmt),
+        "definition": _definition_slice(lines, e.get("file"), int(e.get("line") or 0), fmt, lang),
         "used_in_total": len(used),
         "used_in": shown,
     }
+    if lang != "cobol":
+        item["type"] = e.get("type")
+        if e.get("attributes"):
+            item["attributes"] = e["attributes"]
+        if lang == "pli" and e.get("section"):
+            item["storage"] = e["section"]
     if e.get("status") == "proposed":
         item["description"] = e.get("description")
     if not used:
@@ -829,6 +950,10 @@ def make_queue(dd: dict, app_map: Optional[dict], root: Optional[Path] = None, l
     maps = zscan.programs_by_id(app_map) if app_map else {}
     lines = Lines(root)
     limit = max(0, int(limit))
+    no_decl = []
+    for pid, info in (dd.get("programs") or {}).items():
+        if (info.get("language") or "cobol") not in DECLARING and (not prog_f or pid == prog_f):
+            no_decl.append(pid)
     bounds: Dict[str, Dict[str, List[int]]] = {}
     items = [queue_item(k, e, dd, maps, lines, refs, bounds) for k, e in todo[:limit]]
     write_to = (Path(folder) / DESCRIPTIONS_FILE).as_posix()
@@ -844,6 +969,10 @@ def make_queue(dd: dict, app_map: Optional[dict], root: Optional[Path] = None, l
         "remaining": len(todo) - len(items),
         "write_to": write_to,
         "template": {"source": "<model name>", "descriptions": [{"id": "<id from items>", "description": PLACEHOLDER}]},
+        **({"no_declarations": {"programs": sorted(no_decl),
+                                "note": "REXX execs have no declarations, so the dictionary has no entries for them. "
+                                        "Do not invent any: the map lists their variables under `variables`."}}
+           if no_decl else {}),
         "items": items,
     }
 
@@ -1022,6 +1151,11 @@ def summary(dd: dict, app_map: Optional[dict] = None) -> dict:
         "stale": len(entries) - len(live),
         "review": sorted(k for k, e in entries.items() if e.get("review") and not e.get("stale")),
         "programs": sorted(dd.get("programs") or {}),
+        "languages": {lang: sorted(pid for pid, info in (dd.get("programs") or {}).items()
+                                   if (info.get("language") or "cobol") == lang)
+                      for lang in ("cobol", "pli", "asm", "rexx")},
+        "no_declarations": sorted(pid for pid, info in (dd.get("programs") or {}).items()
+                                  if (info.get("language") or "cobol") not in DECLARING),
         "unresolved_copybooks": dd.get("unresolved_copybooks") or [],
         "warnings": dd.get("warnings") or [],
         "map_drift": map_drift(dd, app_map),
@@ -1037,6 +1171,9 @@ def status_lines(dd: dict, info: dict, folder=DEFAULT_DIR) -> List[str]:
         f"Descriptions: approved {st['approved']}, proposed {st['proposed']}, none {st['none']}",
         f"Programs: {len(info['programs'])}: " + (", ".join(info["programs"]) or "-"),
     ]
+    if info.get("no_declarations"):
+        out.append("REXX execs, no entries (REXX has no declarations; the map lists their variables): "
+                   + ", ".join(info["no_declarations"]))
     drift = info.get("map_drift")
     if drift and any(drift.values()):
         parts = [f"{k} {', '.join(v)}" for k, v in drift.items() if v]
@@ -1095,7 +1232,8 @@ def _cell(value: Any) -> str:
     return text
 
 
-CSV_COLUMNS = ("id", "scope", "owner", "name", "aliases", "qualified", "level", "pic", "usage", "occurs", "redefines",
+CSV_COLUMNS = ("id", "language", "scope", "owner", "name", "aliases", "qualified", "level", "type", "pic", "usage",
+               "occurs", "redefines",
                "value", "conditions_88", "section", "copybook", "programs", "file", "line", "roles", "used_in_count",
                "used_in", "description", "status", "source", "described_at", "approved_by", "approved_at", "stale",
                "review")
@@ -1111,9 +1249,10 @@ def export_csv(dd: dict, max_refs: int = 10) -> str:
                          for u in used[:max_refs]) + (f"; +{len(used) - max_refs} more" if len(used) > max_refs else "")
         aliases = "; ".join(f"{p}: {', '.join(n)}" for p, n in (e.get("aliases") or {}).items())
         row = {
-            "id": key, "scope": e.get("scope"), "owner": e.get("owner"), "name": e.get("name"), "aliases": aliases,
+            "id": key, "language": e.get("language") or "cobol", "scope": e.get("scope"), "owner": e.get("owner"),
+            "name": e.get("name"), "aliases": aliases,
             "qualified": ".".join((e.get("parents") or []) + [e.get("name") or ""]),
-            "level": e.get("level"), "pic": e.get("pic"), "usage": e.get("usage"),
+            "level": e.get("level"), "type": e.get("type"), "pic": e.get("pic"), "usage": e.get("usage"),
             "occurs": _occurs_text(e.get("occurs")), "redefines": e.get("redefines"), "value": e.get("value"),
             "conditions_88": "; ".join(f"{c.get('name')} = {c.get('value')}" for c in e.get("conditions") or []),
             "section": e.get("section"), "copybook": e.get("copybook"),
@@ -1197,6 +1336,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             write_json(args.dir, QUEUE_FILE, doc)
             print(f"Wrote {Path(args.dir) / QUEUE_FILE}: {doc['shown']} of {doc['total']} entries waiting for a "
                   f"description; {doc['remaining']} remain after these")
+            if doc.get("no_declarations") and args.program:
+                print(f"{args.program.upper()} is a REXX exec: REXX has no declarations, so it has no entries to "
+                      "describe; the map lists its variables")
             if doc["shown"]:
                 print(f"Write the descriptions to {doc['write_to']} as {{\"source\": \"<model name>\", \"descriptions\": "
                       f"[{{\"id\": ..., \"description\": ...}}]}}, then run apply on it")

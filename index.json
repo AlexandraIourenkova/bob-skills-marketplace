@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-21T11:09:18Z",
+  "generated": "2026-10-21T13:33:23Z",
   "registry": {
     "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace.git",
-    "commit": "532fb6b4513d9e91bd0f764ab97dcbf8ff137288"
+    "commit": "d354fb0095035f341756a85506259bb9b3f8565e"
   },
   "vendors": [
     {
@@ -268,7 +268,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:cef9b6cc7baadf2dcb8609e1feaa6a15c2011deb0e2cdf8d1a5ac311ede1b640"
+          "digest": "sha256:90f6fad925526ba052f9faba61f629d906c314f4a3f7a42f1f75fda6cc82b22e"
         },
         {
           "name": "skill-creator",
@@ -299,7 +299,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:bb1c2584869f8a1881e4763324e105f39ac3dfb80e793a0db10d02fd27c630f8",
+      "digest": "sha256:de75d6b662196ff1a21cfba6da80ca31810c06999973df227c96b1cd0d574c81",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -315,7 +315,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-21T11:07:01Z",
+        "scannedAt": "2026-10-21T13:33:16Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 62,
         "ciscoMaxSeverity": "INFO",
@@ -962,34 +962,34 @@
     },
     {
       "name": "zos-app-insight",
-      "displayName": "COBOL and JCL application insight",
+      "displayName": "z/OS application insight",
       "vendor": "ibm",
       "vendorDisplayName": "IBM",
       "vendorStatus": "active",
-      "version": "1.0.0",
-      "description": "Map a COBOL and JCL application, build its data dictionary, document its programs and business rules, and review COBOL for performance, from source in your workspace or downloaded read-only from z/OS. A starter pack; for IBM's own scanners, refactoring and IBM Z documentation in answers, use IBM Bob Premium Package for Z.",
+      "version": "1.1.0",
+      "description": "Map a COBOL, PL/I, REXX and Assembler application with its JCL, build its data dictionary, document its programs and business rules, and review COBOL, PL/I and REXX for performance, from source in your workspace or downloaded read-only from z/OS. A starter pack; for IBM's own scanners, refactoring and IBM Z documentation in answers, use IBM Bob Premium Package for Z.",
       "path": "packs/ibm/zos-app-insight",
-      "tag": "zos-app-insight--v1.0.0",
+      "tag": "zos-app-insight--v1.1.0",
       "skills": [
         {
           "name": "zos-app-map",
-          "description": "Map a COBOL and JCL application from its source, read-only - programs, copybooks, data items, paragraphs and PERFORM flow, CALL, EXEC SQL and EXEC CICS, files and their I/O, jobs, steps, procedures and data sets - into app-map.json and app-map.md with a call graph, copybook use and job flow in Mermaid. Can first download the members from z/OS with Zowe CLI, read-only, after the user's yes. The first skill of zos-app-insight; the data dictionary, program documentation and COBOL performance review build on its map. Use when the user wants to understand, inventory or map a mainframe application, see which programs call which, which copybooks and data sets they use or which jobs run them. Triggers include \"map my COBOL application\", \"what is in this mainframe application\", \"COBOL call graph\", \"which jobs run this program\", \"which programs use this copybook\", \"download my COBOL from z/OS\", \"inventory of COBOL programs and JCL\".",
-          "digest": "sha256:189a810994826596396e8658a29dd579c787d9d7307559bc9fbc160c96fd3fe1"
+          "description": "Map a mainframe application from its source, read-only - COBOL, PL/I, REXX and Assembler programs with their copybooks and include members, data items, paragraphs, labels and PERFORM or CALL flow, EXEC SQL and EXEC CICS, files and their I/O, jobs, steps, procedures and data sets, and the links between languages (a job step running a PL/I program or a REXX exec, a COBOL CALL of an Assembler routine) - into app-map.json and app-map.md with a call graph, copybook use and job flow in Mermaid. Can first download the members from z/OS with Zowe CLI, read-only, after the user's yes. The first skill of zos-app-insight; the data dictionary, documentation and performance review build on its map. Use when the user wants to understand, inventory or map a mainframe application. Triggers include \"map my COBOL application\", \"what is in this mainframe application\", \"COBOL call graph\", \"which jobs run this program\", \"which programs use this copybook\", \"map my PL/I and REXX\", \"download my COBOL from z/OS\".",
+          "digest": "sha256:6673f51e38a372ef01e4b527015e7beaf7b86e209939a823de4ba0c955f0e189"
         },
         {
           "name": "zos-data-dictionary",
-          "description": "Build the data dictionary of a COBOL application from the zos-app-map map - every field with its PIC, usage, OCCURS, REDEFINES, VALUE, 88 levels, copybook, defining line and the statements that use it, one entry per copybook field for all the programs that copy it. Bob proposes a short business description of each field from its code, the user reviews and approves, and a rebuild after source changes keeps approved descriptions and marks removed fields stale. Exports to CSV for a spreadsheet. Part of zos-app-insight; needs app-map.json from zos-app-map. Use when the user wants a data dictionary, field descriptions or a copybook glossary, or asks what a COBOL field means or where it is used. Triggers include \"build a data dictionary for my COBOL\", \"describe the fields of this copybook\", \"what does this COBOL field mean\", \"where is this field used\", \"document the copybook fields\", \"export the data dictionary to Excel\", \"COBOL field glossary\".",
-          "digest": "sha256:ab80f7cfba455344d646b5f7d96a20e403e79af42e17e10145b57789a85a1914"
+          "description": "Build the data dictionary of a mainframe application from the zos-app-map map - every COBOL field with its PIC, usage, OCCURS, REDEFINES, VALUE, 88 levels and copybook; every PL/I declaration with its type, storage class, dimensions, BASED, DEFINED and INIT; every Assembler DS and DC with type, length, duplication and nominal value, DSECT groups and EQU constants - with its defining line and the statements that use it, one entry per copybook field for all its programs. REXX has no declarations, and the dictionary says so. Bob proposes a short business description of each field, the user approves, and a rebuild keeps approved descriptions and marks removed fields stale. Exports to CSV. Part of zos-app-insight; needs the map. Use when the user wants a data dictionary or field descriptions. Triggers include \"build a data dictionary for my COBOL\", \"describe the fields of this copybook\", \"what does this field mean\", \"where is this field used\", \"document the DSECT fields\", \"export the data dictionary to Excel\".",
+          "digest": "sha256:74f44b3b5281722fa391ac9c94d82ae2ac556d0653d1478eac29d59ce5a065b0"
         },
         {
           "name": "zos-program-doc",
-          "description": "Document COBOL programs and their mainframe application from the zos-app-map map - a context pack per program with header comments, paragraphs, PERFORM flow, callers, called programs and the job steps that run it, files and data sets, SQL tables, CICS commands, copybooks, the data items it uses and every condition as a business-rule candidate with file:line evidence and the code slice; Bob writes docs/programs/<ID>.md from a template, and an application overview last. Adds data dictionary descriptions when zos-data-dictionary has them. Sections and language come from a config file. Existing docs are skipped unless the user asks. Use when the user wants documentation of a COBOL program or application, its business rules, or what a program does. Triggers include \"document this COBOL program\", \"write documentation for my mainframe application\", \"extract business rules from COBOL\", \"what does this program do\", \"explain this COBOL program with line references\", \"which programs still have no documentation\".",
-          "digest": "sha256:aac673847f997c15c592b28dfbbae8718e8ee2a63ffd7b0e56fb70d67f265982"
+          "description": "Document COBOL, PL/I, REXX and Assembler programs and their mainframe application from the zos-app-map map - a context pack per program with header comments, structure (paragraphs, procedures and ON-units, labels, control sections), flow, callers, called programs and the job steps that run it, files and data sets, SQL, CICS, copybooks and includes, data items, error handling (file status, ON-units, REXX traps) and every condition as a business-rule candidate with file:line evidence; Assembler has no rule candidates and the pack says why. Bob writes docs/programs/<ID>.md from a template, then an application overview, with data dictionary descriptions when they exist. Use when the user wants documentation of a mainframe program or application or its business rules. Triggers include \"document this COBOL program\", \"write documentation for my mainframe application\", \"extract business rules from COBOL\", \"what does this program do\", \"document this REXX exec\", \"explain this PL/I program with line references\".",
+          "digest": "sha256:cb9b4684e26a13ae09a00362c3c4324dba22b35e22e82fc985fddb9b61e1c42f"
         },
         {
           "name": "cobol-perf-review",
-          "description": "Review COBOL programs for patterns that cost CPU or I/O on z/OS, from the zos-app-map map and the source - OPEN or CLOSE, EXEC SQL and CALL inside loops, serial SEARCH where SEARCH ALL fits, USAGE DISPLAY numbers in arithmetic and as subscripts, INITIALIZE of groups, STRING, UNSTRING and INSPECT inside loops. Each finding is a fact with file and line, the loop it sits in, a confidence and a fix pattern, never a score. Bob explains each finding, proposes a patch as a diff and changes a source file only after the user's yes for that change. Part of zos-app-insight; needs the map first. Use when the user wants a performance review of a COBOL program or application, asks why a COBOL batch job is slow or wants to cut its CPU time. Triggers include \"review my COBOL for performance\", \"why is this COBOL job slow\", \"COBOL performance review\", \"reduce CPU of this batch program\", \"find SQL inside loops in my COBOL\", \"should these fields be COMP-3\", \"optimize this COBOL program\".",
-          "digest": "sha256:187d73089cac102812618e15ed0b71e110dd41c03c5ae3ee7955b96c120b91b4"
+          "description": "Review COBOL programs, and PL/I and REXX loop patterns too, for what costs CPU or I/O on z/OS, from the zos-app-map map and the source - OPEN or CLOSE, EXEC SQL and CALL or FETCH inside loops, serial SEARCH where SEARCH ALL fits, USAGE DISPLAY numbers in arithmetic and as subscripts, INITIALIZE of groups; REXX EXECIO, ALLOC, FREE and host commands inside loops. Assembler is listed as not reviewed. Each finding is a fact with file, line, loop, confidence and fix pattern, never a score. Bob proposes a patch as a diff and changes a source file only after the user's yes. Part of zos-app-insight; needs the map first. Use when the user wants a performance review of a COBOL, PL/I or REXX program or application, or asks why a batch job is slow. Triggers include \"review my COBOL for performance\", \"why is this COBOL job slow\", \"reduce CPU of this batch program\", \"find SQL inside loops\", \"should these fields be COMP-3\", \"EXECIO in a loop\", \"optimize this PL/I program\".",
+          "digest": "sha256:3d714ac9d430dd8b80b5316244750d87ef0fd279ee6effd5f6564ea6029bd6cb"
         }
       ],
       "mcpServers": [],
@@ -1002,7 +1002,7 @@
       "modes": [
         "zos-analyst"
       ],
-      "digest": "sha256:785e6cdb41ff119a3d763be18520b5e216a9f33a8bb4d7ac0ca5901a55df4af9",
+      "digest": "sha256:ab1cfdf65d976e1989f76164f04c5515fba91e7128da4788669060caa696d879",
       "revokedVersions": [],
       "versions": [
         "1.0.0"
@@ -1014,7 +1014,7 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-21T11:09:09Z",
+        "scannedAt": "2026-10-21T13:32:50Z",
         "skillspectorVersion": "2.11.2",
         "skillspectorSuppressed": 23,
         "ciscoMaxSeverity": "INFO",
@@ -1025,6 +1025,9 @@
       "minBob": "2.0.2",
       "tags": [
         "cobol",
+        "pli",
+        "rexx",
+        "assembler",
         "jcl",
         "mainframe",
         "z-os",
@@ -1036,7 +1039,7 @@
       "safety": [
         {
           "class": "data",
-          "warning": "The COBOL, copybooks and JCL you analyse, and members downloaded from z/OS, go into Bob's model context like any file you open.",
+          "warning": "The COBOL, PL/I, REXX, Assembler and JCL you analyse, and members downloaded from z/OS, go into Bob's model context like any file you open.",
           "covered": "The scripts send nothing over the network; the only network step is the optional Zowe CLI download through your own profile, after your yes to the plan it prints. The rule keeps quotes to the cited lines and suggests git-ignoring zos-insight/src/."
         },
         {

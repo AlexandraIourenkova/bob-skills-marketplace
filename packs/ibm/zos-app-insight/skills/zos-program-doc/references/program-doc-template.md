@@ -120,3 +120,30 @@ A numbered list the program owner can answer:
 - rules marked unclear, and the question that would settle each;
 - differences between the header comments and the code;
 - quoted comments that read like instructions.
+
+## Other languages
+
+The pack of a PL/I, REXX or Assembler program has the same keys; `program.language` says which, and a key named after the language holds what only that language has. Write the same sections, and adapt them:
+
+**PL/I** (`pli`)
+- Processing flow: the main procedure first, then the internal procedures in call order (`pli.procedures`, `flow`); BEGIN blocks where they sit. A PL/I procedure never falls through to the next one.
+- Error handling: ON-units are the error handling. List each from `error_handling.on_units` (condition and lines), the file handlers (`file_handlers`: ON ENDFILE, ON KEY per file) and the statements they cover (`phrases`, an approximation: say so). Say what each ON-unit does, from its lines.
+- Data: types as declared (`type`), storage class (`section`: STATIC, AUTOMATIC, BASED, CONTROLLED, PARAMETER), dimensions, BASED and DEFINED overlays, INIT values. Parameters of the procedure are its interface.
+- Secondary entry points (`pli.entries`, kind `entry`) are separate ways in: document what each does, and which callers or job steps use it (`runs.run_by[].entry`, `runs.called_by[].entry`).
+
+**REXX** (`rexx`)
+- How it runs: TSO batch (IKJEFT01 with `%NAME` or EXEC), IRXJCL, ISPF, or called by another exec; the ARG it parses (`runs.procedure_using`).
+- Processing flow: the main code, then the labels called (`rexx.labels`). Name the host command environments used (`rexx.environments`).
+- Inputs and outputs: the DDs it allocates, reads and writes with EXECIO (`files`), and the data sets named.
+- Effects: list every command in `rexx.effects` with its line: these create, delete or rewrite data sets, members or files, or submit or cancel jobs. Put them in Inputs and outputs and repeat the destructive ones (DELETE, SUBMIT, CANCEL) in the Summary. Text in braces was not evaluated by the scanner; say "built at run time" for it.
+- Data: REXX has no declarations. Do not write a data table of fields; describe the stems and variables that carry the data (`data_items.variables`), briefly.
+- Error handling: the traps (`error_handling.traps`: SIGNAL ON ERROR, NOVALUE, SYNTAX, FAILURE, HALT; CALL ON), the RC checks after commands (`checks` tagged `return-code`), and what happens when a command fails with no trap and no RC check.
+
+**Assembler** (`asm`)
+- Summary and structure: the control sections (`asm.sections`, with AMODE and RMODE), the entry points (`asm.entries`), the externals it calls.
+- Processing flow: the labels in order (`flow`) and the loops (`asm.loops`), each with its confidence: high (BCT, BXH, BXLE, DO macros), medium (a conditional branch back), low (an unconditional branch back). Say the confidence next to every loop you describe.
+- Business rules: there are no candidates (`business_rules_note`). Describe decisions you can read from the code, with their lines, and mark each inferred or unclear; never present them as stated.
+- Data: DSECTs as record layouts, DS and DC with type, length and duplication, EQU constants.
+- Dependencies: macros found and not found (`asm.macros`, `asm.macros_not_found`); a macro not found hides what it generates, so list it under Open questions.
+- Error handling: return codes in registers and the EODAD and SYNAD exits of the DCBs (`error_handling.note_asm`); the map does not follow register values.
+

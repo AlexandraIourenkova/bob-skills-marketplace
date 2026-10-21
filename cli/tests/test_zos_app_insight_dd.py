@@ -8,6 +8,7 @@ written below, copies the same copybooks as ORDMAIN so that shared fields have t
 from __future__ import annotations
 
 import csv
+import io
 import importlib.util
 import json
 import shutil
@@ -475,3 +476,64 @@ def test_writes_only_under_zos_insight(project, monkeypatch, capsys, tmp_path) -
     assert dd.main(["export", "--csv"]) == 0
     assert target.read_text(encoding="utf-8") == "keep"
     assert not (project / "zos-insight" / "dd" / "DD.csv").is_symlink()
+
+
+# --------------------------------------------------------------------------- languages (1.1)
+LANG = Path(__file__).parent / "fixtures" / "zos-app-insight-lang"
+
+
+@pytest.fixture(scope="module")
+def xbuilt(tmp_path_factory):
+    root = tmp_path_factory.mktemp("xdd")
+    shutil.copytree(LANG, root / "src")
+    app_map = zscan.scan(["src/pli/src", "src/rexx", "src/asm/src", "src/xlang"],
+                         ["src/pli/inc", "src/asm/copy", "src/asm/maclib"], root=root)
+    doc, report = dd.build(app_map, None, root=root)
+    return root, app_map, doc
+
+
+def test_pli_entries_have_type_storage_and_dimensions(xbuilt) -> None:
+    _, _, doc = xbuilt
+    prices = entry(doc, "pli:prog:BILLCALC:PRICES")
+    assert (prices["language"], prices["type"], prices["section"], prices["value"]) == ("pli", "FIXED DEC(9,2)", "STATIC", "(12)0")
+    assert prices["attributes"] == {"dimensions": [{"lower": 1, "upper": 12}]} and prices["occurs"]["max"] == 12
+    assert ("BILLCALC", 14, "CALL") in uses(prices)
+    # a PL/I include member and an Assembler COPY member may share a name: the ids carry the language
+    assert entry(doc, "pli:copy:BILLREC:ORDER_REC")["language"] == "pli"
+    assert entry(doc, "asm:copy:BILLREC:USAGEREC")["language"] == "asm"
+    assert not any(k.startswith("copy:BILLREC:") for k in doc["entries"])
+
+
+def test_assembler_entries_have_dsect_groups_ds_dc_and_equates(xbuilt) -> None:
+    _, _, doc = xbuilt
+    acct = entry(doc, "asm:copy:BILLREC:USAGEREC.UR_KEY.UR_ACCT")
+    assert acct["parent_id"] == "asm:copy:BILLREC:USAGEREC.UR_KEY" and acct["section"] == "DSECT"
+    assert (acct["type"], acct["attributes"]["op"], acct["attributes"]["length"]) == ("C", "DS", 8)
+    maxrecs = entry(doc, "asm:prog:BILLRUN:MAXRECS")
+    assert (maxrecs["type"], maxrecs["value"], maxrecs["attributes"]["op"]) == ("F", "'500'", "DC")
+    assert ("BILLRUN", 17, "L") in uses(maxrecs)  # names inside Assembler operands
+    flag = entry(doc, "asm:equ:BILLREC:UR_LATE")
+    assert (flag["type"], flag["value"], flag["scope"], flag["usage"]) == ("EQU", "X'40'", "copybook", "named constant (EQU)")
+
+
+def test_rexx_execs_have_no_entries_and_the_queue_says_so(xbuilt) -> None:
+    root, app_map, doc = xbuilt
+    assert doc["programs"]["ORDLOAD"]["entries"] == 0 and "no declarations" in doc["programs"]["ORDLOAD"]["note"]
+    assert not any("ORDLOAD" in (e.get("programs") or []) for e in doc["entries"].values())
+    q = dd.make_queue(doc, app_map, root=root, program="ORDLOAD")
+    assert q["total"] == 0 and q["no_declarations"]["programs"] == ["ORDLOAD"]
+    assert "Do not invent any" in q["no_declarations"]["note"]
+    info = dd.summary(doc)
+    assert info["no_declarations"] == ["ORDLOAD", "ORDMENU"] and info["languages"]["pli"] == ["BILLCALC", "BILLMAIN", "BILLSUB"]
+    assert any(line.startswith("REXX execs, no entries") for line in dd.status_lines(doc, info))
+    item = next(it for it in dd.make_queue(doc, app_map, root=root, program="BILLRUN", limit=100)["items"]
+                if it["id"] == "asm:prog:BILLRUN:MAXRECS")
+    assert item["language"] == "asm" and item["type"] == "F" and item["definition"][-1][1].startswith("MAXRECS  DC")
+
+
+def test_csv_has_language_and_type(xbuilt) -> None:
+    _, _, doc = xbuilt
+    rows = list(csv.DictReader(io.StringIO(dd.export_csv(doc))))
+    assert {"language", "type"} <= set(rows[0])
+    row = next(r for r in rows if r["id"] == "pli:prog:BILLCALC:RATE")
+    assert (row["language"], row["type"]) == ("pli", "FIXED DEC(5,4)")
