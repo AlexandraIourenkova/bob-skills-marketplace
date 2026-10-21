@@ -1,0 +1,113 @@
+{
+  "scannedAt": "2026-10-21T11:09:09Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:b21671accb3929bb1c72d9787e4c03184ee1b131ec5f5f9a68b0d5873f39bc7e|sha256:0c0c90de01c3f5ffa44cc5a920c46e0050e554f499df194498c7d0daa9290d8f",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "zos-app-map": {
+      "digest": "sha256:189a810994826596396e8658a29dd579c787d9d7307559bc9fbc160c96fd3fe1",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 9,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "zos-data-dictionary": {
+      "digest": "sha256:ab80f7cfba455344d646b5f7d96a20e403e79af42e17e10145b57789a85a1914",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "zos-program-doc": {
+      "digest": "sha256:aac673847f997c15c592b28dfbbae8718e8ee2a63ffd7b0e56fb70d67f265982",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 8,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    },
+    "cobol-perf-review": {
+      "digest": "sha256:187d73089cac102812618e15ed0b71e110dd41c03c5ae3ee7955b96c120b91b4",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 5,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 1,
+        "accepted": 0,
+        "bySeverity": {
+          "INFO": 1
+        },
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 23,
+    "ciscoAccepted": 0
+  }
+}

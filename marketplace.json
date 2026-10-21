@@ -200,6 +200,28 @@
       "category": "ibm-bob"
     },
     {
+      "name": "zos-app-insight",
+      "source": "./packs/ibm/zos-app-insight",
+      "description": "Map a COBOL and JCL application, build its data dictionary, document its programs and business rules, and review COBOL for performance, from source in your workspace or downloaded read-only from z/OS. A starter pack; for IBM's own scanners, refactoring and IBM Z documentation in answers, use IBM Bob Premium Package for Z.",
+      "version": "1.0.0",
+      "author": {
+        "name": "IBM"
+      },
+      "homepage": "https://github.com/AlexandraIourenkova/bob-skills-marketplace",
+      "license": "Apache-2.0",
+      "keywords": [
+        "cobol",
+        "jcl",
+        "mainframe",
+        "z-os",
+        "documentation",
+        "data-dictionary",
+        "performance",
+        "ibm"
+      ],
+      "category": "ibm-bob"
+    },
+    {
       "name": "anthropic-dev-kit",
       "source": "./packs/anthropic/anthropic-dev-kit",
       "description": "Build MCP servers that expose your APIs to agents, test web applications with Playwright, and design frontends that do not look generated. The Apache-2.0 skills from Anthropic's public skills repository.",

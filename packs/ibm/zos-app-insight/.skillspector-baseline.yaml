@@ -1,0 +1,55 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: AE1
+  reason: "The scanner inspected the referenced script only partly because of its size. The scripts were read by the marketplace team: they use the standard library only, write only under zos-insight/ through one output guard, open no network connection, and the only process they start is Zowe CLI from zowe_fetch.py with an allow-listed argument list and no shell. Reviewed 2026-10-21."
+  path: '*SKILL.md'
+- id: MP3
+  reason: "Documentation of the COBOL REPLACE statement, which the parser does not apply; nothing about the agent's memory. Reviewed 2026-10-21."
+  path: '*references/parser-limits.md'
+- id: MP3
+  reason: "Documentation of the COBOL REPLACE statement, which the parser does not apply; nothing about the agent's memory. Reviewed 2026-10-21."
+  path: '*scripts/zscan.py'
+- id: LP3
+  reason: "No per-skill licence field in the frontmatter; the pack is Apache-2.0, original marketplace code. Reviewed 2026-10-21."
+  path: '*SKILL.md'
+- id: AST4
+  reason: "zowe_fetch.py starts Zowe CLI with an argument list (shell=False) after checking each command against the zos-files list and download allow-list and after the user's yes to the hashed plan. Reviewed 2026-10-21."
+  path: '*scripts/zowe_fetch.py'
+fingerprints:
+- hash: sha256:e7f9a589c399ec5d24fac18d1827a74b70e29fe1f0b9e17d5283701293d072c0
+  rule_id: AE1
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:f3971c0d365e3552ed9b95cbb07a30517863f84fc039314c94121b812e5436bf
+  rule_id: MP3
+  file: references/parser-limits.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:925d9534cd7c31361c91283125ba55d09f86cf359300bcc5bc760de69032b88f
+  rule_id: LP3
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:301c9fb319af6687aa18b1b213773b55e433864c7b08b4fcc9e31776c6ce31b0
+  rule_id: AST4
+  file: scripts/zowe_fetch.py
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:a5d769951ae80e1155f3e00bcd55ab3293c56d2a0ba5df5fe52a80bc602a9a88
+  rule_id: LP3
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:a536ba35accc19798be8ffdbad092525ccf047e61b0ccba52181007744ea8a02
+  rule_id: AE1
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:e7e2c539f8c5b9daf35dd9af6598c1e234e1de43ba204151ad415758f5356604
+  rule_id: LP3
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:e93ad0575c4946b0c608f3e75cb6e9b833250370dcf11a0e5cd9fdf281b78a8a
+  rule_id: AE1
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
+- hash: sha256:c56ceee9b2f8232ed3964b76cd1012556c77eabd239d7daea5072582003f7bee
+  rule_id: LP3
+  file: SKILL.md
+  reason: "See the rule entry for this rule id above. Reviewed 2026-10-21."
