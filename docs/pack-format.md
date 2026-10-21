@@ -29,7 +29,7 @@ packs/<vendor>/<name>/
 | `networkAllow` | no | Hosts the pack's scripts may contact. Must be a subset of the vendor's allow-list. Any other host in a script is a blocking linter finding. |
 | `revokedVersions` | no | Versions the vendor withdrew. The installer refuses them, `update` offers a way out, the guard refuses their skills. |
 | `checksums` | yes for release | Digest per component (`skills/<skill>`, `rules/<file>`, `commands/<file>`, `custom_modes.yaml`). Maintained by `bob-skills registry validate --fix`; CI fails when they do not match the tree. The installer refuses a pack whose checksums do not match. |
-| `source`, `license`, `homepage`, `minBob`, `tags` | no | Provenance and catalog metadata. |
+| `source`, `license`, `homepage`, `minBob`, `tags` | no | Provenance and catalog metadata. `source` holds `repo`, `ref` and `path` of the upstream; `source.exclude` lists names that `scripts/sync_upstream.py` leaves out of every synced skill, such as `evals` for upstream test fixtures. |
 
 ## Digest algorithm
 

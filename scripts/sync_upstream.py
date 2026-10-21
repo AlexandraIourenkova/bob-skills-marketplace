@@ -38,6 +38,7 @@ def main() -> int:
     pack_dir = manifest_path.parent
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     overrides = manifest.get("sources", {})
+    excluded = manifest["source"].get("exclude", [])  # names left out of every synced skill, e.g. upstream eval fixtures
     groups: dict[tuple, list[str]] = {}
     for skill in manifest["skills"]:
         src = overrides.get(skill) or manifest["source"]
@@ -67,7 +68,7 @@ def main() -> int:
                 dst = pack_dir / "skills" / skill
                 if dst.exists():
                     shutil.rmtree(dst)
-                shutil.copytree(src_dir, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "node_modules"))
+                shutil.copytree(src_dir, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "node_modules", *excluded))
                 for f in dst.rglob("*"):
                     if f.is_file() and f.suffix.lower() in TEXT_SUFFIXES and b"\r\n" in f.read_bytes():
                         f.write_bytes(f.read_bytes().replace(b"\r\n", b"\n"))  # git normalises on commit; checksums must see the same bytes

@@ -104,6 +104,15 @@
         "path": {
           "type": "string",
           "description": "Folder inside the upstream repository."
+        },
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Names of files or folders left out of every synced skill, as shell-style patterns matched against each name, for example evals for upstream test fixtures."
         }
       }
     },
