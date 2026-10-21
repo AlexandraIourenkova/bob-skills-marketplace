@@ -84,6 +84,7 @@ flowchart LR
 | [`ibm-cloud`](packs/ibm/ibm-cloud) | IBM (marketplace team) | released 1.0.0 | ibmcloud-setup, ibmcloud-inventory, ibmcloud-diagnose, ibmcloud-cost, the `ibm-cloud` rule, `/ibmcloud-report` and the `cloud-ops` mode; read-only, fixes come as commands you approve |
 | [`agent-evals`](packs/ibm/agent-evals) | IBM (marketplace team) | released 1.0.0 | wxo-agent-api, wxo-eval-cases, wxo-eval-run, the `agent-evals` rule, `/wxo-eval` and the `agent-evals` mode: test a deployed watsonx Orchestrate agent through its API with AgentOps test cases, every tool call captured, offline scoring and Bob as the judge; every message to the agent waits for your yes to a plan |
 | [`challenge-kit`](packs/ibm/challenge-kit) | IBM (marketplace team) | released 1.0.0 | For teams in an AI coding challenge, from the first idea to the submission: first-hour, idea-studio, process-redesign, poc-scope (invented data with an answer key), solution-blueprint (one HTML document with a layered architecture diagram, process lanes and impact charts), usability-pass, demo-script, submission-check (read-only), the `challenge-kit` rule, `/challenge` and the `challenge-coach` mode |
+| [`zos-app-insight`](packs/ibm/zos-app-insight) | IBM (marketplace team) | released 1.0.0 | zos-app-map, zos-data-dictionary, zos-program-doc, cobol-perf-review, the `zos-app-insight` rule, `/zos-insight` and the `zos-analyst` mode: a starter pack that maps, documents and reviews COBOL and JCL applications; IBM Bob Premium Package for Z for scale |
 | [`anthropic-dev-kit`](packs/anthropic/anthropic-dev-kit) | Anthropic | released 1.0.0 | mcp-builder, webapp-testing, frontend-design from anthropics/skills (Apache-2.0) |
 | [`openai-security`](packs/openai/openai-security) | OpenAI | released 1.0.0 | security-best-practices, security-threat-model, security-ownership-map (Apache-2.0) |
 | [`openai-dev-tools`](packs/openai/openai-dev-tools) | OpenAI | released 1.1.0 | jupyter-notebook, gh-fix-ci, cli-creator (Apache-2.0) |
@@ -199,7 +200,7 @@ uv run --project cli bob-skills lint packs              # policy linter, honours
 
 ## Status and next steps
 
-Done: registry with eight vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft, Confluent, Red Hat), eighteen released packs including the team's own office-docs, presentations and challenge-kit, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `audit`, `doctor`, `trust` with linting, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
+Done: registry with eight vendors (IBM, Anthropic, OpenAI, Google, HashiCorp, Microsoft, Confluent, Red Hat), nineteen released packs including the team's own office-docs, presentations and challenge-kit, both scanners with reviewed baselines per pack, the client with install, update, verify, guard, linter, `audit`, `doctor`, `trust` with linting, `resolve` (git link to pack), `show` (what will be installed) and first-vendor confirmation, the find-skills marketplace skill with a generated offline catalog, CI workflows, docs, the static website.
 
 Next, in order:
 
