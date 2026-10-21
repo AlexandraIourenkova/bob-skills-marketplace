@@ -1,0 +1,168 @@
+{
+  "scannedAt": "2026-10-21T08:25:45Z",
+  "tools": {
+    "skillspector": "2.11.2",
+    "ciscoSkillScanner": "2.1.0"
+  },
+  "baselineDigest": "sha256:f3f38a149c73e00fafecfc4d40d1fffdd92ab59d550d6319489c6550c76c6988|sha256:c932bf76a83cde4a963093922ed1879b6c08bf5250bf0cd63f79831bdf92705e",
+  "thresholds": {
+    "block": 30,
+    "review": 10
+  },
+  "skills": {
+    "cluster-update-advisor": {
+      "digest": "sha256:ced7d3449d0e8dcdd2e30fa7ed136e52805c6aec0f66ab9c7d3eabfdedbc80e4",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 0,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "product-lifecycle": {
+      "digest": "sha256:2b1af66de715d09448fe8029bb0fb24ba5812c2bcc378d1e6ccada4217537094",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": "INFO",
+        "findings": 2,
+        "accepted": 2,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "argo-knowledge": {
+      "digest": "sha256:714c7b2daa90a86e400ab6d708a0ef5242bb7eaed0a52d2b0b493413ccfca37d",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 10,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "argo-cluster-debug": {
+      "digest": "sha256:a81eec6a0f771c8f681f129678f1eff30277723c684997f0173b49d70de5aa12",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 1,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "argo-repo-audit": {
+      "digest": "sha256:724c19f873de4dfbf906da4dfdb1b1dcd1e8097ac97a225394c99522ebfdab1b",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 13,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "argo-operations": {
+      "digest": "sha256:78c3e7b45c1d61cd2d0742e6aeac6fc05fea41ad67ab36c706dd16b64c71cd66",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 12,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    },
+    "argo-team-onboard": {
+      "digest": "sha256:26f7dcad9af8bb7d27d81a4f983b4e6a8e345d243a0ef2c08d179bcd36bf55ad",
+      "skillspector": {
+        "riskScore": 0,
+        "recommendation": "CAUTION",
+        "severity": "LOW",
+        "issues": 0,
+        "byRule": {},
+        "suppressed": 2,
+        "version": "2.11.2",
+        "complete": false
+      },
+      "cisco": {
+        "isSafe": true,
+        "maxSeverity": null,
+        "findings": 0,
+        "accepted": 0,
+        "bySeverity": {},
+        "version": null
+      }
+    }
+  },
+  "summary": {
+    "riskScore": 0,
+    "ciscoMaxSeverity": "INFO",
+    "verdict": "pass",
+    "skillspectorSuppressed": 39,
+    "ciscoAccepted": 2
+  }
+}

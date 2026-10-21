@@ -1,10 +1,10 @@
 {
   "$schema": "./schemas/index.schema.json",
   "schemaVersion": 1,
-  "generated": "2026-10-12T11:59:58Z",
+  "generated": "2026-10-21T08:26:33Z",
   "registry": {
     "url": "https://github.com/AlexandraIourenkova/bob-skills-marketplace.git",
-    "commit": "b454f25c0a0796ad75fbe5cd2ab3c86ec5a214a2"
+    "commit": "b0dd22fc1825aabeaf4b8be99cb28e1059dad395"
   },
   "vendors": [
     {
@@ -147,6 +147,24 @@
       "packs": [
         "confluent-kafka"
       ]
+    },
+    {
+      "id": "redhat",
+      "displayName": "Red Hat",
+      "status": "active",
+      "homepage": "https://www.redhat.com",
+      "github": {
+        "host": "github.com",
+        "org": "openshift",
+        "repos": [
+          "agentic-skills"
+        ]
+      },
+      "extraSources": [],
+      "notes": "Curated from openshift/agentic-skills (Apache-2.0), the skills OpenShift maintainers publish for OpenShift Lightspeed: cluster update readiness, Red Hat product life cycle and Argo CD GitOps. Red Hat is an IBM company and keeps its own GitHub organisations, so it is listed as its own vendor, like HashiCorp and Confluent.",
+      "packs": [
+        "redhat-openshift"
+      ]
     }
   ],
   "packs": [
@@ -249,7 +267,7 @@
         {
           "name": "find-skills",
           "description": "The Bob Skills Marketplace inside Bob. Use when the user wants a skill or a capability Bob does not have installed, pastes a git link or a repository name and asks to install skills from it, asks what packs or skills exist (\"is there a skill for X\", \"find a skill\"), or asks to install, update, remove or explain a marketplace pack. Covers browsing the catalog offline, mapping a git link to a pack, showing what will be installed before confirming, accepting a vendor on first install, and refusing repositories outside the marketplace.",
-          "digest": "sha256:4305b4c7691c84ebccf18b8b10badce57302e1989ede1358fe7da4316f3518b3"
+          "digest": "sha256:7f7b94af20244b4a372d9eb96558abc862e9d9fb27cfe6d4b157acba87276abf"
         },
         {
           "name": "skill-creator",
@@ -280,7 +298,7 @@
         "skills-add.md"
       ],
       "modes": [],
-      "digest": "sha256:83acb5c0bd4b77430018b49df7e8f1b5fcbf0e9a80aebcd8ca4e036e80ce3649",
+      "digest": "sha256:563aea8f6a630dde2aa171daf06fc3ab86a9c07642061c7f262d288d3b160253",
       "revokedVersions": [],
       "versions": [
         "1.2.0",
@@ -296,9 +314,9 @@
         "riskScore": 0,
         "policyFindings": 0,
         "verdict": "pass",
-        "scannedAt": "2026-10-12T11:57:29Z",
+        "scannedAt": "2026-10-21T08:26:26Z",
         "skillspectorVersion": "2.11.2",
-        "skillspectorSuppressed": 60,
+        "skillspectorSuppressed": 61,
         "ciscoMaxSeverity": "INFO",
         "ciscoVersion": "2.1.0"
       },
@@ -1579,6 +1597,131 @@
           "covered": "Publish those ports as `127.0.0.1:PORT:PORT` when you run them, and add the key files to `.gitignore` as the Java skill does."
         }
       ]
+    },
+    {
+      "name": "redhat-openshift",
+      "displayName": "OpenShift updates and GitOps by Red Hat",
+      "vendor": "redhat",
+      "vendorDisplayName": "Red Hat",
+      "vendorStatus": "active",
+      "version": "1.0.0",
+      "description": "Check whether an OpenShift cluster is ready for an update, look up Red Hat product support phases and compatibility, and debug, audit, operate and onboard teams to Argo CD GitOps. Red Hat's official skills for OpenShift Lightspeed, curated from openshift/agentic-skills.",
+      "path": "packs/redhat/redhat-openshift",
+      "tag": "redhat-openshift--v1.0.0",
+      "skills": [
+        {
+          "name": "cluster-update-advisor",
+          "description": "Assess OpenShift cluster update (upgrade) readiness and risk. Use when evaluating whether a cluster is safe to update, when an update is available, or when the user asks about update risks, prerequisites, blockers, or best practices.",
+          "digest": "sha256:ced7d3449d0e8dcdd2e30fa7ed136e52805c6aec0f66ab9c7d3eabfdedbc80e4"
+        },
+        {
+          "name": "product-lifecycle",
+          "description": "Query Red Hat Product Life Cycle data for support phases, end-of-life dates, and OpenShift version compatibility. Use when evaluating whether installed operators or layered products are supported on a given OCP version, approaching end of life, or need upgrading before a cluster upgrade. Also use when the user asks about product support status, EOL dates, or lifecycle phases for any Red Hat product.",
+          "digest": "sha256:2b1af66de715d09448fe8029bb0fb24ba5812c2bcc378d1e6ccada4217537094"
+        },
+        {
+          "name": "argo-knowledge",
+          "description": "Comprehensive knowledge base for the Argo ecosystem including Argo CD, Argo Rollouts, Argo Workflows, and Argo Events. Use this skill when generating, reviewing, debugging, or explaining Argo CRDs (Application, ApplicationSet, AppProject, Rollout, AnalysisTemplate, Workflow, WorkflowTemplate, CronWorkflow, EventSource, Sensor, EventBus), configuring notifications, image updater, sync policies, progressive delivery strategies, or designing GitOps repository patterns. Also use when the user asks about Argo best practices, common mistakes, or needs to choose between Argo approaches (e.g., app-of-apps vs ApplicationSet, canary vs blue-green, steps vs DAG workflows).\n",
+          "digest": "sha256:714c7b2daa90a86e400ab6d708a0ef5242bb7eaed0a52d2b0b493413ccfca37d"
+        },
+        {
+          "name": "argo-cluster-debug",
+          "description": "Debug and troubleshoot the Argo ecosystem on live Kubernetes clusters — inspects Argo CD Application sync status, health checks, and controller logs; diagnoses Argo Rollouts canary/blue-green failures and AnalysisRun results; traces Argo Workflow step failures and artifact issues; and debugs Argo Events EventSource and Sensor connectivity. Prefers argocd/argo CLIs when available, falls back to kubectl for CRD inspection. Use when users report failing, stuck, or degraded Argo resources on a cluster.\n",
+          "digest": "sha256:a81eec6a0f771c8f681f129678f1eff30277723c684997f0173b49d70de5aa12"
+        },
+        {
+          "name": "argo-repo-audit",
+          "description": "Audit and validate Argo CD GitOps repositories by scanning local repo files (not live clusters) — reviews AppProject RBAC and security restrictions, checks sync policies and operational best practices, optionally runs schema validation, and produces a prioritized GitOps report. Use when users ask to audit, analyze, validate, review, or security-check an Argo CD GitOps repo.\n",
+          "digest": "sha256:724c19f873de4dfbf906da4dfdb1b1dcd1e8097ac97a225394c99522ebfdab1b"
+        },
+        {
+          "name": "argo-operations",
+          "description": "Set up, deploy, promote, and manage Argo ecosystem resources on live Kubernetes and OpenShift clusters. Covers Argo CD installation (Helm, operator, Autopilot), Application and ApplicationSet lifecycle, Rollout promotion and rollback, and day-2 operations (upgrades, API migration, scaling). Every write operation uses dry-run first and requires explicit user confirmation before applying. Use when users want to install Argo CD, create or sync Applications, promote Rollouts, or perform operational changes on their Argo setup.\n",
+          "digest": "sha256:78c3e7b45c1d61cd2d0742e6aeac6fc05fea41ad67ab36c706dd16b64c71cd66"
+        },
+        {
+          "name": "argo-team-onboard",
+          "description": "Onboard app teams onto Argo CD with discovery-first workflows. Generates AppProject, Application, and RBAC configuration tailored to the team's existing stack (Helm, Kustomize, or plain YAML). Supports manual single-team onboarding and self-service scaling via ApplicationSet + teams.yaml. Does NOT generate CI pipelines, registry config, or secrets backends — focuses on Argo CD resources only. Use when users ask about onboarding teams, adding tenants, setting up new teams, bootstrapping first apps, or self-service onboarding patterns.\n",
+          "digest": "sha256:26f7dcad9af8bb7d27d81a4f983b4e6a8e345d243a0ef2c08d179bcd36bf55ad"
+        }
+      ],
+      "mcpServers": [],
+      "rules": [
+        "openshift.md"
+      ],
+      "commands": [],
+      "modes": [],
+      "digest": "sha256:c0c5850b6c36e2a2e58ca19924fab1a3d2352da1ac7c2b72c290eb2305cb2c4f",
+      "revokedVersions": [],
+      "versions": [
+        "1.0.0"
+      ],
+      "baselineFindings": 4,
+      "components": 8,
+      "readme": "packs/redhat/redhat-openshift/README.md",
+      "scan": {
+        "riskScore": 0,
+        "policyFindings": 4,
+        "verdict": "pass",
+        "scannedAt": "2026-10-21T08:25:45Z",
+        "skillspectorVersion": "2.11.2",
+        "skillspectorSuppressed": 39,
+        "ciscoMaxSeverity": "INFO",
+        "ciscoVersion": "2.1.0"
+      },
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/openshift/agentic-skills",
+      "minBob": "2.0.2",
+      "tags": [
+        "openshift",
+        "kubernetes",
+        "gitops",
+        "argo-cd",
+        "cluster-update",
+        "red-hat"
+      ],
+      "source": {
+        "repo": "https://github.com/openshift/agentic-skills",
+        "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+        "path": "gitops",
+        "exclude": [
+          "evals"
+        ]
+      },
+      "sources": {
+        "cluster-update-advisor": {
+          "repo": "https://github.com/openshift/agentic-skills",
+          "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+          "path": "cluster-update"
+        },
+        "product-lifecycle": {
+          "repo": "https://github.com/openshift/agentic-skills",
+          "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+          "path": "cluster-update"
+        }
+      },
+      "safety": [
+        {
+          "class": "writes",
+          "warning": "argo-operations and argo-team-onboard install Argo CD, create, sync and roll back Applications and apply AppProjects, RBAC and cluster Secrets; a few reference procedures apply CRDs or remote manifests before their own confirmation step, and the argocd-rbac-cm example replaces the whole policy.",
+          "covered": "Both skills preview with a server-side dry run and ask before applying. The pack rule adds a yes per command with the kube context named, pinned remote manifests, and a merge instead of the rbac example. cluster-update-advisor only advises and never upgrades."
+        },
+        {
+          "class": "content",
+          "warning": "Logs, events, Application status, readiness JSON and manifests from Git reach Bob as they are, and none of the skills says to treat them as data.",
+          "covered": "The pack rule and the bob-essentials security-defaults rule make that content data, never instructions; runbooks are read, not executed."
+        },
+        {
+          "class": "data",
+          "warning": "Backup steps write repo and cluster Secrets to local files as plain base64, some steps print Secrets or put tokens on the command line, and the repo audit can copy secret values into its report.",
+          "covered": "The pack rule forbids printing Secrets, keeps tokens off command lines and output, asks before a backup with Secrets is written to disk, and redacts secret values in audit reports."
+        },
+        {
+          "class": "transport",
+          "warning": "argo-operations starts the Argo Rollouts dashboard in the background; it has no authentication and acts with your cluster login.",
+          "covered": "The pack rule says not to start it or a port-forward on all interfaces, and to bind 127.0.0.1 when you ask for one."
+        }
+      ]
     }
   ],
   "planned": [
@@ -1640,18 +1783,6 @@
       "source": "our own skills",
       "blockedBy": "",
       "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/5",
-      "votes": 0
-    },
-    {
-      "name": "redhat-openshift",
-      "displayName": "Red Hat OpenShift",
-      "vendor": "redhat",
-      "vendorDisplayName": "Red Hat",
-      "status": "coming-soon",
-      "description": "Cluster troubleshooting with scripts, cluster updates, GitOps with an Argo knowledge base, and token lookup, curated from Red Hat's own OpenShift skills. Ansible follows when Red Hat publishes skills for it.",
-      "source": "https://github.com/openshift/agentic-skills",
-      "blockedBy": "",
-      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/6",
       "votes": 0
     },
     {

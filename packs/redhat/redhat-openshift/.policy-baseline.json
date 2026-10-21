@@ -1,0 +1,36 @@
+{
+  "accepted": [
+    {
+      "fingerprint": "70591f299f43a30a",
+      "rule": "P006",
+      "path": "skills/argo-knowledge/references/applications.md",
+      "line": 181,
+      "message": "forbidden instruction: 'Delete hook'",
+      "reason": "Argo CD documentation of hook delete policies (HookSucceeded, HookFailed, BeforeHookCreation): it describes what Argo CD does with sync-hook resources and is not an instruction to Bob. Reviewed 2026-10-21."
+    },
+    {
+      "fingerprint": "deb254937f8e717f",
+      "rule": "P006",
+      "path": "skills/argo-knowledge/references/applications.md",
+      "line": 180,
+      "message": "forbidden instruction: 'Delete hook'",
+      "reason": "Argo CD documentation of hook delete policies (HookSucceeded, HookFailed, BeforeHookCreation): it describes what Argo CD does with sync-hook resources and is not an instruction to Bob. Reviewed 2026-10-21."
+    },
+    {
+      "fingerprint": "0fedfe0d4263e416",
+      "rule": "P007",
+      "path": "skills/argo-knowledge/references/gitops-promoter.md",
+      "line": 133,
+      "message": "looks like a private key",
+      "reason": "Example Secret manifest whose PEM block holds the placeholder <your-private-key>; there is no key material. Reviewed 2026-10-21."
+    },
+    {
+      "fingerprint": "315e58927fb995e0",
+      "rule": "P009",
+      "path": "skills/argo-knowledge/references/gitops-promoter.md",
+      "line": 230,
+      "message": "reference to protected path '.env'",
+      "reason": "Go template variable {{ .env }} in an ApplicationSet example, not a reference to a dotenv file. Reviewed 2026-10-21."
+    }
+  ]
+}

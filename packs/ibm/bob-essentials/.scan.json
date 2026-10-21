@@ -1,5 +1,5 @@
 {
-  "scannedAt": "2026-10-12T11:57:29Z",
+  "scannedAt": "2026-10-21T08:26:26Z",
   "tools": {
     "skillspector": "2.11.2",
     "ciscoSkillScanner": "2.1.0"
@@ -11,14 +11,14 @@
   },
   "skills": {
     "find-skills": {
-      "digest": "sha256:4305b4c7691c84ebccf18b8b10badce57302e1989ede1358fe7da4316f3518b3",
+      "digest": "sha256:7f7b94af20244b4a372d9eb96558abc862e9d9fb27cfe6d4b157acba87276abf",
       "skillspector": {
         "riskScore": 0,
         "recommendation": "CAUTION",
         "severity": "LOW",
         "issues": 0,
         "byRule": {},
-        "suppressed": 39,
+        "suppressed": 40,
         "version": "2.11.2",
         "complete": false
       },
@@ -130,7 +130,7 @@
     "riskScore": 0,
     "ciscoMaxSeverity": "INFO",
     "verdict": "pass",
-    "skillspectorSuppressed": 60,
+    "skillspectorSuppressed": 61,
     "ciscoAccepted": 0
   }
 }

@@ -1,6 +1,6 @@
 {
   "$comment": "Planned packs shown in the catalog. Votes are thumbs-up reactions on the request issue; scripts/refresh_roadmap.py creates missing issues and refreshes the counts. Status: coming-soon = the team will build it; candidate = depends on the vendor (licence, official repository).",
-  "updated": "2026-10-12",
+  "updated": "2026-10-21",
   "planned": [
     {
       "name": "app-modernization",
@@ -61,18 +61,6 @@
       "vendorDisplayName": "IBM",
       "votes": 0,
       "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/5"
-    },
-    {
-      "name": "redhat-openshift",
-      "displayName": "Red Hat OpenShift",
-      "vendor": "redhat",
-      "status": "coming-soon",
-      "description": "Cluster troubleshooting with scripts, cluster updates, GitOps with an Argo knowledge base, and token lookup, curated from Red Hat's own OpenShift skills. Ansible follows when Red Hat publishes skills for it.",
-      "source": "https://github.com/openshift/agentic-skills",
-      "blockedBy": "",
-      "vendorDisplayName": "Red Hat",
-      "votes": 0,
-      "issue": "https://github.com/AlexandraIourenkova/bob-skills-marketplace/issues/6"
     },
     {
       "name": "hashicorp-packer",

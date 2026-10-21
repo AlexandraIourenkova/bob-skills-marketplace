@@ -1,0 +1,112 @@
+version: 2
+scanner_version: 2.11.2
+rules:
+- id: LP3
+  reason: "No per-skill licence field in the frontmatter; the pack ships the upstream Apache-2.0 LICENSE next to the skills. Reviewed 2026-10-21."
+  path: '*SKILL.md'
+- id: PE3
+  reason: "Comparison table that names kubeconfig as where Argo CD keeps cluster credentials; documentation, no credential access. Reviewed 2026-10-21."
+  path: '*references/agent-mode.md'
+- id: PE3
+  reason: "Same Argo CD comparison table naming kubeconfig; documentation, no credential access. Reviewed 2026-10-21."
+  path: '*references/applications.md'
+- id: PE3
+  reason: "Recommends encrypting secrets.yaml with SOPS or using sealed secrets; the opposite of a credential leak. Reviewed 2026-10-21."
+  path: '*references/best-practices.md'
+- id: PE3
+  reason: "Table of the Secret key names GitOps Promoter expects for each SCM provider; no values. Reviewed 2026-10-21."
+  path: '*references/gitops-promoter.md'
+- id: E1
+  reason: "Placeholder webhook URL api.example.com in an Argo Events example. Reviewed 2026-10-21."
+  path: '*references/events.md'
+- id: E1
+  reason: "Placeholder webhook URL api.example.com in an Argo CD notifications example. Reviewed 2026-10-21."
+  path: '*references/notifications.md'
+- id: E1
+  reason: "Placeholder webhook URL api.example.com in an Argo Rollouts example. Reviewed 2026-10-21."
+  path: '*references/rollouts.md'
+- id: E1
+  reason: "Placeholder webhook URL api.example.com in an Argo Workflows example. Reviewed 2026-10-21."
+  path: '*references/workflows.md'
+- id: SC2
+  reason: "In-cluster connectivity test (kubectl run curl-test, then curl a Service). It creates a pod, so the pack rule requires the user's yes for `kubectl run` like any other change. Reviewed 2026-10-21."
+  path: '*references/troubleshooting.md'
+- id: TM1
+  reason: "Argo CD CRD JSON schema: skipTests and similar are schema field names used by kubeconform validation, not commands. Reviewed 2026-10-21."
+  path: '*assets/schemas/application-argoproj-v1alpha1.json'
+- id: EA2
+  reason: "Checklist item about when automated sync is appropriate; not an instruction to deploy without confirmation. Reviewed 2026-10-21."
+  path: '*references/best-practices.md'
+- id: PE3
+  reason: "Real: the backup procedure exports repo and cluster Secrets to local files and calls them encrypted, though they are base64. The pack rule says these backups are not encryption and asks before writing one to disk; the pack safety entry repeats it. Reviewed 2026-10-21."
+  path: '*references/day2-operations.md'
+- id: PE3
+  reason: "Applies a cluster Secret manifest after a server-side dry run and the user's confirmation, as the skill's own safety model requires. Reviewed 2026-10-21."
+  path: '*references/setup.md'
+- id: EA2
+  reason: "argo-operations marks Secret and ConfigMap export as read-only with no confirmation; argo-team-onboard marks its cluster checks as read-only. The pack rule asks before any backup with Secrets is written to disk. Reviewed 2026-10-21."
+  path: '*SKILL.md'
+- id: PE1
+  reason: "Guard-rail table explaining which AppProject fields stop teams from escalating their own permissions; documentation of a defence. Reviewed 2026-10-21."
+  path: '*references/self-service-pattern.md'
+fingerprints:
+- hash: sha256:f855975e86dc6bd01c94dd59f16e86e9e13c97bf7251763dfb012ac170fb11f4
+  rule_id: LP3
+  file: SKILL.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:b72d0763d7290ce80506e80cce9e871df7b287973787ef197853d5bc7055370b
+  rule_id: PE3
+  file: references/agent-mode.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:d493fcc4df7ae3e6c47db14358dc5408c479487903d840ad84fd633c2c8b87e6
+  rule_id: PE3
+  file: references/best-practices.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:6b4aa64cac09d8759bc0e73419bd4e665690be3e74726694d801b284efdf7d5b
+  rule_id: PE3
+  file: references/gitops-promoter.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:76926b9098bed6574f28e9462f865a7577c24fb5abdfafe41c253ddc5548763a
+  rule_id: PE3
+  file: references/gitops-promoter.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:52f40d5d88fd60ee26e3c8b3a98a9b2c9d975f07556c8af3037426fa64b61c19
+  rule_id: PE3
+  file: references/gitops-promoter.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:bd4841b3d055485e1f0bd3d784ebba97f7e4db2d444a49a5a6fd3bdd5478614d
+  rule_id: E1
+  file: references/notifications.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:44f5e4a6a27961a54fbefafe8e6658f1da80c6be2c5c75416cb550ff90c66f3e
+  rule_id: SC2
+  file: references/troubleshooting.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:a04c77eebbccc521d8c0b0cacaacd5562d06d0472d33530a0a94211a48e26a30
+  rule_id: TM1
+  file: assets/schemas/application-argoproj-v1alpha1.json
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:dc766c2c1ba1b9a943023a331ba70848ffa7286dca7ac7cd7436c88747f120f4
+  rule_id: EA2
+  file: references/best-practices.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:c5fc745b01f8395a14466736792f58e43f23fefac3ee4b9621332dd5ffdf19ac
+  rule_id: PE3
+  file: references/day2-operations.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:d1ee24bc5529638e3c90c85e3a2f0ab6c124fc97013d607e9b5efaa43ea6ce24
+  rule_id: PE3
+  file: references/day2-operations.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:833a0e2c4991af6d2fbf300233b5cb4c195cc7511ed6156fbd304f74bd2c752e
+  rule_id: PE3
+  file: references/setup.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:844f989f34abf3ef426183ec847525c0c7d2a9f645e795f2edab6eaae4e1669b
+  rule_id: EA2
+  file: SKILL.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."
+- hash: sha256:9637e69b2ad9fc909f56341a856e9ef53cf9cfd114c59d3d892abf21d8aa31fb
+  rule_id: PE1
+  file: references/self-service-pattern.md
+  reason: "See the rule entry for this file above. Reviewed 2026-10-21."

@@ -1,0 +1,25 @@
+{
+ "_comment": "Accepted Cisco skill-scanner findings, each read by a reviewer. Remove an entry to re-evaluate it.",
+ "accepted": [
+  {
+   "key": "a28f72c024a31fdd",
+   "skill": "product-lifecycle",
+   "severity": "MEDIUM",
+   "category": "data_exfiltration",
+   "title": "Outbound network request primitives that can transmit data externally",
+   "file": "scripts/plc_lookup.py",
+   "line": 20,
+   "reason": "GET to the public Red Hat Product Life Cycle API on access.redhat.com over HTTPS with certificate checks on; only the product name the user asked about leaves the machine. Reviewed 2026-10-21."
+  },
+  {
+   "key": "b9a8987581a4a16b",
+   "skill": "product-lifecycle",
+   "severity": "MEDIUM",
+   "category": "data_exfiltration",
+   "title": "Outbound network request primitives that can transmit data externally",
+   "file": "scripts/plc_lookup.py",
+   "line": 22,
+   "reason": "GET to the public Red Hat Product Life Cycle API on access.redhat.com over HTTPS with certificate checks on; only the product name the user asked about leaves the machine. Reviewed 2026-10-21."
+  }
+ ]
+}

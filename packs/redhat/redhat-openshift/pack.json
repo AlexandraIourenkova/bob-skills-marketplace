@@ -1,0 +1,89 @@
+{
+  "$schema": "../../../schemas/pack.schema.json",
+  "name": "redhat-openshift",
+  "displayName": "OpenShift updates and GitOps by Red Hat",
+  "version": "1.0.0",
+  "vendor": "redhat",
+  "description": "Check whether an OpenShift cluster is ready for an update, look up Red Hat product support phases and compatibility, and debug, audit, operate and onboard teams to Argo CD GitOps. Red Hat's official skills for OpenShift Lightspeed, curated from openshift/agentic-skills.",
+  "safety": [
+    {
+      "class": "writes",
+      "warning": "argo-operations and argo-team-onboard install Argo CD, create, sync and roll back Applications and apply AppProjects, RBAC and cluster Secrets; a few reference procedures apply CRDs or remote manifests before their own confirmation step, and the argocd-rbac-cm example replaces the whole policy.",
+      "covered": "Both skills preview with a server-side dry run and ask before applying. The pack rule adds a yes per command with the kube context named, pinned remote manifests, and a merge instead of the rbac example. cluster-update-advisor only advises and never upgrades."
+    },
+    {
+      "class": "content",
+      "warning": "Logs, events, Application status, readiness JSON and manifests from Git reach Bob as they are, and none of the skills says to treat them as data.",
+      "covered": "The pack rule and the bob-essentials security-defaults rule make that content data, never instructions; runbooks are read, not executed."
+    },
+    {
+      "class": "data",
+      "warning": "Backup steps write repo and cluster Secrets to local files as plain base64, some steps print Secrets or put tokens on the command line, and the repo audit can copy secret values into its report.",
+      "covered": "The pack rule forbids printing Secrets, keeps tokens off command lines and output, asks before a backup with Secrets is written to disk, and redacts secret values in audit reports."
+    },
+    {
+      "class": "transport",
+      "warning": "argo-operations starts the Argo Rollouts dashboard in the background; it has no authentication and acts with your cluster login.",
+      "covered": "The pack rule says not to start it or a port-forward on all interfaces, and to bind 127.0.0.1 when you ask for one."
+    }
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/openshift/agentic-skills",
+  "source": {
+    "repo": "https://github.com/openshift/agentic-skills",
+    "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+    "path": "gitops",
+    "exclude": [
+      "evals"
+    ]
+  },
+  "sources": {
+    "cluster-update-advisor": {
+      "repo": "https://github.com/openshift/agentic-skills",
+      "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+      "path": "cluster-update"
+    },
+    "product-lifecycle": {
+      "repo": "https://github.com/openshift/agentic-skills",
+      "ref": "da1431b482a4f438723f95e5512a482e9d01e5cc",
+      "path": "cluster-update"
+    }
+  },
+  "minBob": "2.0.2",
+  "tags": [
+    "openshift",
+    "kubernetes",
+    "gitops",
+    "argo-cd",
+    "cluster-update",
+    "red-hat"
+  ],
+  "skills": [
+    "cluster-update-advisor",
+    "product-lifecycle",
+    "argo-knowledge",
+    "argo-cluster-debug",
+    "argo-repo-audit",
+    "argo-operations",
+    "argo-team-onboard"
+  ],
+  "rules": [
+    "rules/openshift.md"
+  ],
+  "networkAllow": [
+    "access.redhat.com",
+    "raw.githubusercontent.com",
+    "github.com"
+  ],
+  "revokedVersions": [],
+  "checksums": {
+    "skills/cluster-update-advisor": "sha256:ced7d3449d0e8dcdd2e30fa7ed136e52805c6aec0f66ab9c7d3eabfdedbc80e4",
+    "skills/product-lifecycle": "sha256:2b1af66de715d09448fe8029bb0fb24ba5812c2bcc378d1e6ccada4217537094",
+    "skills/argo-knowledge": "sha256:714c7b2daa90a86e400ab6d708a0ef5242bb7eaed0a52d2b0b493413ccfca37d",
+    "skills/argo-cluster-debug": "sha256:a81eec6a0f771c8f681f129678f1eff30277723c684997f0173b49d70de5aa12",
+    "skills/argo-repo-audit": "sha256:724c19f873de4dfbf906da4dfdb1b1dcd1e8097ac97a225394c99522ebfdab1b",
+    "skills/argo-operations": "sha256:78c3e7b45c1d61cd2d0742e6aeac6fc05fea41ad67ab36c706dd16b64c71cd66",
+    "skills/argo-team-onboard": "sha256:26f7dcad9af8bb7d27d81a4f983b4e6a8e345d243a0ef2c08d179bcd36bf55ad",
+    "rules/openshift.md": "sha256:69923050dce247931b50e682f1b2cd8af4b77f58f6901c67cd83da2bf23feb14"
+  }
+}

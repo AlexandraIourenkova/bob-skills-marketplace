@@ -229,6 +229,33 @@
         "raw.githubusercontent.com"
       ],
       "notes": "Curated from confluentinc/agent-skills (Apache-2.0): Kafka clients, Kafka Streams, Schema Registry, Flink and Confluent Cloud pipelines. Confluent has been an IBM company since March 2026 and keeps its own GitHub organisation, so it is listed as its own vendor, like HashiCorp."
+    },
+    {
+      "id": "redhat",
+      "displayName": "Red Hat",
+      "status": "active",
+      "homepage": "https://www.redhat.com",
+      "securityContact": "secalert@redhat.com",
+      "github": {
+        "host": "github.com",
+        "org": "openshift",
+        "repos": [
+          "agentic-skills"
+        ]
+      },
+      "maintainers": [
+        "AlexandraIourenkova",
+        "CyberMaryVer"
+      ],
+      "publicKey": null,
+      "networkAllow": [
+        "access.redhat.com",
+        "*.redhat.com",
+        "redhat.com",
+        "github.com",
+        "raw.githubusercontent.com"
+      ],
+      "notes": "Curated from openshift/agentic-skills (Apache-2.0), the skills OpenShift maintainers publish for OpenShift Lightspeed: cluster update readiness, Red Hat product life cycle and Argo CD GitOps. Red Hat is an IBM company and keeps its own GitHub organisations, so it is listed as its own vendor, like HashiCorp and Confluent."
     }
   ],
   "signature": null

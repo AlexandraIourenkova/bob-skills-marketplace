@@ -344,6 +344,26 @@
         "confluent"
       ],
       "category": "ibm-bob"
+    },
+    {
+      "name": "redhat-openshift",
+      "source": "./packs/redhat/redhat-openshift",
+      "description": "Check whether an OpenShift cluster is ready for an update, look up Red Hat product support phases and compatibility, and debug, audit, operate and onboard teams to Argo CD GitOps. Red Hat's official skills for OpenShift Lightspeed, curated from openshift/agentic-skills.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Red Hat"
+      },
+      "homepage": "https://github.com/openshift/agentic-skills",
+      "license": "Apache-2.0",
+      "keywords": [
+        "openshift",
+        "kubernetes",
+        "gitops",
+        "argo-cd",
+        "cluster-update",
+        "red-hat"
+      ],
+      "category": "ibm-bob"
     }
   ]
 }
